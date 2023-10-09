@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 import styles from './NavigationItem.module.css';
-import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
 
 export interface NavItem {
   title: string;
@@ -25,7 +25,7 @@ const NavigationItem = ({ navItem }: NavigationItemProps) => {
       <Link
         className={clsx(styles.navigationLink, pathname === href && styles.active)}
         href={href}
-        target="_blank"
+        // target="_blank"
         rel="noopener noreferrer"
       >
         {title}

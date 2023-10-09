@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './Header.module.css';
 import Image from 'next/image';
 import Logo from '@/public/logo.svg';
+
+import styles from './Header.module.css';
 
 const Header = () => {
   return (

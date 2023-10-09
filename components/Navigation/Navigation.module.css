@@ -1,15 +1,27 @@
 .nav {
-  height: 100px;
+  padding: 0 1rem;
+  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .navList {
-  max-width: 1137px;
+  max-width: 1140px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
 }
 
+@media (max-width: 1024px) {
+  .nav {
+    padding: 1rem;
+  }
+
+  .navList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+}

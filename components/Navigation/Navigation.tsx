@@ -1,7 +1,7 @@
 import React from 'react';
+import NavigationItem, { NavItem } from './NavigationItem';
 
 import styles from './Navigation.module.css';
-import NavigationItem, { NavItem } from './NavigationItem';
 
 const navItems: NavItem[] = [
   { title: 'Квартиры', href: '/apartments' },

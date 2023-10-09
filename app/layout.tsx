@@ -1,20 +1,19 @@
-import Header from "@/components/Header";
-import "./globals.css";
-import type { Metadata } from "next";
-import { Exo_2 } from "next/font/google";
-import Navigation from "@/components/Navigation";
+import { Exo_2 } from 'next/font/google';
 
-const exo_2 = Exo_2({ subsets: ["cyrillic"] });
+import Header from '@/components/Header';
+import Navigation from '@/components/Navigation';
+
+import './globals.css';
+
+import type { Metadata } from 'next';
+
+const exo_2 = Exo_2({ subsets: ['cyrillic'] });
 
 export const metadata: Metadata = {
-  title: "Marielt",
+  title: 'MaRielt',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={exo_2.className}>

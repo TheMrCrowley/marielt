@@ -1,5 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
+
 import Logo from '@/public/logo.svg';
 
 import styles from './Header.module.css';

@@ -1,6 +1,5 @@
 .nav {
   padding: 0 1rem;
-  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,6 +10,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(6, auto);
+  justify-items: center;
 }
 
 @media (max-width: 1024px) {

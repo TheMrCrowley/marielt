@@ -6,6 +6,10 @@
 
 .navigationLink {
   position: relative;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--white-color);
   text-decoration: none;
   transition: var(--default-transition);
@@ -17,7 +21,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -38px;
+  bottom: 0;
   width: 0px;
   height: 2px;
   background-color: var(--secondary-color);
@@ -33,7 +37,7 @@
 }
 
 @media (max-width: 1024px) {
-  .navigationLink::after {
-    bottom: 0px;
+  .navigationLink {
+    min-height: max-content;
   }
 }

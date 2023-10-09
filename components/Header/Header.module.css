@@ -1,0 +1,11 @@
+.header {
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-image: url('/header-background.png');
+  height: 140px;
+  border-bottom: 1px solid var(--white-color);
+}

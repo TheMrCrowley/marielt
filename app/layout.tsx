@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="content">
             <Header />
             <Navigation />
-            {children}
+            <main className="main">{children}</main>
           </div>
         </div>
       </body>

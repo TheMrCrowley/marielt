@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import CategoryPreview from '@/components/CategoryPreview';
+import Loader from '@/components/Loader';
 import ApartmentsImg from '@/public/apartments.png';
 import CommercialImg from '@/public/commercial.png';
 import HouseImg from '@/public/house.png';
@@ -59,5 +60,6 @@ export default function Home() {
         ))}
       </section>
     </>
+    // <Loader />
   );
 }

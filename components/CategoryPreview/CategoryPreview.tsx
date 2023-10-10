@@ -12,6 +12,7 @@ interface CategoryPreviewProps {
   variant?: 'primary' | 'secondary';
 }
 
+// TODO Change Name
 const CategoryPreview = ({
   description,
   title,
@@ -22,6 +23,7 @@ const CategoryPreview = ({
     <div className={styles.descriptionWrapper}>
       <h2 className={styles.descriptionTitle}>{title}</h2>
       <p className={styles.description}>{description}</p>
+      {/* TODO change to Link */}
       <button className={styles.descriptionButton}>
         Перейти в каталог <Image src={ArrowRight} alt="arrow-right" />
       </button>

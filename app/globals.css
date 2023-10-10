@@ -2,8 +2,7 @@
   --primary-color: #2c2c2c;
   --secondary-color: #e3c496;
   --dark-color: #2c2c2c;
-  --white-color: #ffffff;
-
+  --white-color: #fff;
   --default-transition: all 0.3s ease-in-out;
 }
 
@@ -17,11 +16,14 @@
   border: none;
   outline: none;
   scroll-behavior: smooth;
+  background-color: transparent;
 }
 
 body {
   background-color: var(--primary-color);
 }
+
+
 
 .wrapper {
   min-height: 100vh;

@@ -5,11 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
+import { AppRoutes } from '@/enums/AppRoutes';
+
 import styles from './NavigationItem.module.css';
 
 export interface NavItem {
   title: string;
-  href: string;
+  href: AppRoutes;
 }
 
 interface NavigationItemProps {

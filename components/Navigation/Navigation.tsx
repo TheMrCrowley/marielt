@@ -1,16 +1,14 @@
 import React from 'react';
 
+import { AppRoutes, navigationMap } from '@/enums/AppRoutes';
+
 import styles from './Navigation.module.css';
 import NavigationItem, { NavItem } from './NavigationItem';
 
-const navItems: NavItem[] = [
-  { title: 'Квартиры', href: '/apartments' },
-  { title: 'Дома и Участки', href: '/house-and-lots' },
-  { title: 'Коммерческая недвижимость', href: '/commercial' },
-  { title: 'Профессия ', href: '/profession' },
-  { title: 'Вакансии', href: '/careers' },
-  { title: 'Академия MARIELT', href: '/academy' },
-];
+const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
+  title: navigationMap[key as keyof typeof AppRoutes],
+  href: value,
+}));
 
 const Navigation = () => {
   return (

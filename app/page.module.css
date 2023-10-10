@@ -1,0 +1,39 @@
+.welcomeSection {
+  position: relative;
+  width: 100%;
+  min-height: 747px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/home_bg.png');
+}
+
+.descriptionWrapper {
+  padding: 52px 35px;
+  position: absolute;
+  top: 180px;
+  background-color: rgb(0 0 0 / 50%);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+}
+
+.pageDescription {
+  color: #FFF;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.categories {
+  padding: 100px 0;
+}

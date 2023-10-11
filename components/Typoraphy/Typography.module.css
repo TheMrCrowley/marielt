@@ -1,5 +1,20 @@
 .typography {
   color: var(--white-color);
+  line-height: normal;
+}
+
+.mediumFontSize {
   font-size: 20px;
-  font-weight: 300;
+}
+
+.smallFontSize {
+  font-size: 16px;
+}
+
+.boldFontWeight {
+  font-weight: 500;
+}
+
+.regularFontWeight {
+  font-weight: 400;
 }

@@ -27,6 +27,7 @@ const NavigationItem = ({ navItem }: NavigationItemProps) => {
       <Link
         className={clsx(styles.navigationLink, pathname === href && styles.active)}
         href={href}
+        //TODO Remove comment
         // target="_blank"
         rel="noopener noreferrer"
       >

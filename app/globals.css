@@ -47,6 +47,7 @@ body {
 }
 
 .container {
+  width: 100%;
   position: relative;
   max-width: 1630px;
   height: 100%;

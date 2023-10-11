@@ -1,0 +1,15 @@
+.contactItemWrapper {
+  display: flex;
+  width: 100%;
+  column-gap: 10px;
+}
+
+.contactItemWrapper > img {
+  margin-top: 5px;
+} 
+
+.contactItemWrapper > a {
+  text-decoration: none;
+}
+
+

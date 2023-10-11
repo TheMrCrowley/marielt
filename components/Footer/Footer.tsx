@@ -4,7 +4,7 @@ import React from 'react';
 
 import ContactItem from '@/components/ContactItem';
 import Title from '@/components/Title';
-import Typography from '@/components/Typoraphy';
+import Typography from '@/components/Typography';
 import RatingImg from '@/public/footer_rating.png';
 import InstagramIcon from '@/public/instagram.svg';
 import Logo from '@/public/logo.svg';

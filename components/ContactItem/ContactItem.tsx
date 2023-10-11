@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
 
-import Typography from '@/components/Typoraphy';
+import Typography from '@/components/Typography';
 import TimeIcon from '@/public/clock.svg';
 import EmailIcon from '@/public/mail.svg';
 import MapPinIcon from '@/public/map-pin.svg';

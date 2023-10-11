@@ -5,7 +5,7 @@ import styles from './Typography.module.css';
 
 interface TypographyProps extends PropsWithChildren {
   className?: string;
-  fontSize?: 20 | 16;
+  fontSize?: 20 | 16 | 14;
   fontWeight?: 'bold' | 'regular';
 }
 
@@ -27,6 +27,8 @@ const getFontSizeClassName = (fontSize: TypographyProps['fontSize']): string => 
       return styles.mediumFontSize;
     case 16:
       return styles.smallFontSize;
+    case 14:
+      return styles.extraSmallFontSize;
     default:
       return styles.mediumFontSize;
   }

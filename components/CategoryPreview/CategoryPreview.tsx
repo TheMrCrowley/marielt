@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 
 import ArrowRight from '@/public/arrow-right.svg';
@@ -8,7 +8,7 @@ import styles from './CategoryPreview.module.css';
 interface CategoryPreviewProps {
   title: string;
   description: string;
-  image: React.ReactElement;
+  image: StaticImageData;
   variant?: 'primary' | 'secondary';
 }
 
@@ -36,13 +36,13 @@ const CategoryPreview = ({
         return (
           <>
             {renderDescription()}
-            {image}
+            <Image src={image} alt="" placeholder="blur" />
           </>
         );
       case 'secondary':
         return (
           <>
-            {image}
+            <Image src={image} alt="" placeholder="blur" />
             {renderDescription()}
           </>
         );

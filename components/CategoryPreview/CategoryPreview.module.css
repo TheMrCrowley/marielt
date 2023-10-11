@@ -12,7 +12,7 @@
   flex-direction: column;
   row-gap: 50px;
   padding: 4%;
-  max-width: 50%;
+  width: 50%;
 }
 
 .descriptionTitle {
@@ -67,7 +67,22 @@
 }
 
 .wrapper > img {
-  max-width: 50%;
+  width: 50%;
   height: auto;
   object-fit: cover;
+}
+
+@media (width <= 768px) {
+  .wrapper {
+    flex-direction: column;
+    max-height: unset;
+  }
+
+  .descriptionWrapper {
+    width: 100%;
+  }
+
+  .wrapper > img {
+    width: 100%;
+  }
 }

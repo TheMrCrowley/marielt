@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 import CategoryPreview from '@/components/CategoryPreview';
 import Loader from '@/components/Loader';
@@ -13,28 +13,28 @@ const previewItems: Array<{
   title: string;
   description: string;
   variant: 'primary' | 'secondary';
-  image: React.ReactElement;
+  image: StaticImageData;
 }> = [
   {
     description:
       'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
     title: 'Квартиры',
     variant: 'primary',
-    image: <Image alt="apartments" src={ApartmentsImg} />,
+    image: ApartmentsImg,
   },
   {
     description:
       'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
     title: 'Дома и участки',
     variant: 'secondary',
-    image: <Image alt="house" src={HouseImg} />,
+    image: HouseImg,
   },
   {
     description:
       'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
     title: 'Коммерческая недвижимость',
     variant: 'primary',
-    image: <Image alt="commercial" src={CommercialImg} />,
+    image: CommercialImg,
   },
 ];
 

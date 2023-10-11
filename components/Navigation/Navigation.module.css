@@ -13,7 +13,7 @@
   justify-items: center;
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .nav {
     padding: 1rem;
   }

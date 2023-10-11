@@ -1,8 +1,4 @@
-type AvailableCurrencies = 'USD' | 'EUR' | 'BYN';
-
-const getFormatterByValueType = (value: number, options: Record<string, string | number>) => {
-  return;
-};
+import { AvailableCurrencies } from '@/types/Currency';
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) => {
   return new Intl.NumberFormat('by-BY', {

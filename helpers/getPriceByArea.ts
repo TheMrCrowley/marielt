@@ -1,1 +1,1 @@
-export const getPriceByArea = (price: number, area: number): number => +(area / price).toFixed(1);
+export const getPriceByArea = (price: number, area: number): number => +(price / area).toFixed(1);

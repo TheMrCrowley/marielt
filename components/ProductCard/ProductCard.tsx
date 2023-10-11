@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React from 'react';
 
 import Title from '@/components/Title';
-import Typography from '@/components/Typography';
 import { convertToMonetary } from '@/helpers/formatters';
 import { getPriceByArea } from '@/helpers/getPriceByArea';
 import FloorIcon from '@/public/card-floor.svg';
@@ -35,7 +34,7 @@ const ProductCard = async ({ product }: ProductCardProps) => {
     <div className={styles.cardWrapper}>
       <Image src={imgSrc} width={330} height={165} alt="" />
       <div className={styles.cardDescriptionWrapper}>
-        <Title variant="h2" fontSize={20}>
+        <Title className={styles.title} variant="h2" fontSize={20}>
           {title}
         </Title>
         <div className={styles.cardDescriptionItem}>

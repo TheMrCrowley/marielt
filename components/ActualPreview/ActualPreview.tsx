@@ -1,8 +1,8 @@
 import { StaticImageData } from 'next/image';
 import React from 'react';
 
+import ActualProductSlider from '@/components/ActualProductSlider';
 import CategoryPreview from '@/components/CategoryPreview';
-import Title from '@/components/Title';
 import ApartmentsImg from '@/public/apartments.png';
 import CommercialImg from '@/public/commercial.png';
 import HouseImg from '@/public/house.png';
@@ -56,6 +56,7 @@ const ActualPreview = ({ type }: ActualPreviewProps) => {
   return (
     <section className={styles.wrapper}>
       <CategoryPreview {...data} />
+      <ActualProductSlider type={type} />
     </section>
   );
 };

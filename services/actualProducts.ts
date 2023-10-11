@@ -25,7 +25,9 @@ interface GetActualApartmentsResponse {
       name: string;
       locality: string;
       street?: string;
-      house_number?: number;
+      house_number?: {
+        number: number;
+      };
       currency: 'USD' | 'EUR';
       parameters: {
         floor: number;
@@ -44,8 +46,14 @@ interface GetActualApartmentsResponse {
   }>;
 }
 
+const REVALIDATE_TIME = 1000 * 60 * 5;
+
 const getActualApartments = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`);
+  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`, {
+    next: {
+      revalidate: REVALIDATE_TIME,
+    },
+  });
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('USD');
@@ -54,7 +62,11 @@ const getActualApartments = async (): Promise<Product[]> => {
 };
 
 const getActualHouses = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`);
+  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots-items?populate=*`, {
+    next: {
+      revalidate: REVALIDATE_TIME,
+    },
+  });
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('USD');
@@ -63,7 +75,11 @@ const getActualHouses = async (): Promise<Product[]> => {
 };
 
 const getActualCommercial = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`);
+  const response = await fetch(`${process.env.API_BASE_URL}/commercial-property-items?populate=*`, {
+    next: {
+      revalidate: REVALIDATE_TIME,
+    },
+  });
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('EUR');
@@ -71,10 +87,15 @@ const getActualCommercial = async (): Promise<Product[]> => {
   return formatToActualProduct(data, currency);
 };
 
-export const getActualProductByType: Record<ProductType, () => Promise<Product[]>> = {
-  apartments: getActualApartments,
-  commercial: getActualCommercial,
-  house: getActualHouses,
+export const getActualProductByType = async (type: ProductType): Promise<Product[]> => {
+  switch (type) {
+    case 'apartments':
+      return getActualApartments();
+    case 'commercial':
+      return getActualCommercial();
+    case 'house':
+      return getActualHouses();
+  }
 };
 
 const formatToActualProduct = (
@@ -85,7 +106,7 @@ const formatToActualProduct = (
     address: getFullAddress({
       locality: attributes.locality,
       street: attributes.street,
-      houseNumber: attributes.house_number,
+      houseNumber: attributes.house_number?.number,
     }),
     floor: attributes.parameters.floor,
     maxFloor: attributes.parameters.floors_number,

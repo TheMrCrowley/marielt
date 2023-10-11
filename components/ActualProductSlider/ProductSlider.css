@@ -1,0 +1,10 @@
+.slick-slider .slick-list> .slick-track > .slick-slide {
+  transition: all 0.25s ease-in-out;
+  margin-bottom: 1rem;
+  cursor: grab;  
+}
+
+.slick-slider .slick-list> .slick-track > .slick-slide:active {
+  cursor: grabbing;
+}
+

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import ProductCard from '@/components/ProductCard';
 import Title from '@/components/Title';
 import { getActualProductByType } from '@/services/actualProducts';
 import { ProductType } from '@/types/Product.type';
 
 import styles from './ActualProductSlider.module.css';
+import ProductSlider from './ProductSlider';
 
 interface ActualProductSliderProps {
   type: ProductType;
@@ -23,13 +25,18 @@ const getTitleByType = (type: ProductType) => {
 
 const ActualProductSlider = async ({ type }: ActualProductSliderProps) => {
   const title = getTitleByType(type);
-  const data = await getActualProductByType[type]();
+  const data = await getActualProductByType(type);
+
+  if (!data.length) {
+    return null;
+  }
 
   return (
     <div>
       <Title className={styles.title} fontSize={36}>
         {title}
       </Title>
+      <ProductSlider products={data} />;
     </div>
   );
 };

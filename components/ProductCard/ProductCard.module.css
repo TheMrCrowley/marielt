@@ -12,6 +12,13 @@
   flex-direction: column;
 }
 
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
 .cardDescriptionWrapper > h2 {
   margin-bottom: 12px;
 }

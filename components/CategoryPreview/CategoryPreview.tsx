@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 
@@ -49,7 +50,11 @@ const CategoryPreview = ({
     }
   };
 
-  return <div className={styles.wrapper}>{renderPreview()}</div>;
+  return (
+    <div className={clsx('container')}>
+      <div className={styles.wrapper}>{renderPreview()}</div>
+    </div>
+  );
 };
 
 export default CategoryPreview;

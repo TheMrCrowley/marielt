@@ -3,7 +3,7 @@ import React from 'react';
 
 import ActualProductSlider from '@/components/ActualProductSlider';
 import CategoryPreview from '@/components/CategoryPreview';
-import ApartmentsImg from '@/public/apartments.png';
+import FlatsImg from '@/public/apartments.png';
 import CommercialImg from '@/public/commercial.png';
 import HouseImg from '@/public/house.png';
 import { ProductType } from '@/types/Product.type';
@@ -23,13 +23,13 @@ const getCategoryDataByType = (
   image: StaticImageData;
 } => {
   switch (type) {
-    case 'apartments':
+    case 'flats':
       return {
         description:
           'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
         title: 'Квартиры',
         variant: 'primary',
-        image: ApartmentsImg,
+        image: FlatsImg,
       };
     case 'house':
       return {

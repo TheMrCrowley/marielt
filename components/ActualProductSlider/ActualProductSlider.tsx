@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import Title from '@/components/Title';
@@ -13,7 +14,7 @@ interface ActualProductSliderProps {
 
 const getTitleByType = (type: ProductType) => {
   switch (type) {
-    case 'apartments':
+    case 'flats':
       return 'Актуальные квартиры';
     case 'commercial':
       return 'Актуальная коммерческая недвижемость';
@@ -32,7 +33,7 @@ const ActualProductSlider = async ({ type }: ActualProductSliderProps) => {
 
   return (
     <div>
-      <Title className={styles.title} fontSize={36}>
+      <Title className={clsx('container', styles.title)} fontSize={36}>
         {title}
       </Title>
       <ProductSlider
@@ -48,6 +49,7 @@ const ActualProductSlider = async ({ type }: ActualProductSliderProps) => {
           ...data,
           ...data,
         ]}
+        type={type}
       />
     </div>
   );

@@ -14,8 +14,8 @@ export default function Home() {
         </div>
         {/*TODO //place for form */}
       </section>
-      <section className={clsx('container', styles.categories)}>
-        <ActualPreview type="apartments" />
+      <section className={clsx(styles.categories)}>
+        <ActualPreview type="flats" />
         <ActualPreview type="commercial" />
         <ActualPreview type="house" />
       </section>

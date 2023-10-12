@@ -89,7 +89,7 @@ const getActualCommercial = async (): Promise<Product[]> => {
 
 export const getActualProductByType = async (type: ProductType): Promise<Product[]> => {
   switch (type) {
-    case 'apartments':
+    case 'flats':
       return getActualApartments();
     case 'commercial':
       return getActualCommercial();

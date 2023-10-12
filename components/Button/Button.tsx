@@ -1,17 +1,17 @@
+import { Button as NextUiButton, ButtonProps as NextUiButtonProps } from '@nextui-org/react';
 import React from 'react';
 
-interface ButtonProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  variant?: 'primary' | 'secondary' | 'link';
-  icon?: React.ReactNode | React.ReactElement;
-  children?: React.ReactNode | React.ReactElement;
-}
+type ButtonProps = {
+  type?: 'primary' | 'secondary';
+  children: React.ReactNode | React.ReactElement;
+} & NextUiButtonProps;
 
-const Button = ({ variant = 'primary', icon, children }: ButtonProps) => {
-  return <button>{children}</button>;
+const Button = ({ children }: ButtonProps) => {
+  return (
+    <NextUiButton variant="bordered" color="secondary" radius="none">
+      {children}
+    </NextUiButton>
+  );
 };
 
 export default Button;

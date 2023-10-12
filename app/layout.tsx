@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Navigation from '@/components/Navigation';
 
 import './globals.css';
+import { Providers } from './providers';
 
 import type { Metadata } from 'next';
 
@@ -18,14 +19,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={exo_2.className}>
-        <div className="wrapper">
-          <div className="content">
-            <Header />
-            <Navigation />
-            <main className="main">{children}</main>
+        <Providers>
+          <div className="wrapper dark">
+            <div className="content">
+              <Header />
+              <Navigation />
+              <main className="main">{children}</main>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </Providers>
       </body>
     </html>
   );

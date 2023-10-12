@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ProductCard from '@/components/ProductCard';
 import Title from '@/components/Title';
 import { getActualProductByType } from '@/services/actualProducts';
 import { ProductType } from '@/types/Product.type';
@@ -36,7 +35,20 @@ const ActualProductSlider = async ({ type }: ActualProductSliderProps) => {
       <Title className={styles.title} fontSize={36}>
         {title}
       </Title>
-      <ProductSlider products={data} />;
+      <ProductSlider
+        products={[
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+          ...data,
+        ]}
+      />
     </div>
   );
 };

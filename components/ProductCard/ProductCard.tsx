@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
 
+import Button from '@/components/Button';
 import Title from '@/components/Title';
 import { convertToMonetary } from '@/helpers/formatters';
 import { getPriceByArea } from '@/helpers/getPriceByArea';
@@ -32,7 +33,7 @@ const ProductCard = async ({ product }: ProductCardProps) => {
 
   return (
     <div className={styles.cardWrapper}>
-      <Image src={imgSrc} width={330} height={165} alt="" />
+      <Image className={styles.cardImage} src={imgSrc} width={330} height={165} alt="" />
       <div className={styles.cardDescriptionWrapper}>
         <Title className={styles.title} variant="h2" fontSize={20}>
           {title}
@@ -84,6 +85,7 @@ const ProductCard = async ({ product }: ProductCardProps) => {
             {convertToMonetary(priceBYN, 'BYN')}
           </p>
         </div>
+        <Button>Подробнее</Button>
       </div>
     </div>
   );

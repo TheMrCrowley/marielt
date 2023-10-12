@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+.cardDescriptionWrapper > a > button {
+  width: 100%;
+}
+
 .cardImage {
   object-fit: cover;
   height: 165px;

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import Button from '@/components/Button';
@@ -9,14 +10,16 @@ import { getPriceByArea } from '@/helpers/getPriceByArea';
 import FloorIcon from '@/public/card-floor.svg';
 import CardMapPinIcon from '@/public/card-map-pin.svg';
 import { Product } from '@/services/actualProducts';
+import { ProductType } from '@/types/Product.type';
 
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   product: Product;
+  type: ProductType;
 }
 
-const ProductCard = async ({ product }: ProductCardProps) => {
+const ProductCard = async ({ product, type }: ProductCardProps) => {
   const {
     address,
     currency,
@@ -33,7 +36,13 @@ const ProductCard = async ({ product }: ProductCardProps) => {
 
   return (
     <div className={styles.cardWrapper}>
-      <Image className={styles.cardImage} src={imgSrc} width={330} height={165} alt="" />
+      <Image
+        className={styles.cardImage}
+        src={imgSrc}
+        width={330}
+        height={165}
+        alt="product-card"
+      />
       <div className={styles.cardDescriptionWrapper}>
         <Title className={styles.title} variant="h2" fontSize={20}>
           {title}
@@ -85,7 +94,9 @@ const ProductCard = async ({ product }: ProductCardProps) => {
             {convertToMonetary(priceBYN, 'BYN')}
           </p>
         </div>
-        <Button>Подробнее</Button>
+        <Link href={`/${type}/${productId}`}>
+          <Button fullWidth={true}>Подробнее</Button>
+        </Link>
       </div>
     </div>
   );

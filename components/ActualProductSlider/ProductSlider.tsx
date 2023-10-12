@@ -62,7 +62,7 @@ export const ProductSlider = ({ products, type }: ProductSliderProps) => {
       >
         {products.map((product) => (
           <SwiperSlide style={{ width: 330 }} key={Math.random()}>
-            <ProductCard product={product} />
+            <ProductCard product={product} type={type} />
           </SwiperSlide>
         ))}
       </Swiper>

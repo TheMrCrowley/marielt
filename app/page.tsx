@@ -1,24 +1,38 @@
 import clsx from 'clsx';
 
 import ActualPreview from '@/components/ActualPreview/ActualPreview';
+import { getHomePageData } from '@/services/homePage';
+import { WelcomeSectionItem } from '@/types/HomePage';
 
 import styles from './page.module.css';
 
-export default function Home() {
+const WelcomeSection = ({ data }: { data: WelcomeSectionItem }) => {
+  const { title, description, image } = data;
+
+  return (
+    <section className={styles.welcomeSection} style={{ backgroundImage: `url(${image.src})` }}>
+      <div className={styles.descriptionWrapper}>
+        <h1 className={styles.pageTitle}>{title}</h1>
+        <p className={styles.pageDescription}>{description}</p>
+      </div>
+      {/*TODO //place for form */}
+    </section>
+  );
+};
+
+const Home = async () => {
+  const { opportunityItems, productItems, welcomeSectionItem } = await getHomePageData();
+
   return (
     <>
-      <section className={styles.welcomeSection}>
-        <div className={styles.descriptionWrapper}>
-          <h1 className={styles.pageTitle}>Продать\купить\снять?</h1>
-          <p className={styles.pageDescription}>С нами это как легкая прогулка</p>
-        </div>
-        {/*TODO //place for form */}
-      </section>
+      <WelcomeSection data={welcomeSectionItem} />
       <section className={clsx(styles.categories)}>
-        <ActualPreview type="flats" />
-        <ActualPreview type="commercial" />
-        <ActualPreview type="house" />
+        {productItems.map((item) => (
+          <ActualPreview key={item.to} data={item} />
+        ))}
       </section>
     </>
   );
-}
+};
+
+export default Home;

@@ -93,7 +93,7 @@ export const getActualProductByType = async (type: ProductType): Promise<Product
       return getActualApartments();
     case 'commercial':
       return getActualCommercial();
-    case 'house':
+    case 'houses-and-lots':
       return getActualHouses();
   }
 };

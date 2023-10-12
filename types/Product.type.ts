@@ -1,1 +1,1 @@
-export type ProductType = 'flats' | 'commercial' | 'house';
+export type ProductType = 'flats' | 'commercial' | 'houses-and-lots';

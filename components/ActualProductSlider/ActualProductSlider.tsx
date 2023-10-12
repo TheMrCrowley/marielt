@@ -17,9 +17,9 @@ const getTitleByType = (type: ProductType) => {
     case 'flats':
       return 'Актуальные квартиры';
     case 'commercial':
-      return 'Актуальная коммерческая недвижемость';
-    case 'house':
-      return 'Актуальные дома и квартиры';
+      return 'Актуальная коммерческая недвижимость';
+    case 'houses-and-lots':
+      return 'Актуальные дома и участки';
   }
 };
 

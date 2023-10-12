@@ -1,57 +1,18 @@
-import { StaticImageData } from 'next/image';
 import React from 'react';
 
 import ActualProductSlider from '@/components/ActualProductSlider';
 import CategoryPreview from '@/components/CategoryPreview';
-import FlatsImg from '@/public/apartments.png';
-import CommercialImg from '@/public/commercial.png';
-import HouseImg from '@/public/house.png';
-import { ProductType } from '@/types/Product.type';
+import { getProductTypeByRoute } from '@/helpers/getProductTypeByRoute';
+import { HomePageItem } from '@/types/HomePage';
 
 import styles from './ActualPreview.module.css';
 
 interface ActualPreviewProps {
-  type: ProductType;
+  data: HomePageItem;
 }
 
-const getCategoryDataByType = (
-  type: ProductType,
-): {
-  title: string;
-  description: string;
-  variant: 'primary' | 'secondary';
-  image: StaticImageData;
-} => {
-  switch (type) {
-    case 'flats':
-      return {
-        description:
-          'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
-        title: 'Квартиры',
-        variant: 'primary',
-        image: FlatsImg,
-      };
-    case 'house':
-      return {
-        description:
-          'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
-        title: 'Дома и участки',
-        variant: 'secondary',
-        image: HouseImg,
-      };
-    case 'commercial':
-      return {
-        description:
-          'Lorem ipsum dolor sit amet consectetur. In egestas nec enim odio. Sed ultricies id dis maecenas. Tincidunt lectus faucibus ullamcorper vel. Sit ullamcorper nunc at viverra odio nisl ut. Est auctor rhoncus facilisis orci.',
-        title: 'Коммерческая недвижимость',
-        variant: 'primary',
-        image: CommercialImg,
-      };
-  }
-};
-
-const ActualPreview = ({ type }: ActualPreviewProps) => {
-  const data = getCategoryDataByType(type);
+const ActualPreview = ({ data }: ActualPreviewProps) => {
+  const type = getProductTypeByRoute(data.to);
 
   return (
     <section className={styles.wrapper}>

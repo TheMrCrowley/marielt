@@ -5,7 +5,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('/home_bg.png');
 }
 
 .descriptionWrapper {
@@ -29,7 +28,7 @@
 }
 
 .pageDescription {
-  color: #FFF;
+  color: #fff;
   font-size: 24px;
   font-weight: 400;
 }

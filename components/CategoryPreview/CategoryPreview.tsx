@@ -1,33 +1,25 @@
 import clsx from 'clsx';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import ArrowRight from '@/public/arrow-right.svg';
+import { HomePageItem } from '@/types/HomePage';
 
 import styles from './CategoryPreview.module.css';
 
-interface CategoryPreviewProps {
-  title: string;
-  description: string;
-  image: StaticImageData;
-  variant?: 'primary' | 'secondary';
-}
-
 // TODO Change Name
-const CategoryPreview = ({
-  description,
-  title,
-  image,
-  variant = 'primary',
-}: CategoryPreviewProps) => {
+const CategoryPreview = ({ description, title, image, variant, to }: HomePageItem) => {
   const renderDescription = () => (
     <div className={styles.descriptionWrapper}>
       <h2 className={styles.descriptionTitle}>{title}</h2>
       <p className={styles.description}>{description}</p>
       {/* TODO change to Link */}
-      <button className={styles.descriptionButton}>
-        Перейти в каталог <Image src={ArrowRight} alt="arrow-right" />
-      </button>
+      <Link href={`${to}`}>
+        <button className={styles.descriptionButton}>
+          Перейти в каталог <Image src={ArrowRight} alt="arrow-right" />
+        </button>
+      </Link>
     </div>
   );
 
@@ -37,13 +29,13 @@ const CategoryPreview = ({
         return (
           <>
             {renderDescription()}
-            <Image src={image} alt="" placeholder="blur" />
+            <Image src={image.src} width={image.width} height={image.height} alt="" />
           </>
         );
       case 'secondary':
         return (
           <>
-            <Image src={image} alt="" placeholder="blur" />
+            <Image src={image.src} width={image.width} height={image.height} alt="" />
             {renderDescription()}
           </>
         );

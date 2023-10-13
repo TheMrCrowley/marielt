@@ -1,0 +1,11 @@
+.section {
+  width: 100%;
+  background-color: #343434;
+}
+
+.wrapper {
+  background-repeat: no-repeat;
+  background-image: url('/dividers-bg.png');
+  background-size: cover;
+  background-position: center;
+}

@@ -10,7 +10,7 @@ import { getPriceByArea } from '@/helpers/getPriceByArea';
 import FloorIcon from '@/public/card-floor.svg';
 import CardMapPinIcon from '@/public/card-map-pin.svg';
 import { Product } from '@/services/actualProducts';
-import { ProductType } from '@/types/Product.type';
+import { ProductType } from '@/types/Product';
 
 import styles from './ProductCard.module.css';
 

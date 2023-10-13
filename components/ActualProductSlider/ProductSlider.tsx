@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@/components/ProductCard';
 import { Product } from '@/services/actualProducts';
-import { ProductType } from '@/types/Product.type';
+import { ProductType } from '@/types/Product';
 
 import styles from './ProductSlider.module.css';
 
@@ -57,7 +57,7 @@ export const ProductSlider = ({ products, type }: ProductSliderProps) => {
           prevEl: `.${prevClassName}`,
           nextEl: `.${nextClassName}`,
         }}
-        grabCursor
+        // grabCursor
         slidesPerView="auto"
       >
         {products.map((product) => (

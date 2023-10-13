@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import Title from '@/components/Title';
 import ArrowRight from '@/public/arrow-right.svg';
 import { HomePageItem } from '@/types/HomePage';
 
@@ -12,9 +13,10 @@ import styles from './CategoryPreview.module.css';
 const CategoryPreview = ({ description, title, image, variant, to }: HomePageItem) => {
   const renderDescription = () => (
     <div className={styles.descriptionWrapper}>
-      <h2 className={styles.descriptionTitle}>{title}</h2>
+      <Title fontSize={40} className={styles.descriptionTitle}>
+        {title}
+      </Title>
       <p className={styles.description}>{description}</p>
-      {/* TODO change to Link */}
       <Link href={`${to}`}>
         <button className={styles.descriptionButton}>
           Перейти в каталог <Image src={ArrowRight} alt="arrow-right" />

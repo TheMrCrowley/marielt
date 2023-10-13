@@ -1,5 +1,5 @@
 import { getFullAddress } from '@/helpers/getFullAddress';
-import { ProductType } from '@/types/Product.type';
+import { ProductType } from '@/types/Product';
 
 import { getCurrencyByType } from './getCurrency';
 export interface Product {

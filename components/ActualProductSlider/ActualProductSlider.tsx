@@ -3,7 +3,7 @@ import React from 'react';
 
 import Title from '@/components/Title';
 import { getActualProductByType } from '@/services/actualProducts';
-import { ProductType } from '@/types/Product.type';
+import { ProductType } from '@/types/Product';
 
 import styles from './ActualProductSlider.module.css';
 import ProductSlider from './ProductSlider';

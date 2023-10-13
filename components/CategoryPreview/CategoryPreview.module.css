@@ -18,9 +18,6 @@
 .descriptionTitle {
   padding-left: 25px;
   position: relative;
-  color: var(--white-color);
-  font-size: 40px;
-  font-weight: 400;
   text-transform: uppercase;
 }
 
@@ -60,6 +57,10 @@
   margin-left: auto;
   transition: var(--default-transition);
   cursor: pointer;
+}
+
+.descriptionWrapper > a {
+  margin-top: auto;
 }
 
 .descriptionButton:hover {

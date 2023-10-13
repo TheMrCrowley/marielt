@@ -1,49 +1,29 @@
 import clsx from 'clsx';
 import React, { PropsWithChildren } from 'react';
 
-import styles from './Typography.module.css';
+import {
+  FontSizeType,
+  FontWeightType,
+  getFontSizeClassName,
+  getFontWeightClassName,
+} from '@/helpers/classNameHelpers';
 
 interface TypographyProps extends PropsWithChildren {
   className?: string;
-  fontSize?: 20 | 16 | 14;
-  fontWeight?: 'bold' | 'regular';
+  fontSize?: FontSizeType;
+  fontWeight?: FontWeightType;
 }
-
-// TODO DRY
-const getFontWeightClassName = (fontWeight: TypographyProps['fontWeight']): string => {
-  switch (fontWeight) {
-    case 'bold':
-      return styles.boldFontWeight;
-    case 'regular':
-      return styles.regularFontWeight;
-    default:
-      return styles.regularFontWeight;
-  }
-};
-
-const getFontSizeClassName = (fontSize: TypographyProps['fontSize']): string => {
-  switch (fontSize) {
-    case 20:
-      return styles.mediumFontSize;
-    case 16:
-      return styles.smallFontSize;
-    case 14:
-      return styles.extraSmallFontSize;
-    default:
-      return styles.mediumFontSize;
-  }
-};
 
 const Typography = ({
   children,
   className,
   fontSize = 20,
-  fontWeight = 'regular',
+  fontWeight = 'normal',
 }: TypographyProps) => {
   const commonClassName = clsx(
-    styles.typography,
     getFontSizeClassName(fontSize),
     getFontWeightClassName(fontWeight),
+    'text-white',
   );
 
   return <p className={clsx(commonClassName, className)}>{children}</p>;

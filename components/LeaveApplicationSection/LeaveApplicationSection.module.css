@@ -6,6 +6,6 @@
 .wrapper {
   background-repeat: no-repeat;
   background-image: url('/dividers-bg.png');
-  background-size: cover;
+  background-size: auto;
   background-position: center;
 }

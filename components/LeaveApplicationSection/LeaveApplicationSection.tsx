@@ -25,7 +25,7 @@ const LeaveApplicationSection = () => {
           styles.wrapper,
         )}
       >
-        <Title fontSize={48} variant="h2">
+        <Title fontSize={48} className="text-center" variant="h2">
           Оставьте заявку и мы ответим на все ваши вопросы
         </Title>
         <Button

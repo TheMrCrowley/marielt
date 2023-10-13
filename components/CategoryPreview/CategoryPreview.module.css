@@ -1,20 +1,3 @@
-.wrapper {
-  max-height: 520px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  background-color: #343434;
-}
-
-.descriptionWrapper {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  row-gap: 50px;
-  padding: 4%;
-  width: 50%;
-}
-
 .descriptionTitle {
   padding-left: 25px;
   position: relative;
@@ -32,32 +15,4 @@
   background-image: url('/shape.svg');
   background-repeat: no-repeat;
   background-size: contain;
-}
-
-.description {
-  color: var(--white-color);
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 32px;
-}
-
-.wrapper > img {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
-}
-
-@media (width <= 768px) {
-  .wrapper {
-    flex-direction: column;
-    max-height: unset;
-  }
-
-  .descriptionWrapper {
-    width: 100%;
-  }
-
-  .wrapper > img {
-    width: 100%;
-  }
 }

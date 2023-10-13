@@ -21,7 +21,7 @@ const ContactItem = ({ type, children }: ContactItemProps) => {
           <>
             <Image src={PhoneIcon} alt={type} />
             <a href={`tel:${children}`}>
-              <Typography fontWeight="bold">{children}</Typography>
+              <Typography fontWeight="medium">{children}</Typography>
             </a>
           </>
         );
@@ -30,7 +30,7 @@ const ContactItem = ({ type, children }: ContactItemProps) => {
           <>
             <Image src={EmailIcon} alt={type} />
             <a href={`mailto:${children}`}>
-              <Typography fontWeight="bold">{children}</Typography>
+              <Typography fontWeight="medium">{children}</Typography>
             </a>
           </>
         );
@@ -38,14 +38,14 @@ const ContactItem = ({ type, children }: ContactItemProps) => {
         return (
           <>
             <Image src={MapPinIcon} alt={type} />
-            <Typography fontWeight="bold">{children}</Typography>
+            <Typography fontWeight="medium">{children}</Typography>
           </>
         );
       case 'clock':
         return (
           <>
             <Image src={TimeIcon} alt={type} />
-            <Typography fontWeight="bold">{children}</Typography>
+            <Typography fontWeight="medium">{children}</Typography>
           </>
         );
     }

@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
           </div>
           <div className={clsx(styles.footerContentItem, styles.footerContacts)}>
-            <Title variant="h2" fontSize={36} fontWeight="bold">
+            <Title variant="h2" fontSize={36} fontWeight="medium">
               Контакты
             </Title>
             <ul className={styles.contactList}>
@@ -56,7 +56,7 @@ const Footer = () => {
             </div>
           </div>
           <div className={clsx(styles.footerContentItem, styles.footerAddresses)}>
-            <Title variant="h2" fontSize={36} fontWeight="bold">
+            <Title variant="h2" fontSize={36} fontWeight="medium">
               Адрес
             </Title>
             <ul className={styles.contactList}>

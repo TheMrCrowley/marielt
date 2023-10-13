@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import ActualPreview from '@/components/ActualPreview/ActualPreview';
 import LeaveApplicationSection from '@/components/LeaveApplicationSection';
+import ProductPreview from '@/components/ProductPreview';
 import { getHomePageData } from '@/services/homePage';
 import { WelcomeSectionItem } from '@/types/HomePage';
 
@@ -29,7 +29,7 @@ const Home = async () => {
       <WelcomeSection data={welcomeSectionItem} />
       <section className={clsx(styles.products)}>
         {productItems.map((item) => (
-          <ActualPreview key={item.to} data={item} />
+          <ProductPreview key={item.to} data={item} />
         ))}
       </section>
       <LeaveApplicationSection />

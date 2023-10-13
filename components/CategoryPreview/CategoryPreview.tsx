@@ -1,27 +1,22 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
+import LinkButton from '@/components/LinkButton';
 import Title from '@/components/Title';
-import ArrowRight from '@/public/arrow-right.svg';
 import { HomePageItem } from '@/types/HomePage';
 
 import styles from './CategoryPreview.module.css';
 
 // TODO Change Name
-const CategoryPreview = ({ description, title, image, variant, to }: HomePageItem) => {
+const CategoryPreview = ({ description, title, image, variant, to, type }: HomePageItem) => {
   const renderDescription = () => (
     <div className={styles.descriptionWrapper}>
       <Title fontSize={40} className={styles.descriptionTitle}>
         {title}
       </Title>
       <p className={styles.description}>{description}</p>
-      <Link href={`${to}`}>
-        <button className={styles.descriptionButton}>
-          Перейти в каталог <Image src={ArrowRight} alt="arrow-right" />
-        </button>
-      </Link>
+      <LinkButton to={to} type={type} />
     </div>
   );
 

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 import LeaveApplicationSection from '@/components/LeaveApplicationSection';
+import OpportunityPreview from '@/components/OpportunityPreview';
 import ProductPreview from '@/components/ProductPreview';
 import { getHomePageData } from '@/services/homePage';
 import { WelcomeSectionItem } from '@/types/HomePage';
@@ -27,12 +28,17 @@ const Home = async () => {
   return (
     <>
       <WelcomeSection data={welcomeSectionItem} />
-      <section className={clsx(styles.products)}>
+      <section className={clsx('w-full', 'pt-[100px]')}>
         {productItems.map((item) => (
           <ProductPreview key={item.to} data={item} />
         ))}
       </section>
       <LeaveApplicationSection />
+      <section className={clsx('w-full', 'pt-[100px]', styles.opp)}>
+        {opportunityItems.map((opportunity) => (
+          <OpportunityPreview key={opportunity.to} opportunity={opportunity} />
+        ))}
+      </section>
     </>
   );
 };

@@ -1,0 +1,19 @@
+.descriptionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  height: 50px;
+  padding: 12px 14px 13px 23px;
+  width: max-content;
+  border-bottom: 1.25px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-size: 20px;
+  font-weight: 500;
+  transition: var(--default-transition);
+  cursor: pointer;
+}
+
+.descriptionButton:hover {
+  background-color: rgb(255 255 255 / 25%);
+}

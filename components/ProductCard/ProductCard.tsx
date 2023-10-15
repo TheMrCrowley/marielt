@@ -95,7 +95,7 @@ const ProductCard = async ({ product, type }: ProductCardProps) => {
           </p>
         </div>
         <Link href={`/${type}/${productId}`}>
-          <Button>Подробнее</Button>
+          <Button buttonType="bordered">Подробнее</Button>
         </Link>
       </div>
     </div>

@@ -31,8 +31,8 @@ const LeaveApplicationSection = () => {
         <Button
           fontSize={20}
           fontWeight="medium"
-          buttonType="secondary"
-          endContent={<Image src={ArrowUp} alt="arrpw-up" />}
+          buttonType="filled"
+          endIcon={<Image src={ArrowUp} alt="arrpw-up" />}
           onClick={() => {
             window.scrollTo({
               behavior: 'smooth',

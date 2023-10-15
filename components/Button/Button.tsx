@@ -3,32 +3,61 @@
 import clsx from 'clsx';
 import React from 'react';
 
-type ButtonProps = {
+import { getFontSizeClassName, getFontWeightClassName } from '@/helpers/classNameHelpers';
+
+interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   fontSize?: 20 | 16;
   fontWeight?: 'normal' | 'medium';
-  buttonType?: 'primary' | 'secondary';
+  buttonType?: 'filled' | 'bordered';
   children?: React.ReactNode | React.ReactElement;
-};
+  endIcon?: React.ReactNode | React.ReactElement;
+}
 
 const Button = ({
   children,
-  buttonType = 'primary',
+  buttonType = 'filled',
   fontSize = 16,
   fontWeight = 'normal',
+  endIcon,
   ...props
 }: ButtonProps) => {
-  const commonStyles = clsx(`text-[${fontSize}px]`, `font-${fontWeight}`, 'px-16', 'gap-x-2.5');
-  if (buttonType === 'secondary') {
+  const commonStyles = clsx(
+    'flex',
+    'justify-center',
+    'items-center',
+    getFontSizeClassName(fontSize),
+    getFontWeightClassName(fontWeight),
+    'py-2',
+    'px-16',
+    'gap-x-2.5',
+    'transition',
+    'hover:bg-[#ffffff50]',
+  );
+
+  if (buttonType === 'filled') {
     return (
-      <button className={clsx(commonStyles, 'text-black')} color="secondary" {...props}>
-        {children}
+      <button className={clsx(commonStyles, 'text-black', 'bg-secondary')} {...props}>
+        {children} {endIcon}
       </button>
     );
   }
 
   return (
-    <button className={clsx(commonStyles, 'text-secondary')} color="secondary" {...props}>
-      {children}
+    <button
+      className={clsx(
+        commonStyles,
+        'text-secondary',
+        'border-[1px]',
+        'border-solid',
+        'border-secondary',
+      )}
+      {...props}
+    >
+      {children} {endIcon}
     </button>
   );
 };

@@ -1,4 +1,3 @@
-import { nextui } from '@nextui-org/react';
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,7 +7,6 @@ module.exports = {
 
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   safelist: [
     'font-medium',
@@ -32,21 +30,5 @@ module.exports = {
     },
   },
   darkMode: 'class',
-  plugins: [
-    nextui({
-      themes: {
-        dark: {
-          colors: {
-            primary: {
-              DEFAULT: '#2c2c2c',
-            },
-
-            secondary: {
-              DEFAULT: '#e3c496',
-            },
-          },
-        },
-      },
-    }),
-  ],
+  plugins: [],
 };

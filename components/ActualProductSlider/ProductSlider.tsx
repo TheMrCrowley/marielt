@@ -54,6 +54,7 @@ export const ProductSlider = ({ products, type }: ProductSliderProps) => {
         modules={[Navigation]}
         spaceBetween={25}
         navigation={{
+          // TODO change disabled class
           prevEl: `.${prevClassName}`,
           nextEl: `.${nextClassName}`,
         }}

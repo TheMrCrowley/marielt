@@ -8,7 +8,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
-const exo_2 = Exo_2({ subsets: ['cyrillic'] });
+const exo_2 = Exo_2({ subsets: ['cyrillic'], weight: ['300', '400', '500'] });
 
 export const metadata: Metadata = {
   title: 'MaRielt',

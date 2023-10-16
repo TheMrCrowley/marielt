@@ -48,13 +48,7 @@ const Button = ({
 
   return (
     <button
-      className={clsx(
-        commonStyles,
-        'text-secondary',
-        'border-[1px]',
-        'border-solid',
-        'border-secondary',
-      )}
+      className={clsx(commonStyles, 'text-secondary', 'border', 'border-solid', 'border-secondary')}
       {...props}
     >
       {children} {endIcon}

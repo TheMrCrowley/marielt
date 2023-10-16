@@ -67,7 +67,7 @@ const Select = ({ onChange, options }: SelectProps) => {
           'px-4',
           'py-2',
           'border-solid',
-          'border-b-[1px]',
+          'border-b',
           'hover:cursor-pointer',
           selected.length ? 'border-secondary' : 'border-[#d9d9d9]',
         )}

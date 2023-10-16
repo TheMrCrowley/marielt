@@ -18,7 +18,7 @@ const Option = ({ label, onClick, value, isSelected }: OptionItemProps) => {
         'px-4',
         'py-2',
         'border-solid',
-        'border-b-[1px]',
+        'border-b',
         'text-[20px]',
         'text-white',
         'hover:cursor-pointer',

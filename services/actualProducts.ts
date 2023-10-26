@@ -46,8 +46,9 @@ interface GetActualApartmentsResponse {
   }>;
 }
 
-const REVALIDATE_TIME = 1000 * 60 * 5;
+const REVALIDATE_TIME = 10000;
 
+// TODO change to get ACTUAL
 const getActualApartments = async (): Promise<Product[]> => {
   const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`, {
     next: {

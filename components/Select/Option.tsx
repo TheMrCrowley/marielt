@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 
-interface OptionItemProps {
+export interface OptionItemProps {
   isSelected: boolean;
   onClick: (value: string) => void;
   value: string;
   label: string;
+  disabled?: boolean;
 }
 
-const Option = ({ label, onClick, value, isSelected }: OptionItemProps) => {
+const Option = ({ label, onClick, value, isSelected, disabled }: OptionItemProps) => {
   return (
     <div
       onClick={(event) => {
         event.stopPropagation();
-        onClick(value);
+        if (!disabled) {
+          onClick(value);
+        }
       }}
       className={clsx(
         'px-4',
@@ -20,13 +23,16 @@ const Option = ({ label, onClick, value, isSelected }: OptionItemProps) => {
         'border-solid',
         'border-b',
         'text-[20px]',
-        'text-white',
-        'hover:cursor-pointer',
-        'hover:bg-secondary',
-        'hover:text-black',
-        'hover: text-black',
+        !isSelected && !disabled && 'text-white',
+
+        !disabled && 'hover:bg-secondary',
+        !disabled && 'hover:text-black',
+        !disabled && 'hover: text-black',
         isSelected && 'bg-secondary',
         isSelected && 'text-black',
+        disabled && 'bg-[#d9d9d9]',
+        disabled && 'text-black',
+        disabled && 'cursor-default',
       )}
     >
       {label}

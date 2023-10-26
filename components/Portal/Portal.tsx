@@ -1,21 +1,20 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-interface PortalProps extends PropsWithChildren {
-  rootId?: string;
-}
-
-const Portal = ({ rootId, children }: PortalProps) => {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+const Portal = ({ children }: PropsWithChildren) => {
+  const [container] = useState(() => document.createElement('div'));
 
   useEffect(() => {
-    setMounted(true);
-    containerRef.current = document.querySelector(`${rootId}`);
-    return () => setMounted(false);
+    document.body.appendChild(container);
+    document.body.classList.add('overflow-hidden');
+
+    return () => {
+      document.body.removeChild(container);
+      document.body.classList.remove('overflow-hidden');
+    };
   }, []);
 
-  return mounted && !!containerRef.current ? createPortal(children, containerRef.current) : null;
+  return createPortal(children, container);
 };
 
 export default Portal;

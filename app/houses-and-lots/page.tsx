@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HouseAndLots = () => {
-  return <div>HouseAndLots</div>;
+  return <div>house</div>;
 };
 
 export default HouseAndLots;

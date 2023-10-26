@@ -23,6 +23,7 @@ const Button = ({
   fontSize = 16,
   fontWeight = 'normal',
   endIcon,
+  className,
   ...props
 }: ButtonProps) => {
   const commonStyles = clsx(
@@ -36,6 +37,7 @@ const Button = ({
     'gap-x-2.5',
     'transition',
     'hover:bg-[#ffffff50]',
+    className,
   );
 
   if (buttonType === 'filled') {

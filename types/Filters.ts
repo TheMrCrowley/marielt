@@ -9,6 +9,18 @@ export interface BaseFiltersContext<T extends Record<string, string | string[] |
   ) => void;
 }
 
+export const finishingValues = [
+  'евроремонт',
+  'отличный ремонт',
+  'хороший ремонт',
+  'нормальный ремонт',
+  'удовлетворительный ремонт',
+  'плохое состояние',
+  'аварийное состояние',
+  'без отделки',
+  'строительная отделка',
+];
+
 export type FlatsFiltersType = BaseFiltersContext<{
   priceFrom: string;
   priceTo: string;
@@ -30,4 +42,21 @@ export type FlatsFiltersType = BaseFiltersContext<{
   maxFloorsTo: string;
 
   houseType: string[];
+
+  livingAreaFrom: string;
+  livingAreaTo: string;
+  kitchenAreaFrom: string;
+  kitchenAreaTo: string;
+  ceilingHeight: string;
+
+  finishing: string[];
+  bathroom: string[];
+  renovationYearFrom: string;
+  renovationYearTo: string;
+  constructionYearFrom: string;
+  constructionYearTo: string;
+  balcony: string[];
+  saleTerm: string[];
+  furniture: boolean;
+  parking: boolean;
 }>;

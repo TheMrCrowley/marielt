@@ -22,6 +22,25 @@ const roominessMap: Record<string, string[]> = {
   ],
 };
 
+const bathroomMap: Record<string, string[]> = {
+  separate: ['раздельный'],
+  combined: ['совмещенный'],
+  twoAndMore: ['два санузла', 'три санузла', 'четыре санузла'],
+};
+
+const balconyMap: Record<string, string> = {
+  none: 'нет',
+  balcony: 'балкон',
+  loggia: 'лоджия',
+};
+
+const saleTermMap: Record<string, string> = {
+  clear: 'чистая продажа',
+  change: 'обмен',
+  changeMoveOut: 'обмен - разъезд',
+  changeMoveIn: 'обмен - съезд',
+};
+
 export const getFlatsStrapiQueryParamsByFilters = (
   filters: Record<string, string | string[] | boolean>,
 ): {
@@ -47,24 +66,64 @@ export const getFlatsStrapiQueryParamsByFilters = (
     isNotLastFloor,
     maxFloorsFrom,
     maxFloorsTo,
+    livingAreaTo,
+    livingAreaFrom,
+    kitchenAreaTo,
+    ceilingHeight,
+    kitchenAreaFrom,
+    bathroom,
+    constructionYearFrom,
+    constructionYearTo,
+    finishing,
+    renovationYearFrom,
+    renovationYearTo,
+    balcony,
+    saleTerm,
+    furniture,
+    parking,
   } = filters as FlatsFiltersType['filters'];
 
   const query = qs.stringify(
     {
+      // TODO doublecheck filters
       filters: {
         metro: {
           name: {
             $in: metro,
           },
         },
+        sale_terms: {
+          $in: Array.isArray(saleTerm)
+            ? saleTerm.map((term) => saleTermMap[term])
+            : saleTermMap[saleTerm],
+        },
+        additional_info: {
+          $and: [
+            {
+              name: furniture && 'мебель',
+            },
+            { name: parking && 'парковка' },
+          ],
+        },
         parameters: {
+          construction_year: {
+            $gte: constructionYearFrom,
+            $lte: constructionYearTo,
+          },
+          major_renovation_year: {
+            $gte: renovationYearFrom,
+            $lte: renovationYearTo,
+          },
+          finishing: {
+            $in: finishing,
+          },
           total_area: {
             $gte: areaFrom,
             $lte: areaTo,
           },
           roominess: {
             $in: Array.isArray(roominess)
-              ? roominess.map((item) => roominessMap[item]).join()
+              ? roominess.map((item) => roominessMap[item]).flat()
               : roominessMap[roominess],
           },
           floor: {
@@ -77,6 +136,27 @@ export const getFlatsStrapiQueryParamsByFilters = (
           floors_number: {
             $gte: maxFloorsFrom,
             $lte: maxFloorsTo,
+          },
+          living_area: {
+            $gte: livingAreaFrom,
+            $lte: livingAreaTo,
+          },
+          kitchen_area: {
+            $gte: kitchenAreaFrom,
+            $lte: kitchenAreaTo,
+          },
+          ceilingHeight: {
+            $gte: ceilingHeight,
+          },
+          bathroom: {
+            $in: Array.isArray(bathroom)
+              ? bathroom.map((item) => bathroomMap[item]).flat()
+              : bathroomMap[bathroom],
+          },
+          balcony: {
+            $containsi: Array.isArray(balcony)
+              ? balcony.map((type) => balconyMap[type])
+              : balconyMap[balcony],
           },
         },
         price: {
@@ -99,7 +179,7 @@ export const getFlatsStrapiQueryParamsByFilters = (
       encodeValuesOnly: true,
     },
   );
-
+  console.log(query);
   return { query, currency: currency || 'USD' };
 };
 

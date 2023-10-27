@@ -5,14 +5,18 @@ interface FindResponse {
 }
 
 const getDistricts = async () => {
-  const districtsResponse = await fetch(`${process.env.API_BASE_URL}/districts`);
+  const districtsResponse = await fetch(
+    `${process.env.API_BASE_URL}/districts?pagination[limit]=-1`,
+  );
   const { data } = (await districtsResponse.json()) as StrapiFindResponse<FindResponse>;
 
   return data.map((district) => district.attributes.name);
 };
 
 const getMicroDistricts = async () => {
-  const microDistrictsResponse = await fetch(`${process.env.API_BASE_URL}/microdistricts`);
+  const microDistrictsResponse = await fetch(
+    `${process.env.API_BASE_URL}/microdistricts?pagination[limit]=-1`,
+  );
   const { data } = (await microDistrictsResponse.json()) as StrapiFindResponse<FindResponse>;
 
   return data.map((district) => district.attributes.name);

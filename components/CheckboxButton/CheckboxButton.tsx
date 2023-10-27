@@ -19,8 +19,10 @@ const CheckboxButton = ({ isChecked, onChange, children }: CheckboxButtonProps) 
         'hover:cursor-pointer',
         isChecked ? 'text-white' : 'text-[#A3A3A3]',
         isChecked ? 'bg-[#E3C49680]' : 'bg-[#4C4C4C]',
+        'first-letter:uppercase',
       )}
     >
+      {children}
       <input
         checked={isChecked}
         type="checkbox"
@@ -28,7 +30,6 @@ const CheckboxButton = ({ isChecked, onChange, children }: CheckboxButtonProps) 
         className={clsx('hidden')}
         onChange={(e) => onChange(e.target.checked)}
       />
-      {children}
     </label>
   );
 };

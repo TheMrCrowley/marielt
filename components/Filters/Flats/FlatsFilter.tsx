@@ -5,12 +5,15 @@ import React, { useContext, useState } from 'react';
 import Button from '@/components/Button';
 import ButtonGroup from '@/components/ButtonGroup';
 import CheckboxButton from '@/components/CheckboxButton';
+import CheckboxGroup from '@/components/CheckboxGroup';
 import CurrencySwitch from '@/components/CurrencySwitch';
 import InputFromTo from '@/components/InputFromTo';
 import Modal from '@/components/Modal';
 import Select from '@/components/Select';
+import Switch from '@/components/Switch';
 import Title from '@/components/Title';
 import CrossIcon from '@/public/plus.svg';
+import { finishingValues } from '@/types/Filters';
 
 import { FlatsFiltersContext } from './FlatsContextProvider';
 
@@ -80,7 +83,7 @@ const DistrictFilter = () => {
       label="Район"
       isMulti
       options={districtsOptions.map((district) => ({
-        label: district.split(' ')[0],
+        label: district,
         value: district,
       }))}
       values={selectedDistricts}
@@ -179,6 +182,8 @@ const AreaFilter = () => {
   );
 };
 
+const ExpandedFlatsFilter = () => {};
+
 const FlatsFilter = () => {
   const {
     filters: {
@@ -191,6 +196,21 @@ const FlatsFilter = () => {
       maxFloorsFrom,
       maxFloorsTo,
       houseType,
+      areaFrom,
+      areaTo,
+      livingAreaFrom,
+      livingAreaTo,
+      kitchenAreaFrom,
+      kitchenAreaTo,
+      bathroom,
+      finishing,
+      constructionYearFrom,
+      constructionYearTo,
+      renovationYearFrom,
+      renovationYearTo,
+      saleTerm,
+      furniture,
+      parking,
     },
     updateFilters,
     applyFilters,
@@ -233,12 +253,15 @@ const FlatsFilter = () => {
           className={clsx(
             'flex',
             'py-12',
-            'px-24',
+            'px-20',
             'bg-[#262626]',
             'max-w-[1620px]',
             'w-full',
             'relative',
             'z-10',
+            'flex-auto',
+            'h-full',
+            'overflow-hidden',
           )}
         >
           <button
@@ -254,7 +277,20 @@ const FlatsFilter = () => {
           >
             <Image src={CrossIcon} alt="close-icon" />
           </button>
-          <section className={clsx('flex', 'flex-col', 'gap-y-20', 'w-full')}>
+          <section
+            className={clsx(
+              'flex',
+              'flex-col',
+              'w-full',
+              'justify-between',
+              'overflow-y-auto',
+              'gap-y-8',
+              'px-4',
+              'scrollbar-thin',
+              'scrollbar-thumb-primary',
+              'scrollbar-track-secondary',
+            )}
+          >
             <Title fontSize={40} fontWeight="medium">
               Расширенный фильтр
             </Title>
@@ -325,10 +361,12 @@ const FlatsFilter = () => {
                 wrapperClassName="flex-initial"
               />
               <Select
+                wrapperClassName="flex-auto"
                 isMulti
                 label="Тип дома"
                 values={houseType}
                 options={[
+                  //TODO move it somewhere and keep in one place
                   { value: 'панельный', label: 'панельный' },
                   { value: 'монолитный', label: 'монолитный' },
                   { value: 'кирпичный', label: 'кирпичный' },
@@ -338,6 +376,165 @@ const FlatsFilter = () => {
                   { value: 'бревенчатый', label: 'бревенчатый' },
                 ]}
                 onChange={(selected) => updateFilters({ houseType: selected })}
+                optionWidth="full"
+              />
+            </div>
+            <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8')}>
+              <InputFromTo
+                label="Площадь Общая"
+                subLabel={
+                  <span>
+                    м <sup>2</sup>
+                  </span>
+                }
+                values={{
+                  from: areaFrom,
+                  to: areaTo,
+                }}
+                onChange={({ from, to }) => updateFilters({ areaFrom: from, areaTo: to })}
+              />
+              <InputFromTo
+                label="Площадь Жилая"
+                subLabel={
+                  <span>
+                    м <sup>2</sup>
+                  </span>
+                }
+                values={{
+                  from: livingAreaFrom,
+                  to: livingAreaTo,
+                }}
+                onChange={({ from, to }) =>
+                  updateFilters({ livingAreaFrom: from, livingAreaTo: to })
+                }
+              />
+              <InputFromTo
+                label="Площадь Кухни"
+                subLabel={
+                  <span>
+                    м <sup>2</sup>
+                  </span>
+                }
+                values={{
+                  from: kitchenAreaFrom,
+                  to: kitchenAreaTo,
+                }}
+                onChange={({ from, to }) =>
+                  updateFilters({ kitchenAreaFrom: from, kitchenAreaTo: to })
+                }
+              />
+              <Select
+                label="Высота Потолков"
+                subLabel="м"
+                placeholder="Выбрать"
+                options={[
+                  {
+                    value: '2.5',
+                    label: 'От 2,5 м',
+                  },
+                  {
+                    value: '2.7',
+                    label: 'От 2,7 м',
+                  },
+                  {
+                    value: '3',
+                    label: 'От 3 м',
+                  },
+                  {
+                    value: '3.5',
+                    label: 'От 3,5 м',
+                  },
+                  {
+                    value: '4',
+                    label: 'От 4 м',
+                  },
+                ]}
+                onChange={([height]) => updateFilters({ ceilingHeight: height })}
+                optionWidth="full"
+              />
+            </div>
+            <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8', 'items-end')}>
+              <Select
+                label="Ремонт"
+                isMulti
+                values={finishing}
+                options={finishingValues.map((item) => ({
+                  value: item,
+                  label: item,
+                }))}
+                onChange={(selected) => updateFilters({ finishing: selected })}
+              />
+              <CheckboxGroup
+                isMulti
+                label="Санузел"
+                values={bathroom}
+                items={[
+                  { label: 'Раздельный', value: 'separate' },
+                  { label: 'Совмещенный', value: 'combined' },
+                  { label: '2 и более', value: 'twoAndMore' },
+                ]}
+                onChange={(selected) => updateFilters({ bathroom: selected })}
+              />
+              <CheckboxGroup
+                isMulti
+                label="Балкон"
+                values={bathroom}
+                items={[
+                  // TODO move to one place
+                  { label: 'Есть', value: 'balcony' },
+                  { label: 'Нет', value: 'none' },
+                  { label: 'Лоджия', value: 'loggia' },
+                ]}
+                onChange={(selected) => updateFilters({ balcony: selected })}
+              />
+            </div>
+            <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8')}>
+              <InputFromTo
+                label="Год Ремонта"
+                values={{
+                  from: renovationYearFrom,
+                  to: renovationYearTo,
+                }}
+                onChange={({ from, to }) =>
+                  updateFilters({ renovationYearFrom: from, renovationYearTo: to })
+                }
+              />
+              <InputFromTo
+                label="Год Постройки"
+                values={{
+                  from: constructionYearFrom,
+                  to: constructionYearTo,
+                }}
+                onChange={({ from, to }) =>
+                  updateFilters({ constructionYearFrom: from, constructionYearTo: to })
+                }
+              />
+              <Select
+                label="Условия Сделки"
+                values={saleTerm}
+                onChange={(selected) =>
+                  updateFilters({
+                    saleTerm: selected,
+                  })
+                }
+                options={[
+                  { value: 'clear', label: 'чистая продажа' },
+                  { value: 'change', label: 'обмен' },
+                  { value: 'changeMoveOut', label: 'обмен - разъезд' },
+                  { value: 'changeMoveIn', label: 'обмен - съезд' },
+                ]}
+              />
+            </div>
+            <div className={clsx('flex', 'items-end', 'gap-x-12')}>
+              <Switch
+                label="Мебель"
+                onChange={(checked) => updateFilters({ furniture: checked })}
+                isChecked={furniture}
+              />
+              <Switch
+                label="Парковка"
+                onChange={(checked) => updateFilters({ parking: checked })}
+                isChecked={parking}
               />
             </div>
             <Button className={clsx('self-end', 'flex-1')} onClick={applyFilters}>

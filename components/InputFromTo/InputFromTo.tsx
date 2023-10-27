@@ -29,7 +29,10 @@ const InputFromTo = ({
   const { from, to } = values;
 
   const handleChange = (value: string) =>
-    value && Math.max(Number(minMax?.min), Math.min(Number(minMax?.max), Number(value))).toString();
+    minMax
+      ? value &&
+        Math.max(Number(minMax?.min), Math.min(Number(minMax?.max), Number(value))).toString()
+      : value;
 
   return (
     <InputWrapper wrapperClassName={wrapperClassName} label={label} subLabel={subLabel}>

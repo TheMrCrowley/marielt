@@ -2,29 +2,33 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
 
-import InputWrapper from '@/components/InputWrapper';
+import InputWrapper, { InputWrapperProps } from '@/components/InputWrapper';
 import ChevronIcon from '@/public/chevron-down.svg';
 import { OptionType } from '@/types/Option';
 
 import Option from './Option';
 import { useSelect } from './useSelect';
 
-export interface SelectProps {
+export interface SelectProps extends InputWrapperProps {
   options: OptionType[];
   onChange: (selected: OptionType['value'][]) => void;
   placeholder?: string;
   values?: string[];
-  label?: string;
   isMulti?: boolean;
+  //TODO think how to improve this
+  optionWidth?: 'full' | 'maxContent';
 }
 
 const Select = ({
   onChange,
   options,
-  label,
   placeholder,
   isMulti = false,
   values = [],
+  label,
+  wrapperClassName,
+  subLabel,
+  optionWidth = 'maxContent',
 }: SelectProps) => {
   const { formattedOptions, isOpen, selected, toggleSelect, wrapperRef } = useSelect({
     onChange,
@@ -80,11 +84,14 @@ const Select = ({
             'absolute',
             'top-full',
             'z-10',
-            'w-full',
             'left-0',
-            'bg-primary',
+            'bg-[#4C4C4C]',
             'max-h-60',
             'overflow-y-auto',
+            'scrollbar-thin',
+            'scrollbar-thumb-primary',
+            'scrollbar-track-secondary',
+            optionWidth === 'full' ? 'w-full' : 'w-max',
           )}
         >
           {renderOptions()}
@@ -94,7 +101,11 @@ const Select = ({
   );
 
   if (label) {
-    return <InputWrapper label={label}>{renderSelect()}</InputWrapper>;
+    return (
+      <InputWrapper label={label} wrapperClassName={wrapperClassName} subLabel={subLabel}>
+        {renderSelect()}
+      </InputWrapper>
+    );
   }
 
   return renderSelect();

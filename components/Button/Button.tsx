@@ -37,6 +37,7 @@ const Button = ({
     'gap-x-2.5',
     'transition',
     'hover:bg-[#ffffff50]',
+    'max-h-14',
     className,
   );
 

@@ -29,6 +29,21 @@ const initialFilters: FlatsFiltersType['filters'] = {
   maxFloorsFrom: '',
   maxFloorsTo: '',
   houseType: [],
+  ceilingHeight: '',
+  kitchenAreaFrom: '',
+  kitchenAreaTo: '',
+  livingAreaFrom: '',
+  livingAreaTo: '',
+  bathroom: [],
+  finishing: [],
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  renovationYearFrom: '',
+  renovationYearTo: '',
+  balcony: [],
+  saleTerm: [],
+  furniture: false,
+  parking: false,
 };
 
 interface FlatsContextProviderProps extends PropsWithChildren {

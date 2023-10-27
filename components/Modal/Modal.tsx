@@ -31,6 +31,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
           'justify-center',
           'items-center',
           'bg-[#00000099]',
+          'backdrop-blur-sm',
         )}
         role="dialog"
       >

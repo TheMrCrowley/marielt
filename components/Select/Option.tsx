@@ -33,6 +33,7 @@ const Option = ({ label, onClick, value, isSelected, disabled }: OptionItemProps
         disabled && 'bg-[#d9d9d9]',
         disabled && 'text-black',
         disabled && 'cursor-default',
+        'first-letter:uppercase',
       )}
     >
       {label}

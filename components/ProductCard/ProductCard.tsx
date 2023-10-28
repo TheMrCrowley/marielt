@@ -9,6 +9,7 @@ import { convertToMonetary } from '@/helpers/formatters';
 import { getPriceByArea } from '@/helpers/getPriceByArea';
 import FloorIcon from '@/public/card-floor.svg';
 import CardMapPinIcon from '@/public/card-map-pin.svg';
+import ImagePlaceholder from '@/public/card-placeholder.png';
 import { Product } from '@/services/actualProducts';
 import { ProductType } from '@/types/Product';
 
@@ -37,15 +38,15 @@ const ProductCard = async ({ product, type }: ProductCardProps) => {
   return (
     <div className={styles.cardWrapper}>
       <Image
-        className={styles.cardImage}
-        src={imgSrc}
+        className={imgSrc ? styles.cardImage : 'object-contain'}
+        src={imgSrc || ImagePlaceholder.src}
         width={330}
         height={165}
         alt="product-card"
       />
       <div className={styles.cardDescriptionWrapper}>
         <Title className={styles.title} variant="h2" fontSize={20}>
-          {title}
+          {title || 'Тут могло быть ваше название'}
         </Title>
         <div className={styles.cardDescriptionItem}>
           <Image src={CardMapPinIcon} alt="card-map-pin" />

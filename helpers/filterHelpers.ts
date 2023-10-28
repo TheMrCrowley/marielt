@@ -1,9 +1,11 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
-import { BaseFiltersContext } from '@/types/Filters';
+import { AvailableCurrencies } from '@/types/Currency';
+import { BaseFilters } from '@/types/Filters';
 
 export const formatFiltersToSearchParams = <T extends Record<string, string | string[] | boolean>>(
-  filters: BaseFiltersContext<T>['filters'],
+  filters: BaseFilters<T>['filters'],
+  currency: AvailableCurrencies,
 ) => {
   const searchParams = new URLSearchParams();
 
@@ -25,15 +27,17 @@ export const formatFiltersToSearchParams = <T extends Record<string, string | st
     }
   });
 
+  searchParams.set('currency', currency);
+
   return searchParams;
 };
 
 export const createFiltersStateBySearchParams = <
   T extends Record<string, string | string[] | boolean>,
 >(
-  initialFilters: BaseFiltersContext<T>['filters'],
+  initialFilters: BaseFilters<T>['filters'],
   searchParams: ReadonlyURLSearchParams,
-): BaseFiltersContext<T>['filters'] => {
+): Partial<BaseFilters<T>['filters']> => {
   const filters = { ...initialFilters };
 
   (Object.keys(filters) as Array<keyof typeof filters>).forEach((key) => {

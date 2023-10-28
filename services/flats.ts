@@ -8,18 +8,23 @@ import {
   saleTermQueryMap,
   finishingQueryMap,
 } from '@/enums/FlatsFilters';
+import { getPriceByCurrency } from '@/helpers/currencyHelpers';
+import { getFullAddress } from '@/helpers/getFullAddress';
 import { getQueryArray } from '@/helpers/getQueryArray';
+import { CurrencyState } from '@/store/currency';
 import { AvailableCurrencies } from '@/types/Currency';
 import { FlatsFiltersType } from '@/types/Filters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
+import { StrapiImage } from '@/types/StrapiImage';
 
-// const REVALIDATE_TIME = 10000;
+import { getCurrencies } from './getCurrency';
 
 export const getFlatsStrapiQueryParamsByFilters = (
   filters: Record<string, string | string[] | boolean>,
+  selectedCurrency: AvailableCurrencies,
+  rates: CurrencyState['rates'],
 ): {
   query: string;
-  currency: AvailableCurrencies;
 } => {
   const {
     areaFrom,
@@ -29,12 +34,10 @@ export const getFlatsStrapiQueryParamsByFilters = (
     district,
     microDistrict,
     metro,
-    currency,
     roominess,
     floorFrom,
     floorTo,
     houseType,
-    //TODO add fields in strapi
     isLastFloor,
     isNotFirstFloor,
     isNotLastFloor,
@@ -78,6 +81,9 @@ export const getFlatsStrapiQueryParamsByFilters = (
           ],
         },
         parameters: {
+          is_last_floor: {
+            $eq: isLastFloor || isNotLastFloor,
+          },
           construction_year: {
             $gte: constructionYearFrom,
             $lte: constructionYearTo,
@@ -99,6 +105,7 @@ export const getFlatsStrapiQueryParamsByFilters = (
           floor: {
             $gte: floorFrom,
             $lte: floorTo,
+            $ne: isNotFirstFloor ? 1 : null,
           },
           house_type: {
             $in: getQueryArray(houseTypeQueryMap, houseType),
@@ -126,8 +133,8 @@ export const getFlatsStrapiQueryParamsByFilters = (
           },
         },
         price: {
-          $gte: priceFrom,
-          $lte: priceTo,
+          $gte: priceFrom && getPriceByCurrency(priceFrom, selectedCurrency, 'USD', rates),
+          $lte: priceTo && getPriceByCurrency(priceTo, selectedCurrency, 'USD', rates),
         },
         district: {
           name: {
@@ -146,19 +153,94 @@ export const getFlatsStrapiQueryParamsByFilters = (
     },
   );
 
-  console.log(getQueryArray(finishingQueryMap, finishing));
-
-  return { query, currency: currency || 'USD' };
+  return { query };
 };
 
 export const getFlats = async (searchParams: Record<string, string | string[]>) => {
-  const { currency, query } = getFlatsStrapiQueryParamsByFilters(searchParams);
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*&${query}`, {
-    next: {
-      // revalidate: REVALIDATE_TIME,
+  const { eur, rub, usd } = await getCurrencies();
+  const { query } = getFlatsStrapiQueryParamsByFilters(
+    searchParams,
+    (searchParams.currency as AvailableCurrencies) || 'USD',
+    {
+      rub,
+      eur,
+      usd,
     },
-  });
-  const { data } = (await response.json()) as StrapiFindResponse<{}>;
+  );
 
-  return data;
+  const response = await fetch(
+    `${process.env.API_BASE_URL}/apartments-items?populate=*&${query}&pagination[limit]=6`,
+    {
+      next: {
+        // revalidate: REVALIDATE_TIME,
+      },
+      cache: 'no-cache',
+    },
+  );
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return converResponseToDefaultFlat(data);
 };
+
+const converResponseToDefaultFlat = (
+  flats: StrapiFindResponse<FlatStrapiResponse>['data'],
+): DefaultFlatItem[] => {
+  return flats.map(({ attributes, id }) => ({
+    address: getFullAddress({
+      locality: attributes.locality,
+      houseNumber: attributes.house_number?.number,
+      street: attributes.street,
+    }),
+    floor: attributes.parameters.floor,
+    id,
+    livingArea: attributes.parameters.living_area,
+    maxFloor: attributes.parameters.floors_number,
+    price: attributes.price,
+    totalArea: attributes.parameters.total_area,
+    name: attributes.name,
+    img: attributes.image?.url,
+    initialCurrency: attributes.currency || 'USD',
+  }));
+};
+
+interface FlatStrapiResponse {
+  parameters: {
+    total_area: string;
+    living_area: string;
+    floors_number: string;
+    floor: string;
+    roominess: string;
+    balcony: string;
+    construction_year?: string;
+    major_renovation_year?: string;
+    finishing?: string;
+    house_type?: string;
+    kitchen_area?: string;
+    ceiling_height?: string;
+    bathroom?: string;
+  };
+  coordinates: string;
+  locality: string;
+  street?: string;
+  house_number?: {
+    number: string;
+    building: string;
+  };
+  currency?: AvailableCurrencies;
+  price?: string;
+  name?: string;
+  image?: StrapiImage;
+}
+
+export interface DefaultFlatItem {
+  address: string;
+  floor: string;
+  maxFloor: string;
+  totalArea: string;
+  livingArea: string;
+  id: string;
+  price?: string;
+  name?: string;
+  img?: string;
+  initialCurrency: AvailableCurrencies;
+}

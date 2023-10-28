@@ -1,6 +1,6 @@
 export interface StrapiFindResponse<T> {
   data: Array<{
-    id: number;
+    id: string;
     attributes: T;
   }>;
 }

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import CheckboxButton from '@/components/CheckboxButton';
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import InputFromTo from '@/components/InputFromTo';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const FloorFilter = () => {
   const {
@@ -17,7 +17,7 @@ const FloorFilter = () => {
       maxFloorsFrom,
       maxFloorsTo,
     },
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <>

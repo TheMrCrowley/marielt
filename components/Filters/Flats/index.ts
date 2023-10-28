@@ -1,1 +1,1 @@
-export { default } from './FlatsWithContext';
+export { default } from './FlatsFilter';

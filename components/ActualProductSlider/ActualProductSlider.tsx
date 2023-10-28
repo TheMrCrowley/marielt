@@ -36,21 +36,7 @@ const ActualProductSlider = async ({ type }: ActualProductSliderProps) => {
       <Title className={clsx('container', styles.title)} fontSize={36}>
         {title}
       </Title>
-      <ProductSlider
-        products={[
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-          ...data,
-        ]}
-        type={type}
-      />
+      <ProductSlider products={data} type={type} />
     </div>
   );
 };

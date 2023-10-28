@@ -5,18 +5,23 @@ import {
   SaleTermValues,
 } from '@/enums/FlatsFilters';
 import { FinishingValues } from '@/enums/FlatsFilters';
-import { AvailableCurrencies } from '@/types/Currency';
 
-export interface BaseFiltersContext<T extends Record<string, string | string[] | boolean>> {
-  applyFilters: () => void;
+export interface BaseFilters<T extends Record<string, string | string[] | boolean>> {
   filters: T;
-  data: Partial<T>;
+  data: { district: string[] | null; microDistrict: string[] | null; metro: string[] | null };
   updateFilters: <K extends keyof T>(
-    values: Partial<Record<K, BaseFiltersContext<T>['filters'][K]>>,
+    values: Partial<Record<K, BaseFilters<T>['filters'][K]>>,
   ) => void;
+  setData: (data: {
+    district: string[] | null;
+    microDistrict: string[] | null;
+    metro: string[] | null;
+  }) => void;
+  isExpandedOpen: boolean;
+  setIsExpandedOpen: (isExpandedOpen: boolean) => void;
 }
 
-export type FlatsFiltersType = BaseFiltersContext<{
+export type FlatsFiltersType = BaseFilters<{
   priceFrom: string;
   priceTo: string;
   district: string[];
@@ -25,7 +30,6 @@ export type FlatsFiltersType = BaseFiltersContext<{
   areaFrom: string;
   areaTo: string;
   roominess: RoominessValues[];
-  currency: AvailableCurrencies;
 
   floorFrom: string;
   floorTo: string;
@@ -55,3 +59,37 @@ export type FlatsFiltersType = BaseFiltersContext<{
   furniture: boolean;
   parking: boolean;
 }>;
+
+export const initialFlatsFilters: FlatsFiltersType['filters'] = {
+  areaFrom: '',
+  areaTo: '',
+  priceFrom: '',
+  priceTo: '',
+  district: [],
+  roominess: [],
+  microDistrict: [],
+  metro: [],
+  floorFrom: '',
+  floorTo: '',
+  isLastFloor: false,
+  isNotFirstFloor: false,
+  isNotLastFloor: false,
+  maxFloorsFrom: '',
+  maxFloorsTo: '',
+  houseType: [],
+  ceilingHeight: '',
+  kitchenAreaFrom: '',
+  kitchenAreaTo: '',
+  livingAreaFrom: '',
+  livingAreaTo: '',
+  bathroom: [],
+  finishing: [],
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  renovationYearFrom: '',
+  renovationYearTo: '',
+  balcony: [],
+  saleTerm: [],
+  furniture: false,
+  parking: false,
+};

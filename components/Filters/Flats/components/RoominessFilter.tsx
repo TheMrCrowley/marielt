@@ -1,14 +1,12 @@
-import { useContext } from 'react';
-
 import ButtonGroup from '@/components/ButtonGroup';
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import { RoominessValues, roominessOptions } from '@/enums/FlatsFilters';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const RoominessFilter = () => {
   const {
     filters: { roominess },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <ButtonGroup

@@ -1,13 +1,11 @@
-import { useContext } from 'react';
-
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import InputFromTo from '@/components/InputFromTo';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const AreaFilter = () => {
   const {
-    filters: { areaFrom, areaTo },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+    filters: { areaFrom, areaTo },
+  } = useFlatsFilter();
 
   return (
     <InputFromTo
@@ -21,12 +19,12 @@ const AreaFilter = () => {
         from: areaFrom,
         to: areaTo,
       }}
-      onChange={({ from, to }) =>
+      onChange={({ from, to }) => {
         updateFilters({
           areaFrom: from,
           areaTo: to,
-        })
-      }
+        });
+      }}
     />
   );
 };

@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Button from '@/components/Button';
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import Modal from '@/components/Modal';
 import Switch from '@/components/Switch';
 import Title from '@/components/Title';
 import CrossIcon from '@/public/plus.svg';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 import ExpandedAreaFilter from './components/ExpandedAreaFilter';
 import FloorFilter from './components/FloorFilter';
@@ -19,14 +19,14 @@ import YearsFilter from './components/YearsFilter';
 interface ExpandedProps {
   isModalOpen: boolean;
   closeModal: () => void;
+  applyFilters: () => void;
 }
 
-const ExpandedFilters = ({ closeModal, isModalOpen }: ExpandedProps) => {
+const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedProps) => {
   const {
-    applyFilters,
     filters: { furniture, parking },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -58,7 +58,7 @@ const ExpandedFilters = ({ closeModal, isModalOpen }: ExpandedProps) => {
             'w-full',
             'justify-start',
             'overflow-y-auto',
-            'gap-y-8',
+            'gap-y-12',
             'px-4',
             'scrollbar-thin',
             'scrollbar-thumb-primary',

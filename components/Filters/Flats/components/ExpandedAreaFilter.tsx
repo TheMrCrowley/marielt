@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import InputFromTo from '@/components/InputFromTo';
 import Select from '@/components/Select';
 import { ceilingHeightValues } from '@/enums/FlatsFilters';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const ExpandedAreaFilter = () => {
   const {
@@ -18,7 +18,7 @@ const ExpandedAreaFilter = () => {
       ceilingHeight,
     },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8')}>

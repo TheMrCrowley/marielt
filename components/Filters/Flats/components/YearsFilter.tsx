@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import InputFromTo from '@/components/InputFromTo';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const YearsFilter = () => {
   const {
     filters: { renovationYearFrom, renovationYearTo, constructionYearFrom, constructionYearTo },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <>

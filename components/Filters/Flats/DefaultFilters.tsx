@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Button from '@/components/Button';
 import CurrencySwitch from '@/components/CurrencySwitch';
+import { useCurrency } from '@/store/currency';
 
-import { FlatsFiltersContext } from './FlatsContextProvider';
 import AreaFilter from './components/AreaFilter';
 import DistrictFilter from './components/DistrictFilter';
 import MetroFilter from './components/MetroFilter';
@@ -14,14 +14,11 @@ import RoominessFilter from './components/RoominessFilter';
 
 interface DefaultFilterProps {
   openModal: () => void;
+  applyFilters: () => void;
 }
 
-const DefaultFilters = ({ openModal }: DefaultFilterProps) => {
-  const {
-    filters: { currency },
-    updateFilters,
-    applyFilters,
-  } = useContext(FlatsFiltersContext);
+const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
+  const { changeCurrency, selectedCurrency } = useCurrency();
 
   return (
     <>
@@ -29,8 +26,8 @@ const DefaultFilters = ({ openModal }: DefaultFilterProps) => {
         <div className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-7xl', 'flex-auto')}>
           <div className={clsx('flex', 'justify-between', 'w-full')}>
             <CurrencySwitch
-              onChange={(cur) => updateFilters({ currency: cur })}
-              selectedCurrency={currency}
+              onChange={(cur) => changeCurrency(cur)}
+              selectedCurrency={selectedCurrency}
             />
             <button
               onClick={openModal}

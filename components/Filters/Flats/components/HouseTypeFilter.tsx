@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import Select from '@/components/Select';
 import { HouseTypeValues, houseTypeOptions } from '@/enums/FlatsFilters';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const HouseTypeFilter = () => {
   const {
     filters: { houseType },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   return (
     <Select

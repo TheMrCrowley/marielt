@@ -1,18 +1,36 @@
-import { useContext } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import InputFromTo from '@/components/InputFromTo';
+import { getPriceByCurrency } from '@/helpers/currencyHelpers';
+import { useCurrency } from '@/store/currency';
+import { useFlatsFilter } from '@/store/flatsFilters';
+import { AvailableCurrencies } from '@/types/Currency';
 
 const PriceFilter = () => {
   const {
-    filters: { currency, priceFrom, priceTo },
+    filters: { priceFrom, priceTo },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
+
+  const { selectedCurrency, rates } = useCurrency();
+
+  const prev = useRef<AvailableCurrencies>(selectedCurrency);
+
+  useEffect(() => {
+    if (selectedCurrency !== prev.current) {
+      updateFilters({
+        priceFrom:
+          priceFrom && getPriceByCurrency(priceFrom, prev.current, selectedCurrency, rates),
+        priceTo: priceTo && getPriceByCurrency(priceTo, prev.current, selectedCurrency, rates),
+      });
+      prev.current = selectedCurrency;
+    }
+  }, [selectedCurrency]);
 
   return (
     <InputFromTo
       label="Стоимость"
-      subLabel={currency}
+      subLabel={selectedCurrency}
       values={{
         from: priceFrom,
         to: priceTo,

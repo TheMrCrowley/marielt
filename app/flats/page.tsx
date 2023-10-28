@@ -1,6 +1,7 @@
 import React from 'react';
 
-import FlatsWithContext from '@/components/Filters/Flats';
+import FlatsFilters from '@/components/Filters/Flats';
+import FlatCard from '@/components/ProductCard/FlatCard';
 import { getFiltersData } from '@/services/filters';
 import { getFlats } from '@/services/flats';
 
@@ -11,16 +12,13 @@ type FlatsProps = {
 const Flats = async ({ searchParams }: FlatsProps) => {
   const [filters, flats] = await Promise.all([getFiltersData(), getFlats(searchParams)]);
 
-  // console.log(searchParams);
-
-  console.log(flats.length);
+  console.log('Flats was found: ', flats.length);
   return (
     <>
-      <FlatsWithContext
-        filtersData={{
-          ...filters,
-        }}
-      />
+      <FlatsFilters data={filters} />
+      {/* {flats.map((flat) => (
+        <FlatCard flatItem={flat} key={flat.id} />
+      ))} */}
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { getFullAddress } from '@/helpers/getFullAddress';
 import { ProductType } from '@/types/Product';
+import { StrapiImage } from '@/types/StrapiImage';
 
 import { getCurrencyByType } from './getCurrency';
 export interface Product {
@@ -26,7 +27,7 @@ interface GetActualApartmentsResponse {
       locality: string;
       street?: string;
       house_number?: {
-        number: number;
+        number: string;
       };
       currency: 'USD' | 'EUR';
       parameters: {
@@ -35,11 +36,9 @@ interface GetActualApartmentsResponse {
         total_area: number;
         living_area: number;
       };
-      image: {
+      image?: {
         data: Array<{
-          attributes: {
-            url: string;
-          };
+          attributes: StrapiImage;
         }>;
       };
     };
@@ -118,6 +117,7 @@ const formatToActualProduct = (
     livingArea: attributes.parameters.living_area,
     totalArea: attributes.parameters.total_area,
     productId: attributes.id,
-    imgSrc: attributes.image.data[0].attributes.url,
+    // imgSrc: attributes?.image?.data[0]?.attributes?.url,
+    imgSrc: attributes.image?.data ? attributes.image.data[0].attributes.url : '',
   }));
 };

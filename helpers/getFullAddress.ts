@@ -5,7 +5,7 @@ export const getFullAddress = ({
 }: {
   locality: string;
   street?: string;
-  houseNumber?: number;
+  houseNumber?: string;
 }): string => {
   return [locality, street, houseNumber].filter((item) => !!item).join(', ');
 };

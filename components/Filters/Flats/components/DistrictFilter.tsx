@@ -1,14 +1,12 @@
-import { useContext } from 'react';
-
-import { FlatsFiltersContext } from '@/components/Filters/Flats/FlatsContextProvider';
 import Select from '@/components/Select';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 const DistrictFilter = () => {
   const {
     data: { district: districtsOptions },
     filters: { district: selectedDistricts },
     updateFilters,
-  } = useContext(FlatsFiltersContext);
+  } = useFlatsFilter();
 
   if (!districtsOptions) {
     return null;

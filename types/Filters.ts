@@ -1,3 +1,10 @@
+import {
+  RoominessValues,
+  HouseTypeValues,
+  BalconyValues,
+  SaleTermValues,
+} from '@/enums/FlatsFilters';
+import { FinishingValues } from '@/enums/FlatsFilters';
 import { AvailableCurrencies } from '@/types/Currency';
 
 export interface BaseFiltersContext<T extends Record<string, string | string[] | boolean>> {
@@ -9,18 +16,6 @@ export interface BaseFiltersContext<T extends Record<string, string | string[] |
   ) => void;
 }
 
-export const finishingValues = [
-  'евроремонт',
-  'отличный ремонт',
-  'хороший ремонт',
-  'нормальный ремонт',
-  'удовлетворительный ремонт',
-  'плохое состояние',
-  'аварийное состояние',
-  'без отделки',
-  'строительная отделка',
-];
-
 export type FlatsFiltersType = BaseFiltersContext<{
   priceFrom: string;
   priceTo: string;
@@ -29,7 +24,7 @@ export type FlatsFiltersType = BaseFiltersContext<{
   metro: string[];
   areaFrom: string;
   areaTo: string;
-  roominess: string[];
+  roominess: RoominessValues[];
   currency: AvailableCurrencies;
 
   floorFrom: string;
@@ -41,7 +36,7 @@ export type FlatsFiltersType = BaseFiltersContext<{
   maxFloorsFrom: string;
   maxFloorsTo: string;
 
-  houseType: string[];
+  houseType: HouseTypeValues[];
 
   livingAreaFrom: string;
   livingAreaTo: string;
@@ -49,14 +44,14 @@ export type FlatsFiltersType = BaseFiltersContext<{
   kitchenAreaTo: string;
   ceilingHeight: string;
 
-  finishing: string[];
+  finishing: FinishingValues[];
   bathroom: string[];
   renovationYearFrom: string;
   renovationYearTo: string;
   constructionYearFrom: string;
   constructionYearTo: string;
-  balcony: string[];
-  saleTerm: string[];
+  balcony: BalconyValues[];
+  saleTerm: SaleTermValues[];
   furniture: boolean;
   parking: boolean;
 }>;

@@ -66,7 +66,9 @@ const FlatsContextProvider = ({ children, filtersData }: FlatsContextProviderPro
   };
 
   const applyFilters = () => {
-    router.push(pathname + '?' + formatFiltersToSearchParams(filters));
+    // TODO try to change this
+    router.replace(pathname + '?' + formatFiltersToSearchParams(filters));
+    router.refresh();
   };
 
   return (

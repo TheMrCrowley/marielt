@@ -1,45 +1,19 @@
 import qs from 'qs';
 
+import {
+  roominessQueryMap,
+  houseTypeQueryMap,
+  bathroomQueryMap,
+  balconyQueryMap,
+  saleTermQueryMap,
+  finishingQueryMap,
+} from '@/enums/FlatsFilters';
+import { getQueryArray } from '@/helpers/getQueryArray';
 import { AvailableCurrencies } from '@/types/Currency';
 import { FlatsFiltersType } from '@/types/Filters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
 
 // const REVALIDATE_TIME = 10000;
-
-const roominessMap: Record<string, string[]> = {
-  part: ['комната (доля)'],
-  1: ['однокомнатная квартира'],
-  2: ['двухкомнатная квартира'],
-  3: ['трехкомнатная квартира'],
-  '4+': [
-    'четырехкомнатная квартира',
-    'пятикомнатная квартира',
-    'шестикомнатная квартира',
-    'семикомнатная квартира',
-    'восьмикомнатная квартира',
-    'девятикомнатная квартира',
-    'десять и более комнат',
-  ],
-};
-
-const bathroomMap: Record<string, string[]> = {
-  separate: ['раздельный'],
-  combined: ['совмещенный'],
-  twoAndMore: ['два санузла', 'три санузла', 'четыре санузла'],
-};
-
-const balconyMap: Record<string, string> = {
-  none: 'нет',
-  balcony: 'балкон',
-  loggia: 'лоджия',
-};
-
-const saleTermMap: Record<string, string> = {
-  clear: 'чистая продажа',
-  change: 'обмен',
-  changeMoveOut: 'обмен - разъезд',
-  changeMoveIn: 'обмен - съезд',
-};
 
 export const getFlatsStrapiQueryParamsByFilters = (
   filters: Record<string, string | string[] | boolean>,
@@ -93,9 +67,7 @@ export const getFlatsStrapiQueryParamsByFilters = (
           },
         },
         sale_terms: {
-          $in: Array.isArray(saleTerm)
-            ? saleTerm.map((term) => saleTermMap[term])
-            : saleTermMap[saleTerm],
+          $in: getQueryArray(saleTermQueryMap, saleTerm),
         },
         additional_info: {
           $and: [
@@ -115,23 +87,21 @@ export const getFlatsStrapiQueryParamsByFilters = (
             $lte: renovationYearTo,
           },
           finishing: {
-            $in: finishing,
+            $in: getQueryArray(finishingQueryMap, finishing),
           },
           total_area: {
             $gte: areaFrom,
             $lte: areaTo,
           },
           roominess: {
-            $in: Array.isArray(roominess)
-              ? roominess.map((item) => roominessMap[item]).flat()
-              : roominessMap[roominess],
+            $in: getQueryArray(roominessQueryMap, roominess),
           },
           floor: {
             $gte: floorFrom,
             $lte: floorTo,
           },
           house_type: {
-            $in: houseType,
+            $in: getQueryArray(houseTypeQueryMap, houseType),
           },
           floors_number: {
             $gte: maxFloorsFrom,
@@ -145,18 +115,14 @@ export const getFlatsStrapiQueryParamsByFilters = (
             $gte: kitchenAreaFrom,
             $lte: kitchenAreaTo,
           },
-          ceilingHeight: {
+          ceiling_height: {
             $gte: ceilingHeight,
           },
           bathroom: {
-            $in: Array.isArray(bathroom)
-              ? bathroom.map((item) => bathroomMap[item]).flat()
-              : bathroomMap[bathroom],
+            $in: getQueryArray(bathroomQueryMap, bathroom),
           },
           balcony: {
-            $containsi: Array.isArray(balcony)
-              ? balcony.map((type) => balconyMap[type])
-              : balconyMap[balcony],
+            $containsi: getQueryArray(balconyQueryMap, balcony),
           },
         },
         price: {
@@ -179,7 +145,9 @@ export const getFlatsStrapiQueryParamsByFilters = (
       encodeValuesOnly: true,
     },
   );
-  console.log(query);
+
+  console.log(getQueryArray(finishingQueryMap, finishing));
+
   return { query, currency: currency || 'USD' };
 };
 

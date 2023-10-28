@@ -13,6 +13,7 @@ export interface SelectProps extends InputWrapperProps {
   options: OptionType[];
   onChange: (selected: OptionType['value'][]) => void;
   placeholder?: string;
+  placeholderPrefix?: string;
   values?: string[];
   isMulti?: boolean;
   //TODO think how to improve this
@@ -29,6 +30,7 @@ const Select = ({
   wrapperClassName,
   subLabel,
   optionWidth = 'maxContent',
+  placeholderPrefix,
 }: SelectProps) => {
   const { formattedOptions, isOpen, selected, toggleSelect, wrapperRef } = useSelect({
     onChange,
@@ -44,7 +46,7 @@ const Select = ({
 
   const renderPlaceholder = () => {
     if (placeholder) {
-      return selected[0] ? selected[0] : placeholder;
+      return selected[0] ? `${placeholderPrefix || ''} ${selected[0]}` : placeholder;
     }
     return selected.length ? `Выбрано: ${selected.length}` : 'Выбрать';
   };

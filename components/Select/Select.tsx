@@ -13,8 +13,8 @@ interface SelectProps extends InputWrapperProps {
   options: OptionType[];
   onChange: (selected: OptionType['value'][]) => void;
   placeholder?: string;
-  placeholderPrefix?: string;
   values?: string[];
+  placeholderPrefix?: string;
   isMulti?: boolean;
   //TODO think how to improve this
   optionWidth?: 'full' | 'maxContent';
@@ -32,7 +32,7 @@ const Select = ({
   optionWidth = 'maxContent',
   placeholderPrefix,
 }: SelectProps) => {
-  const { formattedOptions, isOpen, selected, toggleSelect, wrapperRef } = useSelect({
+  const { formattedOptions, isOpen, toggleSelect, wrapperRef } = useSelect({
     onChange,
     options,
     isMulti,
@@ -49,9 +49,9 @@ const Select = ({
 
   const renderPlaceholder = () => {
     if (placeholder) {
-      return selected[0] ? `${placeholderPrefix || ''} ${selected[0]}` : placeholder;
+      return values[0] ? `${placeholderPrefix || ''} ${values[0]}` : placeholder;
     }
-    return selected.length ? `Выбрано: ${selected.length}` : 'Выбрать';
+    return values.length ? `Выбрано: ${values.length}` : 'Выбрать';
   };
 
   const renderSelect = () => (
@@ -71,7 +71,7 @@ const Select = ({
         'select-none',
         'w-full',
         placeholder ? 'min-w-[140px]' : 'min-w-[180px]',
-        selected.length ? 'border-secondary' : 'border-[#d9d9d9]',
+        values.length ? 'border-secondary' : 'border-[#d9d9d9]',
       )}
       onClick={toggleSelect}
     >
@@ -80,7 +80,7 @@ const Select = ({
           className={clsx(
             'md:text-xl',
             'text-base',
-            selected.length ? 'text-white' : 'text-[#d9d9d9]',
+            values.length ? 'text-white' : 'text-[#d9d9d9]',
           )}
         >
           {renderPlaceholder()}

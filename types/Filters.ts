@@ -20,7 +20,7 @@ export interface BaseFilters<T extends Record<string, string | string[] | boolea
   ) => void;
   setData: (data: {
     district: District[] | null;
-    microDistrict: string[] | null;
+    microDistrict: MicroDistrict[] | null;
     metro: string[] | null;
   }) => void;
   isExpandedOpen: boolean;

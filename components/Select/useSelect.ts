@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useMemo, useState } from 'react';
+import { RefObject, useMemo, useState } from 'react';
 
 import { getIsItemSelected } from '@/helpers/getIsItemSelected';
 import { useClickOutside } from '@/helpers/useClickOutside';
@@ -18,14 +18,12 @@ type UseSelectSignature = ({
   isMulti: boolean;
 }) => {
   wrapperRef: RefObject<HTMLDivElement>;
-  selected: string[];
   isOpen: boolean;
   toggleSelect: () => void;
   formattedOptions: OptionItemProps[];
 };
 
 export const useSelect: UseSelectSignature = ({ onChange, options, isMulti, values }) => {
-  const [selected, setSelected] = useState<string[]>(values);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const wrapperRef = useClickOutside(() => {
@@ -33,19 +31,19 @@ export const useSelect: UseSelectSignature = ({ onChange, options, isMulti, valu
   });
 
   const handleClickOption = (value: string) => {
-    const isSelected = !!selected.find((option) => option === value);
+    const isSelected = !!values.find((option) => option === value);
 
     if (isMulti) {
       if (isSelected) {
-        setSelected(selected.filter((option) => option !== value));
+        onChange(values.filter((option) => option !== value));
       } else {
-        setSelected([...selected, value]);
+        onChange([...values, value]);
       }
     } else {
       if (isSelected) {
-        setSelected(selected.filter((option) => option !== value));
+        onChange(values.filter((option) => option !== value));
       } else {
-        setSelected([value]);
+        onChange([value]);
         setIsOpen(false);
       }
     }
@@ -53,7 +51,7 @@ export const useSelect: UseSelectSignature = ({ onChange, options, isMulti, valu
 
   const formattedOptions = useMemo<OptionItemProps[]>(() => {
     return options.map((option) => {
-      const isSelected = getIsItemSelected(selected, option.value);
+      const isSelected = getIsItemSelected(values, option.value);
 
       return {
         ...option,
@@ -62,20 +60,10 @@ export const useSelect: UseSelectSignature = ({ onChange, options, isMulti, valu
         onClick: handleClickOption,
       };
     });
-  }, [selected, options]);
-
-  // TODO: fix this
-  useEffect(() => {
-    setSelected(values);
-  }, [values]);
-
-  useEffect(() => {
-    onChange(selected);
-  }, [selected]);
+  }, [values, options]);
 
   return {
     wrapperRef,
-    selected,
     isOpen,
     toggleSelect: () => setIsOpen(!isOpen),
     formattedOptions,

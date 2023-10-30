@@ -27,7 +27,6 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
 
   useEffect(() => {
     const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
-
     updateFilters({ ...initialFilters });
     setData(data);
   }, []);

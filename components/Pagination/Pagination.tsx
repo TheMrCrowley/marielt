@@ -1,7 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import React from 'react';
+
+import PrevIcon from '@/public/chevron-left.svg';
+import NextIcon from '@/public/chevron-right.svg';
 
 interface PaginationProps {
   totalPages: number;
@@ -45,6 +49,7 @@ const PaginationButton = ({
 };
 
 const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
+  console.log({ totalPages });
   const renderPages = () => {
     const isEdge =
       currentPage === 1 ||
@@ -56,7 +61,9 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
       if (currentPage === 1 || currentPage === 2) {
         const pages = [];
 
-        for (let i = 1; i <= PAGE_RANGE; i++) {
+        const end = PAGE_RANGE > totalPages ? totalPages : PAGE_RANGE;
+
+        for (let i = 1; i <= end; i++) {
           const isActive = currentPage === i;
 
           pages.push(
@@ -75,7 +82,9 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
       if (currentPage === totalPages || currentPage === totalPages - 1) {
         const pages = [];
 
-        for (let i = totalPages; i > totalPages - PAGE_RANGE; i--) {
+        const end = totalPages - PAGE_RANGE >= 0 ? totalPages - PAGE_RANGE : 0;
+
+        for (let i = totalPages; i > end; i--) {
           const isActive = currentPage === i;
 
           pages.push(
@@ -114,39 +123,49 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
   };
 
   return (
-    <div className={clsx('flex', 'justify-between', 'gap-x-2')}>
+    <div className={clsx('flex', 'max-w-lg', 'justify-between', 'gap-x-2')}>
       <button
         className={clsx(
+          'flex',
+          'gap-x-4',
+          'justify-center',
+          'items-center',
           'text-[20px]',
           'border-b',
           'border-solid',
           'py-3',
           'px-4',
-          'border-[#B1B1B1]',
+          'border-secondary',
           'text-white',
           'disabled:opacity-50',
         )}
         onClick={() => onChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        Prev
+        <Image src={PrevIcon} alt="next-icon" />
+        Назад
       </button>
       {renderPages()}
       <button
         className={clsx(
+          'flex',
+          'gap-x-4',
+          'justify-center',
+          'items-center',
           'text-[20px]',
           'border-b',
           'border-solid',
           'py-3',
           'px-4',
-          'border-[#B1B1B1]',
+          'border-secondary',
           'text-white',
           'disabled:opacity-50',
         )}
         onClick={() => onChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        Next
+        Вперед
+        <Image src={NextIcon} alt="next-icon" />
       </button>
     </div>
   );

@@ -38,7 +38,7 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
           'gap-y-10',
         )}
       >
-        <section className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-7xl', 'flex-auto')}>
+        <section className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-max', 'flex-auto', 'px-8')}>
           <div className={clsx('flex', 'justify-between', 'w-full')}>
             <CurrencySwitch
               onChange={(cur) => changeCurrency(cur)}
@@ -51,13 +51,23 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
               Расширенный фильтр
             </button>
           </div>
-          <div className={clsx('flex', 'items-center', 'justify-between', 'gap-x-9')}>
+          <div
+            className={clsx(
+              'flex',
+              'items-center',
+              'justify-between',
+              'gap-9',
+              'flex-wrap',
+              'w-full',
+            )}
+          >
             <RoominessFilter />
             <PriceFilter />
             <DistrictFilter />
             <MicroDistrictFilter />
             <MetroFilter />
           </div>
+
           <div className={clsx('flex', 'items-center', 'justify-between', 'gap-x-5')}>
             <AreaFilter />
             <Button className={clsx('self-end', 'flex-1')} onClick={applyFilters}>

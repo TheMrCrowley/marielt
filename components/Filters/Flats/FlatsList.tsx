@@ -24,26 +24,20 @@ const FlatsList = ({ flats, pagination: { page, pageCount } }: FlatsListProps) =
     currentSearchParams.set('page', to.toString());
 
     router.push(pathname + '?' + currentSearchParams.toString(), {
-      scroll: false,
+      scroll: true,
     });
   };
 
   return (
     <section className="container">
       <section
-        className={clsx(
-          'max-w-7xl',
-          'flex',
-          'gap-x-12',
-          'gap-y-8',
-          'py-20',
-          'flex-wrap',
-          'justify-center',
-        )}
+        className={clsx('max-w-max', 'flex', 'flex-col', 'py-20', 'items-center', 'gap-y-10')}
       >
-        {flats.map((flat) => (
-          <FlatCard flatItem={flat} key={`flats-list-flats-item-${flat.id}`} />
-        ))}
+        <div className={clsx('flex', 'gap-x-12', 'gap-y-8', 'flex-wrap')}>
+          {flats.map((flat) => (
+            <FlatCard flatItem={flat} key={`flats-list-flats-item-${flat.id}`} />
+          ))}
+        </div>
         <Pagination currentPage={page} totalPages={pageCount} onChange={handlePageChange} />
       </section>
     </section>

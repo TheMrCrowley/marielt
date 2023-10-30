@@ -56,7 +56,7 @@ function CheckboxGroup<T extends boolean>({
       <div className={clsx('flex', 'gap-x-2')}>
         {items.map((item) => (
           <CheckboxButton
-            key={Math.random() + 'checkboxGroup-checkBoxItem'}
+            key={`checkbox-group-checkbox-item-${label}-${item.label}-${item.value}`}
             isChecked={isValueChecked(item.value)}
             onChange={() => handleClick(item.value)}
           >

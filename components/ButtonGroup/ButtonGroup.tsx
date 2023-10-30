@@ -70,7 +70,7 @@ const ButtonGroup = ({ items, label, onChange, values }: ButtonGroupProps) => {
       <div className={clsx('flex', 'gap-1', 'flex-wrap')}>
         {items.map(({ label: buttonLabel, value }) => (
           <ButtonGroupItem
-            key={Math.random()}
+            key={`button-group-button-item-${label}-${buttonLabel}-${value}`}
             handleClick={handleClick}
             isActive={!!selected.find((item) => item === value)}
             label={buttonLabel}

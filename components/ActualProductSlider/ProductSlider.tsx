@@ -61,8 +61,8 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
         // grabCursor
         slidesPerView="auto"
       >
-        {products.map((product) => (
-          <SwiperSlide style={{ width: 330 }} key={Math.random()}>
+        {products.map((product, index) => (
+          <SwiperSlide style={{ width: 330 }} key={`product-slider-${type}-swiper-slide-${index}`}>
             <ProductCard product={product} type={type} />
           </SwiperSlide>
         ))}

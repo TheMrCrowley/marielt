@@ -41,7 +41,10 @@ const Select = ({
 
   const renderOptions = () =>
     formattedOptions.map((formattedOption) => (
-      <Option key={`${formattedOption.label}-${formattedOption.value}`} {...formattedOption} />
+      <Option
+        key={`select-option-item-${formattedOption.label}-${formattedOption.value}`}
+        {...formattedOption}
+      />
     ));
 
   const renderPlaceholder = () => {

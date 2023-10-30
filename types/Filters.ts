@@ -6,14 +6,20 @@ import {
 } from '@/enums/FlatsFilters';
 import { FinishingValues } from '@/enums/FlatsFilters';
 
+import { District, MicroDistrict } from './Location';
+
 export interface BaseFilters<T extends Record<string, string | string[] | boolean>> {
   filters: T;
-  data: { district: string[] | null; microDistrict: string[] | null; metro: string[] | null };
+  data: {
+    district: District[] | null;
+    microDistrict: MicroDistrict[] | null;
+    metro: string[] | null;
+  };
   updateFilters: <K extends keyof T>(
     values: Partial<Record<K, BaseFilters<T>['filters'][K]>>,
   ) => void;
   setData: (data: {
-    district: string[] | null;
+    district: District[] | null;
     microDistrict: string[] | null;
     metro: string[] | null;
   }) => void;

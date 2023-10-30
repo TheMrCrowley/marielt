@@ -1,14 +1,32 @@
+import { useMemo } from 'react';
+
 import Select from '@/components/Select';
 import { useFlatsFilter } from '@/store/flatsFilters';
 
 const MicroDistrictFilter = () => {
   const {
-    filters: { microDistrict: selectedMicroDistricts },
-    data: { microDistrict: microDistrictsOptions },
+    filters: { microDistrict: selectedMicroDistricts, district: selectedDistricts },
+    data: { microDistrict: microDistrictsOptions, district: districtsData },
     updateFilters,
   } = useFlatsFilter();
 
-  if (!microDistrictsOptions) {
+  const dataToRender = useMemo(() => {
+    const filtered = microDistrictsOptions?.filter((microDistrictsOption) => {
+      const belongTo = new Set(
+        districtsData
+          ?.filter((initialDistrict) => selectedDistricts.includes(initialDistrict.districtName))
+          .map((item) => item.microdistricts)
+          .flat()
+          .map((item) => item.microdistrictId),
+      );
+
+      return belongTo.has(microDistrictsOption.microDistrictId);
+    });
+
+    return filtered?.length ? filtered : microDistrictsOptions;
+  }, [selectedDistricts]);
+
+  if (!dataToRender) {
     return null;
   }
 
@@ -16,9 +34,9 @@ const MicroDistrictFilter = () => {
     <Select
       label="Микрорайон"
       isMulti
-      options={microDistrictsOptions.map((microDistrict) => ({
-        label: microDistrict,
-        value: microDistrict,
+      options={dataToRender.map((microDistrict) => ({
+        label: microDistrict.microDistrictName,
+        value: microDistrict.microDistrictName,
       }))}
       values={selectedMicroDistricts}
       onChange={(selected) =>

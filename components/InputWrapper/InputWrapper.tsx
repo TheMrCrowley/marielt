@@ -17,7 +17,7 @@ const InputWrapper = ({ label, children, subLabel, wrapperClassName }: InputWrap
           {label}
           {subLabel && ','}
         </Typography>
-        {subLabel && <p className={clsx('text-[20px]', 'text-[#d9d9d9]')}>{subLabel}</p>}
+        {subLabel && <p className={clsx('text-xl', 'text-[#d9d9d9]')}>{subLabel}</p>}
       </div>
       {children}
     </div>

@@ -41,7 +41,7 @@ const InputFromTo = ({
 
   return (
     <InputWrapper wrapperClassName={wrapperClassName} label={label} subLabel={subLabel}>
-      <div className={clsx('flex', 'gap-x-1')}>
+      <div className={clsx('flex', 'gap-x-1', 'gap-y-3', 'flex-wrap')}>
         <input
           type="text"
           value={from}
@@ -55,7 +55,8 @@ const InputFromTo = ({
             'px-4',
             'py-2',
             'max-w-[140px]',
-            'text-[20px]',
+            'md:text-xl',
+            'text-base',
             'text-white',
             'border-b',
             'border-[#D9D9D9]',
@@ -79,7 +80,8 @@ const InputFromTo = ({
             'px-4',
             'py-2',
             'max-w-[140px]',
-            'text-[20px]',
+            'md:text-xl',
+            'text-base',
             'text-white',
             'border-b',
             'border-[#D9D9D9]',

@@ -28,7 +28,7 @@ const CurrencySwitch = ({ onChange, selectedCurrency }: CurrencySwitchProps) => 
   };
 
   return (
-    <div className={clsx('flex', 'text-white', 'text-[20px]', 'gap-x-1')}>
+    <div className={clsx('flex', 'text-white', 'md:text-xl', 'text-base', 'gap-x-1')}>
       {renderCurrency('EUR')} / {renderCurrency('USD')} / {renderCurrency('RUB')}
     </div>
   );

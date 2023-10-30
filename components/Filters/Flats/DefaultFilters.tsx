@@ -29,8 +29,9 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
         className={clsx(
           'w-full',
           'bg-[#262626]',
-          'pt-14',
-          'pb-9',
+          'md:pt-14',
+          'md:pb-9',
+          'py-4',
           'flex',
           'flex-col',
           'justify-center',
@@ -38,15 +39,38 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
           'gap-y-10',
         )}
       >
-        <section className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-max', 'flex-auto', 'px-8')}>
-          <div className={clsx('flex', 'justify-between', 'w-full')}>
+        <section
+          className={clsx(
+            'flex',
+            'flex-col',
+            'flex-auto',
+            'w-full',
+            'md:gap-y-10',
+            'gap-y-5',
+            'md:px-8',
+            'px-4',
+            'md:max-w-max',
+            'max-w-full',
+          )}
+        >
+          <div
+            className={clsx(
+              'flex',
+              'justify-between',
+              'w-full',
+              'md:flex-row',
+              'flex-col',
+              'items-start',
+              'gap-y-5',
+            )}
+          >
             <CurrencySwitch
               onChange={(cur) => changeCurrency(cur)}
               selectedCurrency={selectedCurrency}
             />
             <button
               onClick={openModal}
-              className={clsx('text-[#B1B1B1]', 'underline', 'text-[20px]')}
+              className={clsx('text-[#B1B1B1]', 'underline', 'md:text-xl', 'text-base')}
             >
               Расширенный фильтр
             </button>
@@ -54,11 +78,13 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
           <div
             className={clsx(
               'flex',
-              'items-center',
-              'justify-between',
               'gap-9',
               'flex-wrap',
               'w-full',
+              'md:items-center',
+              'md:justify-between',
+              'md:flex-row',
+              'flex-col',
             )}
           >
             <RoominessFilter />
@@ -68,9 +94,19 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
             <MetroFilter />
           </div>
 
-          <div className={clsx('flex', 'items-center', 'justify-between', 'gap-x-5')}>
+          <div
+            className={clsx(
+              'flex',
+              'md:justify-between',
+              'gap-5',
+              'md:flex-row',
+              'md:items-center',
+              'flex-col',
+              'items-start',
+            )}
+          >
             <AreaFilter />
-            <Button className={clsx('self-end', 'flex-1')} onClick={applyFilters}>
+            <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={applyFilters}>
               Применить
             </Button>
           </div>

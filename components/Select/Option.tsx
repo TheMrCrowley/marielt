@@ -18,11 +18,13 @@ const Option = ({ label, onClick, value, isSelected, disabled }: OptionItemProps
         }
       }}
       className={clsx(
-        'px-4',
+        'max-w-full',
+        'break-all',
+        'px-2',
         'py-2',
         'border-solid',
         'border-b',
-        'text-[20px]',
+        'text-base',
         !isSelected && !disabled && 'text-white',
 
         !disabled && 'hover:bg-secondary',

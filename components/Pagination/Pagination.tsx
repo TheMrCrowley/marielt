@@ -27,7 +27,7 @@ const PaginationButton = ({
   return (
     <button
       className={clsx(
-        'text-[20px]',
+        'text-xl',
         'border-b',
         'border-solid',
         'py-3',
@@ -129,7 +129,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
           'gap-x-4',
           'justify-center',
           'items-center',
-          'text-[20px]',
+          'text-xl',
           'border-b',
           'border-solid',
           'py-3',
@@ -151,7 +151,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
           'gap-x-4',
           'justify-center',
           'items-center',
-          'text-[20px]',
+          'text-xl',
           'border-b',
           'border-solid',
           'py-3',

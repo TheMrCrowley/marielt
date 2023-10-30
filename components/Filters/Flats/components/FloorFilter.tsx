@@ -21,7 +21,7 @@ const FloorFilter = () => {
 
   return (
     <>
-      <div className={clsx('flex', 'items-end', 'gap-x-2')}>
+      <div className={clsx('flex', 'items-end', 'gap-x-2', 'gap-y-4', 'flex-wrap')}>
         <InputFromTo
           label="Этаж"
           values={{
@@ -39,39 +39,41 @@ const FloorFilter = () => {
             min: 1,
           }}
         />
-        <CheckboxButton
-          isChecked={isNotFirstFloor}
-          onChange={(checked) =>
-            updateFilters({
-              isNotFirstFloor: checked,
-              floorFrom: floorFrom === '1' ? '2' : floorFrom,
-            })
-          }
-        >
-          Не первый
-        </CheckboxButton>
-        <CheckboxButton
-          isChecked={isNotLastFloor}
-          onChange={(checked) =>
-            updateFilters({
-              isNotLastFloor: checked,
-              isLastFloor: false,
-            })
-          }
-        >
-          Не последний
-        </CheckboxButton>
-        <CheckboxButton
-          isChecked={isLastFloor}
-          onChange={(checked) =>
-            updateFilters({
-              isLastFloor: checked,
-              isNotLastFloor: false,
-            })
-          }
-        >
-          Последний
-        </CheckboxButton>
+        <div className={clsx('flex', 'gap-x-3', 'gap-y-4', 'min-w-min', 'flex-wrap')}>
+          <CheckboxButton
+            isChecked={isNotFirstFloor}
+            onChange={(checked) =>
+              updateFilters({
+                isNotFirstFloor: checked,
+                floorFrom: floorFrom === '1' ? '2' : floorFrom,
+              })
+            }
+          >
+            Не первый
+          </CheckboxButton>
+          <CheckboxButton
+            isChecked={isNotLastFloor}
+            onChange={(checked) =>
+              updateFilters({
+                isNotLastFloor: checked,
+                isLastFloor: false,
+              })
+            }
+          >
+            Не последний
+          </CheckboxButton>
+          <CheckboxButton
+            isChecked={isLastFloor}
+            onChange={(checked) =>
+              updateFilters({
+                isLastFloor: checked,
+                isNotLastFloor: false,
+              })
+            }
+          >
+            Последний
+          </CheckboxButton>
+        </div>
       </div>
       <InputFromTo
         label="Этажей в Доме"
@@ -84,7 +86,7 @@ const FloorFilter = () => {
           max: 50,
           min: 1,
         }}
-        wrapperClassName="flex-initial"
+        wrapperClassName="flex-initial justify-end"
       />
     </>
   );

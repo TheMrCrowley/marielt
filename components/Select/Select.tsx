@@ -73,7 +73,13 @@ const Select = ({
       onClick={toggleSelect}
     >
       <div className={clsx('flex', 'justify-between', 'items-center')}>
-        <p className={clsx('text-[20px]', selected.length ? 'text-white' : 'text-[#d9d9d9]')}>
+        <p
+          className={clsx(
+            'md:text-xl',
+            'text-base',
+            selected.length ? 'text-white' : 'text-[#d9d9d9]',
+          )}
+        >
           {renderPlaceholder()}
         </p>
         <Image src={ChevronIcon} alt="chevron" className={clsx(isOpen && 'rotate-180')} />
@@ -93,7 +99,8 @@ const Select = ({
             'scrollbar-thin',
             'scrollbar-thumb-primary',
             'scrollbar-track-secondary',
-            optionWidth === 'full' ? 'w-full' : 'w-max',
+            // optionWidth === 'full' ? 'md:w-full' : 'md:w-max',
+            'w-full',
           )}
         >
           {renderOptions()}

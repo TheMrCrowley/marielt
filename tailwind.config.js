@@ -20,13 +20,26 @@ module.exports = {
     'text-xl',
     'text-base',
     'text-sm',
+    'md:text-xl',
+    'md:text-5xl',
+    'md:text-[40px]',
+    'md:text-4xl',
+    'md:text-[32px]',
+    'md:text-2xl',
+    'md:text-base',
+    'md:text-sm',
   ],
   theme: {
+    // screens: {
+    //   // 'small:'
+    // },
+
     extend: {
       colors: {
         primary: '#2c2c2c',
         secondary: '#e3c496',
       },
+      screens: {},
     },
   },
   darkMode: 'class',

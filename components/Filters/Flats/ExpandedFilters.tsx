@@ -33,8 +33,6 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedProp
       <div
         className={clsx(
           'flex',
-          'py-12',
-          'px-20',
           'bg-[#262626]',
           'max-w-[1620px]',
           'w-full',
@@ -43,6 +41,10 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedProp
           'flex-auto',
           'h-full',
           'overflow-hidden',
+          'md:py-12',
+          '',
+          'md:px-20',
+          '',
         )}
       >
         <button
@@ -68,7 +70,9 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedProp
           <Title fontSize={40} fontWeight="medium">
             Расширенный фильтр
           </Title>
-          <div className={clsx('flex', 'w-full', 'justify-between', 'gap-x-3')}>
+          <div
+            className={clsx('flex', 'w-full', 'justify-between', 'gap-x-3', 'gap-y-4', 'flex-wrap')}
+          >
             <FloorFilter />
             <HouseTypeFilter />
           </div>

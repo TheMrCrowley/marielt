@@ -15,7 +15,8 @@ interface ButtonGroupItemProps {
 const ButtonGroupItem = ({ handleClick, value, label, isActive }: ButtonGroupItemProps) => (
   <button
     className={clsx(
-      'text-[20px]',
+      'md:text-xl',
+      'text-base',
       'border-b',
       'border-solid',
       'py-3',
@@ -66,7 +67,7 @@ const ButtonGroup = ({ items, label, onChange, values }: ButtonGroupProps) => {
 
   return (
     <InputWrapper label={label}>
-      <div className={clsx('flex', 'gap-x-1')}>
+      <div className={clsx('flex', 'gap-1', 'flex-wrap')}>
         {items.map(({ label: buttonLabel, value }) => (
           <ButtonGroupItem
             key={Math.random()}

@@ -20,6 +20,7 @@ const YearsFilter = () => {
         onChange={({ from, to }) =>
           updateFilters({ renovationYearFrom: from, renovationYearTo: to })
         }
+        maxLength={4}
       />
       <InputFromTo
         label="Год Постройки"
@@ -30,6 +31,7 @@ const YearsFilter = () => {
         onChange={({ from, to }) =>
           updateFilters({ constructionYearFrom: from, constructionYearTo: to })
         }
+        maxLength={4}
       />
     </>
   );

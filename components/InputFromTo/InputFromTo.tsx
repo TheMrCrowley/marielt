@@ -16,7 +16,11 @@ interface InputFromToProps {
     max: number;
   };
   wrapperClassName?: string;
+  maxLength?: number;
 }
+
+const formatToNumber = (value: string, maxLength?: number) =>
+  maxLength ? value.substring(0, maxLength).replace(/[\D\s]/gim, '') : value.replace(/\D/gim, '');
 
 const InputFromTo = ({
   label,
@@ -25,6 +29,7 @@ const InputFromTo = ({
   subLabel,
   minMax,
   wrapperClassName,
+  maxLength,
 }: InputFromToProps) => {
   const { from, to } = values;
 
@@ -42,7 +47,7 @@ const InputFromTo = ({
           value={from}
           onChange={(e) =>
             onChange({
-              from: handleChange(e.target.value),
+              from: handleChange(formatToNumber(e.target.value, maxLength)),
               to,
             })
           }
@@ -66,7 +71,7 @@ const InputFromTo = ({
           onChange={(e) => {
             onChange({
               from,
-              to: handleChange(e.target.value),
+              to: handleChange(formatToNumber(e.target.value, maxLength)),
             });
           }}
           placeholder="До"

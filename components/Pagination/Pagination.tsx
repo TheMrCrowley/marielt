@@ -49,7 +49,6 @@ const PaginationButton = ({
 };
 
 const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
-  console.log({ totalPages });
   const renderPages = () => {
     const isEdge =
       currentPage === 1 ||

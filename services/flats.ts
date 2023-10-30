@@ -140,7 +140,7 @@ const getFlatsStrapiQueryParamsByFilters = (
             $in: district,
           },
         },
-        microDistrict: {
+        microdistrict: {
           name: {
             $in: microDistrict,
           },
@@ -211,7 +211,7 @@ const convertResponseToDefaultFlat = (
   }));
 };
 
-interface FlatStrapiResponse {
+export interface FlatStrapiResponse {
   parameters: {
     total_area: string;
     living_area: string;

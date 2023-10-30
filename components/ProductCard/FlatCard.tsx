@@ -105,7 +105,11 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
           </div>
         </div>
         {renderPriceBlock()}
-        <Link href={`/flats/${id}`}>
+        <Link
+          href={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::apartments-item.apartments-item/${id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Button buttonType="bordered" className="w-full">
             Подробнее
           </Button>

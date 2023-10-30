@@ -82,7 +82,7 @@ export const houseTypeQueryMap: QueryMapType<HouseTypeValues> = {
   [HouseTypeValues.Timbered]: 'бревенчатый',
 };
 
-export enum BathroomValues {
+enum BathroomValues {
   Separate = 'separate',
   Combined = 'combined',
   TwoAndMore = 'twoAndMore',

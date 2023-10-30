@@ -17,7 +17,7 @@ interface ProductSliderProps {
   type: ProductType;
 }
 
-export const ProductSlider = ({ products, type }: ProductSliderProps) => {
+const ProductSlider = ({ products, type }: ProductSliderProps) => {
   const nextClassName = `next-${type}`;
   const prevClassName = `prev-${type}`;
   return (

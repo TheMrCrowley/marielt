@@ -17,13 +17,13 @@ export interface StrapiImage {
   updatedAt: string;
 }
 
-export interface Formats {
+interface Formats {
   small: Format;
   medium: Format;
   thumbnail: Format;
 }
 
-export interface Format {
+interface Format {
   ext: string;
   url: string;
   hash: string;

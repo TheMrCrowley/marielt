@@ -9,7 +9,7 @@ import { OptionType } from '@/types/Option';
 import Option from './Option';
 import { useSelect } from './useSelect';
 
-export interface SelectProps extends InputWrapperProps {
+interface SelectProps extends InputWrapperProps {
   options: OptionType[];
   onChange: (selected: OptionType['value'][]) => void;
   placeholder?: string;

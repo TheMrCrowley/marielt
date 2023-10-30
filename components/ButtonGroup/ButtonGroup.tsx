@@ -55,6 +55,11 @@ const ButtonGroup = ({ items, label, onChange, values }: ButtonGroupProps) => {
     }
   };
 
+  // TODO fix this
+  useEffect(() => {
+    setSelected(values);
+  }, [values]);
+
   useEffect(() => {
     onChange(selected);
   }, [selected]);
@@ -76,4 +81,4 @@ const ButtonGroup = ({ items, label, onChange, values }: ButtonGroupProps) => {
   );
 };
 
-export default ButtonGroup;
+export default React.memo(ButtonGroup);

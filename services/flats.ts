@@ -19,7 +19,7 @@ import { StrapiImage } from '@/types/StrapiImage';
 
 import { getCurrencies } from './getCurrency';
 
-export const getFlatsStrapiQueryParamsByFilters = (
+const getFlatsStrapiQueryParamsByFilters = (
   filters: Record<string, string | string[] | boolean>,
   selectedCurrency: AvailableCurrencies,
   rates: CurrencyState['rates'],
@@ -40,7 +40,6 @@ export const getFlatsStrapiQueryParamsByFilters = (
     houseType,
     isLastFloor,
     isNotFirstFloor,
-    isNotLastFloor,
     maxFloorsFrom,
     maxFloorsTo,
     livingAreaTo,
@@ -82,7 +81,7 @@ export const getFlatsStrapiQueryParamsByFilters = (
         },
         parameters: {
           is_last_floor: {
-            $eq: isLastFloor || isNotLastFloor,
+            $eq: isLastFloor,
           },
           construction_year: {
             $gte: constructionYearFrom,
@@ -105,7 +104,7 @@ export const getFlatsStrapiQueryParamsByFilters = (
           floor: {
             $gte: floorFrom,
             $lte: floorTo,
-            $ne: isNotFirstFloor ? 1 : null,
+            $ne: isNotFirstFloor && 1,
           },
           house_type: {
             $in: getQueryArray(houseTypeQueryMap, houseType),
@@ -169,7 +168,11 @@ export const getFlats = async (searchParams: Record<string, string | string[]>) 
   );
 
   const response = await fetch(
-    `${process.env.API_BASE_URL}/apartments-items?populate=*&${query}&pagination[limit]=6`,
+    `${
+      process.env.API_BASE_URL
+    }/apartments-items?populate=*&${query}&pagination[pageSize]=6&pagination[page]=${
+      searchParams.page || 1
+    }`,
     {
       next: {
         // revalidate: REVALIDATE_TIME,
@@ -177,12 +180,17 @@ export const getFlats = async (searchParams: Record<string, string | string[]>) 
       cache: 'no-cache',
     },
   );
-  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
-
-  return converResponseToDefaultFlat(data);
+  const {
+    data,
+    meta: { pagination },
+  } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+  return {
+    flats: convertResponseToDefaultFlat(data),
+    pagination,
+  };
 };
 
-const converResponseToDefaultFlat = (
+const convertResponseToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
 ): DefaultFlatItem[] => {
   return flats.map(({ attributes, id }) => ({

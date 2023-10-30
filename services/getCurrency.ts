@@ -1,4 +1,4 @@
-export enum CurrencyId {
+enum CurrencyId {
   USD = 431,
   EUR = 451,
   RUB = 456,

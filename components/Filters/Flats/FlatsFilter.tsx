@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import {
   createFiltersStateBySearchParams,
@@ -25,8 +25,10 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
   const { setData, isExpandedOpen, setIsExpandedOpen, updateFilters, filters } = useFlatsFilter();
   const { selectedCurrency } = useCurrency();
 
-  useLayoutEffect(() => {
-    updateFilters({ ...createFiltersStateBySearchParams(filters, searchParams) });
+  useEffect(() => {
+    const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
+
+    updateFilters({ ...initialFilters });
     setData(data);
   }, []);
 

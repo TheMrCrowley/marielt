@@ -64,6 +64,11 @@ export const useSelect: UseSelectSignature = ({ onChange, options, isMulti, valu
     });
   }, [selected, options]);
 
+  // TODO: fix this
+  useEffect(() => {
+    setSelected(values);
+  }, [values]);
+
   useEffect(() => {
     onChange(selected);
   }, [selected]);

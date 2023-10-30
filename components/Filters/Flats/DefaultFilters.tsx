@@ -2,8 +2,10 @@ import clsx from 'clsx';
 import React from 'react';
 
 import Button from '@/components/Button';
+import Chip from '@/components/Chip';
 import CurrencySwitch from '@/components/CurrencySwitch';
 import { useCurrency } from '@/store/currency';
+import { useFlatsFilter } from '@/store/flatsFilters';
 
 import AreaFilter from './components/AreaFilter';
 import DistrictFilter from './components/DistrictFilter';
@@ -19,11 +21,24 @@ interface DefaultFilterProps {
 
 const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
   const { changeCurrency, selectedCurrency } = useCurrency();
+  const { filters, updateFilters } = useFlatsFilter();
 
   return (
     <>
-      <div className={clsx('w-full', 'bg-[#262626]', 'pt-14', 'pb-9', 'flex', 'justify-center')}>
-        <div className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-7xl', 'flex-auto')}>
+      <div
+        className={clsx(
+          'w-full',
+          'bg-[#262626]',
+          'pt-14',
+          'pb-9',
+          'flex',
+          'flex-col',
+          'justify-center',
+          'items-center',
+          'gap-y-10',
+        )}
+      >
+        <section className={clsx('flex', 'flex-col', 'gap-y-10', 'max-w-7xl', 'flex-auto')}>
           <div className={clsx('flex', 'justify-between', 'w-full')}>
             <CurrencySwitch
               onChange={(cur) => changeCurrency(cur)}
@@ -49,7 +64,34 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
               Применить
             </Button>
           </div>
-        </div>
+        </section>
+        {/* TODO move this somewhere */}
+        <section className={clsx('flex', 'max-w-7xl', 'flex-auto', 'flex-wrap', 'gap-3', 'w-full')}>
+          {Object.entries(filters)
+            .filter(([, value]) => (Array.isArray(value) ? !!value.length : !!value))
+            .map(([key, value]) => (
+              <Chip
+                onDelete={() => {
+                  if (Array.isArray(value)) {
+                    updateFilters({ [key]: [] });
+                    return;
+                  }
+                  if (typeof value === 'string') {
+                    updateFilters({ [key]: '' });
+                    return;
+                  }
+                  if (typeof value === 'boolean') {
+                    updateFilters({ [key]: false });
+                    return;
+                  }
+                }}
+                label={
+                  Array.isArray(value) ? value.join(', ') : typeof value === 'string' ? value : key
+                }
+                key={`chip-item-for-${key}-${value}`}
+              />
+            ))}
+        </section>
       </div>
     </>
   );

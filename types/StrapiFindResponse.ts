@@ -3,6 +3,7 @@ export interface StrapiFindResponse<T> {
     id: string;
     attributes: T;
   }>;
+  meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } };
 }
 
 export interface StrapiFindOneResponse<T> {

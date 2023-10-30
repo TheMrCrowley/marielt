@@ -117,7 +117,6 @@ const formatToActualProduct = (
     livingArea: attributes.parameters.living_area,
     totalArea: attributes.parameters.total_area,
     productId: attributes.id,
-    // imgSrc: attributes?.image?.data[0]?.attributes?.url,
     imgSrc: attributes.image?.data ? attributes.image.data[0].attributes.url : '',
   }));
 };

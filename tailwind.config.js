@@ -28,12 +28,9 @@ module.exports = {
     'md:text-2xl',
     'md:text-base',
     'md:text-sm',
+    'basis-1/5',
   ],
   theme: {
-    // screens: {
-    //   // 'small:'
-    // },
-
     extend: {
       colors: {
         primary: '#2c2c2c',

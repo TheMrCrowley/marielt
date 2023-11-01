@@ -26,7 +26,6 @@ const Option = ({ label, onClick, value, isSelected, disabled }: OptionItemProps
         'border-b',
         'text-base',
         !isSelected && !disabled && 'text-white',
-
         !disabled && 'hover:bg-secondary',
         !disabled && 'hover:text-black',
         !disabled && 'hover: text-black',

@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import InputFromTo from '@/components/InputFromTo';
+import AreaFilter from '@/components/Filters/components/AreaFilter';
+import KitchenAreaFilter from '@/components/Filters/components/KitchenAreaFilter';
+import LivingAreaFilter from '@/components/Filters/components/LivingAreaFilter';
 import Select from '@/components/Select';
 import { ceilingHeightValues } from '@/enums/FlatsFilters';
 import { useFlatsFilter } from '@/store/flatsFilters';
@@ -22,44 +24,16 @@ const ExpandedAreaFilter = () => {
 
   return (
     <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8')}>
-      <InputFromTo
-        label="Площадь Общая"
-        subLabel={
-          <span>
-            м <sup>2</sup>
-          </span>
-        }
-        values={{
-          from: areaFrom,
-          to: areaTo,
-        }}
-        onChange={({ from, to }) => updateFilters({ areaFrom: from, areaTo: to })}
+      <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
+      <LivingAreaFilter
+        livingAreaFrom={livingAreaFrom}
+        livingAreaTo={livingAreaTo}
+        onChange={updateFilters}
       />
-      <InputFromTo
-        label="Площадь Жилая"
-        subLabel={
-          <span>
-            м <sup>2</sup>
-          </span>
-        }
-        values={{
-          from: livingAreaFrom,
-          to: livingAreaTo,
-        }}
-        onChange={({ from, to }) => updateFilters({ livingAreaFrom: from, livingAreaTo: to })}
-      />
-      <InputFromTo
-        label="Площадь Кухни"
-        subLabel={
-          <span>
-            м <sup>2</sup>
-          </span>
-        }
-        values={{
-          from: kitchenAreaFrom,
-          to: kitchenAreaTo,
-        }}
-        onChange={({ from, to }) => updateFilters({ kitchenAreaFrom: from, kitchenAreaTo: to })}
+      <KitchenAreaFilter
+        kitchenAreaFrom={kitchenAreaFrom}
+        kitchenAreaTo={kitchenAreaTo}
+        onChange={updateFilters}
       />
       <Select
         label="Высота Потолков"

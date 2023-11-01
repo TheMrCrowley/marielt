@@ -1,9 +1,10 @@
 import React from 'react';
 
 import HousesAndLotsFilters from '@/components/Filters/HousesAndLots/HousesAndLotsFilters';
+import { HousesAndLotsType } from '@/enums/HousesAndLotsFilters';
 import { getHousesAndLotsFiltersData } from '@/services/filters';
 
-const HousesAndLots = async () => {
+const Dachi = async () => {
   const { directions, houseTypes } = await getHousesAndLotsFiltersData();
 
   return (
@@ -13,9 +14,10 @@ const HousesAndLots = async () => {
           directions,
           houseTypes,
         }}
+        type={HousesAndLotsType.Dachi}
       />
     </>
   );
 };
 
-export default HousesAndLots;
+export default Dachi;

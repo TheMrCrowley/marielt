@@ -1,12 +1,12 @@
 import InputFromTo from '@/components/InputFromTo';
-import { useFlatsFilter } from '@/store/flatsFilters';
 
-const AreaFilter = () => {
-  const {
-    updateFilters,
-    filters: { areaFrom, areaTo },
-  } = useFlatsFilter();
+interface AreaFilterProps {
+  areaFrom: string;
+  areaTo: string;
+  onChange: (data: { areaFrom: string; areaTo: string }) => void;
+}
 
+const AreaFilter = ({ areaFrom, areaTo, onChange }: AreaFilterProps) => {
   return (
     <InputFromTo
       label="Площадь"
@@ -20,7 +20,7 @@ const AreaFilter = () => {
         to: areaTo,
       }}
       onChange={({ from, to }) => {
-        updateFilters({
+        onChange({
           areaFrom: from,
           areaTo: to,
         });

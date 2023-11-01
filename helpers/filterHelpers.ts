@@ -4,7 +4,7 @@ import { AvailableCurrencies } from '@/types/Currency';
 import { BaseFilters } from '@/types/Filters';
 
 export const formatFiltersToSearchParams = <T extends Record<string, string | string[] | boolean>>(
-  filters: BaseFilters<T>['filters'],
+  filters: BaseFilters<T, {}>['filters'],
   currency: AvailableCurrencies,
 ) => {
   const searchParams = new URLSearchParams();
@@ -35,9 +35,9 @@ export const formatFiltersToSearchParams = <T extends Record<string, string | st
 export const createFiltersStateBySearchParams = <
   T extends Record<string, string | string[] | boolean>,
 >(
-  initialFilters: BaseFilters<T>['filters'],
+  initialFilters: BaseFilters<T, {}>['filters'],
   searchParams: ReadonlyURLSearchParams,
-): Partial<BaseFilters<T>['filters']> => {
+): Partial<BaseFilters<T, {}>['filters']> => {
   const filters = { ...initialFilters };
 
   (Object.keys(filters) as Array<keyof typeof filters>).forEach((key) => {

@@ -102,7 +102,32 @@ const getMetro = async () => {
   return data.map((district) => district.attributes.name);
 };
 
-export const getFiltersData = async () => {
+const getDirections = async () => {
+  const directionsResponse = await fetch(`${process.env.API_BASE_URL}/directions`);
+  const { data } = (await directionsResponse.json()) as StrapiFindResponse<FindResponse>;
+
+  return data.map((district) => district.attributes.name);
+};
+
+const getHouseType = async () => {
+  const directionsResponse = await fetch(
+    `${process.env.API_BASE_URL}/houses-and-lots-categories?filter[category][$eqi]=Дома и коттеджи`,
+  );
+  const { data } = (await directionsResponse.json()) as StrapiFindResponse<FindResponse>;
+
+  return data.map((district) => district.attributes.name);
+};
+
+export const getHousesAndLotsFiltersData = async () => {
+  const [directions, houseTypes] = await Promise.all([getDirections(), getHouseType()]);
+
+  return {
+    directions,
+    houseTypes,
+  };
+};
+
+export const getFlatsFiltersData = async () => {
   const [district, microDistrict, metro] = await Promise.all([
     getDistricts(),
     getMicroDistricts(),

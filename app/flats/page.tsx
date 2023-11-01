@@ -2,7 +2,7 @@ import React from 'react';
 
 import FlatsFilters from '@/components/Filters/Flats';
 import FlatsList from '@/components/Filters/Flats/FlatsList';
-import { getFiltersData } from '@/services/filters';
+import { getFlatsFiltersData } from '@/services/filters';
 import { getFlats } from '@/services/flats';
 
 type FlatsProps = {
@@ -11,7 +11,7 @@ type FlatsProps = {
 
 const Flats = async ({ searchParams }: FlatsProps) => {
   const [filters, { flats, pagination }] = await Promise.all([
-    getFiltersData(),
+    getFlatsFiltersData(),
     getFlats(searchParams),
   ]);
 

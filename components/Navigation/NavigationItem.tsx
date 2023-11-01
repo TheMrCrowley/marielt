@@ -25,7 +25,7 @@ const NavigationItem = ({ navItem }: NavigationItemProps) => {
   return (
     <li className={styles.navigationItem}>
       <Link
-        className={clsx(styles.navigationLink, pathname === href && styles.active)}
+        className={clsx(styles.navigationLink, pathname.includes(href) && styles.active)}
         href={href}
         //TODO Remove comment
         // target="_blank"

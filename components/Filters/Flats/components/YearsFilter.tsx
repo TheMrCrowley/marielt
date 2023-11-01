@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ConstructionYearFilter from '@/components/Filters/components/ConstructionYearFilter';
 import InputFromTo from '@/components/InputFromTo';
 import { useFlatsFilter } from '@/store/flatsFilters';
 
@@ -22,16 +23,10 @@ const YearsFilter = () => {
         }
         maxLength={4}
       />
-      <InputFromTo
-        label="Год Постройки"
-        values={{
-          from: constructionYearFrom,
-          to: constructionYearTo,
-        }}
-        onChange={({ from, to }) =>
-          updateFilters({ constructionYearFrom: from, constructionYearTo: to })
-        }
-        maxLength={4}
+      <ConstructionYearFilter
+        constructionYearFrom={constructionYearFrom}
+        constructionYearTo={constructionYearTo}
+        onChange={updateFilters}
       />
     </>
   );

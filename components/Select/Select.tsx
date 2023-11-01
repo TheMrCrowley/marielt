@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
@@ -15,6 +17,8 @@ interface SelectProps extends InputWrapperProps {
   placeholder?: string;
   values?: string[];
   placeholderPrefix?: string;
+  placeholderPostfix?: string;
+
   isMulti?: boolean;
   //TODO think how to improve this
   optionWidth?: 'full' | 'maxContent';
@@ -31,6 +35,7 @@ const Select = ({
   subLabel,
   optionWidth = 'maxContent',
   placeholderPrefix,
+  placeholderPostfix,
 }: SelectProps) => {
   const { formattedOptions, isOpen, toggleSelect, wrapperRef } = useSelect({
     onChange,
@@ -49,7 +54,9 @@ const Select = ({
 
   const renderPlaceholder = () => {
     if (placeholder) {
-      return values[0] ? `${placeholderPrefix || ''} ${values[0]}` : placeholder;
+      return values[0]
+        ? `${placeholderPrefix || ''} ${values[0]} ${placeholderPostfix || ''}`
+        : placeholder;
     }
     return values.length ? `Выбрано: ${values.length}` : 'Выбрать';
   };
@@ -71,11 +78,11 @@ const Select = ({
         'select-none',
         'w-full',
         placeholder ? 'min-w-[140px]' : 'min-w-[180px]',
-        values.length ? 'border-secondary' : 'border-[#d9d9d9]',
+        values.length && values.some(Boolean) ? 'border-secondary' : 'border-[#d9d9d9]',
       )}
       onClick={toggleSelect}
     >
-      <div className={clsx('flex', 'justify-between', 'items-center')}>
+      <div className={clsx('flex', 'justify-between', 'items-center', 'gap-x-2')}>
         <p
           className={clsx(
             'md:text-xl',

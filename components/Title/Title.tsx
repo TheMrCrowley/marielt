@@ -31,9 +31,9 @@ const Title = ({
   const renderTitle = () => {
     switch (variant) {
       case 'h1':
-        return <h1 className={clsx(commonClassName, className)}>{children}</h1>;
+        return <h1 className={clsx(commonClassName, className, 'leading-snug')}>{children}</h1>;
       case 'h2':
-        return <h2 className={clsx(commonClassName, className)}>{children}</h2>;
+        return <h2 className={clsx(commonClassName, className, 'leading-snug')}>{children}</h2>;
     }
   };
 

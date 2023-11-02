@@ -5,7 +5,14 @@ import {
   SaleTermValues,
 } from '@/enums/FlatsFilters';
 import { FinishingValues } from '@/enums/FlatsFilters';
+import {
+  ElectricityValues,
+  HeatingValues,
+  HouseLevelValues,
+  WallMaterialValues,
+} from '@/enums/HousesAndLotsFilters';
 
+import { WaterValues } from './../enums/HousesAndLotsFilters';
 import { District, MicroDistrict } from './Location';
 
 export type OptionType<T extends string> = Array<{
@@ -123,12 +130,12 @@ export type HousesAndLotsFiltersType = BaseFilters<
     plotAreaTo: string;
 
     gasSupply: string;
-    electricity: string[];
-    water: string[];
+    electricity: ElectricityValues[];
+    water: WaterValues[];
     sewerage: string;
     nearLake: boolean;
-    wallMaterial: string[];
-    houseLevels: string[];
+    wallMaterial: WallMaterialValues[];
+    houseLevels: HouseLevelValues[];
 
     livingAreaFrom: string;
     livingAreaTo: string;
@@ -139,7 +146,7 @@ export type HousesAndLotsFiltersType = BaseFilters<
     constructionYearTo: string;
     readinessFrom: string;
     readinessTo: string;
-    heating: string[];
+    heating: HeatingValues[];
 
     saleTerm: SaleTermValues[];
   },
@@ -176,30 +183,6 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   readinessFrom: '',
   readinessTo: '',
   heating: [],
-  // district: [],
-  // roominess: [],
-  // microDistrict: [],
-  // metro: [],
-  // floorFrom: '',
-  // floorTo: '',
-  // isLastFloor: false,
-  // isNotFirstFloor: false,
-  // isNotLastFloor: false,
-  // maxFloorsFrom: '',
-  // maxFloorsTo: '',
-  // houseType: [],
-  // ceilingHeight: '',
-  // kitchenAreaFrom: '',
-  // kitchenAreaTo: '',
-  // livingAreaFrom: '',
-  // livingAreaTo: '',
-  // bathroom: [],
-  // finishing: [],
 
-  // renovationYearFrom: '',
-  // renovationYearTo: '',
-  // balcony: [],
   saleTerm: [],
-  // furniture: false,
-  // parking: false,
 };

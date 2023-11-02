@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Select from '@/components/Select';
-import { wallMaterialOptions } from '@/enums/HousesAndLotsFilters';
+import { WallMaterialValues, wallMaterialOptions } from '@/enums/HousesAndLotsFilters';
 
 interface WallMaterialFilterProps {
-  wallMaterial: string[];
-  onChange: (data: { wallMaterial: string[] }) => void;
+  wallMaterial: WallMaterialValues[];
+  onChange: (data: { wallMaterial: WallMaterialValues[] }) => void;
 }
 
 const WallMaterialFilter = ({ onChange, wallMaterial }: WallMaterialFilterProps) => {
@@ -15,7 +15,7 @@ const WallMaterialFilter = ({ onChange, wallMaterial }: WallMaterialFilterProps)
       options={wallMaterialOptions}
       isMulti
       values={wallMaterial}
-      onChange={(selected) => onChange({ wallMaterial: selected })}
+      onChange={(selected) => onChange({ wallMaterial: selected as WallMaterialValues[] })}
       wrapperClassName="basis-3/12 shrink"
     />
   );

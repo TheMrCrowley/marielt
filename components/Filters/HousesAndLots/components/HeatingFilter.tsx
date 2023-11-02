@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Select from '@/components/Select';
-import { heatingOptions } from '@/enums/HousesAndLotsFilters';
+import { HeatingValues, heatingOptions } from '@/enums/HousesAndLotsFilters';
 
 interface HeatingFilterProps {
-  heating: string[];
-  onChange: (data: { heating: string[] }) => void;
+  heating: HeatingValues[];
+  onChange: (data: { heating: HeatingValues[] }) => void;
 }
 
 const HeatingFilter = ({ heating, onChange }: HeatingFilterProps) => {
@@ -15,7 +15,7 @@ const HeatingFilter = ({ heating, onChange }: HeatingFilterProps) => {
       isMulti
       values={heating}
       label="Отопление"
-      onChange={(selected) => onChange({ heating: selected })}
+      onChange={(selected) => onChange({ heating: selected as HeatingValues[] })}
       wrapperClassName="basis-3/12 shrink"
     />
   );

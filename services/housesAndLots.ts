@@ -3,6 +3,7 @@ import qs from 'qs';
 import { saleTermQueryMap } from '@/enums/FlatsFilters';
 import {
   electricityQueryMap,
+  gasSupplyQueryMap,
   heatingQueryMap,
   houseLevelQueryMap,
   wallMaterialQueryMap,
@@ -99,7 +100,7 @@ const getHousesAndLotsStrapiQuery = (
             $in: getQueryArray(electricityQueryMap, electricity),
           },
           gas: {
-            $eq: gasSupply,
+            $in: getQueryArray(gasSupplyQueryMap, gasSupply),
           },
           heating: {
             $in: getQueryArray(heatingQueryMap, heating),
@@ -134,8 +135,12 @@ const getHousesAndLotsStrapiQuery = (
     { encodeValuesOnly: true },
   );
 
+  console.log(getQueryArray(sewerageQueryMap, sewerage));
+
   return { query };
 };
+
+//gas, sewerage можно только один варик или все таки несколько
 
 export const getHousesAndLots = async (searchParams: Record<string, string | string[]>) => {
   const { eur, rub, usd } = await getCurrencies();

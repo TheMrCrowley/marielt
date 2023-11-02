@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Select from '@/components/Select';
-import { waterOptions } from '@/enums/HousesAndLotsFilters';
+import { WaterValues, waterOptions } from '@/enums/HousesAndLotsFilters';
 
 interface WaterFilterProps {
-  water: string[];
-  onChange: (data: { water: string[] }) => void;
+  water: WaterValues[];
+  onChange: (data: { water: WaterValues[] }) => void;
 }
 
 const WaterFilter = ({ onChange, water }: WaterFilterProps) => {
@@ -14,7 +14,7 @@ const WaterFilter = ({ onChange, water }: WaterFilterProps) => {
       label="Вода"
       isMulti
       options={waterOptions}
-      onChange={(selected) => onChange({ water: selected })}
+      onChange={(selected) => onChange({ water: selected as WaterValues[] })}
       values={water}
       wrapperClassName="basis-1/5 shrink"
     />

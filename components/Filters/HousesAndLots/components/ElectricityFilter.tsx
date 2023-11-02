@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Select from '@/components/Select';
-import { electricityOptions } from '@/enums/HousesAndLotsFilters';
+import { ElectricityValues, electricityOptions } from '@/enums/HousesAndLotsFilters';
 
 interface ElectricityFilterProps {
-  electricity: string[];
-  onChange: (data: { electricity: string[] }) => void;
+  electricity: ElectricityValues[];
+  onChange: (data: { electricity: ElectricityValues[] }) => void;
 }
 
 const ElectricityFilter = ({ electricity, onChange }: ElectricityFilterProps) => {
@@ -14,7 +14,7 @@ const ElectricityFilter = ({ electricity, onChange }: ElectricityFilterProps) =>
       label="Электроснабжение"
       isMulti
       options={electricityOptions}
-      onChange={(selected) => onChange({ electricity: selected })}
+      onChange={(selected) => onChange({ electricity: selected as ElectricityValues[] })}
       values={electricity}
       wrapperClassName="basis-1/5 shrink"
     />

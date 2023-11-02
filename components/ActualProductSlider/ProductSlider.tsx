@@ -21,8 +21,24 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
   const nextClassName = `next-${type}`;
   const prevClassName = `prev-${type}`;
   return (
-    <div className={styles.wrapper}>
-      <button className={clsx(styles.button, prevClassName)}>
+    <div className={clsx('relative', 'flex')}>
+      <button
+        className={clsx(
+          'flex-1',
+          'flex',
+          'p-4',
+          'justify-center',
+          'items-center',
+          'bg-transparent',
+          'hover:cursor-pointer',
+          'transition-all',
+          'stroke-[#868686]',
+          'hover:stroke-secondary',
+          'hover:bg-[#ffffff1a]',
+          'hover:backdrop-blur-sm',
+          prevClassName,
+        )}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -54,9 +70,9 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
         modules={[Navigation]}
         spaceBetween={25}
         navigation={{
-          // TODO change disabled class
           prevEl: `.${prevClassName}`,
           nextEl: `.${nextClassName}`,
+          disabledClass: 'opacity-0 pointer-events-none shrink-0 grow-0 basis-1/12',
         }}
         // grabCursor
         slidesPerView="auto"

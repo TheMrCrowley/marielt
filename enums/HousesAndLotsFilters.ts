@@ -21,9 +21,8 @@ export const getRouteByHouseType = (type: string): HousesAndLotsType => {
   )[0][0] as HousesAndLotsType;
 };
 
-enum ElectricityValues {
+export enum ElectricityValues {
   Yes = 'yes',
-  Near = 'near',
   No = 'no',
   V220 = 'V220',
   V320 = 'V320',
@@ -31,22 +30,21 @@ enum ElectricityValues {
 
 export const electricityOptions: OptionType<ElectricityValues> = [
   { label: 'Есть', value: ElectricityValues.Yes },
-  { label: 'Рядом', value: ElectricityValues.Near },
   { label: 'Нет', value: ElectricityValues.No },
   { label: 'В220', value: ElectricityValues.V220 },
   { label: 'В380', value: ElectricityValues.V320 },
 ];
 
 export const electricityQueryMap: QueryMapType<ElectricityValues> = {
-  [ElectricityValues.Yes]: 'есть',
-  [ElectricityValues.Near]: 'рядом',
+  [ElectricityValues.Yes]: ['есть', 'рядом'],
   [ElectricityValues.No]: 'нет',
   [ElectricityValues.V220]: 'В220',
   [ElectricityValues.V320]: 'В380',
 };
 
-enum GasSupplyValues {
+export enum GasSupplyValues {
   Yes = 'yes',
+  Near = 'near',
   No = 'no',
 }
 
@@ -56,24 +54,26 @@ export const gasSupplyOptions: OptionType<GasSupplyValues> = [
     value: GasSupplyValues.Yes,
   },
   {
-    label: 'No',
+    label: 'Рядом',
+    value: GasSupplyValues.Near,
+  },
+  {
+    label: 'Нет',
     value: GasSupplyValues.No,
   },
 ];
 
 export const gasSupplyQueryMap: QueryMapType<GasSupplyValues> = {
-  [ElectricityValues.Yes]: 'есть',
-  [ElectricityValues.No]: 'нет',
+  [GasSupplyValues.Yes]: 'есть',
+  [GasSupplyValues.No]: 'нет',
+  [GasSupplyValues.Near]: 'рядом',
 };
 
-enum HeatingValues {
+export enum HeatingValues {
   Steam = 'steam',
   GasHeating = 'gas heating',
   Central = 'central',
   Oven = 'oven',
-  SteamOnGas = 'steam on gas',
-  LiquidFuelSteam = 'liquid fuel steam',
-  SolidFuelSteam = 'solid fuel steam',
   Electric = 'electric',
   AlternativeSources = 'alternative sources',
   No = 'no',
@@ -81,31 +81,31 @@ enum HeatingValues {
 
 export const heatingOptions: OptionType<HeatingValues> = [
   { value: HeatingValues.Steam, label: 'Паровое' },
-  { value: HeatingValues.GasHeating, label: 'Отопление на газу' },
-  { value: HeatingValues.Central, label: 'Центральное' },
+  { value: HeatingValues.GasHeating, label: 'На газу' },
   { value: HeatingValues.Oven, label: 'Печное' },
-  { value: HeatingValues.SteamOnGas, label: 'Паровое на газу' },
-  { value: HeatingValues.LiquidFuelSteam, label: 'Паровое на жидком топливе' },
-  { value: HeatingValues.SolidFuelSteam, label: 'Паровое на твердом топливе' },
   { value: HeatingValues.Electric, label: 'Электрическое' },
-  { value: HeatingValues.AlternativeSources, label: 'Альтернативные источники' },
+  { value: HeatingValues.Central, label: 'Центральное' },
   { value: HeatingValues.No, label: 'Нет' },
+  { value: HeatingValues.AlternativeSources, label: 'Альтернативные источники' },
 ];
 
 export const heatingQueryMap: QueryMapType<HeatingValues> = {
-  [HeatingValues.Steam]: 'паровое',
+  [HeatingValues.Steam]: [
+    'паровое',
+    'паровое на газу',
+    'паровое на жидком топливе',
+    'паровое на твердом топливе',
+  ],
   [HeatingValues.GasHeating]: 'отопление на газу',
   [HeatingValues.Central]: 'центральное',
   [HeatingValues.Oven]: 'печное',
-  [HeatingValues.SteamOnGas]: 'паровое на газу',
-  [HeatingValues.LiquidFuelSteam]: 'паровое на жидком топливе',
-  [HeatingValues.SolidFuelSteam]: 'паровое на твердом топливе',
+
   [HeatingValues.Electric]: 'электрическое',
   [HeatingValues.AlternativeSources]: 'альтернативные источники',
   [HeatingValues.No]: 'нет',
 };
 
-enum HouseLevelValues {
+export enum HouseLevelValues {
   One = 'one',
   Two = 'two',
   TheeOrMore = 'threeOrMore',
@@ -123,112 +123,77 @@ export const houseLevelQueryMap: QueryMapType<HouseLevelValues> = {
   [HouseLevelValues.TheeOrMore]: 'три и более',
 };
 
-enum WaterValues {
+export enum WaterValues {
   Hot = 'hot',
   Cold = 'cold',
-  Near = 'near',
-  WellNearby = 'well nearby',
-  WaterSupplyNearby = 'water supply nearby',
-  CentralWaterSupply = 'central water supply',
-  Hole = 'hole',
   Well = 'well',
-  No = 'no',
+  WaterSupplyNearby = 'water-supply-nearby',
+  CentralWaterSupply = 'central-water-supply',
+  Hole = 'hole',
   Seasonal = 'seasonal',
+  No = 'no',
 }
 
 export const waterOptions: OptionType<WaterValues> = [
   { label: 'Горячая', value: WaterValues.Hot },
   { label: 'Холодная', value: WaterValues.Cold },
-  { label: 'Рядом', value: WaterValues.Near },
-  { label: 'Рядом колодец', value: WaterValues.WellNearby },
-  { label: 'Рядом водопровод', value: WaterValues.WaterSupplyNearby },
-  { label: 'Центральный водопровод', value: WaterValues.CentralWaterSupply },
-  { label: 'Скважина', value: WaterValues.Hole },
   { label: 'Колодец', value: WaterValues.Well },
+  { label: 'Водопровод', value: WaterValues.WaterSupplyNearby },
+  { label: 'Центральный водопровод', value: WaterValues.CentralWaterSupply },
   { label: 'Нет', value: WaterValues.No },
+  { label: 'Скважина', value: WaterValues.Hole },
   { label: 'Сезонная', value: WaterValues.Seasonal },
 ];
 
 export const waterQueryMap: QueryMapType<WaterValues> = {
   [WaterValues.Hot]: 'горячая',
-  [WaterValues.Cold]: 'холодная',
-  [WaterValues.Near]: 'рядом',
-  [WaterValues.WellNearby]: 'рядом колодец',
+  [WaterValues.Cold]: ['холодная', 'рядом'],
+  [WaterValues.Well]: ['колодец', 'рядом колодец'],
   [WaterValues.WaterSupplyNearby]: 'рядом водопровод',
   [WaterValues.CentralWaterSupply]: 'центральный водопровод',
   [WaterValues.Hole]: 'скважина',
-  [WaterValues.Well]: 'колодец',
   [WaterValues.No]: 'нет',
   [WaterValues.Seasonal]: 'сезонная',
 };
 
-enum WallMaterialValues {
+export enum WallMaterialValues {
   Brick = 'brick',
-  FacingBrick = 'facing-brick',
   Panel = 'panel',
-  Block = 'block',
-  Tree = 'tree',
-  WoodLinedWithBrick = 'wood-lined-with-brick',
-  RedBrick = 'red-brick',
-  WhiteBrick = 'white-brick',
-  GasSilicateBlock = 'gas-silicate-block',
-  ExpandedClayConcrete = 'expanded-clay-concrete',
-  CinderConcrete = 'cinder-concrete',
-  LogHouse = 'log-house',
-  ProfiledTimber = 'profiled-timber',
-  RoundedTimber = 'rounded-timber',
-  LaminatedTimber = 'laminated-timber',
-  FrameFill = 'frame-fill',
-  PrefabricatedPanel = 'prefabricated-panel',
-  FrameWooden = 'frame-wooden',
+  BlockRooms = 'block-rooms',
+  Log = 'log',
   MonolithicFrame = 'monolithic-frame',
+  SilicateBlock = 'silicate-block',
 }
 
 export const wallMaterialOptions: OptionType<WallMaterialValues> = [
   { label: 'Кирпич', value: WallMaterialValues.Brick },
-  { label: 'Облицовочный кирпич', value: WallMaterialValues.FacingBrick },
   { label: 'Панельный', value: WallMaterialValues.Panel },
-  { label: 'Блочный', value: WallMaterialValues.Block },
-  { label: 'Дерево', value: WallMaterialValues.Tree },
-  { label: 'Дерево, обложено кирпичом', value: WallMaterialValues.WoodLinedWithBrick },
-  { label: 'Красный кирпич', value: WallMaterialValues.RedBrick },
-  { label: 'Белый кирпич', value: WallMaterialValues.WhiteBrick },
-  { label: 'Блок газосиликатный', value: WallMaterialValues.GasSilicateBlock },
-  { label: 'Керамзитбетон', value: WallMaterialValues.ExpandedClayConcrete },
-  { label: 'Щлакобетон', value: WallMaterialValues.CinderConcrete },
-  { label: 'Сруб', value: WallMaterialValues.LogHouse },
-  { label: 'Брус профилированный', value: WallMaterialValues.ProfiledTimber },
-  { label: 'Брус оцилиндрованный', value: WallMaterialValues.RoundedTimber },
-  { label: 'Брус клееный', value: WallMaterialValues.LaminatedTimber },
-  { label: 'Каркасно-засыпной', value: WallMaterialValues.FrameFill },
-  { label: 'Сборно-щитовой', value: WallMaterialValues.PrefabricatedPanel },
-  { label: 'Каркасный деревянный', value: WallMaterialValues.FrameWooden },
+  { label: 'Блок-комнаты', value: WallMaterialValues.BlockRooms },
+  { label: 'Бревенчатый', value: WallMaterialValues.Log },
   { label: 'Монолитно-каркасный', value: WallMaterialValues.MonolithicFrame },
+  { label: 'Силикатные блоки', value: WallMaterialValues.SilicateBlock },
 ];
 
 export const wallMaterialQueryMap: QueryMapType<WallMaterialValues> = {
-  [WallMaterialValues.Brick]: 'кирпич',
-  [WallMaterialValues.FacingBrick]: 'облицовочный кирпич',
-  [WallMaterialValues.Panel]: 'панельный',
-  [WallMaterialValues.Block]: 'блочный',
-  [WallMaterialValues.Tree]: 'дерево',
-  [WallMaterialValues.WoodLinedWithBrick]: 'дерево, обложено кирпичом',
-  [WallMaterialValues.RedBrick]: 'красный кирпич',
-  [WallMaterialValues.WhiteBrick]: 'белый кирпич',
-  [WallMaterialValues.GasSilicateBlock]: 'блок газосиликатный',
-  [WallMaterialValues.ExpandedClayConcrete]: 'керамзитбетон',
-  [WallMaterialValues.CinderConcrete]: 'шлакобетон',
-  [WallMaterialValues.LogHouse]: 'сруб',
-  [WallMaterialValues.ProfiledTimber]: 'брус профилированный',
-  [WallMaterialValues.RoundedTimber]: 'брус оцилиндрованный',
-  [WallMaterialValues.LaminatedTimber]: 'брус клееный',
-  [WallMaterialValues.FrameFill]: 'каркасно-засыпной',
-  [WallMaterialValues.PrefabricatedPanel]: 'сборно-щитовой',
-  [WallMaterialValues.FrameWooden]: 'каркасный деревянный',
-  [WallMaterialValues.MonolithicFrame]: 'монолитно-каркасный',
+  [WallMaterialValues.Brick]: ['кирпич', 'облицовочный кирпич', 'красный кирпич', 'белый кирпич'],
+  [WallMaterialValues.Panel]: ['панельный'],
+  [WallMaterialValues.BlockRooms]: ['блочный'],
+  [WallMaterialValues.Log]: [
+    'каркасно-засыпной',
+    'сборно-щитовой',
+    'брус профилированный',
+    'каркасный деревянный',
+    'сруб',
+    'брус оцилиндрованный',
+    'брус клееный',
+    'дерево',
+    'дерево, обложено кирпичом',
+  ],
+  [WallMaterialValues.MonolithicFrame]: ['монолитно-каркасный'],
+  [WallMaterialValues.SilicateBlock]: ['керамзитбетон', 'блок газосиликатный', 'шлакобетон'],
 };
 
-enum SewerageValues {
+export enum SewerageValues {
   Yes = 'yes',
   No = 'no',
   Street = 'street',
@@ -241,7 +206,7 @@ export const sewerageOptions: OptionType<SewerageValues> = [
 ];
 
 export const sewerageQueryMap: QueryMapType<SewerageValues> = {
-  [SewerageValues.Yes]: 'есть',
+  [SewerageValues.Yes]: ['есть', 'центральная', 'местная'],
   [SewerageValues.No]: 'нет',
   [SewerageValues.Street]: 'с/у на улице',
 };

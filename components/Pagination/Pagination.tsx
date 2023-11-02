@@ -101,7 +101,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
     }
 
     const start = currentPage - 2;
-    const end = currentPage + 2;
+    const end = currentPage + 2 < totalPages ? currentPage + 2 : totalPages;
 
     const pages = [];
 

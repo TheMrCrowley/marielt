@@ -42,21 +42,21 @@ const HousesAndLotsFilters = ({ data, type }: HousesAndLotsFiltersProps) => {
     setData(data);
   }, []);
 
-  useEffect(() => {
+  const applyFilters = () => {
     const [path, houseType] = pathname.split('/').filter(Boolean);
 
-    if (filters.housesAndLotsType) {
-      if (houseType !== getRouteByHouseType(filters.housesAndLotsType)) {
-        router.replace('/' + path + '/' + getRouteByHouseType(filters.housesAndLotsType));
-      }
+    if (houseType !== getRouteByHouseType(filters.housesAndLotsType)) {
+      router.push(
+        '/' +
+          path +
+          '/' +
+          getRouteByHouseType(filters.housesAndLotsType) +
+          '?' +
+          formatFiltersToSearchParams(filters, selectedCurrency),
+      );
     } else {
-      router.replace('/' + path);
+      router.push('/' + path + '?' + formatFiltersToSearchParams(filters, selectedCurrency));
     }
-  }, [filters.housesAndLotsType]);
-
-  const applyFilters = () => {
-    router.push(pathname + '?' + formatFiltersToSearchParams(filters, selectedCurrency));
-    router.refresh();
   };
 
   return (

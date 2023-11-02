@@ -82,8 +82,6 @@ const getMicroDistricts = async (): Promise<MicroDistrict[]> => {
   const { data } =
     (await microDistrictsResponse.json()) as StrapiFindResponse<MicroDistrictResponse>;
 
-  console.log(data.filter((item) => Array.isArray(item.attributes.district.data)));
-
   return data.map((microdistrict) => ({
     microDistrictId: microdistrict.id,
     microDistrictName: microdistrict.attributes.name,
@@ -111,7 +109,7 @@ const getDirections = async () => {
 
 const getHouseType = async () => {
   const directionsResponse = await fetch(
-    `${process.env.API_BASE_URL}/houses-and-lots-categories?filter[category][$eqi]=Дома и коттеджи`,
+    `${process.env.API_BASE_URL}/houses-and-lots-categories?filters[category][$eqi]=Дома и коттеджи`,
   );
   const { data } = (await directionsResponse.json()) as StrapiFindResponse<FindResponse>;
 

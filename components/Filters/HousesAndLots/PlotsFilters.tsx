@@ -1,10 +1,11 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Button from '@/components/Button';
 import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import Switch from '@/components/Switch';
 import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
+import { HousesAndLotsFiltersType } from '@/types/Filters';
 
 import ElectricityFilter from './components/ElectricityFilter';
 import GasSupplyFilter from './components/GasSupplyFilter';
@@ -12,27 +13,46 @@ import SewerageFilter from './components/SewerageFilter';
 import WaterFilter from './components/WaterFilter';
 
 interface PlotsFiltersProps {
-  applyFilters: () => void;
+  applyFilters: (selectedFilters: Partial<HousesAndLotsFiltersType['filters']>) => void;
 }
 
 const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
   const {
-    filters: { gasSupply, electricity, water, sewerage, nearLake, plotAreaFrom, plotAreaTo },
+    filters: {
+      gasSupply,
+      electricity,
+      water,
+      sewerage,
+      nearLake,
+      plotAreaFrom,
+      plotAreaTo,
+      //Default filters
+      priceFrom,
+      priceTo,
+      housesAndLotsType,
+      directions,
+      distance,
+    },
     updateFilters,
   } = useHousesAndLotsFilters();
 
-  useEffect(() => {
-    return () =>
-      updateFilters({
-        gasSupply: '',
-        electricity: [],
-        water: [],
-        sewerage: [],
-        nearLake: false,
-        plotAreaFrom: '',
-        plotAreaTo: '',
-      });
-  }, []);
+  const onApply = () => {
+    applyFilters({
+      gasSupply,
+      electricity,
+      water,
+      sewerage,
+      nearLake,
+      plotAreaFrom,
+      plotAreaTo,
+      //Default filters
+      priceFrom,
+      priceTo,
+      housesAndLotsType,
+      directions,
+      distance,
+    });
+  };
 
   return (
     <>
@@ -52,7 +72,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
         label="У озера"
         onChange={(checked) => updateFilters({ nearLake: checked })}
       />
-      <Button className={clsx('mt-auto', 'self-center')} onClick={applyFilters}>
+      <Button className={clsx('mt-auto', 'self-center')} onClick={onApply}>
         Применить
       </Button>
     </>

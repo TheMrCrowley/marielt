@@ -44,6 +44,7 @@ const DistrictFilter = () => {
           district: selected,
         })
       }
+      wrapperClassName="flex-auto"
     />
   );
 };

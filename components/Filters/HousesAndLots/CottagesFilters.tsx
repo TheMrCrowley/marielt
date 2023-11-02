@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Button from '@/components/Button';
 import AreaFilter from '@/components/Filters/components/AreaFilter';
@@ -11,6 +11,7 @@ import SaleTermFilter from '@/components/Filters/components/SaleTermFilter';
 import Select from '@/components/Select';
 import Switch from '@/components/Switch';
 import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
+import { HousesAndLotsFiltersType } from '@/types/Filters';
 
 import ElectricityFilter from './components/ElectricityFilter';
 import GasSupplyFilter from './components/GasSupplyFilter';
@@ -22,7 +23,7 @@ import WallMaterialFilter from './components/WallMaterialFilter';
 import WaterFilter from './components/WaterFilter';
 
 interface CottagesFiltersProps {
-  applyFilters: () => void;
+  applyFilters: (selectedFilters: Partial<HousesAndLotsFiltersType['filters']>) => void;
 }
 
 const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
@@ -50,38 +51,49 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       nearLake,
       saleTerm,
       houseType,
+      // Default filters
+      priceFrom,
+      priceTo,
+      housesAndLotsType,
+      distance,
+      directions,
     },
     data: { houseTypes },
     updateFilters,
   } = useHousesAndLotsFilters();
 
-  useEffect(() => {
-    return () =>
-      updateFilters({
-        areaFrom: '',
-        areaTo: '',
-        livingAreaFrom: '',
-        livingAreaTo: '',
-        kitchenAreaFrom: '',
-        kitchenAreaTo: '',
-        wallMaterial: [],
-        houseLevels: [],
-        constructionYearFrom: '',
-        constructionYearTo: '',
-        readinessFrom: '',
-        readinessTo: '',
-        heating: [],
-        gasSupply: '',
-        electricity: [],
-        water: [],
-        sewerage: [],
-        nearLake: false,
-        plotAreaFrom: '',
-        plotAreaTo: '',
-        saleTerm: [],
-        houseType: [],
-      });
-  }, []);
+  const onApply = () => {
+    applyFilters({
+      areaFrom,
+      areaTo,
+      livingAreaFrom,
+      livingAreaTo,
+      kitchenAreaFrom,
+      kitchenAreaTo,
+      plotAreaFrom,
+      plotAreaTo,
+      wallMaterial,
+      houseLevels,
+      constructionYearFrom,
+      constructionYearTo,
+      readinessFrom,
+      readinessTo,
+      heating,
+      gasSupply,
+      electricity,
+      water,
+      sewerage,
+      nearLake,
+      saleTerm,
+      houseType,
+      //Default filters
+      priceFrom,
+      priceTo,
+      housesAndLotsType,
+      distance,
+      directions,
+    });
+  };
 
   return (
     <>
@@ -147,7 +159,7 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
           onChange={(checked) => updateFilters({ nearLake: checked })}
         />
       </div>
-      <Button className={clsx('mt-auto', 'self-center')} onClick={applyFilters}>
+      <Button className={clsx('mt-auto', 'self-center')} onClick={onApply}>
         Применить
       </Button>
     </>

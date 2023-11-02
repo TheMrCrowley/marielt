@@ -26,6 +26,7 @@ const MetroFilter = () => {
           metro: selected,
         })
       }
+      wrapperClassName="flex-auto"
     />
   );
 };

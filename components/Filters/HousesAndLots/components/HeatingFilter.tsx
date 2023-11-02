@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Select from '@/components/Select';
+import { heatingOptions } from '@/enums/HousesAndLotsFilters';
 
 interface HeatingFilterProps {
   heating: string[];
@@ -10,18 +11,7 @@ interface HeatingFilterProps {
 const HeatingFilter = ({ heating, onChange }: HeatingFilterProps) => {
   return (
     <Select
-      options={[
-        { label: 'паровое', value: 'паровое' },
-        { label: 'отопление на газу', value: 'отопление на газу' },
-        { label: 'центральное', value: 'центральное' },
-        { label: 'печное', value: 'печное' },
-        { label: 'паровое на газу', value: 'паровое на газу' },
-        { label: 'паровое на жидком топливе', value: 'паровое на жидком топливе' },
-        { label: 'паровое на твердом топливе', value: 'паровое на твердом топливе' },
-        { label: 'электрическое', value: 'электрическое' },
-        { label: 'альтернативные источники', value: 'альтернативные источники' },
-        { label: 'нет', value: 'нет' },
-      ]}
+      options={heatingOptions}
       isMulti
       values={heating}
       label="Отопление"

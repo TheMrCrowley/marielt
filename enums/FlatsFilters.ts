@@ -1,9 +1,4 @@
-type OptionType<T extends string> = Array<{
-  label: string;
-  value: T;
-}>;
-
-type QueryMapType<T extends string> = Record<T, string | string[]>;
+import { OptionType, QueryMapType } from '@/types/Filters';
 
 export enum RoominessValues {
   Part = 'part',

@@ -9,7 +9,6 @@ export const getPriceByCurrencyMonetary = (
   toCurrency: AvailableCurrencies,
   rates: CurrencyState['rates'],
 ): string => {
-  // console.log(price, fromCurrency, toCurrency, rates);
   switch (toCurrency) {
     case 'EUR':
       return convertToMonetary(convertToEUR(price, fromCurrency, rates), 'EUR');
@@ -30,7 +29,6 @@ export const getPriceByCurrency = (
   toCurrency: AvailableCurrencies,
   rates: CurrencyState['rates'],
 ): string => {
-  // console.log(price, fromCurrency, toCurrency, rates);
   if (!price) {
     return '';
   }

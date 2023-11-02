@@ -10,6 +10,7 @@ import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
 import { HousesAndLotsType, getRouteByHouseType } from '@/enums/HousesAndLotsFilters';
 import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
+import { HousesAndLotsFiltersType } from '@/types/Filters';
 
 import DirectionFilter from './components/DirectionFilter';
 import DistanceFilter from './components/DistanceFilter';
@@ -17,12 +18,22 @@ import HousesAndLotsTypeFilter from './components/HousesAndLotsTypeFilter';
 
 interface DefaultFiltersProps {
   openModal: () => void;
-  applyFilters: () => void;
+  applyFilters: (selectedFilters: Partial<HousesAndLotsFiltersType['filters']>) => void;
 }
 
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
   const {
-    filters: { priceFrom, priceTo, areaFrom, areaTo, housesAndLotsType, plotAreaFrom, plotAreaTo },
+    filters: {
+      priceFrom,
+      priceTo,
+      areaFrom,
+      areaTo,
+      housesAndLotsType,
+      plotAreaFrom,
+      plotAreaTo,
+      distance,
+      directions,
+    },
     updateFilters,
   } = useHousesAndLotsFilters();
 
@@ -40,6 +51,22 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       default:
         return <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />;
     }
+  };
+
+  const onApply = () => {
+    const type = housesAndLotsType && getRouteByHouseType(housesAndLotsType);
+
+    applyFilters({
+      priceFrom,
+      priceTo,
+      areaFrom: type === HousesAndLotsType.Plots ? '' : areaFrom,
+      areaTo: type === HousesAndLotsType.Plots ? '' : areaTo,
+      plotAreaFrom: type !== HousesAndLotsType.Plots ? '' : plotAreaFrom,
+      plotAreaTo: type !== HousesAndLotsType.Plots ? '' : plotAreaTo,
+      distance,
+      directions,
+      housesAndLotsType,
+    });
   };
 
   return (
@@ -62,18 +89,10 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
         <DistanceFilter />
       </div>
       <div
-        className={clsx(
-          'flex',
-          'justify-between',
-          'w-full',
-          'items-center',
-          'gap-4',
-          'md:flex-row',
-          'flex-col',
-        )}
+        className={clsx('flex', 'justify-between', 'w-full', 'gap-4', 'md:flex-row', 'flex-col')}
       >
         {getAreaFilter()}
-        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={applyFilters}>
+        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={onApply}>
           Применить
         </Button>
       </div>

@@ -72,11 +72,12 @@ const getFlatsStrapiQueryParamsByFilters = (
           $in: getQueryArray(saleTermQueryMap, saleTerm),
         },
         additional_info: {
-          $and: [
+          $or: [
             {
               name: furniture && 'мебель',
             },
-            { name: parking && 'парковка' },
+            { name: parking && 'гараж' },
+            { name: parking && 'стоянка автомобиля' },
           ],
         },
         parameters: {
@@ -184,6 +185,7 @@ export const getFlats = async (searchParams: Record<string, string | string[]>) 
     data,
     meta: { pagination },
   } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
   return {
     flats: convertResponseToDefaultFlat(data),
     pagination,

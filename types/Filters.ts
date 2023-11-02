@@ -8,6 +8,13 @@ import { FinishingValues } from '@/enums/FlatsFilters';
 
 import { District, MicroDistrict } from './Location';
 
+export type OptionType<T extends string> = Array<{
+  label: string;
+  value: T;
+}>;
+
+export type QueryMapType<T extends string> = Record<T, string | string[]>;
+
 export interface BaseFilters<
   T extends Record<string, string | string[] | boolean>,
   D extends Record<string, unknown[] | null>,
@@ -118,45 +125,23 @@ export type HousesAndLotsFiltersType = BaseFilters<
     gasSupply: string;
     electricity: string[];
     water: string[];
-    sewerage: string[];
+    sewerage: string;
     nearLake: boolean;
     wallMaterial: string[];
     houseLevels: string[];
-    // district: string[];
-    // microDistrict: string[];
-    // metro: string[];
-    // roominess: RoominessValues[];
-
-    // floorFrom: string;
-    // floorTo: string;
-    // isNotFirstFloor: boolean;
-    // isNotLastFloor: boolean;
-    // isLastFloor: boolean;
-
-    // maxFloorsFrom: string;
-    // maxFloorsTo: string;
-
-    // houseType: HouseTypeValues[];
 
     livingAreaFrom: string;
     livingAreaTo: string;
     kitchenAreaFrom: string;
     kitchenAreaTo: string;
-    // ceilingHeight: string;
 
-    // finishing: FinishingValues[];
-    // bathroom: string[];
-    // renovationYearFrom: string;
-    // renovationYearTo: string;
     constructionYearFrom: string;
     constructionYearTo: string;
     readinessFrom: string;
     readinessTo: string;
     heating: string[];
-    // balcony: BalconyValues[];
+
     saleTerm: SaleTermValues[];
-    // furniture: boolean;
-    // parking: boolean;
   },
   {
     directions: string[];
@@ -182,7 +167,7 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   gasSupply: '',
   electricity: [],
   water: [],
-  sewerage: [],
+  sewerage: '',
   nearLake: false,
   wallMaterial: [],
   houseLevels: [],

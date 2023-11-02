@@ -34,7 +34,7 @@ const HousesAndLotsFilters = ({ data, type }: HousesAndLotsFiltersProps) => {
 
   useEffect(() => {
     const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
-    if (type) {
+    if (type && type !== getRouteByHouseType(filters.housesAndLotsType)) {
       updateFilters({ housesAndLotsType: housesAndLotsTypeMap[type] });
       initialFilters.housesAndLotsType = housesAndLotsTypeMap[type];
     }
@@ -42,20 +42,26 @@ const HousesAndLotsFilters = ({ data, type }: HousesAndLotsFiltersProps) => {
     setData(data);
   }, []);
 
-  const applyFilters = () => {
+  const applyFilters = (selectedFilters: Partial<typeof filters>) => {
     const [path, houseType] = pathname.split('/').filter(Boolean);
 
-    if (houseType !== getRouteByHouseType(filters.housesAndLotsType)) {
+    if (filters.housesAndLotsType && houseType !== getRouteByHouseType(filters.housesAndLotsType)) {
       router.push(
         '/' +
           path +
           '/' +
           getRouteByHouseType(filters.housesAndLotsType) +
           '?' +
-          formatFiltersToSearchParams(filters, selectedCurrency),
+          formatFiltersToSearchParams(selectedFilters, selectedCurrency),
       );
     } else {
-      router.push('/' + path + '?' + formatFiltersToSearchParams(filters, selectedCurrency));
+      router.push(
+        '/' +
+          path +
+          (houseType && filters.housesAndLotsType ? `/${houseType}` : '') +
+          '?' +
+          formatFiltersToSearchParams(selectedFilters, selectedCurrency),
+      );
     }
   };
 

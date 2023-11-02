@@ -23,9 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="content">
             <Header />
             <Navigation />
-            <CurrencyProvider>
-              <main className="main">{children}</main>
-            </CurrencyProvider>
+            <main className="main">
+              <CurrencyProvider>{children}</CurrencyProvider>
+            </main>
           </div>
           <Footer />
         </div>

@@ -44,6 +44,7 @@ const MicroDistrictFilter = () => {
           microDistrict: selected,
         })
       }
+      wrapperClassName="flex-auto"
     />
   );
 };

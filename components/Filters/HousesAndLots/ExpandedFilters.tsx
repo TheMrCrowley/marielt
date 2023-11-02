@@ -9,6 +9,7 @@ import {
   housesAndLotsTypeMap,
 } from '@/enums/HousesAndLotsFilters';
 import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
+import { HousesAndLotsFiltersType } from '@/types/Filters';
 
 import CottagesFilters from './CottagesFilters';
 import DachiFilters from './DachiFilters';
@@ -17,7 +18,7 @@ import PlotsFilters from './PlotsFilters';
 interface ExpandedFiltersProps {
   isModalOpen: boolean;
   closeModal: () => void;
-  applyFilters: () => void;
+  applyFilters: (selectedFilters: Partial<HousesAndLotsFiltersType['filters']>) => void;
 }
 
 const TypeChanger = () => {
@@ -33,7 +34,7 @@ const TypeChanger = () => {
         <CheckboxButton
           key={`houses-and-lots-type-changer-item-${key}-${value}`}
           isChecked={housesAndLotsType === value}
-          onChange={(checked) => {
+          onChange={() => {
             updateFilters({ housesAndLotsType: value });
           }}
         >

@@ -16,6 +16,7 @@ interface InputFromToProps {
     max: number;
   };
   wrapperClassName?: string;
+  inputWrapperClassName?: string;
   maxLength?: number;
 }
 
@@ -30,6 +31,7 @@ const InputFromTo = ({
   minMax,
   wrapperClassName,
   maxLength,
+  inputWrapperClassName,
 }: InputFromToProps) => {
   const { from, to } = values;
 
@@ -41,7 +43,7 @@ const InputFromTo = ({
 
   return (
     <InputWrapper wrapperClassName={wrapperClassName} label={label} subLabel={subLabel}>
-      <div className={clsx('flex', 'gap-x-1', 'gap-y-3', 'flex-wrap')}>
+      <div className={clsx('flex', 'gap-x-1', 'gap-y-3', 'flex-wrap', inputWrapperClassName)}>
         <input
           type="text"
           value={from}

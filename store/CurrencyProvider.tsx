@@ -2,6 +2,8 @@
 
 import React, { PropsWithChildren, useEffect } from 'react';
 
+import Loader from '@/components/Loader';
+
 import { useCurrency } from './currency';
 
 const CurrencyProvider = ({ children }: PropsWithChildren) => {
@@ -12,7 +14,7 @@ const CurrencyProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   if (!isCurrenciesExist) {
-    return null;
+    return <Loader />;
   }
 
   return <>{children}</>;

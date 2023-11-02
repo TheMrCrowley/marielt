@@ -1,7 +1,7 @@
 import { CurrencyState } from '@/store/currency';
 import { AvailableCurrencies } from '@/types/Currency';
 
-import { convertToMonetary } from './formatters';
+import { convertToMonetary, convertToSign } from './formatters';
 
 export const getPriceByCurrencyMonetary = (
   price: number,
@@ -18,6 +18,26 @@ export const getPriceByCurrencyMonetary = (
       return convertToMonetary(convertToRUB(price, fromCurrency, rates), 'RUB');
     case 'BYN':
       return convertToMonetary(convertToBYN(price, fromCurrency, rates), 'BYN');
+    default:
+      return null as never;
+  }
+};
+
+export const getPriceByCurrencySign = (
+  price: number,
+  fromCurrency: AvailableCurrencies,
+  toCurrency: AvailableCurrencies,
+  rates: CurrencyState['rates'],
+): string => {
+  switch (toCurrency) {
+    case 'EUR':
+      return convertToSign(convertToEUR(price, fromCurrency, rates), 'EUR');
+    case 'USD':
+      return convertToSign(convertToUSD(price, fromCurrency, rates), 'USD');
+    case 'RUB':
+      return convertToSign(convertToRUB(price, fromCurrency, rates), 'RUB');
+    case 'BYN':
+      return convertToSign(convertToBYN(price, fromCurrency, rates), 'BYN');
     default:
       return null as never;
   }

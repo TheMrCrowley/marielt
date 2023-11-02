@@ -7,7 +7,7 @@ import React from 'react';
 
 import Button from '@/components/Button';
 import Title from '@/components/Title';
-import { getPriceByCurrencyMonetary } from '@/helpers/currencyHelpers';
+import { getPriceByCurrencyMonetary, getPriceByCurrencySign } from '@/helpers/currencyHelpers';
 import FloorIcon from '@/public/card-floor.svg';
 import CardMapPinIcon from '@/public/card-map-pin.svg';
 import ImagePlaceholder from '@/public/card-placeholder.png';
@@ -85,24 +85,32 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
             </p>
             <p className={clsx('text-white', 'text-xs', 'font-light')}>общая</p>
           </div>
-          <div className={clsx('flex', 'flex-col')}>
-            <p className={clsx('text-white', 'text-sm', 'font-medium')}>
-              {livingArea}
-              <span className={clsx('text-xs', 'opacity-50')}>
-                м<sup>2</sup>
-              </span>
-            </p>
-            <p className={clsx('text-white', 'text-xs', 'font-light')}>жилая</p>
-          </div>
-          <div className={clsx('flex', 'flex-col')}>
-            <p className={clsx('text-white', 'text-sm', 'font-medium')}>
-              {/* TODO think */}
-              Деньги
-            </p>
-            <p className={clsx('text-white', 'text-xs', 'font-light')}>
-              за м<sup>2</sup>
-            </p>
-          </div>
+          {!!livingArea && (
+            <div className={clsx('flex', 'flex-col')}>
+              <p className={clsx('text-white', 'text-sm', 'font-medium')}>
+                {livingArea}
+                <span className={clsx('text-xs', 'opacity-50')}>
+                  м<sup>2</sup>
+                </span>
+              </p>
+              <p className={clsx('text-white', 'text-xs', 'font-light')}>жилая</p>
+            </div>
+          )}
+          {!!price && !!totalArea && (
+            <div className={clsx('flex', 'flex-col')}>
+              <p className={clsx('text-white', 'text-sm', 'font-medium')}>
+                {getPriceByCurrencySign(
+                  +price / +totalArea,
+                  initialCurrency,
+                  selectedCurrency,
+                  rates,
+                )}
+              </p>
+              <p className={clsx('text-white', 'text-xs', 'font-light')}>
+                за м<sup>2</sup>
+              </p>
+            </div>
+          )}
         </div>
         {renderPriceBlock()}
         <Link

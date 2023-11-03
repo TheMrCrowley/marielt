@@ -2,8 +2,7 @@ import { Exo_2 } from 'next/font/google';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Navigation from '@/components/Navigation';
-import CurrencyProvider from '@/store/CurrencyProvider';
+import CurrencyProvider from '@/providers/CurrencyProvider';
 
 import './globals.css';
 
@@ -22,11 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="wrapper dark">
           <div className="content">
             <Header />
-            <Navigation />
             <main className="main">
               <CurrencyProvider>{children}</CurrencyProvider>
             </main>
           </div>
+
           <Footer />
         </div>
       </body>

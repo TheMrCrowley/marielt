@@ -2,12 +2,10 @@ import { create } from 'zustand';
 
 import { AvailableCurrencies } from '@/types/Currency';
 
-import { getCurrencies } from './../services/getCurrency';
-
 export interface CurrencyState {
   selectedCurrency: AvailableCurrencies;
   changeCurrency: (currency: AvailableCurrencies) => void;
-  getCurrencies: () => Promise<void>;
+  setCurrencies: (currencies: { usd: number; eur: number; rub: number }) => void;
   rates: {
     usd: number;
     eur: number;
@@ -19,13 +17,8 @@ export interface CurrencyState {
 export const useCurrency = create<CurrencyState>((set) => ({
   selectedCurrency: 'USD',
   changeCurrency: (currency) => set({ selectedCurrency: currency }),
-  getCurrencies: async () => {
-    const { eur, rub, usd } = await getCurrencies();
-
-    set({
-      rates: { eur, rub, usd },
-      isCurrenciesExist: true,
-    });
+  setCurrencies(currencies) {
+    set({ rates: currencies, isCurrenciesExist: true });
   },
   rates: {
     usd: 0,

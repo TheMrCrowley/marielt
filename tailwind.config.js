@@ -8,10 +8,29 @@ module.exports = {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  //   xl:
+  // lg:
+  // sm:
   safelist: [
     'font-medium',
     'font-normal',
     'font-light',
+    'xl:text-5xl',
+    'xl:text-[40px]',
+    'xl:text-4xl',
+    'xl:text-[32px]',
+    'xl:text-2xl',
+    'xl:text-xl',
+    'xl:text-base',
+    'xl:text-sm',
+    'lg:text-5xl',
+    'lg:text-[40px]',
+    'lg:text-4xl',
+    'lg:text-[32px]',
+    'lg:text-2xl',
+    'lg:text-xl',
+    'lg:text-base',
+    'lg:text-sm',
     'text-5xl',
     'text-[40px]',
     'text-4xl',
@@ -28,6 +47,14 @@ module.exports = {
     'md:text-2xl',
     'md:text-base',
     'md:text-sm',
+    'sm:text-xl',
+    'sm:text-5xl',
+    'sm:text-[40px]',
+    'sm:text-4xl',
+    'sm:text-[32px]',
+    'sm:text-2xl',
+    'sm:text-base',
+    'sm:text-sm',
     'basis-1/5',
   ],
   theme: {
@@ -36,6 +63,7 @@ module.exports = {
         primary: '#2c2c2c',
         secondary: '#e3c496',
       },
+
       screens: {},
     },
   },

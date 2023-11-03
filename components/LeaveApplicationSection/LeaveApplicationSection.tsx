@@ -8,21 +8,23 @@ import Button from '@/components/Button';
 import Title from '@/components/Title';
 import ArrowUp from '@/public/arrow-up.svg';
 
-import styles from './LeaveApplicationSection.module.css';
-
 const LeaveApplicationSection = () => {
   return (
-    <section className={styles.section}>
+    <section className={clsx('w-full', 'bg-[#343434]')}>
       <div
         className={clsx(
           'flex',
           'flex-col',
           'justify-center',
           'items-center',
-          'gap-y-14',
-          'pt-[70px]',
-          'pb-[60px]',
-          styles.wrapper,
+          'lg:gap-14',
+          'gap-8',
+          'py-16',
+          'px-8',
+          'bg-no-repeat',
+          'bg-[url(/dividers-bg.png)]',
+          'bg-auto',
+          'bg-center',
         )}
       >
         <Title fontSize={48} className="text-center" variant="h2">

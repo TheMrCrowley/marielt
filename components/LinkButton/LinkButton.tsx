@@ -34,7 +34,8 @@ const LinkButton = ({ type, to, buttonClassName, linkClassName }: LinkButtonProp
           'border-[#E3C496]',
           'text-[#E3C496]',
           'font-medium',
-          'text-xl',
+          'lg:text-xl',
+          'text-base',
           //TODO add transition to TAILWIND
           'transition-colors',
           'duration-300',

@@ -3,31 +3,47 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import Navigation from '@/components/Navigation';
+import BurgerMenu from '@/components/Navigation/BurgerMenu';
 import Logo from '@/public/logo.svg';
 
 const Header = () => {
   return (
-    <header
-      // className={styles.header}
-      className={clsx(
-        'pb-10',
-        'flex',
-        'justify-center',
-        'items-end',
-        'bg-no-repeat',
-        'bg-bottom',
-        'h-[140px]',
-        'bg-[url(/header-background.png)]',
-        'bg',
-        'border-b',
-        'border-solid',
-        'border-white',
-      )}
-    >
-      <Link href="/">
-        <Image alt="logo" src={Logo.src} width={212} height={40} />
-      </Link>
-    </header>
+    <>
+      <header
+        // className={styles.header}
+        className={clsx(
+          'px-5',
+          'flex',
+          'sm:justify-center',
+          'justify-between',
+          'items-center',
+          'xl:h-36',
+          'lg:h-28',
+          'md:h-20',
+          'h-16',
+          'bg-contain',
+          'sm:bg-[url(/header-background.png)]',
+          'bg-[url(/header_bg_mob.png)]',
+          'sm:bg-bottom',
+          'bg-right',
+          'bg-no-repeat',
+          'border-b',
+          'border-solid',
+          'border-white',
+        )}
+      >
+        <Link href="/">
+          <Image
+            alt="logo"
+            src={Logo}
+            className={clsx('lg:w-[220px]', 'md:w-[200px]', 'sm:w-[180px]', 'w-[120px]')}
+          />
+        </Link>
+        <BurgerMenu />
+      </header>
+      <Navigation />
+    </>
   );
 };
 

@@ -17,19 +17,19 @@ export const getFontWeightClassName = (fontWeight: FontWeightType): string => {
 export const getFontSizeClassName = (fontSize: FontSizeType): string => {
   switch (fontSize) {
     case 48:
-      return 'text-5xl';
+      return 'xl:text-5xl lg:text-[40px] md:text-4xl sm:text-[32px] text-2xl';
     case 40:
-      return 'lg:text-[40px] md:text-[32px] text-2xl';
+      return 'xl:text-[40px] lg:text-4xl md:text-[32px] text-2xl';
     case 36:
-      return 'text-4xl';
+      return 'lg:text-4xl md:text-[32px] text-2xl';
     case 32:
-      return 'text-[32px]';
+      return 'lg:text-[32px] md:text-2xl text-xl';
     case 24:
       return 'text-2xl';
     case 20:
-      return 'lg:text-xl text-base';
+      return 'lg:text-xl md:text-base text-sm';
     case 16:
-      return 'text-base';
+      return 'sm:text-base text-sm';
     case 14:
       return 'text-sm';
     default:

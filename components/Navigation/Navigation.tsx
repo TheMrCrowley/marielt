@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import { AppRoutes, navigationMap } from '@/enums/AppRoutes';
@@ -12,7 +13,7 @@ const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
 
 const Navigation = () => {
   return (
-    <nav className={styles.nav}>
+    <nav className={clsx('px-4', 'sm:flex', 'justify-center', 'items-center', 'hidden')}>
       <ul className={styles.navList}>
         {navItems.map((navItem) => (
           <NavigationItem navItem={navItem} key={navItem.title} />

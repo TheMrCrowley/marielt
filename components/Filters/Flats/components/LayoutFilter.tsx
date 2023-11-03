@@ -19,13 +19,14 @@ const LayoutFilter = () => {
   } = useFlatsFilter();
 
   return (
-    <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8', 'items-end')}>
+    <div className={clsx('flex', 'w-full', 'justify-start', 'gap-8', 'items-end', 'flex-wrap')}>
       <Select
         label="Ремонт"
         isMulti
         values={finishing}
         options={finishingOptions}
         onChange={(selected) => updateFilters({ finishing: selected as FinishingValues[] })}
+        wrapperClassName="md:basis-1/5 basis-full"
       />
       <CheckboxGroup
         isMulti

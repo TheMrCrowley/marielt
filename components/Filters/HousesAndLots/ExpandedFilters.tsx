@@ -29,7 +29,9 @@ const TypeChanger = () => {
 
   // TODO think to not rerender page while modal is open, but after apply
   return (
-    <div className={clsx('flex', 'justify-between', 'items-center', 'gap-5', 'w-max')}>
+    <div
+      className={clsx('flex', 'justify-between', 'items-center', 'gap-5', 'max-w-max', 'flex-wrap')}
+    >
       {Object.entries(housesAndLotsTypeMap).map(([key, value]) => (
         <CheckboxButton
           key={`houses-and-lots-type-changer-item-${key}-${value}`}
@@ -50,7 +52,11 @@ const ExpandedFilters = ({ applyFilters, closeModal, isModalOpen }: ExpandedFilt
     filters: { housesAndLotsType },
   } = useHousesAndLotsFilters();
 
-  const getFiltersByType = (type: string) => {
+  const getFiltersByType = (type?: string) => {
+    if (!type) {
+      return null;
+    }
+
     switch (getRouteByHouseType(type)) {
       case HousesAndLotsType.Plots:
         return <PlotsFilters applyFilters={applyFilters} />;

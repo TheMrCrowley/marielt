@@ -16,7 +16,7 @@ const HeatingFilter = ({ heating, onChange }: HeatingFilterProps) => {
       values={heating}
       label="Отопление"
       onChange={(selected) => onChange({ heating: selected as HeatingValues[] })}
-      wrapperClassName="basis-3/12 shrink"
+      wrapperClassName="md:basis-3/12 basis-full shrink"
     />
   );
 };

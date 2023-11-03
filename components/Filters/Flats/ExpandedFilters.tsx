@@ -29,17 +29,17 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedFilt
 
   return (
     <ExpandedFiltersWrapper closeModal={closeModal} isModalOpen={isModalOpen}>
-      <div className={clsx('flex', 'w-full', 'justify-between', 'gap-x-3', 'gap-y-4', 'flex-wrap')}>
+      <div className={clsx('flex', 'w-full', 'justify-between', 'gap-8', 'flex-wrap')}>
         <FloorFilter />
         <HouseTypeFilter />
       </div>
       <ExpandedAreaFilter />
       <LayoutFilter />
-      <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8', 'items-end')}>
+      <div className={clsx('flex', 'w-full', 'justify-start', 'gap-8', 'items-end', 'flex-wrap')}>
         <YearsFilter />
         <SaleTermFilter onChange={updateFilters} saleTerm={saleTerm} />
       </div>
-      <div className={clsx('flex', 'items-end', 'gap-x-12')}>
+      <div className={clsx('flex', 'items-end', 'gap-8', 'flex-wrap')}>
         <Switch
           label="Мебель"
           onChange={(checked) => updateFilters({ furniture: checked })}

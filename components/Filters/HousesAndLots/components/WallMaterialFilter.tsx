@@ -16,7 +16,7 @@ const WallMaterialFilter = ({ onChange, wallMaterial }: WallMaterialFilterProps)
       isMulti
       values={wallMaterial}
       onChange={(selected) => onChange({ wallMaterial: selected as WallMaterialValues[] })}
-      wrapperClassName="basis-3/12 shrink"
+      wrapperClassName="md:basis-3/12 basis-full shrink"
     />
   );
 };

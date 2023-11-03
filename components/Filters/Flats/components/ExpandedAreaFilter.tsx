@@ -23,7 +23,7 @@ const ExpandedAreaFilter = () => {
   } = useFlatsFilter();
 
   return (
-    <div className={clsx('flex', 'w-full', 'justify-start', 'gap-x-8')}>
+    <div className={clsx('flex', 'w-full', 'justify-start', 'items-end', 'gap-8', 'flex-wrap')}>
       <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
       <LivingAreaFilter
         livingAreaFrom={livingAreaFrom}
@@ -43,7 +43,7 @@ const ExpandedAreaFilter = () => {
         options={ceilingHeightValues}
         values={[ceilingHeight]}
         onChange={([height]) => updateFilters({ ceilingHeight: height })}
-        optionWidth="full"
+        wrapperClassName="md:basis-1/5 basis-full"
       />
     </div>
   );

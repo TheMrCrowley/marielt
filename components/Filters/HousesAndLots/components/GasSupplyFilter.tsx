@@ -16,6 +16,7 @@ const GasSupplyFilter = ({ gasSupply, onChange }: GasSupplyFilterProps) => {
       items={gasSupplyOptions}
       isMulti={false}
       onChange={(selected) => onChange({ gasSupply: selected })}
+      wrapperClassName="flex-wrap"
     />
   );
 };

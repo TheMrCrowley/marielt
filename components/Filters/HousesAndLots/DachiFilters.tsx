@@ -94,7 +94,7 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
 
   return (
     <>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
         <LivingAreaFilter
           livingAreaFrom={livingAreaFrom}
@@ -112,7 +112,7 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
           onChange={updateFilters}
         />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <WallMaterialFilter wallMaterial={wallMaterial} onChange={updateFilters} />
         <HouseLevelFilter houseLevels={houseLevels} onChange={updateFilters} />
         <ConstructionYearFilter
@@ -126,17 +126,17 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
           readinessTo={readinessTo}
         />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <HeatingFilter heating={heating} onChange={updateFilters} />
         <GasSupplyFilter gasSupply={gasSupply} onChange={updateFilters} />
         <ElectricityFilter electricity={electricity} onChange={updateFilters} />
         <WaterFilter onChange={updateFilters} water={water} />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
-        <SewerageFilter onChange={updateFilters} sewerage={sewerage} wrapperClassName="flex-" />
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <SewerageFilter onChange={updateFilters} sewerage={sewerage} />
         <SaleTermFilter saleTerm={saleTerm} onChange={updateFilters} />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <Switch
           isChecked={nearLake}
           label="У озера"

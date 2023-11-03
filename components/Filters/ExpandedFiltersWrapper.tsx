@@ -18,7 +18,7 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
         className={clsx(
           'flex',
           'bg-[#262626]',
-          'max-w-[1620px]',
+          'md:max-w-[1620px]',
           'w-full',
           'relative',
           'z-10',
@@ -28,15 +28,28 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
           'md:py-12',
           'py-6',
           'md:px-20',
-          'px-10',
+          'px-0',
           'bg-[url(/modal-bg.png)]',
         )}
       >
         <button
-          className={clsx('flex', 'justify-center', 'items-center', 'absolute', 'top-6', 'right-6')}
+          className={clsx(
+            'flex',
+            'justify-center',
+            'items-center',
+            'absolute',
+            'md:top-6',
+            'md:right-6',
+            'top-9',
+            'right-4',
+          )}
           onClick={closeModal}
         >
-          <Image src={CrossIcon} alt="close-icon" />
+          <Image
+            src={CrossIcon}
+            alt="close-icon"
+            className={clsx('md:w-8', 'md:h-8', 'w-4', 'h-4')}
+          />
         </button>
         <section
           className={clsx(

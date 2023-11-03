@@ -20,7 +20,7 @@ const SaleTermFilter = ({ saleTerm, onChange }: SaleTermFilterProps) => {
         })
       }
       options={saleTermOptions}
-      wrapperClassName="basis-3/12 shrink"
+      wrapperClassName="md:basis-3/12 basis-full shrink"
     />
   );
 };

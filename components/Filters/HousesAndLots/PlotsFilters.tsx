@@ -61,7 +61,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
         plotAreaTo={plotAreaTo}
         onChange={updateFilters}
       />
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <GasSupplyFilter gasSupply={gasSupply} onChange={updateFilters} />
         <ElectricityFilter electricity={electricity} onChange={updateFilters} />
         <WaterFilter onChange={updateFilters} water={water} />

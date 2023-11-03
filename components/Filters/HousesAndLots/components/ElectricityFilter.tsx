@@ -16,7 +16,7 @@ const ElectricityFilter = ({ electricity, onChange }: ElectricityFilterProps) =>
       options={electricityOptions}
       onChange={(selected) => onChange({ electricity: selected as ElectricityValues[] })}
       values={electricity}
-      wrapperClassName="basis-1/5 shrink"
+      wrapperClassName="md:basis-1/5 basis-full shrink"
     />
   );
 };

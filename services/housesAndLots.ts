@@ -135,8 +135,6 @@ const getHousesAndLotsStrapiQuery = (
     { encodeValuesOnly: true },
   );
 
-  console.log(getQueryArray(sewerageQueryMap, sewerage));
-
   return { query };
 };
 

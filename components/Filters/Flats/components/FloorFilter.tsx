@@ -21,7 +21,7 @@ const FloorFilter = () => {
 
   return (
     <>
-      <div className={clsx('flex', 'items-end', 'gap-x-2', 'gap-y-4', 'flex-wrap')}>
+      <div className={clsx('flex', 'items-end', 'gap-8', 'flex-wrap')}>
         <InputFromTo
           label="Этаж"
           values={{
@@ -39,7 +39,7 @@ const FloorFilter = () => {
             min: 1,
           }}
         />
-        <div className={clsx('flex', 'gap-x-3', 'gap-y-4', 'min-w-min', 'flex-wrap')}>
+        <div className={clsx('flex', 'gap-8', 'min-w-min', 'flex-wrap')}>
           <CheckboxButton
             isChecked={isNotFirstFloor}
             onChange={(checked) =>

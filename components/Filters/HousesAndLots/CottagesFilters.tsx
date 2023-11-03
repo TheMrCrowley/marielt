@@ -97,7 +97,7 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
 
   return (
     <>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <Select
           options={houseTypes.map((item) => ({
             label: item,
@@ -107,10 +107,10 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
           label="Вид Объекта"
           onChange={(selected) => updateFilters({ houseType: selected })}
           values={houseType}
-          wrapperClassName="basis-3/12 shrink"
+          wrapperClassName="md:basis-3/12 basis-full shrink"
         />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
         <LivingAreaFilter
           livingAreaFrom={livingAreaFrom}
@@ -128,7 +128,7 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
           onChange={updateFilters}
         />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <WallMaterialFilter wallMaterial={wallMaterial} onChange={updateFilters} />
         <HouseLevelFilter houseLevels={houseLevels} onChange={updateFilters} />
         <ConstructionYearFilter
@@ -142,17 +142,17 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
           readinessTo={readinessTo}
         />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <HeatingFilter heating={heating} onChange={updateFilters} />
         <GasSupplyFilter gasSupply={gasSupply} onChange={updateFilters} />
         <ElectricityFilter electricity={electricity} onChange={updateFilters} />
         <WaterFilter onChange={updateFilters} water={water} />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
-        <SewerageFilter onChange={updateFilters} sewerage={sewerage} wrapperClassName="flex-" />
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <SewerageFilter onChange={updateFilters} sewerage={sewerage} />
         <SaleTermFilter saleTerm={saleTerm} onChange={updateFilters} />
       </div>
-      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end')}>
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <Switch
           isChecked={nearLake}
           label="У озера"

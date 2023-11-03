@@ -53,7 +53,7 @@ function CheckboxGroup<T extends boolean>({
 
   return (
     <InputWrapper label={label} subLabel={subLabel} wrapperClassName={wrapperClassName}>
-      <div className={clsx('flex', 'gap-x-2')}>
+      <div className={clsx('flex', 'gap-2', 'flex-wrap')}>
         {items.map((item) => (
           <CheckboxButton
             key={`checkbox-group-checkbox-item-${label}-${item.label}-${item.value}`}

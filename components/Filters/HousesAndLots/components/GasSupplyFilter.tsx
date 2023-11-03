@@ -1,21 +1,21 @@
 import React from 'react';
 
 import CheckboxGroup from '@/components/CheckboxGroup';
-import { gasSupplyOptions } from '@/enums/HousesAndLotsFilters';
+import { GasSupplyValues, gasSupplyOptions } from '@/enums/HousesAndLotsFilters';
 
 interface GasSupplyFilterProps {
-  gasSupply: string;
-  onChange: (data: { gasSupply: string }) => void;
+  gasSupply: GasSupplyValues[];
+  onChange: (data: { gasSupply: GasSupplyValues[] }) => void;
 }
 
 const GasSupplyFilter = ({ gasSupply, onChange }: GasSupplyFilterProps) => {
   return (
     <CheckboxGroup
       label="Газоснабжение"
+      isMulti={true}
       values={gasSupply}
       items={gasSupplyOptions}
-      isMulti={false}
-      onChange={(selected) => onChange({ gasSupply: selected })}
+      onChange={(selected) => onChange({ gasSupply: selected as GasSupplyValues[] })}
       wrapperClassName="flex-wrap"
     />
   );

@@ -85,7 +85,7 @@ const Select = ({
       <div className={clsx('flex', 'justify-between', 'items-center', 'gap-x-2')}>
         <p
           className={clsx(
-            'md:text-xl',
+            'lg:text-xl',
             'text-base',
             values.length ? 'text-white' : 'text-[#d9d9d9]',
           )}

@@ -12,7 +12,7 @@ import {
   WallMaterialValues,
 } from '@/enums/HousesAndLotsFilters';
 
-import { WaterValues } from './../enums/HousesAndLotsFilters';
+import { WaterValues, GasSupplyValues, SewerageValues } from './../enums/HousesAndLotsFilters';
 import { District, MicroDistrict } from './Location';
 
 export type OptionType<T extends string> = Array<{
@@ -129,10 +129,10 @@ export type HousesAndLotsFiltersType = BaseFilters<
     plotAreaFrom: string;
     plotAreaTo: string;
 
-    gasSupply: string;
+    gasSupply: GasSupplyValues[];
     electricity: ElectricityValues[];
     water: WaterValues[];
-    sewerage: string;
+    sewerage: SewerageValues[];
     nearLake: boolean;
     wallMaterial: WallMaterialValues[];
     houseLevels: HouseLevelValues[];
@@ -171,10 +171,10 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   livingAreaFrom: '',
   livingAreaTo: '',
   houseType: [],
-  gasSupply: '',
+  gasSupply: [],
   electricity: [],
   water: [],
-  sewerage: '',
+  sewerage: [],
   nearLake: false,
   wallMaterial: [],
   houseLevels: [],

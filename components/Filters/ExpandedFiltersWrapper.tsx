@@ -25,9 +25,9 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
           'flex-auto',
           'h-full',
           'overflow-hidden',
-          'md:py-12',
+          'lg:py-12',
           'py-6',
-          'md:px-20',
+          'lg:px-20',
           'px-0',
           'bg-[url(/modal-bg.png)]',
         )}

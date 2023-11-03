@@ -65,7 +65,7 @@ const InputFromTo = ({
           className={clsx(
             'px-4',
             'py-2',
-            'md:text-xl',
+            'lg:text-xl',
             'text-base',
             'text-white',
             'border-b',
@@ -89,7 +89,7 @@ const InputFromTo = ({
           className={clsx(
             'px-4',
             'py-2',
-            'md:text-xl',
+            'lg:text-xl',
             'text-base',
             'text-white',
             'border-b',

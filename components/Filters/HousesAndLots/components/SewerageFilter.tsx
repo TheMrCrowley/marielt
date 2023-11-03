@@ -1,11 +1,11 @@
 import React from 'react';
 
 import CheckboxGroup from '@/components/CheckboxGroup';
-import { sewerageOptions } from '@/enums/HousesAndLotsFilters';
+import { SewerageValues, sewerageOptions } from '@/enums/HousesAndLotsFilters';
 
 interface SewerageFilterProps {
-  sewerage: string;
-  onChange: (data: { sewerage: string }) => void;
+  sewerage: SewerageValues[];
+  onChange: (data: { sewerage: SewerageValues[] }) => void;
   wrapperClassName?: string;
 }
 
@@ -13,10 +13,10 @@ const SewerageFilter = ({ onChange, sewerage, wrapperClassName }: SewerageFilter
   return (
     <CheckboxGroup
       label="Канализация"
+      isMulti={true}
       values={sewerage}
       items={sewerageOptions}
-      isMulti={false}
-      onChange={(selected) => onChange({ sewerage: selected })}
+      onChange={(selected) => onChange({ sewerage: selected as SewerageValues[] })}
       wrapperClassName={wrapperClassName}
     />
   );

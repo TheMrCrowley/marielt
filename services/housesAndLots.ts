@@ -138,8 +138,6 @@ const getHousesAndLotsStrapiQuery = (
   return { query };
 };
 
-//gas, sewerage можно только один варик или все таки несколько
-
 export const getHousesAndLots = async (searchParams: Record<string, string | string[]>) => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getHousesAndLotsStrapiQuery(

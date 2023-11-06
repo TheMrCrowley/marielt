@@ -3,15 +3,12 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import {
-  HousesAndLotsType,
-  getRouteByHouseType,
-  housesAndLotsTypeMap,
-} from '@/enums/HousesAndLotsFilters';
+import { HousesAndLotsRootCategory } from '@/enums/HousesAndLotsFilters';
 import {
   createFiltersStateBySearchParams,
   formatFiltersToSearchParams,
 } from '@/helpers/filterHelpers';
+import { getHousesAndLotsRoute } from '@/helpers/getHousesAndLotsRoute';
 import { useCurrency } from '@/store/currency';
 import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
@@ -19,7 +16,7 @@ import DefaultFilters from './DefaultFilters';
 import ExpandedFilters from './ExpandedFilters';
 
 interface HousesAndLotsFiltersProps {
-  type?: HousesAndLotsType;
+  type?: HousesAndLotsRootCategory;
   data: HousesAndLotsFiltersType['data'];
 }
 
@@ -33,23 +30,31 @@ const HousesAndLotsFilters = ({ data, type }: HousesAndLotsFiltersProps) => {
 
   useEffect(() => {
     const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
-    if (type && type !== getRouteByHouseType(filters.housesAndLotsType)) {
-      updateFilters({ housesAndLotsType: housesAndLotsTypeMap[type] });
-      initialFilters.housesAndLotsType = housesAndLotsTypeMap[type];
+    if (
+      type &&
+      type ===
+        getHousesAndLotsRoute(filters.housesAndLotsRootCategory, data.housesAndLotasCategories)
+    ) {
+      const target = data.housesAndLotasCategories.find((category) => category.uid === type);
+      updateFilters({ housesAndLotsRootCategory: target?.categoryName || '' });
+      initialFilters.housesAndLotsRootCategory = target?.categoryName || '';
     }
     updateFilters({ ...initialFilters });
     setData(data);
   }, []);
 
   const applyFilters = (selectedFilters: Partial<typeof filters>) => {
-    const [path, houseType] = pathname.split('/').filter(Boolean);
-
-    if (filters.housesAndLotsType && houseType !== getRouteByHouseType(filters.housesAndLotsType)) {
+    const [path, rootCategory] = pathname.split('/').filter(Boolean);
+    if (
+      filters.housesAndLotsRootCategory &&
+      rootCategory !==
+        getHousesAndLotsRoute(filters.housesAndLotsRootCategory, data.housesAndLotasCategories)
+    ) {
       router.push(
         '/' +
           path +
           '/' +
-          getRouteByHouseType(filters.housesAndLotsType) +
+          getHousesAndLotsRoute(filters.housesAndLotsRootCategory, data.housesAndLotasCategories) +
           '?' +
           formatFiltersToSearchParams(selectedFilters, selectedCurrency),
       );
@@ -57,7 +62,7 @@ const HousesAndLotsFilters = ({ data, type }: HousesAndLotsFiltersProps) => {
       router.push(
         '/' +
           path +
-          (houseType && filters.housesAndLotsType ? `/${houseType}` : '') +
+          (rootCategory && filters.housesAndLotsRootCategory ? `/${rootCategory}` : '') +
           '?' +
           formatFiltersToSearchParams(selectedFilters, selectedCurrency),
       );

@@ -58,6 +58,7 @@ function Select<T extends boolean>({
         (onChange as (selected: string) => void)('');
       } else {
         (onChange as (selected: string) => void)(value);
+        setIsOpen(false);
       }
     }
   };

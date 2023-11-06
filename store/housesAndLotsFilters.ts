@@ -10,15 +10,16 @@ import {
   HouseLevelValues,
   HeatingValues,
 } from '@/enums/HousesAndLotsFilters';
+import { HousesAndLotsCategory } from '@/services/housesAndLotsFilters';
 import { BaseFilters } from '@/types/Filters';
 
 export type HousesAndLotsFiltersType = BaseFilters<
   {
-    housesAndLotsType: string;
+    housesAndLotsRootCategory: string;
+    housesAndLotsCategories: string[];
     priceFrom: string;
     priceTo: string;
     directions: string[];
-    houseType: string[];
     distance: string;
     areaFrom: string;
     areaTo: string;
@@ -48,12 +49,12 @@ export type HousesAndLotsFiltersType = BaseFilters<
   },
   {
     directions: string[];
-    houseTypes: string[];
+    housesAndLotasCategories: HousesAndLotsCategory[];
   }
 >;
 
 export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = {
-  housesAndLotsType: '',
+  housesAndLotsRootCategory: '',
   priceFrom: '',
   priceTo: '',
   directions: [],
@@ -66,7 +67,7 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   kitchenAreaTo: '',
   livingAreaFrom: '',
   livingAreaTo: '',
-  houseType: [],
+  housesAndLotsCategories: [],
   gasSupply: [],
   electricity: [],
   water: [],
@@ -87,7 +88,7 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
   filters: initialHousesAndLotsFilters,
   data: {
     directions: [],
-    houseTypes: [],
+    housesAndLotasCategories: [],
   },
   updateFilters: (update) => {
     set((prev) => ({

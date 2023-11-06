@@ -1,13 +1,10 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import CheckboxButton from '@/components/CheckboxButton';
 import ExpandedFiltersWrapper from '@/components/Filters/ExpandedFiltersWrapper';
-import {
-  HousesAndLotsType,
-  getRouteByHouseType,
-  housesAndLotsTypeMap,
-} from '@/enums/HousesAndLotsFilters';
+import { HousesAndLotsRootCategory } from '@/enums/HousesAndLotsFilters';
+import { getHousesAndLotsRoute } from '@/helpers/getHousesAndLotsRoute';
 import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import CottagesFilters from './CottagesFilters';
@@ -22,24 +19,30 @@ interface ExpandedFiltersProps {
 
 const TypeChanger = () => {
   const {
-    filters: { housesAndLotsType },
+    filters: { housesAndLotsRootCategory },
+    data: { housesAndLotasCategories },
     updateFilters,
   } = useHousesAndLotsFilters();
+
+  const dataToRender = useMemo(
+    () => housesAndLotasCategories.filter((category) => category.isRoot),
+    [housesAndLotasCategories],
+  );
 
   // TODO think to not rerender page while modal is open, but after apply
   return (
     <div
       className={clsx('flex', 'justify-between', 'items-center', 'gap-5', 'max-w-max', 'flex-wrap')}
     >
-      {Object.entries(housesAndLotsTypeMap).map(([key, value]) => (
+      {dataToRender.map(({ uid, categoryName }) => (
         <CheckboxButton
-          key={`houses-and-lots-type-changer-item-${key}-${value}`}
-          isChecked={housesAndLotsType === value}
+          key={`houses-and-lots-type-changer-item-${categoryName}-${uid}`}
+          isChecked={housesAndLotsRootCategory === categoryName}
           onChange={() => {
-            updateFilters({ housesAndLotsType: value });
+            updateFilters({ housesAndLotsRootCategory: categoryName });
           }}
         >
-          {value}
+          {categoryName}
         </CheckboxButton>
       ))}
     </div>
@@ -48,30 +51,27 @@ const TypeChanger = () => {
 
 const ExpandedFilters = ({ applyFilters, closeModal, isModalOpen }: ExpandedFiltersProps) => {
   const {
-    filters: { housesAndLotsType },
+    filters: { housesAndLotsRootCategory },
+    data: { housesAndLotasCategories },
   } = useHousesAndLotsFilters();
 
-  const getFiltersByType = (type?: string) => {
-    if (!type) {
-      return null;
-    }
-
-    switch (getRouteByHouseType(type)) {
-      case HousesAndLotsType.Plots:
+  const getFiltersByType = () => {
+    switch (getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories)) {
+      case HousesAndLotsRootCategory.Plots:
         return <PlotsFilters applyFilters={applyFilters} />;
-      case HousesAndLotsType.Dachi:
+      case HousesAndLotsRootCategory.Dachi:
         return <DachiFilters applyFilters={applyFilters} />;
-      case HousesAndLotsType.Cottages:
+      case HousesAndLotsRootCategory.Cottages:
         return <CottagesFilters applyFilters={applyFilters} />;
       default:
-        return 'Выбери тип';
+        return null;
     }
   };
 
   return (
     <ExpandedFiltersWrapper closeModal={closeModal} isModalOpen={isModalOpen}>
       <TypeChanger />
-      {getFiltersByType(housesAndLotsType)}
+      {getFiltersByType()}
     </ExpandedFiltersWrapper>
   );
 };

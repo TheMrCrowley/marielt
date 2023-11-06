@@ -1,4 +1,4 @@
-import TelegramApi from 'node-telegram-bot-api';
+// import TelegramApi from 'node-telegram-bot-api';
 export interface WebhookRequest {
   event: 'entry.update';
   createdAt: string;

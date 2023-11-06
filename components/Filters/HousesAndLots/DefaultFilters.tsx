@@ -8,12 +8,13 @@ import FiltersWrapper from '@/components/Filters/DefaultFiltersWrapper';
 import AreaFilter from '@/components/Filters/components/AreaFilter';
 import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
-import { HousesAndLotsType, getRouteByHouseType } from '@/enums/HousesAndLotsFilters';
+import { HousesAndLotsRootCategory } from '@/enums/HousesAndLotsFilters';
+import { getHousesAndLotsRoute } from '@/helpers/getHousesAndLotsRoute';
 import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import DirectionFilter from './components/DirectionFilter';
 import DistanceFilter from './components/DistanceFilter';
-import HousesAndLotsTypeFilter from './components/HousesAndLotsTypeFilter';
+import HousesAndLotsRootCategoryFilter from './components/HousesAndLotsRootCategoryFilter';
 
 interface DefaultFiltersProps {
   openModal: () => void;
@@ -27,19 +28,23 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       priceTo,
       areaFrom,
       areaTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       plotAreaFrom,
       plotAreaTo,
       distance,
       directions,
     },
+    data: { housesAndLotasCategories },
     updateFilters,
   } = useHousesAndLotsFilters();
 
   const getAreaFilter = () => {
-    const type = housesAndLotsType && getRouteByHouseType(housesAndLotsType);
+    const type =
+      housesAndLotsRootCategory &&
+      getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories);
+    console.log({ type });
     switch (type) {
-      case HousesAndLotsType.Plots:
+      case HousesAndLotsRootCategory.Plots:
         return (
           <PlotAreaFilter
             plotAreaFrom={plotAreaFrom}
@@ -53,18 +58,20 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
   };
 
   const onApply = () => {
-    const type = housesAndLotsType && getRouteByHouseType(housesAndLotsType);
+    const type =
+      housesAndLotsRootCategory &&
+      getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories);
 
     applyFilters({
       priceFrom,
       priceTo,
-      areaFrom: type === HousesAndLotsType.Plots ? '' : areaFrom,
-      areaTo: type === HousesAndLotsType.Plots ? '' : areaTo,
-      plotAreaFrom: type !== HousesAndLotsType.Plots ? '' : plotAreaFrom,
-      plotAreaTo: type !== HousesAndLotsType.Plots ? '' : plotAreaTo,
+      areaFrom: type === HousesAndLotsRootCategory.Plots ? '' : areaFrom,
+      areaTo: type === HousesAndLotsRootCategory.Plots ? '' : areaTo,
+      plotAreaFrom: type !== HousesAndLotsRootCategory.Plots ? '' : plotAreaFrom,
+      plotAreaTo: type !== HousesAndLotsRootCategory.Plots ? '' : plotAreaTo,
       distance,
       directions,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
     });
   };
 
@@ -82,7 +89,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
           'flex-col',
         )}
       >
-        <HousesAndLotsTypeFilter />
+        <HousesAndLotsRootCategoryFilter />
         <PriceFilter onChange={updateFilters} priceFrom={priceFrom} priceTo={priceTo} />
         <DirectionFilter />
         <DistanceFilter />

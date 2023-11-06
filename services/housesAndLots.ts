@@ -42,7 +42,7 @@ const getHousesAndLotsStrapiQuery = (
     gasSupply,
     heating,
     houseLevels,
-    houseType,
+    housesAndLotsCategories,
     water,
     wallMaterial,
     saleTerm,
@@ -52,7 +52,7 @@ const getHousesAndLotsStrapiQuery = (
     directions,
     distance,
     nearLake,
-    housesAndLotsType,
+    housesAndLotsRootCategory,
   } = filters as HousesAndLotsFiltersType['filters'];
 
   const query = qs.stringify(
@@ -69,7 +69,10 @@ const getHousesAndLotsStrapiQuery = (
         },
         houses_and_lots_categories: {
           name: {
-            $in: houseType && houseType.length ? houseType : [housesAndLotsType],
+            $in:
+              housesAndLotsCategories && housesAndLotsCategories.length
+                ? housesAndLotsCategories
+                : [housesAndLotsRootCategory],
           },
         },
         sale_terms: {

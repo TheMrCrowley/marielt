@@ -52,7 +52,7 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
       priceFrom,
       priceTo,
 
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       directions,
       distance,
     },
@@ -85,7 +85,7 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
       //Default filters
       priceFrom,
       priceTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       directions,
       distance,
     });

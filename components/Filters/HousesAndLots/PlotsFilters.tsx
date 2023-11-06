@@ -28,7 +28,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
       //Default filters
       priceFrom,
       priceTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       directions,
       distance,
     },
@@ -47,7 +47,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
       //Default filters
       priceFrom,
       priceTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       directions,
       distance,
     });

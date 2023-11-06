@@ -10,6 +10,7 @@ import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import SaleTermFilter from '@/components/Filters/components/SaleTermFilter';
 import Select from '@/components/Select';
 import Switch from '@/components/Switch';
+import { getHousesAndLotsRoute } from '@/helpers/getHousesAndLotsRoute';
 import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import ElectricityFilter from './components/ElectricityFilter';
@@ -49,15 +50,15 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       sewerage,
       nearLake,
       saleTerm,
-      houseType,
+      housesAndLotsCategories,
       // Default filters
       priceFrom,
       priceTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       distance,
       directions,
     },
-    data: { houseTypes },
+    data: { housesAndLotasCategories },
     updateFilters,
   } = useHousesAndLotsFilters();
 
@@ -84,11 +85,11 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       sewerage,
       nearLake,
       saleTerm,
-      houseType,
+      housesAndLotsCategories,
       //Default filters
       priceFrom,
       priceTo,
-      housesAndLotsType,
+      housesAndLotsRootCategory,
       distance,
       directions,
     });
@@ -99,13 +100,15 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <Select
           isMulti={true}
-          items={houseTypes.map((item) => ({
-            label: item,
-            value: item,
-          }))}
+          items={housesAndLotasCategories
+            .filter((item) => item.belongTo === housesAndLotsRootCategory)
+            .map((item) => ({
+              label: item.categoryName,
+              value: item.categoryName,
+            }))}
           label="Вид Объекта"
-          onChange={(selected) => updateFilters({ houseType: selected })}
-          values={houseType}
+          onChange={(selected) => updateFilters({ housesAndLotsCategories: selected })}
+          values={housesAndLotsCategories}
           wrapperClassName="md:basis-3/12 basis-full shrink"
         />
       </div>

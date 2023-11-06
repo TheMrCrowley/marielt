@@ -10,8 +10,8 @@ import {
 } from '@/enums/HousesAndLotsFilters';
 import { getFullAddress } from '@/helpers/getFullAddress';
 import { CurrencyState } from '@/store/currency';
+import { HousesAndLotsFiltersType } from '@/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/types/Currency';
-import { HousesAndLotsFiltersType } from '@/types/Filters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
 
 import { waterQueryMap, sewerageQueryMap } from './../enums/HousesAndLotsFilters';

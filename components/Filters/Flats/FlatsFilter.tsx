@@ -8,8 +8,7 @@ import {
   formatFiltersToSearchParams,
 } from '@/helpers/filterHelpers';
 import { useCurrency } from '@/store/currency';
-import { useFlatsFilter } from '@/store/flatsFilters';
-import { FlatsFiltersType } from '@/types/Filters';
+import { FlatsFiltersType, useFlatsFilter } from '@/store/flatsFilters';
 
 import DefaultFilters from './DefaultFilters';
 import ExpandedFilters from './ExpandedFilters';

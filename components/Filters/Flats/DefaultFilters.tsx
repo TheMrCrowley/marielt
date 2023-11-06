@@ -3,7 +3,7 @@ import React from 'react';
 
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
-import FiltersWrapper from '@/components/Filters/FiltersWrapper';
+import FiltersWrapper from '@/components/Filters/DefaultFiltersWrapper';
 import AreaFilter from '@/components/Filters/components/AreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
 import { useFlatsFilter } from '@/store/flatsFilters';

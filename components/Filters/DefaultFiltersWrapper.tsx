@@ -6,12 +6,16 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import CurrencySwitch from '@/components/CurrencySwitch';
 import { useCurrency } from '@/store/currency';
 
-interface FiltersWrapperProps extends PropsWithChildren {
+interface DefaultFiltersWrapperProps extends PropsWithChildren {
   openModal: () => void;
   filtersList?: ReactNode;
 }
 
-const FiltersWrapper = ({ children, openModal, filtersList }: FiltersWrapperProps) => {
+const DefaultFiltersWrapper = ({
+  children,
+  openModal,
+  filtersList,
+}: DefaultFiltersWrapperProps) => {
   const { changeCurrency, selectedCurrency } = useCurrency();
 
   return (
@@ -72,4 +76,4 @@ const FiltersWrapper = ({ children, openModal, filtersList }: FiltersWrapperProp
   );
 };
 
-export default FiltersWrapper;
+export default DefaultFiltersWrapper;

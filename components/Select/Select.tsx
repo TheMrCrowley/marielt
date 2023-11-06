@@ -87,7 +87,7 @@ const Select = ({
           className={clsx(
             'lg:text-xl',
             'text-base',
-            values.length ? 'text-white' : 'text-[#d9d9d9]',
+            values.length && values.some(Boolean) ? 'text-white' : 'text-[#d9d9d9]',
           )}
         >
           {renderPlaceholder()}

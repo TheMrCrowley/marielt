@@ -13,8 +13,7 @@ import {
   formatFiltersToSearchParams,
 } from '@/helpers/filterHelpers';
 import { useCurrency } from '@/store/currency';
-import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
-import { HousesAndLotsFiltersType } from '@/types/Filters';
+import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import DefaultFilters from './DefaultFilters';
 import ExpandedFilters from './ExpandedFilters';

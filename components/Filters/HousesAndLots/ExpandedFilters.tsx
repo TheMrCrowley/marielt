@@ -8,8 +8,7 @@ import {
   getRouteByHouseType,
   housesAndLotsTypeMap,
 } from '@/enums/HousesAndLotsFilters';
-import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
-import { HousesAndLotsFiltersType } from '@/types/Filters';
+import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import CottagesFilters from './CottagesFilters';
 import DachiFilters from './DachiFilters';

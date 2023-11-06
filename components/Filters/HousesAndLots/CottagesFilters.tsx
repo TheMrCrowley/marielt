@@ -10,8 +10,7 @@ import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import SaleTermFilter from '@/components/Filters/components/SaleTermFilter';
 import Select from '@/components/Select';
 import Switch from '@/components/Switch';
-import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
-import { HousesAndLotsFiltersType } from '@/types/Filters';
+import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import ElectricityFilter from './components/ElectricityFilter';
 import GasSupplyFilter from './components/GasSupplyFilter';

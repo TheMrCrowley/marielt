@@ -4,13 +4,12 @@ import clsx from 'clsx';
 import React from 'react';
 
 import Button from '@/components/Button';
-import FiltersWrapper from '@/components/Filters/FiltersWrapper';
+import FiltersWrapper from '@/components/Filters/DefaultFiltersWrapper';
 import AreaFilter from '@/components/Filters/components/AreaFilter';
 import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
 import { HousesAndLotsType, getRouteByHouseType } from '@/enums/HousesAndLotsFilters';
-import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
-import { HousesAndLotsFiltersType } from '@/types/Filters';
+import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
 import DirectionFilter from './components/DirectionFilter';
 import DistanceFilter from './components/DistanceFilter';

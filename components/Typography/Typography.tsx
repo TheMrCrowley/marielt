@@ -12,6 +12,7 @@ interface TypographyProps extends PropsWithChildren {
   className?: string;
   fontSize?: FontSizeType;
   fontWeight?: FontWeightType;
+  color?: string;
 }
 
 const Typography = ({
@@ -19,11 +20,12 @@ const Typography = ({
   className,
   fontSize = 20,
   fontWeight = 'normal',
+  color,
 }: TypographyProps) => {
   const commonClassName = clsx(
     getFontSizeClassName(fontSize),
     getFontWeightClassName(fontWeight),
-    'text-white',
+    color || 'text-white',
   );
 
   return <p className={clsx(commonClassName, className)}>{children}</p>;

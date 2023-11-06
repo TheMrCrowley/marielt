@@ -12,8 +12,8 @@ import { getPriceByCurrency } from '@/helpers/currencyHelpers';
 import { getFullAddress } from '@/helpers/getFullAddress';
 import { getQueryArray } from '@/helpers/getQueryArray';
 import { CurrencyState } from '@/store/currency';
+import { FlatsFiltersType } from '@/store/flatsFilters';
 import { AvailableCurrencies } from '@/types/Currency';
-import { FlatsFiltersType } from '@/types/Filters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
 import { StrapiImage } from '@/types/StrapiImage';
 

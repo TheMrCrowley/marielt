@@ -10,7 +10,7 @@ type FlatsProps = {
 };
 
 const Flats = async ({ searchParams }: FlatsProps) => {
-  const [filters, { flats, pagination }] = await Promise.all([
+  const [{ district, metro, microDistrict }, { flats, pagination }] = await Promise.all([
     getFlatsFiltersData(),
     getFlats(searchParams),
   ]);
@@ -18,7 +18,13 @@ const Flats = async ({ searchParams }: FlatsProps) => {
   console.log('Flats was found: ', flats.length);
   return (
     <>
-      <FlatsFilters data={filters} />
+      <FlatsFilters
+        data={{
+          district,
+          metro,
+          microDistrict,
+        }}
+      />
       <FlatsList flats={flats} pagination={pagination} />
     </>
   );

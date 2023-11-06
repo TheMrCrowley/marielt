@@ -15,8 +15,8 @@ const MetroFilter = () => {
   return (
     <Select
       label="Метро"
-      isMulti
-      options={metroOptions.map((station) => ({
+      isMulti={true}
+      items={metroOptions.map((station) => ({
         label: station,
         value: station,
       }))}

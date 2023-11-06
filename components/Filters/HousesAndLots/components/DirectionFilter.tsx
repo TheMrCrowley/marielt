@@ -13,8 +13,8 @@ const DirectionFilter = () => {
   return (
     <Select
       label="Направление"
-      isMulti
-      options={directionOptions.map((station) => ({
+      isMulti={true}
+      items={directionOptions.map((station) => ({
         label: station,
         value: station,
       }))}

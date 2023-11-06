@@ -33,8 +33,8 @@ const DistrictFilter = () => {
   return (
     <Select
       label="Район"
-      isMulti
-      options={dataToRender.map((district) => ({
+      isMulti={true}
+      items={dataToRender.map((district) => ({
         label: district.districtName,
         value: district.districtName,
       }))}

@@ -11,9 +11,9 @@ interface WallMaterialFilterProps {
 const WallMaterialFilter = ({ onChange, wallMaterial }: WallMaterialFilterProps) => {
   return (
     <Select
+      isMulti={true}
       label="Материал Стен"
-      options={wallMaterialOptions}
-      isMulti
+      items={wallMaterialOptions}
       values={wallMaterial}
       onChange={(selected) => onChange({ wallMaterial: selected as WallMaterialValues[] })}
       wrapperClassName="md:basis-3/12 basis-full shrink"

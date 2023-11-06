@@ -11,7 +11,7 @@ interface SaleTermFilterProps {
 const SaleTermFilter = ({ saleTerm, onChange }: SaleTermFilterProps) => {
   return (
     <Select
-      isMulti
+      isMulti={true}
       label="Условия Сделки"
       values={saleTerm}
       onChange={(selected) =>
@@ -19,7 +19,7 @@ const SaleTermFilter = ({ saleTerm, onChange }: SaleTermFilterProps) => {
           saleTerm: selected as SaleTermValues[],
         })
       }
-      options={saleTermOptions}
+      items={saleTermOptions}
       wrapperClassName="md:basis-3/12 basis-full shrink"
     />
   );

@@ -36,13 +36,13 @@ const ExpandedAreaFilter = () => {
         onChange={updateFilters}
       />
       <Select
+        isMulti={false}
         label="Высота Потолков"
         subLabel="м"
-        placeholder="Выбрать"
         placeholderPrefix="От"
-        options={ceilingHeightValues}
-        values={[ceilingHeight]}
-        onChange={([height]) => updateFilters({ ceilingHeight: height })}
+        items={ceilingHeightValues}
+        values={ceilingHeight}
+        onChange={(height) => updateFilters({ ceilingHeight: height })}
         wrapperClassName="md:basis-1/5 basis-full"
       />
     </div>

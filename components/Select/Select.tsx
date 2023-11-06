@@ -2,47 +2,85 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
 import InputWrapper, { InputWrapperProps } from '@/components/InputWrapper';
+import { getIsItemSelected } from '@/helpers/getIsItemSelected';
+import { useClickOutside } from '@/helpers/useClickOutside';
 import ChevronIcon from '@/public/chevron-down.svg';
-import { OptionType } from '@/types/Option';
 
-import Option from './Option';
-import { useSelect } from './useSelect';
+import Option, { OptionItemProps } from './Option';
 
-interface SelectProps extends InputWrapperProps {
-  options: OptionType[];
-  onChange: (selected: OptionType['value'][]) => void;
+interface NewProps<T extends boolean> extends InputWrapperProps {
+  isMulti: T;
+  onChange: (selected: T extends true ? string[] : string) => void;
+  items: Array<{
+    value: string;
+    label: string;
+  }>;
+  values: T extends true ? string[] : string;
   placeholder?: string;
-  values?: string[];
   placeholderPrefix?: string;
   placeholderPostfix?: string;
-
-  isMulti?: boolean;
-  //TODO think how to improve this
-  optionWidth?: 'full' | 'maxContent';
 }
 
-const Select = ({
+function Select<T extends boolean>({
+  isMulti,
+  items,
   onChange,
-  options,
-  placeholder,
-  isMulti = false,
-  values = [],
+  values,
   label,
-  wrapperClassName,
   subLabel,
-  optionWidth = 'maxContent',
-  placeholderPrefix,
+  wrapperClassName,
+  placeholder = 'Выбрать',
   placeholderPostfix,
-}: SelectProps) => {
-  const { formattedOptions, isOpen, toggleSelect, wrapperRef } = useSelect({
-    onChange,
-    options,
-    isMulti,
-    values,
+  placeholderPrefix,
+}: NewProps<T>) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const wrapperRef = useClickOutside(() => {
+    setIsOpen(false);
   });
+
+  const handleClickOption = (value: string) => {
+    if (isMulti) {
+      const isSelected = (values as string[]).find((item) => item === value);
+      if (isSelected) {
+        (onChange as (selected: string[]) => void)(
+          (values as string[]).filter((item) => item !== value),
+        );
+      } else {
+        (onChange as (selected: string[]) => void)([...(values as string[]), value]);
+      }
+    } else {
+      const isSelected = (values as string) === value;
+      if (isSelected) {
+        (onChange as (selected: string) => void)('');
+      } else {
+        (onChange as (selected: string) => void)(value);
+      }
+    }
+  };
+
+  const formattedOptions = useMemo<OptionItemProps[]>(() => {
+    return items.map((option) => {
+      if (isMulti) {
+        const isSelected = getIsItemSelected(values as string[], option.value);
+
+        return {
+          ...option,
+
+          isSelected,
+          onClick: handleClickOption,
+        };
+      }
+      return {
+        ...option,
+        isSelected: (values as string) === option.value,
+        onClick: handleClickOption,
+      };
+    });
+  }, [values, items]);
 
   const renderOptions = () =>
     formattedOptions.map((formattedOption) => (
@@ -53,12 +91,12 @@ const Select = ({
     ));
 
   const renderPlaceholder = () => {
-    if (placeholder) {
-      return values[0]
-        ? `${placeholderPrefix || ''} ${values[0]} ${placeholderPostfix || ''}`
-        : placeholder;
+    if (isMulti) {
+      return values.length ? `Выбрано: ${values.length}` : 'Выбрать';
     }
-    return values.length ? `Выбрано: ${values.length}` : 'Выбрать';
+    return values
+      ? `${placeholderPrefix || ''} ${values} ${placeholderPostfix || ''}`
+      : placeholder;
   };
 
   const renderSelect = () => (
@@ -78,16 +116,16 @@ const Select = ({
         'select-none',
         'w-full',
         placeholder ? 'min-w-[140px]' : 'min-w-[180px]',
-        values.length && values.some(Boolean) ? 'border-secondary' : 'border-[#d9d9d9]',
+        !!values.length ? 'border-secondary' : 'border-[#d9d9d9]',
       )}
-      onClick={toggleSelect}
+      onClick={() => setIsOpen(!isOpen)}
     >
       <div className={clsx('flex', 'justify-between', 'items-center', 'gap-x-2')}>
         <p
           className={clsx(
             'lg:text-xl',
             'text-base',
-            values.length && values.some(Boolean) ? 'text-white' : 'text-[#d9d9d9]',
+            !!values.length ? 'text-white' : 'text-[#d9d9d9]',
           )}
         >
           {renderPlaceholder()}
@@ -128,6 +166,6 @@ const Select = ({
   }
 
   return renderSelect();
-};
+}
 
-export default React.memo(Select);
+export default Select;

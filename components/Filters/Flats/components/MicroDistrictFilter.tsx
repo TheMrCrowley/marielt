@@ -33,8 +33,8 @@ const MicroDistrictFilter = () => {
   return (
     <Select
       label="Микрорайон"
-      isMulti
-      options={dataToRender.map((microDistrict) => ({
+      isMulti={true}
+      items={dataToRender.map((microDistrict) => ({
         label: microDistrict.microDistrictName,
         value: microDistrict.microDistrictName,
       }))}

@@ -11,8 +11,8 @@ interface HeatingFilterProps {
 const HeatingFilter = ({ heating, onChange }: HeatingFilterProps) => {
   return (
     <Select
-      options={heatingOptions}
-      isMulti
+      isMulti={true}
+      items={heatingOptions}
       values={heating}
       label="Отопление"
       onChange={(selected) => onChange({ heating: selected as HeatingValues[] })}

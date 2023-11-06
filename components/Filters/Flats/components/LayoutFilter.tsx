@@ -22,9 +22,9 @@ const LayoutFilter = () => {
     <div className={clsx('flex', 'w-full', 'justify-start', 'gap-8', 'items-end', 'flex-wrap')}>
       <Select
         label="Ремонт"
-        isMulti
+        isMulti={true}
         values={finishing}
-        options={finishingOptions}
+        items={finishingOptions}
         onChange={(selected) => updateFilters({ finishing: selected as FinishingValues[] })}
         wrapperClassName="md:basis-1/5 basis-full"
       />

@@ -13,12 +13,11 @@ const HouseTypeFilter = () => {
   return (
     <Select
       wrapperClassName="flex-auto"
-      isMulti
+      isMulti={true}
       label="Тип дома"
       values={houseType}
-      options={houseTypeOptions}
+      items={houseTypeOptions}
       onChange={(selected) => updateFilters({ houseType: selected as HouseTypeValues[] })}
-      optionWidth="full"
     />
   );
 };

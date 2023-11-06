@@ -12,8 +12,9 @@ const HousesAndLotsTypeFilter = () => {
 
   return (
     <Select
+      isMulti={false}
       label="Тип недвижимости"
-      options={[
+      items={[
         {
           label: housesAndLotsTypeMap[HousesAndLotsType.Cottages],
           value: housesAndLotsTypeMap[HousesAndLotsType.Cottages],
@@ -28,10 +29,9 @@ const HousesAndLotsTypeFilter = () => {
         },
       ]}
       onChange={(selected) => {
-        updateFilters({ housesAndLotsType: selected[0] });
+        updateFilters({ housesAndLotsType: selected });
       }}
-      values={[housesAndLotsType]}
-      placeholder="Выбрать"
+      values={housesAndLotsType}
       wrapperClassName="flex-1"
     />
   );

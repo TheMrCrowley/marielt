@@ -98,11 +98,11 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
     <>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <Select
-          options={houseTypes.map((item) => ({
+          isMulti={true}
+          items={houseTypes.map((item) => ({
             label: item,
             value: item,
           }))}
-          isMulti
           label="Вид Объекта"
           onChange={(selected) => updateFilters({ houseType: selected })}
           values={houseType}

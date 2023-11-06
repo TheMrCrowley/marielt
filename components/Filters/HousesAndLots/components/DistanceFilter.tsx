@@ -11,11 +11,11 @@ const DistanceFilter = () => {
 
   return (
     <Select
+      isMulti={false}
       label="Расстояние от МКАД"
-      placeholder="Выбрать"
       placeholderPrefix="До"
       placeholderPostfix="км."
-      options={[
+      items={[
         {
           value: '50',
           label: 'До 50 км.',
@@ -33,8 +33,8 @@ const DistanceFilter = () => {
           label: 'До 200 км.',
         },
       ]}
-      values={[distance]}
-      onChange={([selected]) =>
+      values={distance}
+      onChange={(selected) =>
         updateFilters({
           distance: selected,
         })

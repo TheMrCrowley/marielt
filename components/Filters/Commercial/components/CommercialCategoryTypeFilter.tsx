@@ -37,13 +37,13 @@ const CommercialCategoryTypeFilter = () => {
 
   return (
     <Select
+      isMulti={false}
       label="Тип недвижимости"
-      placeholder="Выбрать"
-      values={[selectedCategory]}
-      onChange={([selected]) => {
+      values={selectedCategory}
+      onChange={(selected) => {
         updateFilters({ categoryType: selected });
       }}
-      options={dataToRender.map((category) => ({
+      items={dataToRender.map((category) => ({
         label: category.categoryName,
         value: category.categoryName,
       }))}

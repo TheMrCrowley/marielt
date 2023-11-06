@@ -32,13 +32,13 @@ const CommercialTransactionTypeFilter = () => {
 
   return (
     <Select
-      placeholder="Выбрать"
-      values={[selectedTransaction]}
+      isMulti={false}
+      values={selectedTransaction}
       label="Тип сделки"
-      onChange={([type]) => {
+      onChange={(type) => {
         updateFilters({ transactionType: type });
       }}
-      options={dataToRender.map((transaction) => ({
+      items={dataToRender.map((transaction) => ({
         label: transaction.transactionName,
         value: transaction.transactionName,
       }))}

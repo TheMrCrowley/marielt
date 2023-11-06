@@ -11,9 +11,9 @@ interface WaterFilterProps {
 const WaterFilter = ({ onChange, water }: WaterFilterProps) => {
   return (
     <Select
+      isMulti={true}
       label="Вода"
-      isMulti
-      options={waterOptions}
+      items={waterOptions}
       onChange={(selected) => onChange({ water: selected as WaterValues[] })}
       values={water}
       wrapperClassName="md:basis-1/5 basis-full shrink"

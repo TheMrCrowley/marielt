@@ -6,7 +6,7 @@ import { useCommercialFilters } from '@/store/commercialFilters';
 const CommercialTransactionTypeFilter = () => {
   const {
     data: { transactions: transactionOptions, categories: categoriesData },
-    filters: { transactionType: selectedTransaction, categoryType: selectedCategory },
+    filters: { transactionType: selectedTransaction, rootCategoryType: selectedRootCategory },
     updateFilters,
   } = useCommercialFilters();
 
@@ -14,7 +14,7 @@ const CommercialTransactionTypeFilter = () => {
     const filtered = transactionOptions?.filter((transactionOption) => {
       const belongTo = new Set(
         categoriesData
-          .filter((initialCategory) => selectedCategory === initialCategory.categoryName)
+          .filter((initialCategory) => selectedRootCategory === initialCategory.categoryName)
           .map((item) => item.commercialTransactions)
           .flat()
           .map((item) => item.transactionId),
@@ -24,7 +24,7 @@ const CommercialTransactionTypeFilter = () => {
     });
 
     return filtered?.length ? filtered : transactionOptions;
-  }, [selectedCategory, transactionOptions]);
+  }, [selectedRootCategory, transactionOptions]);
 
   if (!dataToRender.length) {
     return null;

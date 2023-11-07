@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import CheckboxButton from '@/components/CheckboxButton';
+import FloorsFilter from '@/components/Filters/components/FloorsFilter';
 import InputFromTo from '@/components/InputFromTo';
 import { useFlatsFilter } from '@/store/flatsFilters';
 
@@ -22,23 +23,7 @@ const FloorFilter = () => {
   return (
     <>
       <div className={clsx('flex', 'items-end', 'gap-8', 'flex-wrap')}>
-        <InputFromTo
-          label="Этаж"
-          values={{
-            from: floorFrom,
-            to: floorTo,
-          }}
-          onChange={({ from, to }) =>
-            updateFilters({
-              floorFrom: from,
-              floorTo: to,
-            })
-          }
-          minMax={{
-            max: 50,
-            min: 1,
-          }}
-        />
+        <FloorsFilter floorFrom={floorFrom} floorTo={floorTo} onChange={updateFilters} />
         <div className={clsx('flex', 'gap-8', 'min-w-min', 'flex-wrap')}>
           <CheckboxButton
             isChecked={isNotFirstFloor}

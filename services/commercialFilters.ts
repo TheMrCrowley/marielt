@@ -1,10 +1,11 @@
 import qs from 'qs';
 
+import { CommercialRootCategoryTypeValues, TransactionTypeValues } from '@/enums/CommercialFilters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
 
 interface CommercialTransactionResponse {
   name: string;
-  uid: string;
+  uid: TransactionTypeValues;
   commercial_categories: {
     data: Array<{
       id: string;
@@ -17,7 +18,7 @@ interface CommercialTransactionResponse {
 
 interface CommercialCategoryResponse {
   name: string;
-  uid: string;
+  uid: CommercialRootCategoryTypeValues;
   category: string | null;
   comm_trans: {
     data: Array<{
@@ -32,14 +33,14 @@ interface CommercialCategoryResponse {
 export interface CommercialTransaction {
   transactionName: string;
   transactionId: string;
-  transactionUid: string;
+  transactionUid: TransactionTypeValues;
   commercialCategories: Array<{ categoryId: string; categoryName: string }>;
 }
 
 export interface CommercialCategory {
   categoryName: string;
   belongTo: string | null;
-  categoryUid: string;
+  categoryUid: CommercialRootCategoryTypeValues;
   isRoot: boolean;
   categoryId: string;
   commercialTransactions: Array<{

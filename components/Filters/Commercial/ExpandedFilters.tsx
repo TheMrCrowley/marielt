@@ -4,7 +4,11 @@ import React, { useMemo } from 'react';
 import CheckboxGroup from '@/components/CheckboxGroup';
 import ExpandedFiltersWrapper from '@/components/Filters/ExpandedFiltersWrapper';
 import Typography from '@/components/Typography';
+import { TransactionTypeValues } from '@/enums/CommercialFilters';
+import { CommercialCategory, CommercialTransaction } from '@/services/commercialFilters';
 import { CommercialFiltersType, useCommercialFilters } from '@/store/commercialFilters';
+
+import BusinessFilter from './BusinessFilter';
 
 interface ExpandedFiltersProps {
   isModalOpen: boolean;
@@ -54,7 +58,7 @@ const TransactionChanger = () => {
 const RootCategoryChanger = () => {
   const {
     data: { transactions: transactionsData, categories: categoriesOptions },
-    filters: { transactionType: selectedTransaction, categoryType: selectedCategory },
+    filters: { transactionType: selectedTransaction, rootCategoryType: selectedRootCategory },
     updateFilters,
   } = useCommercialFilters();
 
@@ -79,7 +83,7 @@ const RootCategoryChanger = () => {
     return filtered.length ? filtered : rootCategories;
   }, [selectedTransaction, categoriesOptions]);
 
-  if (!selectedTransaction || !dataToRender.length) {
+  if (!selectedTransaction || dataToRender.length <= 1) {
     return null;
   }
 
@@ -90,17 +94,67 @@ const RootCategoryChanger = () => {
         label: item.categoryName,
         value: item.categoryName,
       }))}
-      onChange={(category) => updateFilters({ categoryType: category })}
-      values={selectedCategory}
+      onChange={(category) => updateFilters({ rootCategoryType: category })}
+      values={selectedRootCategory}
     />
   );
 };
 
+const getFilterByTransactionAndRootCategory = ({
+  categoriesData,
+  selectedRootCategory,
+  selectedTransaction,
+  transactionData,
+}: {
+  transactionData: CommercialTransaction[];
+  selectedTransaction: string;
+  categoriesData: CommercialCategory[];
+  selectedRootCategory: string;
+}) => {
+  const transactionUid = transactionData.find(
+    (transaction) => transaction.transactionName === selectedTransaction,
+  )?.transactionUid;
+
+  switch (transactionUid) {
+    case TransactionTypeValues.Business:
+      return <BusinessFilter />;
+    default:
+      return getFilterByRootCategory({ categoriesData, selectedRootCategory });
+  }
+};
+
+const getFilterByRootCategory = ({
+  categoriesData,
+  selectedRootCategory,
+}: {
+  categoriesData: CommercialCategory[];
+  selectedRootCategory: string;
+}) => {
+  const categoryUid = categoriesData.find(
+    (category) => category.categoryName === selectedRootCategory,
+  )?.categoryUid;
+
+  switch (categoryUid) {
+    default:
+      return null;
+  }
+};
+
 const ExpandedFilters = ({ applyFilters, closeModal, isModalOpen }: ExpandedFiltersProps) => {
+  const {
+    filters: { transactionType: selectedTransaction, rootCategoryType: selectedRootCategory },
+    data: { transactions: transactionData, categories: categoriesData },
+  } = useCommercialFilters();
   return (
     <ExpandedFiltersWrapper closeModal={closeModal} isModalOpen={isModalOpen}>
       <TransactionChanger />
       <RootCategoryChanger />
+      {getFilterByTransactionAndRootCategory({
+        categoriesData,
+        selectedRootCategory,
+        selectedTransaction,
+        transactionData,
+      })}
     </ExpandedFiltersWrapper>
   );
 };

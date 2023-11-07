@@ -39,3 +39,9 @@ export enum CommercialCategoryTypeValues {
   Prod = 'prod',
   Peftebaza = 'neftebaza',
 }
+
+export enum CommercialFloorValues {
+  First = 'first',
+  Last = 'last',
+  Ground = 'ground',
+}

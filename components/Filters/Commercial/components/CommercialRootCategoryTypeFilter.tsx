@@ -3,10 +3,10 @@ import React, { useMemo } from 'react';
 import Select from '@/components/Select';
 import { useCommercialFilters } from '@/store/commercialFilters';
 
-const CommercialCategoryTypeFilter = () => {
+const CommercialRootCategoryTypeFilter = () => {
   const {
     data: { transactions: transactionsData, categories: categoriesOptions },
-    filters: { transactionType: selectedTransaction, categoryType: selectedCategory },
+    filters: { transactionType: selectedTransaction, rootCategoryType: selectedRootCategory },
     updateFilters,
   } = useCommercialFilters();
 
@@ -39,9 +39,9 @@ const CommercialCategoryTypeFilter = () => {
     <Select
       isMulti={false}
       label="Тип недвижимости"
-      values={selectedCategory}
+      values={selectedRootCategory}
       onChange={(selected) => {
-        updateFilters({ categoryType: selected });
+        updateFilters({ rootCategoryType: selected });
       }}
       items={dataToRender.map((category) => ({
         label: category.categoryName,
@@ -52,4 +52,4 @@ const CommercialCategoryTypeFilter = () => {
   );
 };
 
-export default CommercialCategoryTypeFilter;
+export default CommercialRootCategoryTypeFilter;

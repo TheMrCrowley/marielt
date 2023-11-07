@@ -7,8 +7,9 @@ import AreaFilter from '@/components/Filters/components/AreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
 import { CommercialFiltersType, useCommercialFilters } from '@/store/commercialFilters';
 
-import CommercialCategoryTypeFilter from './components/CommercialCategoryTypeFilter';
-import CommercialTransactionType from './components/CommercialTransactionTypeFilter';
+import CommercialCategoryTypeFilter from './components/CommercialRootCategoryTypeFilter';
+import CommercialRootCategoryTypeFilter from './components/CommercialTransactionTypeFilter';
+import PropertyTypeFilter from './components/PropertyTypeFilter';
 
 interface DefaultFiltersProps {
   openModal: () => void;
@@ -35,7 +36,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
           'flex-col',
         )}
       >
-        <CommercialTransactionType />
+        <CommercialRootCategoryTypeFilter />
         <CommercialCategoryTypeFilter />
         <PriceFilter onChange={updateFilters} priceFrom={priceFrom} priceTo={priceTo} />
         <AreaFilter onChange={updateFilters} areaFrom={areaFrom} areaTo={areaTo} />

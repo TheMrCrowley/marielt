@@ -7,11 +7,25 @@ export type CommercialFiltersType = BaseFilters<
   {
     // Default
     transactionType: string;
-    categoryType: string;
+    rootCategoryType: string;
+    propertyType: string[];
     priceFrom: string;
     priceTo: string;
     areaFrom: string;
     areaTo: string;
+    floorFrom: string;
+    floorTo: string;
+    constructionYearFrom: string;
+    constructionYearTo: string;
+    profitabilityFrom: string;
+    profitabilityTo: string;
+    paybackFrom: string;
+    paybackTo: string;
+    isFirstFloor: boolean;
+    isLastFloor: boolean;
+    isGroundFloor: boolean;
+    vat: boolean;
+    separateEntrance: boolean;
     //
   },
   {
@@ -22,11 +36,25 @@ export type CommercialFiltersType = BaseFilters<
 
 const initialCommercialFilters: CommercialFiltersType['filters'] = {
   transactionType: '',
-  categoryType: '',
+  rootCategoryType: '',
+  propertyType: [],
   priceFrom: '',
   priceTo: '',
   areaFrom: '',
   areaTo: '',
+  floorFrom: '',
+  floorTo: '',
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  profitabilityFrom: '',
+  profitabilityTo: '',
+  paybackFrom: '',
+  paybackTo: '',
+  isFirstFloor: false,
+  isLastFloor: false,
+  isGroundFloor: false,
+  vat: false,
+  separateEntrance: false,
 };
 
 export const useCommercialFilters = create<CommercialFiltersType>((set) => ({

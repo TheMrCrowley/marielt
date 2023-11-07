@@ -21,7 +21,7 @@ export interface HousesAndLotsCategory {
   uid: HousesAndLotsRootCategory;
 }
 
-const getDirections = async () => {
+export const getDirections = async () => {
   const directionsResponse = await fetch(`${process.env.API_BASE_URL}/directions`);
   const { data } = (await directionsResponse.json()) as StrapiFindResponse<DirectionResponse>;
 

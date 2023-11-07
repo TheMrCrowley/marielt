@@ -14,32 +14,32 @@ import PropertyTypeFilter from './components/PropertyTypeFilter';
 import SeparateEntrance from './components/SeparateEntrance';
 import VatToggleFilter from './components/VatToggleFilter';
 
-interface BusinessFilterProps {
+interface RentBusinessFilterProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
 }
 
-const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
+const RentBusinessFilter = ({ applyFilters }: RentBusinessFilterProps) => {
   const {
     filters: {
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
       areaFrom,
       areaTo,
       floorFrom,
       floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
       isFirstFloor,
       isGroundFloor,
-      paybackFrom,
-      paybackTo,
+      constructionYearFrom,
+      constructionYearTo,
       profitabilityFrom,
       profitabilityTo,
+      paybackFrom,
+      paybackTo,
       vat,
       separateEntrance,
+      transactionType,
+      rootCategoryType,
+      priceFrom,
+      priceTo,
+      propertyType,
     },
     updateFilters,
   } = useCommercialFilters();
@@ -54,17 +54,17 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
       areaFrom,
       areaTo,
       //
+      propertyType,
       floorFrom,
       floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
       isFirstFloor,
       isGroundFloor,
-      paybackFrom,
-      paybackTo,
+      constructionYearFrom,
+      constructionYearTo,
       profitabilityFrom,
       profitabilityTo,
+      paybackFrom,
+      paybackTo,
       vat,
       separateEntrance,
     });
@@ -79,7 +79,11 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
         <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
         <FloorsFilter floorFrom={floorFrom} floorTo={floorTo} onChange={updateFilters} />
         <CommercialFloorFilter
-          floorTypes={{ isFirstFloor: true, isGroundFloor: true, isLastFloor: false }}
+          floorTypes={{
+            isFirstFloor: true,
+            isGroundFloor: true,
+            isLastFloor: false,
+          }}
         />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
@@ -94,7 +98,9 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
         <PaybackFilter />
         <VatToggleFilter />
       </div>
-      <SeparateEntrance />
+      <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <SeparateEntrance />
+      </div>
       <Button className={clsx('sm:self-center', 'mt-auto')} onClick={onApply}>
         Применить
       </Button>
@@ -102,4 +108,4 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
   );
 };
 
-export default BusinessFilter;
+export default RentBusinessFilter;

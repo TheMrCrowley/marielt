@@ -7,18 +7,19 @@ import ConstructionYearFilter from '@/components/Filters/components/Construction
 import FloorsFilter from '@/components/Filters/components/FloorsFilter';
 import { CommercialFiltersType, useCommercialFilters } from '@/store/commercialFilters';
 
+import CommercialBathroomToggle from './components/CommercialBathroomToggle';
+import CommercialCeilingHeight from './components/CommercialCeilingHeight';
+import CommercialFinishingFilter from './components/CommercialFinishingFilter';
 import CommercialFloorFilter from './components/CommercialFloorFilter';
-import PaybackFilter from './components/PaybackFilter';
-import ProfitabilityFilter from './components/ProfitabilityFilter';
-import PropertyTypeFilter from './components/PropertyTypeFilter';
+import CommercialLocationFilter from './components/CommercialLocationFilter';
+import CommercialRampToggle from './components/CommercialRampToggle';
 import SeparateEntrance from './components/SeparateEntrance';
-import VatToggleFilter from './components/VatToggleFilter';
 
-interface BusinessFilterProps {
+interface RestorantCafeFilterProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
 }
 
-const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
+const RestorantCafeFilter = ({ applyFilters }: RestorantCafeFilterProps) => {
   const {
     filters: {
       transactionType,
@@ -27,19 +28,20 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
       priceTo,
       areaFrom,
       areaTo,
+
+      commercialLocation,
       floorFrom,
       floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
       isFirstFloor,
       isGroundFloor,
-      paybackFrom,
-      paybackTo,
-      profitabilityFrom,
-      profitabilityTo,
-      vat,
+      ceilingHeightFrom,
+      ceilingHeightTo,
+      constructionYearFrom,
+      constructionYearTo,
+      finishing,
+      bathroom,
       separateEntrance,
+      ramp,
     },
     updateFilters,
   } = useCommercialFilters();
@@ -54,47 +56,52 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
       areaFrom,
       areaTo,
       //
+      commercialLocation,
       floorFrom,
       floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
       isFirstFloor,
       isGroundFloor,
-      paybackFrom,
-      paybackTo,
-      profitabilityFrom,
-      profitabilityTo,
-      vat,
+      ceilingHeightFrom,
+      ceilingHeightTo,
+      constructionYearFrom,
+      constructionYearTo,
+      finishing,
+      bathroom,
       separateEntrance,
+      ramp,
     });
   };
 
   return (
     <>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
-        <PropertyTypeFilter />
+        <CommercialLocationFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <AreaFilter areaFrom={areaFrom} areaTo={areaTo} onChange={updateFilters} />
         <FloorsFilter floorFrom={floorFrom} floorTo={floorTo} onChange={updateFilters} />
         <CommercialFloorFilter
-          floorTypes={{ isFirstFloor: true, isGroundFloor: true, isLastFloor: false }}
+          floorTypes={{
+            isFirstFloor: true,
+            isLastFloor: false,
+            isGroundFloor: true,
+          }}
         />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <CommercialCeilingHeight />
         <ConstructionYearFilter
           constructionYearFrom={constructionYearFrom}
           constructionYearTo={constructionYearTo}
           onChange={updateFilters}
         />
+        <CommercialFinishingFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
-        <ProfitabilityFilter />
-        <PaybackFilter />
-        <VatToggleFilter />
+        <CommercialBathroomToggle />
+        <SeparateEntrance />
+        <CommercialRampToggle />
       </div>
-      <SeparateEntrance />
       <Button className={clsx('sm:self-center', 'mt-auto')} onClick={onApply}>
         Применить
       </Button>
@@ -102,4 +109,4 @@ const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
   );
 };
 
-export default BusinessFilter;
+export default RestorantCafeFilter;

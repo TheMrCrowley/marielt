@@ -21,8 +21,6 @@ const HousesAndLotsRootCategoryFilter = () => {
     [housesAndLotasCategories],
   );
 
-  console.log(housesAndLotasCategories);
-
   return (
     <Select
       isMulti={false}

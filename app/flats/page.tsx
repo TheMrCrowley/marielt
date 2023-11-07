@@ -2,8 +2,8 @@ import React from 'react';
 
 import FlatsFilters from '@/components/Filters/Flats';
 import FlatsList from '@/components/Filters/Flats/FlatsList';
-import { getFlatsFiltersData } from '@/services/filters';
 import { getFlats } from '@/services/flats';
+import { getFlatsFiltersData } from '@/services/flatsFilters';
 
 type FlatsProps = {
   searchParams: Record<string, string | string[]>;

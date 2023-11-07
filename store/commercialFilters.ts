@@ -26,11 +26,31 @@ export type CommercialFiltersType = BaseFilters<
     isGroundFloor: boolean;
     vat: boolean;
     separateEntrance: boolean;
+    commercialLocation: string[];
+    separateRoomsFrom: string;
+    separateRoomsTo: string;
+    ceilingHeightFrom: string;
+    ceilingHeightTo: string;
+    finishing: string[];
+    bathroom: boolean;
+    furniture: boolean;
+    ramp: boolean;
+    plotAreaFrom: string;
+    plotAreaTo: string;
+    wallMaterial: string[];
+    directions: string[];
+    distance: string;
+    heating: boolean;
+    water: boolean;
+    sewerage: boolean;
+    electricity: boolean;
+    gas: boolean;
     //
   },
   {
     transactions: CommercialTransaction[];
     categories: CommercialCategory[];
+    directions: string[];
   }
 >;
 
@@ -55,6 +75,25 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   isGroundFloor: false,
   vat: false,
   separateEntrance: false,
+  commercialLocation: [],
+  separateRoomsFrom: '',
+  separateRoomsTo: '',
+  ceilingHeightFrom: '',
+  ceilingHeightTo: '',
+  finishing: [],
+  bathroom: false,
+  furniture: false,
+  ramp: false,
+  plotAreaFrom: '',
+  plotAreaTo: '',
+  wallMaterial: [],
+  directions: [],
+  distance: '',
+  heating: false,
+  water: false,
+  sewerage: false,
+  electricity: false,
+  gas: false,
 };
 
 export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
@@ -62,6 +101,7 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
   data: {
     transactions: [],
     categories: [],
+    directions: [],
   },
   updateFilters: (update) => {
     set((prev) => ({

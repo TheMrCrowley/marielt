@@ -4,9 +4,9 @@ import CommercialFilters from '@/components/Filters/Commercial/CommercialFilters
 import { getCommercialFiltersData } from '@/services/commercialFilters';
 
 const Commercial = async () => {
-  const { transactions, categories } = await getCommercialFiltersData();
+  const { transactions, categories, directions } = await getCommercialFiltersData();
 
-  return <CommercialFilters data={{ transactions, categories }} />;
+  return <CommercialFilters data={{ transactions, categories, directions }} />;
 };
 
 export default Commercial;

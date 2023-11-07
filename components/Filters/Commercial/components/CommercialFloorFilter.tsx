@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import CheckboxButton from '@/components/CheckboxButton';
+import { CommercialFloorValues, commercialFloorOptions } from '@/enums/CommercialFilters';
 import { useCommercialFilters } from '@/store/commercialFilters';
 
 interface CommercialFloorFilterProps {
@@ -29,7 +30,7 @@ const CommercialFloorFilter = ({ floorTypes }: CommercialFloorFilterProps) => {
             })
           }
         >
-          Первый
+          {commercialFloorOptions[CommercialFloorValues.First]}
         </CheckboxButton>
       )}
       {floorTypes.isGroundFloor && (
@@ -41,7 +42,7 @@ const CommercialFloorFilter = ({ floorTypes }: CommercialFloorFilterProps) => {
             })
           }
         >
-          Цокольный
+          {commercialFloorOptions[CommercialFloorValues.Ground]}
         </CheckboxButton>
       )}
       {floorTypes.isLastFloor && (
@@ -53,7 +54,7 @@ const CommercialFloorFilter = ({ floorTypes }: CommercialFloorFilterProps) => {
             })
           }
         >
-          Последний
+          {commercialFloorOptions[CommercialFloorValues.Last]}
         </CheckboxButton>
       )}
     </div>

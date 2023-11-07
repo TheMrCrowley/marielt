@@ -5,7 +5,7 @@ import { useCommercialFilters } from '@/store/commercialFilters';
 
 const PropertyTypeFilter = () => {
   const {
-    data: { categories, transactions },
+    data: { categories },
     filters: {
       transactionType: selectedTransaction,
       rootCategoryType: selectedRootCategory,

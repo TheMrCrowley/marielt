@@ -3,6 +3,8 @@ import qs from 'qs';
 import { CommercialRootCategoryTypeValues, TransactionTypeValues } from '@/enums/CommercialFilters';
 import { StrapiFindResponse } from '@/types/StrapiFindResponse';
 
+import { getDirections } from './housesAndLotsFilters';
+
 interface CommercialTransactionResponse {
   name: string;
   uid: TransactionTypeValues;
@@ -85,19 +87,21 @@ const getCommercialCategories = async (): Promise<Array<CommercialCategory>> => 
   );
 
   const { data, meta } = (await response.json()) as StrapiFindResponse<CommercialCategoryResponse>;
-  console.log(data.length, meta);
+
   return formatCommercialCategory(data);
 };
 
 export const getCommercialFiltersData = async () => {
-  const [transactions, categories] = await Promise.all([
+  const [transactions, categories, directions] = await Promise.all([
     getCommercialTransactions(),
     getCommercialCategories(),
+    getDirections(),
   ]);
 
   return {
     transactions,
     categories,
+    directions,
   };
 };
 

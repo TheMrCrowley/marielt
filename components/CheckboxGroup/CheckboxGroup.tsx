@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import CheckboxButton from '@/components/CheckboxButton';
 import InputWrapper, { InputWrapperProps } from '@/components/InputWrapper';
@@ -23,33 +23,25 @@ function CheckboxGroup<T extends boolean>({
   items,
   values,
 }: CheckboxGroupProps<T>) {
-  const [selected, setSelected] = useState<string[] | string>(values);
-
   const handleClick = (value: string) => {
     if (isMulti) {
       // string[]
-      const isSelected = (selected as string[]).find((item) => item === value);
+      const isSelected = (values as string[]).find((item) => item === value);
       if (isSelected) {
-        setSelected((selected as string[]).filter((item) => item !== value));
+        (onChange as (selected: string[]) => void)(
+          (values as string[]).filter((item) => item !== value),
+        );
       } else {
-        setSelected((prev) => [...(prev as string[]), value]);
+        (onChange as (selected: string[]) => void)([...(values as string[]), value]);
       }
     } else {
       // string
-      setSelected(value);
+      (onChange as (selected: string) => void)(value);
     }
   };
 
-  useEffect(() => {
-    if (isMulti) {
-      (onChange as (selected: string[]) => void)(selected as string[]);
-    } else {
-      (onChange as (selected: string) => void)(selected as string);
-    }
-  }, [selected]);
-
   const isValueChecked = (value: string) =>
-    Array.isArray(selected) ? !!selected.find((item) => item === value) : selected === value;
+    Array.isArray(values) ? !!values.find((item) => item === value) : values === value;
 
   return (
     <InputWrapper label={label} subLabel={subLabel} wrapperClassName={wrapperClassName}>

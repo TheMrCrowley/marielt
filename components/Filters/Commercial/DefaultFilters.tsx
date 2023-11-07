@@ -9,7 +9,6 @@ import { CommercialFiltersType, useCommercialFilters } from '@/store/commercialF
 
 import CommercialCategoryTypeFilter from './components/CommercialRootCategoryTypeFilter';
 import CommercialRootCategoryTypeFilter from './components/CommercialTransactionTypeFilter';
-import PropertyTypeFilter from './components/PropertyTypeFilter';
 
 interface DefaultFiltersProps {
   openModal: () => void;
@@ -19,8 +18,19 @@ interface DefaultFiltersProps {
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
   const {
     updateFilters,
-    filters: { priceFrom, priceTo, areaFrom, areaTo },
+    filters: { priceFrom, priceTo, areaFrom, areaTo, transactionType, rootCategoryType },
   } = useCommercialFilters();
+
+  const onApply = () => {
+    applyFilters({
+      transactionType,
+      rootCategoryType,
+      priceFrom,
+      priceTo,
+      areaFrom,
+      areaTo,
+    });
+  };
 
   return (
     <DefaultFiltersWrapper openModal={openModal}>
@@ -41,7 +51,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
         <PriceFilter onChange={updateFilters} priceFrom={priceFrom} priceTo={priceTo} />
         <AreaFilter onChange={updateFilters} areaFrom={areaFrom} areaTo={areaTo} />
       </div>
-      <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={() => {}}>
+      <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={onApply}>
         Применить
       </Button>
     </DefaultFiltersWrapper>

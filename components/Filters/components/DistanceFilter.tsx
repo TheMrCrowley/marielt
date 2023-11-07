@@ -1,14 +1,13 @@
 import React from 'react';
 
 import Select from '@/components/Select';
-import { useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
-const DistanceFilter = () => {
-  const {
-    filters: { distance },
-    updateFilters,
-  } = useHousesAndLotsFilters();
+interface DistanceFilterProps {
+  distance: string;
+  onChange: ({ distance }: { distance: string }) => void;
+}
 
+const DistanceFilter = ({ distance, onChange }: DistanceFilterProps) => {
   return (
     <Select
       isMulti={false}
@@ -35,11 +34,11 @@ const DistanceFilter = () => {
       ]}
       values={distance}
       onChange={(selected) =>
-        updateFilters({
+        onChange({
           distance: selected,
         })
       }
-      wrapperClassName="flex-1"
+      wrapperClassName="lg:basis-1/4 sm:basis-1/2 basis-full"
     />
   );
 };

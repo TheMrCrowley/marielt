@@ -1,22 +1,3 @@
-import {
-  RoominessValues,
-  HouseTypeValues,
-  BalconyValues,
-  SaleTermValues,
-} from '@/enums/FlatsFilters';
-import { FinishingValues } from '@/enums/FlatsFilters';
-import {
-  ElectricityValues,
-  HeatingValues,
-  HouseLevelValues,
-  WallMaterialValues,
-} from '@/enums/HousesAndLotsFilters';
-import { CommercialTransaction } from '@/services/commercialFilters';
-
-import { WaterValues, GasSupplyValues, SewerageValues } from './../enums/HousesAndLotsFilters';
-import { CommercialCategory } from './../services/commercialFilters';
-import { District, MicroDistrict } from './Location';
-
 export type OptionType<T extends string> = Array<{
   label: string;
   value: T;

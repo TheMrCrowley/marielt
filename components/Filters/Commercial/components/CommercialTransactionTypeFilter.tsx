@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import Select from '@/components/Select';
 import { useCommercialFilters } from '@/store/commercialFilters';

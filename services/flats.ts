@@ -61,7 +61,6 @@ const getFlatsStrapiQueryParamsByFilters = (
 
   const query = qs.stringify(
     {
-      // TODO doublecheck filters
       filters: {
         metro: {
           name: {

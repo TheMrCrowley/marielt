@@ -6,14 +6,14 @@ import React from 'react';
 import Button from '@/components/Button';
 import FiltersWrapper from '@/components/Filters/DefaultFiltersWrapper';
 import AreaFilter from '@/components/Filters/components/AreaFilter';
+import DirectionFilter from '@/components/Filters/components/DirectionFilter';
+import DistanceFilter from '@/components/Filters/components/DistanceFilter';
 import PlotAreaFilter from '@/components/Filters/components/PlotAreaFilter';
 import PriceFilter from '@/components/Filters/components/PriceFilter';
 import { HousesAndLotsRootCategory } from '@/enums/HousesAndLotsFilters';
 import { getHousesAndLotsRoute } from '@/helpers/getHousesAndLotsRoute';
 import { HousesAndLotsFiltersType, useHousesAndLotsFilters } from '@/store/housesAndLotsFilters';
 
-import DirectionFilter from './components/DirectionFilter';
-import DistanceFilter from './components/DistanceFilter';
 import HousesAndLotsRootCategoryFilter from './components/HousesAndLotsRootCategoryFilter';
 
 interface DefaultFiltersProps {
@@ -34,7 +34,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       distance,
       directions,
     },
-    data: { housesAndLotasCategories },
+    data: { housesAndLotasCategories, directions: directionOptions },
     updateFilters,
   } = useHousesAndLotsFilters();
 
@@ -42,7 +42,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     const type =
       housesAndLotsRootCategory &&
       getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories);
-    console.log({ type });
+
     switch (type) {
       case HousesAndLotsRootCategory.Plots:
         return (
@@ -91,8 +91,12 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       >
         <HousesAndLotsRootCategoryFilter />
         <PriceFilter onChange={updateFilters} priceFrom={priceFrom} priceTo={priceTo} />
-        <DirectionFilter />
-        <DistanceFilter />
+        <DirectionFilter
+          directions={directionOptions}
+          onChange={updateFilters}
+          values={directions}
+        />
+        <DistanceFilter distance={distance} onChange={updateFilters} />
       </div>
       <div
         className={clsx('flex', 'justify-between', 'w-full', 'gap-4', 'md:flex-row', 'flex-col')}

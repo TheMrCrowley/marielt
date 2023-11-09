@@ -25,7 +25,7 @@ export const getFontSizeClassName = (fontSize: FontSizeType): string => {
     case 32:
       return 'lg:text-[32px] md:text-2xl text-xl';
     case 24:
-      return 'text-2xl';
+      return 'lg:text-2xl sm:text-xl text-base';
     case 20:
       return 'lg:text-xl md:text-base text-sm';
     case 16:

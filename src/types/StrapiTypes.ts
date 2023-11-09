@@ -16,7 +16,7 @@ export interface StrapiFindResponse<T> {
 
 export interface StrapiFindOneResponse<T> {
   data: {
-    id: number;
+    id: string;
     attributes: T;
   };
 }

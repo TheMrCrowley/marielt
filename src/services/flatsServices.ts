@@ -16,7 +16,11 @@ import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
 import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
-import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import {
+  FlatStrapiResponse,
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+} from '@/src/types/StrapiTypes';
 
 import { getPaginationQuery } from './../helpers/getPaginationQuery';
 import { getCurrencies } from './currencyServices';
@@ -329,4 +333,15 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
   const searchResults = (await response.json()) as SearchResults;
 
   return searchResults;
+};
+
+export const getFlatById = async (id: string): Promise<DefaultFlatItem> => {
+  const query = qs.stringify({
+    populate: '*',
+  });
+  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items/${id}?${query}`);
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat([data])[0];
 };

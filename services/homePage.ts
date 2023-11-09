@@ -30,11 +30,7 @@ const getHomePageItems = async (): Promise<{
   productItems: HomePageItem[];
   opportunityItems: HomePageItem[];
 }> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/home-pages?populate=*`, {
-    next: {
-      revalidate: 1000 * 60 * 60,
-    },
-  });
+  const response = await fetch(`${process.env.API_BASE_URL}/home-pages?populate=*`, {});
   const { data } = (await response.json()) as StrapiFindResponse<HomePageItemResponse>;
 
   const productItems = data
@@ -75,9 +71,7 @@ const getHomePageItems = async (): Promise<{
 
 const getWelcomeSectionItem = async (): Promise<WelcomeSectionItem> => {
   const response = await fetch(`${process.env.API_BASE_URL}/carousels/1?populate=*`, {
-    next: {
-      revalidate: 1000 * 60 * 60,
-    },
+    cache: 'no-cache',
   });
   const { data } = (await response.json()) as StrapiFindOneResponse<CarouselItemResponse>;
 

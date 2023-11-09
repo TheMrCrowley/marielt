@@ -27,6 +27,7 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
   const { selectedCurrency } = useCurrency();
 
   useEffect(() => {
+    console.log('commercial filters mounted');
     const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
 
     updateFilters({ ...initialFilters });
@@ -34,53 +35,18 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
   }, []);
 
   const applyFilters = (selectedFilters: Partial<typeof filters>) => {
-    console.log(selectedFilters.propertyType);
-    // console.log(formatFiltersToSearchParams(selectedFilters, selectedCurrency).toString());
-    // console.log(selectedFilters);
-    // parameters.premises_area.max
-
-    // console.log(
-    //   qs.stringify({
-    //     filters: {
-    //       parameters: {
-    //         premises_area: {
-    //           $or: [
-    //             {
-    //               max_area: {
-    //                 $null: true,
-    //               },
-    //               min_area: {
-    //                 $gte: 20,
-    //                 $lte: 100,
-    //               },
-    //             },
-    //             {
-    //               max_area: {
-    //                 $between: [20, 100],
-    //               },
-    //             },
-    //             {
-    //               min_area: {
-    //                 $between: [20, 100],
-    //               },
-    //             },
-    //             {
-    //               max_area: {
-    //                 $gte: 100,
-    //                 $not: {
-    //                   $lt: 20,
-    //                 },
-    //               },
-    //               min_area: {
-    //                 $lte: 20,
-    //               },
-    //             },
-    //           ],
-    //         },
-    //       },
-    //     },
-    //   }),
-    // );
+    // router.push(pathname + '?' + formatFiltersToSearchParams(selectedFilters, selectedCurrency));
+    // router.refresh();
+    console.log(
+      qs.stringify(
+        {
+          filters: {
+            parameters: {},
+          },
+        },
+        { encodeValuesOnly: true },
+      ),
+    );
   };
 
   return (

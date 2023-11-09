@@ -45,15 +45,9 @@ interface GetActualApartmentsResponse {
   }>;
 }
 
-const REVALIDATE_TIME = 10000;
-
 // TODO change to get ACTUAL
 const getActualApartments = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`, {
-    next: {
-      revalidate: REVALIDATE_TIME,
-    },
-  });
+  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?populate=*`, {});
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('USD');
@@ -62,11 +56,7 @@ const getActualApartments = async (): Promise<Product[]> => {
 };
 
 const getActualHouses = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots-items?populate=*`, {
-    next: {
-      revalidate: REVALIDATE_TIME,
-    },
-  });
+  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots-items?populate=*`, {});
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('USD');
@@ -75,11 +65,10 @@ const getActualHouses = async (): Promise<Product[]> => {
 };
 
 const getActualCommercial = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/commercial-property-items?populate=*`, {
-    next: {
-      revalidate: REVALIDATE_TIME,
-    },
-  });
+  const response = await fetch(
+    `${process.env.API_BASE_URL}/commercial-property-items?populate=*`,
+    {},
+  );
   const { data } = (await response.json()) as GetActualApartmentsResponse;
 
   const currency = await getCurrencyByType('EUR');

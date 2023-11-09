@@ -208,11 +208,11 @@ export const isUpdateNeeded = async (
     formatted.district_rb && targetItem.district_rb !== formatted.district_rb;
 
   const isHouseNumberChanged =
-    formatted.house_number.number &&
+    formatted?.house_number?.number &&
     targetItem?.house_number?.number !== formatted.house_number.number;
 
   const isBuildingChanged =
-    formatted.house_number.building &&
+    formatted?.house_number?.building &&
     targetItem?.house_number?.building !== formatted.house_number.building;
 
   if (
@@ -242,7 +242,9 @@ export const updateEntry = async (entry: WebhookRequest, formatted: FormattedCom
     }),
   });
 
-  return response.json();
+  const data = await response.json();
+
+  return data;
 };
 
 export const shouldHandleAddressChange = (

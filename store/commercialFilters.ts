@@ -64,15 +64,15 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   areaTo: '',
   floorFrom: '',
   floorTo: '',
+  isFirstFloor: false,
+  isLastFloor: false,
+  isGroundFloor: false,
   constructionYearFrom: '',
   constructionYearTo: '',
   profitabilityFrom: '',
   profitabilityTo: '',
   paybackFrom: '',
   paybackTo: '',
-  isFirstFloor: false,
-  isLastFloor: false,
-  isGroundFloor: false,
   vat: false,
   separateEntrance: false,
   commercialLocation: [],
@@ -111,7 +111,10 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
       },
     }));
   },
-  setData: (data) => set({ data }),
+  setData: (data) => {
+    console.log('set commercial data');
+    set({ data });
+  },
   isExpandedOpen: false,
   setIsExpandedOpen: (isExpandedOpen) => set({ isExpandedOpen }),
 }));

@@ -160,9 +160,6 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
       searchParams.page || 1
     }`,
     {
-      next: {
-        // revalidate: REVALIDATE_TIME,
-      },
       cache: 'no-cache',
     },
   );

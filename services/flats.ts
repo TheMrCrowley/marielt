@@ -174,9 +174,6 @@ export const getFlats = async (searchParams: Record<string, string | string[]>) 
       searchParams.page || 1
     }`,
     {
-      next: {
-        // revalidate: REVALIDATE_TIME,
-      },
       cache: 'no-cache',
     },
   );

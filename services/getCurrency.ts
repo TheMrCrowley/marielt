@@ -16,11 +16,7 @@ interface GetCurrencyResponse {
 const VALIDATE_RATE = 1000 * 60 * 60 * 24;
 
 export const getCurrencyByType = async (type: keyof typeof CurrencyId) => {
-  const response = await fetch(`https://api.nbrb.by/exrates/rates/${CurrencyId[type]}`, {
-    next: {
-      revalidate: VALIDATE_RATE,
-    },
-  });
+  const response = await fetch(`https://api.nbrb.by/exrates/rates/${CurrencyId[type]}`, {});
   const data = (await response.json()) as GetCurrencyResponse;
 
   return data.Cur_OfficialRate / data.Cur_Scale;

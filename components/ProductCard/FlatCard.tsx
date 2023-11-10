@@ -19,8 +19,15 @@ interface FlatCardProps {
 }
 
 const FlatCard = ({ flatItem }: FlatCardProps) => {
-  const { img, name, address, floor, maxFloor, totalArea, livingArea, id, price, initialCurrency } =
-    flatItem;
+  const {
+    img,
+    name,
+    address,
+    id,
+    price,
+    initialCurrency,
+    parameters: { floor, maxFloor, totalArea, livingArea },
+  } = flatItem;
 
   const { selectedCurrency, rates } = useCurrency();
 

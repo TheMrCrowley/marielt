@@ -3,6 +3,7 @@ import { Exo_2 } from 'next/font/google';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import CurrencyProvider from '@/providers/CurrencyProvider';
+import WindowResizeProvider from '@/providers/WindowResizeProvider';
 
 import './globals.css';
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="content">
             <Header />
             <main className="main">
-              <CurrencyProvider>{children}</CurrencyProvider>
+              <CurrencyProvider>
+                <WindowResizeProvider>{children}</WindowResizeProvider>
+              </CurrencyProvider>
             </main>
           </div>
 

@@ -1,17 +1,22 @@
+'use client';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import Navigation from '@/components/Navigation';
-import BurgerMenu from '@/components/Navigation/BurgerMenu';
+import { WindowWidth } from '@/enums/Width';
+import { useWindowSize } from '@/helpers/useWindowSize';
+import Burger from '@/public/burger.svg';
 import Logo from '@/public/logo.svg';
 
 const Header = () => {
+  const breakpoint = useWindowSize();
+
   return (
     <>
       <header
-        // className={styles.header}
         className={clsx(
           'px-5',
           'flex',
@@ -40,9 +45,19 @@ const Header = () => {
             className={clsx('lg:w-[220px]', 'md:w-[200px]', 'sm:w-[180px]', 'w-[120px]')}
           />
         </Link>
-        <BurgerMenu />
+        {!(breakpoint >= WindowWidth.SM) && (
+          <button
+            className={clsx('flex', 'justify-center', 'items-center', 'hover:cursor-pointer')}
+          >
+            <Image
+              src={Burger}
+              alt="burger"
+              className={clsx('transition-transform', 'active:scale-90')}
+            />
+          </button>
+        )}
       </header>
-      <Navigation />
+      {breakpoint >= WindowWidth.SM && <Navigation />}
     </>
   );
 };

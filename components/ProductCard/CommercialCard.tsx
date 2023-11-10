@@ -10,23 +10,15 @@ import Title from '@/components/Title';
 import { getPriceByCurrencyMonetary } from '@/helpers/currencyHelpers';
 import CardMapPinIcon from '@/public/card-map-pin.svg';
 import ImagePlaceholder from '@/public/card-placeholder.png';
-import { DefaultHousesAndLotsItem } from '@/services/housesAndLots';
+import { DefaultCommercialItem } from '@/services/commercial';
 import { useCurrency } from '@/store/currency';
 
-interface HousesAndLotsCardProps {
-  housesAndLotsItem: DefaultHousesAndLotsItem;
+interface CommercialCardProps {
+  commercialItem: DefaultCommercialItem;
 }
 
-const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
-  const {
-    address,
-    id,
-    initialCurrency,
-    img,
-    name,
-    price,
-    parameters: { plotSize },
-  } = housesAndLotsItem;
+const CommercialCard = ({ commercialItem }: CommercialCardProps) => {
+  const { img, name, address, id, initialCurrency, price } = commercialItem;
 
   const { selectedCurrency, rates } = useCurrency();
 
@@ -81,16 +73,16 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
           <Image src={CardMapPinIcon} alt="card-map-pin" />
           <p className={clsx('text-white', 'text-base', 'font-normal', 'opacity-50')}>{address}</p>
         </div>
-        {!!plotSize && (
+        {/* {!!plotSize && (
           <p className={clsx('md:text-sm', 'text-xs', 'font-light', 'text-white')}>
             Площадь участка:{' '}
             <span className={clsx('md:text-base', 'text-sm', 'font-medium')}>{plotSize}</span>{' '}
             <span className={clsx('opacity-50')}>соток</span>
           </p>
-        )}
+        )} */}
         {price && renderPriceBlock()}
         <Link
-          href={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::houses-and-lots-item.houses-and-lots-item/${id}`}
+          href={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::commercial-property-item.commercial-property-item/${id}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -103,4 +95,4 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
   );
 };
 
-export default HousesAndLotsCard;
+export default CommercialCard;

@@ -35,18 +35,8 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
   }, []);
 
   const applyFilters = (selectedFilters: Partial<typeof filters>) => {
-    // router.push(pathname + '?' + formatFiltersToSearchParams(selectedFilters, selectedCurrency));
-    // router.refresh();
-    console.log(
-      qs.stringify(
-        {
-          filters: {
-            parameters: {},
-          },
-        },
-        { encodeValuesOnly: true },
-      ),
-    );
+    router.push(pathname + '?' + formatFiltersToSearchParams(selectedFilters, selectedCurrency));
+    router.refresh();
   };
 
   return (

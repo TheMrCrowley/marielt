@@ -22,6 +22,8 @@ const CurrencySetter = ({ children, currencies }: CurrencySetterProps) => {
   }, []);
 
   if (!isCurrenciesExist) {
+    console.log(3);
+
     return <Loader />;
   }
 

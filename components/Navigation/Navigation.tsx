@@ -13,7 +13,7 @@ const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
 
 const Navigation = () => {
   return (
-    <nav className={clsx('px-4', 'sm:flex', 'justify-center', 'items-center', 'hidden')}>
+    <nav className={clsx('px-4', 'flex', 'justify-center', 'items-center')}>
       <ul className={styles.navList}>
         {navItems.map((navItem) => (
           <NavigationItem navItem={navItem} key={navItem.title} />

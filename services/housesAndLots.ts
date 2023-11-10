@@ -126,7 +126,7 @@ const getHousesAndLotsStrapiQuery = (
           },
         },
         distance: {
-          $gte: distance,
+          $lte: distance,
         },
         direction: {
           name: {
@@ -196,10 +196,12 @@ const convertResponseToDefaultItem = (
         street,
       }),
       initialCurrency: currency || 'USD',
-      plotSize: parameters.plot_size || 'Нету площади',
       img: image?.url,
       name,
       price,
+      parameters: {
+        plotSize: parameters.plot_size || 'Нету площади',
+      },
     }),
   );
 };
@@ -234,10 +236,12 @@ interface HousesAndLotsStrapiResponse {
 
 export interface DefaultHousesAndLotsItem {
   address: string;
-  plotSize: string;
   id: string;
   price?: string;
   name?: string;
   img?: string;
   initialCurrency: AvailableCurrencies;
+  parameters: {
+    plotSize: string;
+  };
 }

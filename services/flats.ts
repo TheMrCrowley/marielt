@@ -197,15 +197,18 @@ const convertResponseToDefaultFlat = (
       houseNumber: attributes.house_number?.number,
       street: attributes.street,
     }),
-    floor: attributes.parameters.floor,
     id,
-    livingArea: attributes.parameters.living_area,
-    maxFloor: attributes.parameters.floors_number,
+
     price: attributes.price,
-    totalArea: attributes.parameters.total_area,
     name: attributes.name,
     img: attributes.image?.url,
     initialCurrency: attributes.currency || 'USD',
+    parameters: {
+      floor: attributes.parameters.floor,
+      livingArea: attributes.parameters.living_area,
+      maxFloor: attributes.parameters.floors_number,
+      totalArea: attributes.parameters.total_area,
+    },
   }));
 };
 
@@ -240,13 +243,15 @@ export interface FlatStrapiResponse {
 
 export interface DefaultFlatItem {
   address: string;
-  floor: string;
-  maxFloor: string;
-  totalArea: string;
-  livingArea: string;
   id: string;
   price?: string;
   name?: string;
   img?: string;
   initialCurrency: AvailableCurrencies;
+  parameters: {
+    totalArea: string;
+    floor: string;
+    maxFloor: string;
+    livingArea: string;
+  };
 }

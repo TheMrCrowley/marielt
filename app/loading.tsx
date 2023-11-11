@@ -1,9 +1,8 @@
 import React from 'react';
 
-import Loader from '@/components/Loader';
+import Loader from '@/src/components/common/Loader';
 
 const loader = () => {
-  console.log(1);
   return <Loader />;
 };
 

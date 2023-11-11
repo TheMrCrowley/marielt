@@ -1,29 +1,21 @@
 import React from 'react';
 
-import HousesAndLotsFilters from '@/components/Filters/HousesAndLots';
-import HousesAndLotsList from '@/components/Filters/HousesAndLots/HousesAndLotsList';
-import { getHousesAndLots } from '@/services/housesAndLots';
-import { getHousesAndLotsFiltersData } from '@/services/housesAndLotsFilters';
+import HousesAndLotsPage from '@/src/app-pages/HousesAndLotsPage';
+import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
+import { getHousesAndLots } from '@/src/services/housesAndLotsServices';
 
 type HousesAndLotsProps = {
   searchParams: Record<string, string | string[]>;
 };
 
 const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
-  const [{ directions, housesAndLotasCategories }, { housesAndLots, pagination }] =
-    await Promise.all([getHousesAndLotsFiltersData(), getHousesAndLots(searchParams)]);
+  const [data, { housesAndLots, pagination }] = await Promise.all([
+    getHousesAndLotsFiltersData(),
+    getHousesAndLots(searchParams),
+  ]);
 
-  return (
-    <>
-      <HousesAndLotsFilters
-        data={{
-          directions,
-          housesAndLotasCategories,
-        }}
-      />
-      <HousesAndLotsList housesAndLots={housesAndLots} pagination={pagination} />
-    </>
-  );
+  console.log('Found: ', housesAndLots.length);
+  return <HousesAndLotsPage data={data} housesAndLots={housesAndLots} pagination={pagination} />;
 };
 
 export default HousesAndLots;

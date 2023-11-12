@@ -46,6 +46,10 @@ export type CommercialFiltersType = BaseFilters<
     electricity: boolean;
     gas: boolean;
     //
+    district_rb: string[];
+    locality: string[];
+    region: string[];
+    street: string[];
   },
   {
     transactions: CommercialTransaction[];
@@ -94,6 +98,10 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   sewerage: false,
   electricity: false,
   gas: false,
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
 };
 
 export const useCommercialFilters = create<CommercialFiltersType>((set) => ({

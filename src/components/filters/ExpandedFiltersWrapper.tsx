@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
 
 import CrossIcon from '@/public/plus.svg';
-import FiltersModal from '@/src/components/FiltersModal';
+import Portal from '@/src/components/common/Portal';
 import Title from '@/src/components/common/Title';
 
 interface ExpandedFiltersProps extends PropsWithChildren {
@@ -12,66 +12,105 @@ interface ExpandedFiltersProps extends PropsWithChildren {
 }
 
 const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedFiltersProps) => {
+  if (!isModalOpen) {
+    return null;
+  }
+
   return (
-    <FiltersModal isOpen={isModalOpen} onClose={closeModal}>
+    <Portal>
       <div
         className={clsx(
-          'flex',
-          'bg-[#262626]',
-          'md:max-w-[1620px]',
-          'w-full',
-          'relative',
+          'fixed',
+          'top-0',
+          'left-0',
+          'right-0',
+          'bottom-0',
+          'lg:p-9',
+          'md:p-4',
+          'p-0',
+          'box-border',
           'z-10',
-          'flex-auto',
-          'h-full',
-          'overflow-hidden',
-          'lg:py-12',
-          'py-6',
-          'lg:px-20',
-          'px-0',
-          'bg-[url(/modal-bg.png)]',
+          'flex',
+          'justify-center',
+          'items-center',
+          'bg-[#00000099]',
+          'backdrop-blur-sm',
         )}
+        role="dialog"
       >
-        <button
+        <div
           className={clsx(
-            'flex',
-            'justify-center',
-            'items-center',
             'absolute',
-            'md:top-6',
-            'md:right-6',
-            'top-9',
-            'right-4',
+            'top-0',
+            'left-0',
+            'right-0',
+            'bottom-0',
+            'cursor-pointer',
+            'bg-[#00000099]',
+            'z-0',
           )}
           onClick={closeModal}
-        >
-          <Image
-            src={CrossIcon}
-            alt="close-icon"
-            className={clsx('md:w-8', 'md:h-8', 'w-4', 'h-4')}
-          />
-        </button>
-        <section
+          role="button"
+        />
+        <div
           className={clsx(
             'flex',
-            'flex-col',
+            'bg-[#262626]',
+            'md:max-w-[1620px]',
             'w-full',
-            'justify-start',
-            'overflow-y-auto',
-            'gap-y-10',
-            'px-4',
-            'scrollbar-thin',
-            'scrollbar-thumb-primary',
-            'scrollbar-track-secondary',
+            'relative',
+            'z-10',
+            'flex-auto',
+            'h-full',
+            'overflow-hidden',
+            'lg:py-12',
+            'py-6',
+            'lg:px-20',
+            'px-0',
+            'bg-[url(/modal-bg.png)]',
           )}
         >
-          <Title fontSize={40} fontWeight="medium">
-            Расширенный фильтр
-          </Title>
-          {children}
-        </section>
+          <button
+            className={clsx(
+              'flex',
+              'justify-center',
+              'items-center',
+              'absolute',
+              'md:top-6',
+              'md:right-6',
+              'top-9',
+              'right-4',
+            )}
+            onClick={closeModal}
+          >
+            <Image
+              src={CrossIcon}
+              alt="close-icon"
+              className={clsx('md:w-8', 'md:h-8', 'w-4', 'h-4')}
+            />
+          </button>
+          <section
+            className={clsx(
+              'flex',
+              'flex-col',
+              'w-full',
+              'justify-start',
+              'overflow-y-auto',
+              'gap-y-10',
+              'px-4',
+              'scrollbar-thin',
+              'scrollbar-thumb-primary',
+              'scrollbar-track-secondary',
+            )}
+          >
+            <Title fontSize={40} fontWeight="medium">
+              Расширенный фильтр
+            </Title>
+            {children}
+          </section>
+        </div>
       </div>
-    </FiltersModal>
+    </Portal>
   );
 };
 

@@ -7,9 +7,12 @@ import MicroDistrictFilter from '@/src/components/FlatsFilters/MicroDistrictFilt
 import RoominessFilter from '@/src/components/FlatsFilters/RoominessFilter';
 import Button from '@/src/components/common/Button';
 import Chip from '@/src/components/common/Chip';
+import Input from '@/src/components/common/Input/Input';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import FiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
 import PriceFilter from '@/src/components/filters/PriceFilter';
+import SearchField from '@/src/components/filters/SearchField';
+import { getFlatsSearchResults } from '@/src/services/flatsServices';
 import { useFlatsFilter } from '@/src/store/flatsFilters';
 
 interface DefaultFilterProps {
@@ -83,12 +86,22 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
           'md:justify-between',
           'gap-5',
           'md:flex-row',
-          'md:items-center',
+          'md:items-end',
           'flex-col',
           'items-start',
         )}
       >
         <AreaFilter areaFrom={filters.areaFrom} areaTo={filters.areaTo} onChange={updateFilters} />
+        <SearchField
+          onClick={updateFilters}
+          search={getFlatsSearchResults}
+          values={{
+            district_rb: filters.district_rb,
+            locality: filters.locality,
+            region: filters.region,
+            street: filters.street,
+          }}
+        />
         <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={applyFilters}>
           Применить
         </Button>

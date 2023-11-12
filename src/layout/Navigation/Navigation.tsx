@@ -1,9 +1,12 @@
+'use client';
+
 import clsx from 'clsx';
 import React from 'react';
 
 import { AppRoutes, navigationMap } from '@/src/enums/AppRoutes';
+import { WindowWidth } from '@/src/enums/Width';
+import { useWindowSize } from '@/src/hooks/useWindowSize';
 
-import styles from './Navigation.module.css';
 import NavigationItem, { NavItem } from './NavigationItem';
 
 const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
@@ -12,9 +15,24 @@ const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
 }));
 
 const Navigation = () => {
+  const breakpoint = useWindowSize();
+
+  if (breakpoint < WindowWidth.SM) {
+    return null;
+  }
+
   return (
     <nav className={clsx('px-4', 'flex', 'justify-center', 'items-center')}>
-      <ul className={styles.navList}>
+      <ul
+        className={clsx(
+          'max-w-6xl',
+          'w-full',
+          'grid',
+          'grid-flow-col',
+          'gap-4',
+          'justify-items-center',
+        )}
+      >
         {navItems.map((navItem) => (
           <NavigationItem navItem={navItem} key={navItem.title} />
         ))}

@@ -19,6 +19,7 @@ import {
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
+import { SearchResults } from './../types/Filters';
 import { getFullAddress } from './getFullAddress';
 
 export const formatToDefaultFlat = (
@@ -159,3 +160,46 @@ export const formatToCommercialCategory = (
       transactionName: transaction.attributes.name,
     })),
   }));
+
+export const formatResponseToSearchResult = (
+  data:
+    | StrapiFindResponse<FlatStrapiResponse>['data']
+    | StrapiFindResponse<HousesAndLotsStrapiResponse>['data']
+    | StrapiFindResponse<CommercialStrapiResponse>['data'],
+  value: string,
+): SearchResults => {
+  const streets = new Set<string>();
+  const localities = new Set<string>();
+  const regions = new Set<string>();
+  const districts = new Set<string>();
+
+  data.forEach((item) => {
+    const street = item?.attributes.street;
+    const region = item?.attributes?.region?.data?.attributes?.name;
+    const district = item?.attributes.district_rb;
+    const locality = item?.attributes.locality;
+
+    if (street && street.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+      streets.add(street);
+    }
+
+    if (region && region.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+      regions.add(region);
+    }
+
+    if (district && district.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+      districts.add(district);
+    }
+
+    if (locality && locality.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+      localities.add(locality);
+    }
+  });
+
+  return {
+    district_rb: Array.from(districts),
+    locality: Array.from(localities),
+    region: Array.from(regions),
+    street: Array.from(streets),
+  };
+};

@@ -48,6 +48,10 @@ export type FlatsFiltersType = BaseFilters<
     saleTerm: SaleTermValues[];
     furniture: boolean;
     parking: boolean;
+    street: string[];
+    locality: string[];
+    district_rb: string[];
+    region: string[];
   },
   {
     district: District[];
@@ -88,6 +92,10 @@ export const initialFlatsFilters: FlatsFiltersType['filters'] = {
   saleTerm: [],
   furniture: false,
   parking: false,
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
 };
 
 export const useFlatsFilter = create<FlatsFiltersType>((set) => ({

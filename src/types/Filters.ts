@@ -18,3 +18,10 @@ export interface BaseFilters<
   isExpandedOpen: boolean;
   setIsExpandedOpen: (isExpandedOpen: boolean) => void;
 }
+
+export interface SearchResults {
+  street: string[];
+  locality: string[];
+  district_rb: string[];
+  region: string[];
+}

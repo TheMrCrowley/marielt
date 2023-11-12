@@ -14,6 +14,7 @@ import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
+import { SearchResults } from '@/src/types/Filters';
 import { DefaultFlatItem } from '@/src/types/Flats';
 import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
@@ -57,11 +58,30 @@ const getFlatsStrapiQueryParamsByFilters = (
     saleTerm,
     furniture,
     parking,
+    district_rb,
+    locality,
+    region,
+    isNotLastFloor,
+    street,
   } = filters as FlatsFiltersType['filters'];
 
   const query = qs.stringify(
     {
       filters: {
+        locality: {
+          $in: locality,
+        },
+        street: {
+          $in: street,
+        },
+        district_rb: {
+          $in: district_rb,
+        },
+        region: {
+          name: {
+            $in: region,
+          },
+        },
         metro: {
           name: {
             $in: metro,
@@ -146,6 +166,11 @@ const getFlatsStrapiQueryParamsByFilters = (
           },
         },
       },
+      populate: '*',
+      pagination: {
+        pageSize: 6,
+        page: filters.page || 1,
+      },
     },
     {
       encodeValuesOnly: true,
@@ -172,16 +197,11 @@ export const getFlats = async (
     },
   );
 
-  const response = await fetch(
-    `${
-      process.env.API_BASE_URL
-    }/apartments-items?populate=*&${query}&pagination[pageSize]=6&pagination[page]=${
-      searchParams.page || 1
-    }`,
-    {
-      cache: 'no-cache',
-    },
-  );
+  const url = `${process.env.API_BASE_URL}/apartments-items?${query}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
   const {
     data,
     meta: { pagination },
@@ -191,4 +211,23 @@ export const getFlats = async (
     flats: formatToDefaultFlat(data),
     pagination,
   };
+};
+
+export const getFlatsSearchResults = async (value: string): Promise<SearchResults> => {
+  const query = qs.stringify(
+    {
+      searchValue: value,
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `/api/search?${query}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
+
+  const searchResults = (await response.json()) as SearchResults;
+
+  return searchResults;
 };

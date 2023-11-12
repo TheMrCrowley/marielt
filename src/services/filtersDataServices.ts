@@ -184,3 +184,43 @@ export const getCommercialFiltersData = async () => {
     directions,
   };
 };
+
+export const getSearchFieldQuery = (value: string) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        $or: [
+          {
+            locality: {
+              $containsi: value,
+            },
+          },
+          {
+            street: {
+              $containsi: value,
+            },
+          },
+          {
+            district_rb: {
+              $containsi: value,
+            },
+          },
+          {
+            region: {
+              name: {
+                $containsi: value,
+              },
+            },
+          },
+        ],
+      },
+      populate: '*',
+      pagination: {
+        limit: -1,
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+
+  return query;
+};

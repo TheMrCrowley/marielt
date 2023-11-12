@@ -46,6 +46,10 @@ export type HousesAndLotsFiltersType = BaseFilters<
     heating: HeatingValues[];
 
     saleTerm: SaleTermValues[];
+    district_rb: string[];
+    locality: string[];
+    region: string[];
+    street: string[];
   },
   {
     directions: string[];
@@ -82,6 +86,11 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   heating: [],
 
   saleTerm: [],
+
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
 };
 
 export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) => ({

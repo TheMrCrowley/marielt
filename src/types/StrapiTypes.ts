@@ -82,6 +82,14 @@ export interface FlatStrapiResponse {
   coordinates: string;
   locality: string;
   street?: string;
+  district_rb?: string;
+  region?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
   house_number?: {
     number: string;
     building: string;
@@ -95,6 +103,14 @@ export interface FlatStrapiResponse {
 export interface CommercialStrapiResponse {
   locality: string;
   coordinates: string;
+  district_rb?: string;
+  region?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
   parameters: {
     premises_area?: {
       min_area: string;
@@ -161,6 +177,14 @@ export interface CommercialStrapiResponse {
 export interface HousesAndLotsStrapiResponse {
   locality: string;
   street?: string;
+  district_rb?: string;
+  region?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
   house_number?: {
     number: string;
     building: string;

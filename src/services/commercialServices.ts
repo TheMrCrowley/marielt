@@ -240,6 +240,11 @@ const getCommercialStrapiQueryParamsByFilters = (
           },
         },
       },
+      populate: '*',
+      pagination: {
+        pageSize: 6,
+        page: filters.page || 1,
+      },
     },
     {
       encodeValuesOnly: true,
@@ -260,16 +265,12 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
       usd,
     },
   );
-  const response = await fetch(
-    `${
-      process.env.API_BASE_URL
-    }/commercial-property-items?populate=*&${query}&pagination[pageSize]=6&pagination[page]=${
-      searchParams.page || 1
-    }`,
-    {
-      cache: 'no-cache',
-    },
-  );
+
+  const url = `${process.env.API_BASE_URL}/commercial-property-items?${query}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
 
   const {
     data,

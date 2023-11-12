@@ -11,14 +11,19 @@ import {
   sewerageQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/formatters';
+import {
+  formatResponseToSearchResult,
+  formatToDefaultHouseAndLotsItem,
+} from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
+import { SearchResults } from '@/src/types/Filters';
 import { HousesAndLotsStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import { getCurrencies } from './currencyServices';
+import { getSearchFieldQuery } from './filtersDataServices';
 
 const getHousesAndLotsStrapiQuery = (
   filters: Record<string, string | string[] | boolean>,
@@ -134,6 +139,11 @@ const getHousesAndLotsStrapiQuery = (
           },
         },
       },
+      populate: '*',
+      pagination: {
+        pageSize: 6,
+        page: filters.page || 1,
+      },
     },
     { encodeValuesOnly: true },
   );
@@ -153,16 +163,11 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     },
   );
 
-  const response = await fetch(
-    `${
-      process.env.API_BASE_URL
-    }/houses-and-lots-items?populate=*&${query}&pagination[pageSize]=6&pagination[page]=${
-      searchParams.page || 1
-    }`,
-    {
-      cache: 'no-cache',
-    },
-  );
+  const url = `${process.env.API_BASE_URL}/houses-and-lots-items?${query}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
 
   const {
     data,
@@ -173,4 +178,18 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     housesAndLots: formatToDefaultHouseAndLotsItem(data),
     pagination,
   };
+};
+
+export const getHousesAndLotsSearchResults = async (value: string): Promise<SearchResults> => {
+  const query = getSearchFieldQuery(value);
+
+  const url = `http://185.251.38.44:1337/api/houses-and-lots-items?${query}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+
+  return formatResponseToSearchResult(data, value);
 };

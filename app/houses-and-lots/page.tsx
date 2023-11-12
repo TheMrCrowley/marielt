@@ -14,7 +14,7 @@ const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
     getHousesAndLots(searchParams),
   ]);
 
-  console.log('Found: ', housesAndLots.length);
+  console.log('Found houses and Lots: ', housesAndLots.length);
   return <HousesAndLotsPage data={data} housesAndLots={housesAndLots} pagination={pagination} />;
 };
 

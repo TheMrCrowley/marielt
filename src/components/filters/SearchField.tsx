@@ -38,7 +38,7 @@ const SearchOption = ({
   return (
     <div
       onClick={(event) => {
-        // event.stopPropagation();
+        event.stopPropagation();
         onClick();
       }}
       className={clsx(

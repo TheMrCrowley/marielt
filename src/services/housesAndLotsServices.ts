@@ -11,10 +11,7 @@ import {
   sewerageQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import {
-  formatResponseToSearchResult,
-  formatToDefaultHouseAndLotsItem,
-} from '@/src/helpers/formatters';
+import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
@@ -22,8 +19,8 @@ import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
 import { HousesAndLotsStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { lotsWaterQueryMap } from './../enums/HousesAndLotsFilters';
 import { getCurrencies } from './currencyServices';
-import { getSearchFieldQuery } from './filtersDataServices';
 
 const getHousesAndLotsStrapiQuery = (
   filters: Record<string, string | string[] | boolean>,
@@ -58,11 +55,30 @@ const getHousesAndLotsStrapiQuery = (
     distance,
     nearLake,
     housesAndLotsRootCategory,
+    district_rb,
+    locality,
+    region,
+    street,
+    lotsWater,
   } = filters as HousesAndLotsFiltersType['filters'];
 
   const query = qs.stringify(
     {
       filters: {
+        locality: {
+          $in: locality,
+        },
+        street: {
+          $in: street,
+        },
+        district_rb: {
+          $in: district_rb,
+        },
+        region: {
+          name: {
+            $in: region,
+          },
+        },
         price: {
           $gte: priceFrom && getPriceByCurrency(priceFrom, selectedCurrency, 'USD', rates),
           $lte: priceTo && getPriceByCurrency(priceTo, selectedCurrency, 'USD', rates),
@@ -117,7 +133,9 @@ const getHousesAndLotsStrapiQuery = (
             $in: getQueryArray(houseLevelQueryMap, houseLevels),
           },
           water: {
-            $in: getQueryArray(waterQueryMap, water),
+            $in:
+              (water && getQueryArray(waterQueryMap, water)) ||
+              (lotsWater && getQueryArray(lotsWaterQueryMap, lotsWater)),
           },
           wall_material: {
             $in: getQueryArray(wallMaterialQueryMap, wallMaterial),
@@ -181,15 +199,21 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
 };
 
 export const getHousesAndLotsSearchResults = async (value: string): Promise<SearchResults> => {
-  const query = getSearchFieldQuery(value);
+  const query = qs.stringify(
+    {
+      searchValue: value,
+      type: 'houses-and-lots',
+    },
+    { encodeValuesOnly: true },
+  );
 
-  const url = `http://185.251.38.44:1337/api/houses-and-lots-items?${query}`;
+  const url = `/api/search?${query}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',
   });
 
-  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+  const searchResults = (await response.json()) as SearchResults;
 
-  return formatResponseToSearchResult(data, value);
+  return searchResults;
 };

@@ -90,18 +90,16 @@ const getFlatsStrapiQueryParamsByFilters = (
         sale_terms: {
           $in: getQueryArray(saleTermQueryMap, saleTerm),
         },
-        additional_info: {
-          $or: [
-            {
-              name: furniture && 'мебель',
-            },
-            { name: parking && 'гараж' },
-            { name: parking && 'стоянка автомобиля' },
-          ],
-        },
+
         parameters: {
+          furniture: {
+            $eq: furniture,
+          },
+          parking: {
+            $eq: parking,
+          },
           is_last_floor: {
-            $eq: isLastFloor,
+            $eq: isLastFloor ? isLastFloor : isNotFirstFloor ? !isNotLastFloor : undefined,
           },
           construction_year: {
             $gte: constructionYearFrom,
@@ -217,6 +215,7 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
   const query = qs.stringify(
     {
       searchValue: value,
+      type: 'flats',
     },
     { encodeValuesOnly: true },
   );

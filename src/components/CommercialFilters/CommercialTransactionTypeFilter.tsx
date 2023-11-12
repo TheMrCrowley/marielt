@@ -42,7 +42,7 @@ const CommercialTransactionTypeFilter = () => {
         label: transaction.transactionName,
         value: transaction.transactionName,
       }))}
-      wrapperClassName="basis-1/4"
+      wrapperClassName="flex-auto"
     />
   );
 };

@@ -53,6 +53,10 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
       //Default filters
       priceFrom,
       priceTo,
+      district_rb,
+      street,
+      region,
+      locality,
 
       housesAndLotsRootCategory,
       directions,
@@ -86,6 +90,10 @@ const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
       saleTerm,
       //Default filters
       priceFrom,
+      district_rb,
+      street,
+      region,
+      locality,
       priceTo,
       housesAndLotsRootCategory,
       directions,

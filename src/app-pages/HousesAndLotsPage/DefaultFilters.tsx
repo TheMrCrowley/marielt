@@ -11,8 +11,10 @@ import DirectionFilter from '@/src/components/filters/DirectionFilter';
 import DistanceFilter from '@/src/components/filters/DistanceFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import PriceFilter from '@/src/components/filters/PriceFilter';
+import SearchField from '@/src/components/filters/SearchField';
 import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import { getHousesAndLotsRoute } from '@/src/helpers/getHousesAndLotsRoute';
+import { getHousesAndLotsSearchResults } from '@/src/services/housesAndLotsServices';
 import {
   HousesAndLotsFiltersType,
   useHousesAndLotsFilters,
@@ -35,6 +37,10 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       plotAreaTo,
       distance,
       directions,
+      district_rb,
+      street,
+      region,
+      locality,
     },
     data: { housesAndLotasCategories, directions: directionOptions },
     updateFilters,
@@ -74,6 +80,10 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       distance,
       directions,
       housesAndLotsRootCategory,
+      district_rb,
+      street,
+      region,
+      locality,
     });
   };
 
@@ -101,9 +111,27 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
         <DistanceFilter distance={distance} onChange={updateFilters} />
       </div>
       <div
-        className={clsx('flex', 'justify-between', 'w-full', 'gap-4', 'md:flex-row', 'flex-col')}
+        className={clsx(
+          'flex',
+          'justify-between',
+          'items-end',
+          'w-full',
+          'gap-4',
+          'md:flex-row',
+          'flex-col',
+        )}
       >
         {getAreaFilter()}
+        <SearchField
+          search={getHousesAndLotsSearchResults}
+          values={{
+            district_rb,
+            street,
+            region,
+            locality,
+          }}
+          onClick={updateFilters}
+        />
         <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={onApply}>
           Применить
         </Button>

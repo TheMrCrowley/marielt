@@ -4,7 +4,7 @@ import React from 'react';
 import InputWrapper from '@/src/components/common/InputWrapper';
 
 interface InputFromToProps {
-  label: string;
+  label: string | React.ReactNode | React.ReactElement;
   values: {
     from: string;
     to: string;

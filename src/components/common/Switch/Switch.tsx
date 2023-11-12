@@ -12,7 +12,12 @@ interface SwitchProps {
 const Switch = ({ label, onChange, isChecked }: SwitchProps) => {
   return (
     <label className={clsx('flex', 'hover:cursor-pointer', 'max-w-max', 'gap-x-3', 'items-center')}>
-      <input className="hidden" type="checkbox" onChange={(e) => onChange(e.target.checked)} />
+      <input
+        className="hidden"
+        type="checkbox"
+        checked={isChecked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
       <Typography>{label}</Typography>
       <div
         className={clsx(

@@ -11,6 +11,7 @@ import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CommercialFiltersType } from '@/src/store/commercialFilters';
 import { CurrencyState } from '@/src/store/currency';
 import { AvailableCurrencies } from '@/src/types/Currency';
+import { SearchResults } from '@/src/types/Filters';
 import { CommercialStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import { getCurrencies } from './currencyServices';
@@ -60,6 +61,12 @@ const getCommercialStrapiQueryParamsByFilters = (
     sewerage,
     electricity,
     gas,
+    district_rb,
+    locality,
+    priceForMeterFrom,
+    priceFromMeterTo,
+    region,
+    street,
   } = filters as CommercialFiltersType['filters'];
 
   const targetCurrency: AvailableCurrencies = transactionType === 'Аренда' ? 'EUR' : 'USD';
@@ -67,6 +74,20 @@ const getCommercialStrapiQueryParamsByFilters = (
   const query = qs.stringify(
     {
       filters: {
+        locality: {
+          $in: locality,
+        },
+        street: {
+          $in: street,
+        },
+        district_rb: {
+          $in: district_rb,
+        },
+        region: {
+          name: {
+            $in: region,
+          },
+        },
         comm_tran: {
           name: {
             $in: [transactionType],
@@ -77,9 +98,106 @@ const getCommercialStrapiQueryParamsByFilters = (
             $in: [rootCategoryType, ...(propertyType ? propertyType : [])].filter(Boolean),
           },
         },
-        price_total: {
-          $gte: priceFrom && getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-          $lte: priceTo && getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+        price_total: (priceFrom || priceTo) && {
+          $or: [
+            {
+              to: {
+                $null: true,
+              },
+              from: {
+                $gte:
+                  priceFrom &&
+                  getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                $lte:
+                  priceTo && getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+              },
+            },
+            {
+              to: {
+                $between: priceFrom &&
+                  priceTo && [
+                    getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                  ],
+              },
+            },
+            {
+              from: {
+                $between: priceFrom &&
+                  priceTo && [
+                    getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                  ],
+              },
+            },
+            {
+              to: {
+                $gte: getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                $not: {
+                  $lt: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                },
+              },
+              from: {
+                $lte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+              },
+            },
+          ],
+        },
+        price_meter: (priceForMeterFrom || priceFromMeterTo) && {
+          $or: [
+            {
+              to: {
+                $null: true,
+              },
+              from: {
+                $gte:
+                  priceForMeterFrom &&
+                  getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
+                $lte:
+                  priceFromMeterTo &&
+                  getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
+              },
+            },
+            {
+              to: {
+                $between: priceForMeterFrom &&
+                  priceFromMeterTo && [
+                    getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
+                    getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
+                  ],
+              },
+            },
+            {
+              from: {
+                $between: priceForMeterFrom &&
+                  priceFromMeterTo && [
+                    getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
+                    getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
+                  ],
+              },
+            },
+            {
+              to: {
+                $gte: getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
+                $not: {
+                  $lt: getPriceByCurrency(
+                    priceForMeterFrom,
+                    selectedCurrency,
+                    targetCurrency,
+                    rates,
+                  ),
+                },
+              },
+              from: {
+                $lte: getPriceByCurrency(
+                  priceForMeterFrom,
+                  selectedCurrency,
+                  targetCurrency,
+                  rates,
+                ),
+              },
+            },
+          ],
         },
         parameters: {
           premises_area: (areaFrom || areaTo) && {
@@ -95,12 +213,12 @@ const getCommercialStrapiQueryParamsByFilters = (
               },
               {
                 max_area: {
-                  $between: [areaFrom, areaTo],
+                  $between: areaFrom && areaTo && [areaFrom, areaTo],
                 },
               },
               {
                 min_area: {
-                  $between: [areaFrom, areaTo],
+                  $between: areaFrom && areaTo && [areaFrom, areaTo],
                 },
               },
               {
@@ -267,18 +385,39 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
   );
 
   const url = `${process.env.API_BASE_URL}/commercial-property-items?${query}`;
+  console.log({ url });
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
+
+  const d = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+  console.log({ d });
+  const {
+    data,
+    meta: { pagination },
+  } = d;
+  return {
+    commercial: formatToDefaultCommercial(data),
+    pagination,
+  };
+};
+
+export const getCommercialSearchResults = async (value: string): Promise<SearchResults> => {
+  const query = qs.stringify(
+    {
+      searchValue: value,
+      type: 'commercial',
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `/api/search?${query}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',
   });
 
-  const {
-    data,
-    meta: { pagination },
-  } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+  const searchResults = (await response.json()) as SearchResults;
 
-  return {
-    commercial: formatToDefaultCommercial(data),
-    pagination,
-  };
+  return searchResults;
 };

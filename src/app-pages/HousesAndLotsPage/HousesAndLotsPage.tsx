@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';

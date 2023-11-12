@@ -48,13 +48,20 @@ const CommercialCard = ({ commercialItem }: CommercialCardProps) => {
         'min-h-[435px]',
       )}
     >
-      <Image
-        className={clsx('object-cover')}
-        src={img || ImagePlaceholder}
-        width={330}
-        height={165}
-        alt="product-card"
-      />
+      <Link
+        href={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::commercial-property-item.commercial-property-item/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          className={clsx('object-cover')}
+          src={img || ImagePlaceholder}
+          width={330}
+          height={165}
+          alt="product-card"
+        />
+      </Link>
+
       <div className={clsx('pt-3', 'pb-5', 'px-5', 'flex', 'flex-col', 'flex-auto')}>
         <Title
           className={clsx(

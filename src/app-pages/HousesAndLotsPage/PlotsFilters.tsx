@@ -3,8 +3,8 @@ import React from 'react';
 
 import ElectricityFilter from '@/src/components/HousesAndLotsFilters/ElectricityFilter';
 import GasSupplyFilter from '@/src/components/HousesAndLotsFilters/GasSupplyFilter';
+import LotsWaterFilter from '@/src/components/HousesAndLotsFilters/LotsWaterFilter';
 import SewerageFilter from '@/src/components/HousesAndLotsFilters/SewerageFilter';
-import WaterFilter from '@/src/components/HousesAndLotsFilters/WaterFilter';
 import Button from '@/src/components/common/Button';
 import Switch from '@/src/components/common/Switch';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
@@ -22,7 +22,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
     filters: {
       gasSupply,
       electricity,
-      water,
+      lotsWater,
       sewerage,
       nearLake,
       plotAreaFrom,
@@ -33,6 +33,10 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
       housesAndLotsRootCategory,
       directions,
       distance,
+      district_rb,
+      street,
+      region,
+      locality,
     },
     updateFilters,
   } = useHousesAndLotsFilters();
@@ -41,7 +45,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
     applyFilters({
       gasSupply,
       electricity,
-      water,
+      lotsWater,
       sewerage,
       nearLake,
       plotAreaFrom,
@@ -52,6 +56,10 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
       housesAndLotsRootCategory,
       directions,
       distance,
+      district_rb,
+      street,
+      region,
+      locality,
     });
   };
 
@@ -65,7 +73,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <GasSupplyFilter gasSupply={gasSupply} onChange={updateFilters} />
         <ElectricityFilter electricity={electricity} onChange={updateFilters} />
-        <WaterFilter onChange={updateFilters} water={water} />
+        <LotsWaterFilter />
         <SewerageFilter onChange={updateFilters} sewerage={sewerage} />
       </div>
       <Switch

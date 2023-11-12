@@ -164,6 +164,7 @@ const getCommercialCategories = async (): Promise<Array<CommercialCategory>> => 
   );
   const response = await fetch(
     `${process.env.API_BASE_URL}/commercial-property-categories?${query}`,
+    { cache: 'no-cache' },
   );
 
   const { data } = (await response.json()) as StrapiFindResponse<CommercialCategoryResponse>;

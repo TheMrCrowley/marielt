@@ -58,6 +58,10 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       housesAndLotsRootCategory,
       distance,
       directions,
+      district_rb,
+      street,
+      region,
+      locality,
     },
     data: { housesAndLotasCategories },
     updateFilters,
@@ -93,6 +97,10 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
       housesAndLotsRootCategory,
       distance,
       directions,
+      district_rb,
+      street,
+      region,
+      locality,
     });
   };
 

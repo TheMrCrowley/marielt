@@ -45,6 +45,8 @@ export type CommercialFiltersType = BaseFilters<
     sewerage: boolean;
     electricity: boolean;
     gas: boolean;
+    priceForMeterFrom: string;
+    priceFromMeterTo: string;
     //
     district_rb: string[];
     locality: string[];
@@ -98,6 +100,8 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   sewerage: false,
   electricity: false,
   gas: false,
+  priceForMeterFrom: '',
+  priceFromMeterTo: '',
   district_rb: [],
   locality: [],
   region: [],

@@ -48,13 +48,20 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
 
   return (
     <div className={clsx('flex', 'flex-col', 'max-w-[300px]', 'w-full', 'bg-[#262626]')}>
-      <Image
-        className={clsx('object-cover')}
-        src={img || ImagePlaceholder}
-        width={330}
-        height={165}
-        alt="product-card"
-      />
+      <Link
+        href={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::apartments-item.apartments-item/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          className={clsx('object-cover')}
+          src={img || ImagePlaceholder}
+          width={330}
+          height={165}
+          alt="product-card"
+        />
+      </Link>
+
       <div className={clsx('pt-3', 'pb-5', 'px-5', 'flex', 'flex-col')}>
         <Title
           className={clsx(

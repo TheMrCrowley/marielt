@@ -47,7 +47,7 @@ const CommercialRootCategoryTypeFilter = () => {
         label: category.categoryName,
         value: category.categoryName,
       }))}
-      wrapperClassName="basis-1/5"
+      wrapperClassName="flex-auto"
     />
   );
 };

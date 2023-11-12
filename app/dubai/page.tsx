@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Academy = () => {
-  return <div>Academy</div>;
+  return <div>Marielt DUBAI</div>;
 };
 
 export default Academy;

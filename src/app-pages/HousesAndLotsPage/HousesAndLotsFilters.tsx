@@ -3,12 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import {
   createFiltersStateBySearchParams,
   formatFiltersToSearchParams,
 } from '@/src/helpers/filterHelpers';
-import { getHousesAndLotsRoute } from '@/src/helpers/getHousesAndLotsRoute';
 import { useCurrency } from '@/src/store/currency';
 import {
   HousesAndLotsFiltersType,

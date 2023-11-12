@@ -24,7 +24,7 @@ const FloorFilter = () => {
     <>
       <div className={clsx('flex', 'items-end', 'gap-8', 'flex-wrap')}>
         <FloorsFilter floorFrom={floorFrom} floorTo={floorTo} onChange={updateFilters} />
-        <div className={clsx('flex', 'gap-8', 'min-w-min', 'flex-wrap')}>
+        <div className={clsx('flex', 'gap-2', 'min-w-min', 'flex-wrap')}>
           <CheckboxButton
             isChecked={isNotFirstFloor}
             onChange={(checked) =>

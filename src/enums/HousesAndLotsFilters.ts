@@ -119,6 +119,11 @@ export enum WaterValues {
   No = 'no',
 }
 
+export enum LotsWaterValues {
+  Yes = 'yes',
+  No = 'no',
+}
+
 export const waterOptions: OptionType<WaterValues> = [
   { label: 'Горячая', value: WaterValues.Hot },
   { label: 'Холодная', value: WaterValues.Cold },
@@ -130,6 +135,11 @@ export const waterOptions: OptionType<WaterValues> = [
   { label: 'Сезонная', value: WaterValues.Seasonal },
 ];
 
+export const lotsWaterOptions: OptionType<LotsWaterValues> = [
+  { label: 'Есть', value: LotsWaterValues.Yes },
+  { label: 'Нету', value: LotsWaterValues.No },
+];
+
 export const waterQueryMap: QueryMapType<WaterValues> = {
   [WaterValues.Hot]: 'горячая',
   [WaterValues.Cold]: ['холодная', 'рядом'],
@@ -139,6 +149,21 @@ export const waterQueryMap: QueryMapType<WaterValues> = {
   [WaterValues.Hole]: 'скважина',
   [WaterValues.No]: 'нет',
   [WaterValues.Seasonal]: 'сезонная',
+};
+
+export const lotsWaterQueryMap: QueryMapType<LotsWaterValues> = {
+  [LotsWaterValues.Yes]: [
+    'горячая',
+    'холодная',
+    'рядом',
+    'колодец',
+    'рядом колодец',
+    'рядом водопровод',
+    'центральный водопровод',
+    'скважина',
+    'сезонная',
+  ],
+  [LotsWaterValues.No]: 'нет',
 };
 
 export enum WallMaterialValues {

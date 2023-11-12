@@ -4,12 +4,12 @@ export enum AppRoutes {
   Commercial = '/commercial',
   Profession = '/profession',
   Careers = '/careers',
-  Academy = '/academy',
+  Dubai = '/dubai',
 }
 
 export const navigationMap: Record<keyof typeof AppRoutes, string> = {
   Flats: 'Квартиры',
-  Academy: 'Академия MARIELT',
+  Dubai: 'Marielt DUBAI',
   Careers: 'Вакансии',
   Profession: 'Профессия',
   Commercial: 'Коммерческая недвижимость',

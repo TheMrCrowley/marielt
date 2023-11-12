@@ -34,9 +34,7 @@ const TypeChanger = () => {
 
   // TODO think to not rerender page while modal is open, but after apply
   return (
-    <div
-      className={clsx('flex', 'justify-between', 'items-center', 'gap-5', 'max-w-max', 'flex-wrap')}
-    >
+    <div className={clsx('flex', 'items-center', 'md:gap-4', 'gap-2', 'max-w-max', 'flex-wrap')}>
       {dataToRender.map(({ uid, categoryName }) => (
         <CheckboxButton
           key={`houses-and-lots-type-changer-item-${categoryName}-${uid}`}
@@ -58,14 +56,19 @@ const ExpandedFilters = ({ applyFilters, closeModal, isModalOpen }: ExpandedFilt
     data: { housesAndLotasCategories },
   } = useHousesAndLotsFilters();
 
+  const onApply = (params: Partial<HousesAndLotsFiltersType['filters']>) => {
+    applyFilters(params);
+    closeModal();
+  };
+
   const getFiltersByType = () => {
     switch (getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories)) {
       case HousesAndLotsRootCategory.Plots:
-        return <PlotsFilters applyFilters={applyFilters} />;
+        return <PlotsFilters applyFilters={onApply} />;
       case HousesAndLotsRootCategory.Dachi:
-        return <DachiFilters applyFilters={applyFilters} />;
+        return <DachiFilters applyFilters={onApply} />;
       case HousesAndLotsRootCategory.Cottages:
-        return <CottagesFilters applyFilters={applyFilters} />;
+        return <CottagesFilters applyFilters={onApply} />;
       default:
         return null;
     }

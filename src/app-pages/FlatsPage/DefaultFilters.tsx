@@ -7,7 +7,6 @@ import MicroDistrictFilter from '@/src/components/FlatsFilters/MicroDistrictFilt
 import RoominessFilter from '@/src/components/FlatsFilters/RoominessFilter';
 import Button from '@/src/components/common/Button';
 import Chip from '@/src/components/common/Chip';
-import Input from '@/src/components/common/Input/Input';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import FiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
 import PriceFilter from '@/src/components/filters/PriceFilter';

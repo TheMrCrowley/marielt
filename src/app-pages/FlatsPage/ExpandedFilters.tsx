@@ -50,7 +50,13 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedFilt
           isChecked={parking}
         />
       </div>
-      <Button className={clsx('mt-auto', 'self-center')} onClick={applyFilters}>
+      <Button
+        className={clsx('mt-auto', 'self-center')}
+        onClick={() => {
+          applyFilters();
+          closeModal();
+        }}
+      >
         Применить
       </Button>
     </ExpandedFiltersWrapper>

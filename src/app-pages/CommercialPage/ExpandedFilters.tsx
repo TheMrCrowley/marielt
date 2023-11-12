@@ -179,13 +179,18 @@ const ExpandedFilters = ({ applyFilters, closeModal, isModalOpen }: ExpandedFilt
     data: { transactions: transactionData, categories: categoriesData },
   } = useCommercialFilters();
 
+  const onApply = (params: Partial<CommercialFiltersType['filters']>) => {
+    applyFilters(params);
+    closeModal();
+  };
+
   const component = useMemo(() => {
     return getFilterByTransactionAndRootCategory({
       categoriesData,
       selectedRootCategory,
       selectedTransaction,
       transactionData,
-      applyFilters,
+      applyFilters: onApply,
     });
   }, [selectedTransaction, selectedRootCategory]);
 

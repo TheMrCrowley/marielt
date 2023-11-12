@@ -9,6 +9,7 @@ import {
   WallMaterialValues,
   HouseLevelValues,
   HeatingValues,
+  LotsWaterValues,
 } from '@/src/enums/HousesAndLotsFilters';
 import { BaseFilters } from '@/src/types/Filters';
 import { HousesAndLotsCategory } from '@/src/types/HousesAndLots';
@@ -29,6 +30,7 @@ export type HousesAndLotsFiltersType = BaseFilters<
     gasSupply: GasSupplyValues[];
     electricity: ElectricityValues[];
     water: WaterValues[];
+    lotsWater: LotsWaterValues[];
     sewerage: SewerageValues[];
     nearLake: boolean;
     wallMaterial: WallMaterialValues[];
@@ -75,6 +77,7 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   gasSupply: [],
   electricity: [],
   water: [],
+  lotsWater: [],
   sewerage: [],
   nearLake: false,
   wallMaterial: [],

@@ -1,16 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
-import FloorIcon from '@/public/card-floor.svg';
-import CardMapPinIcon from '@/public/card-map-pin.svg';
-import ImagePlaceholder from '@/public/card-placeholder.png';
-import Button from '@/src/components/common/Button';
-import Title from '@/src/components/common/Title';
-import { getPriceByCurrencyMonetary, getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
+import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
 import { DefaultFlatItem } from '@/src/types/Flats';
 

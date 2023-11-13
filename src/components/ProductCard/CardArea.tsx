@@ -73,13 +73,15 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
       return null;
     }
 
-    <Typography fontSize={14} fontWeight="light">
-      Площадь участка:{' '}
-      <Typography fontSize={14} fontWeight="medium">
-        {plotSize}
-      </Typography>{' '}
-      <span className={clsx('opacity-50')}>соток</span>
-    </Typography>;
+    return (
+      <Typography fontSize={14} fontWeight="light" className="flex gap-x-1">
+        Площадь участка:{' '}
+        <Typography fontSize={14} fontWeight="medium">
+          {plotSize}
+        </Typography>{' '}
+        <span className={clsx('opacity-50')}>соток</span>
+      </Typography>
+    );
   };
 
   return (

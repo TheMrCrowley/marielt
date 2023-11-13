@@ -6,54 +6,32 @@ import MetroFilter from '@/src/components/FlatsFilters/MetroFilter';
 import MicroDistrictFilter from '@/src/components/FlatsFilters/MicroDistrictFilter';
 import RoominessFilter from '@/src/components/FlatsFilters/RoominessFilter';
 import Button from '@/src/components/common/Button';
-import Chip from '@/src/components/common/Chip';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import FiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
+import FiltersTagsList from '@/src/components/filters/FiltersTagsList';
 import PriceFilter from '@/src/components/filters/PriceFilter';
 import SearchField from '@/src/components/filters/SearchField';
 import { getFlatsSearchResults } from '@/src/services/flatsServices';
-import { useFlatsFilter } from '@/src/store/flatsFilters';
+import { FlatsFiltersType, useFlatsFilter } from '@/src/store/flatsFilters';
 
 interface DefaultFilterProps {
   openModal: () => void;
-  applyFilters: () => void;
+  applyFilters: (f?: Partial<FlatsFiltersType['filters']>) => void;
 }
 
 const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
-  const { filters, updateFilters } = useFlatsFilter();
+  const { filters, updateFilters, deleteTag, tags } = useFlatsFilter();
 
   return (
     <FiltersWrapper
       openModal={openModal}
       filtersList={
-        /* TODO move this somewhere */
-
-        <section className={clsx('flex', 'max-w-7xl', 'flex-auto', 'flex-wrap', 'gap-3', 'w-full')}>
-          {Object.entries(filters)
-            .filter(([, value]) => (Array.isArray(value) ? !!value.length : !!value))
-            .map(([key, value]) => (
-              <Chip
-                onDelete={() => {
-                  if (Array.isArray(value)) {
-                    updateFilters({ [key]: [] });
-                    return;
-                  }
-                  if (typeof value === 'string') {
-                    updateFilters({ [key]: '' });
-                    return;
-                  }
-                  if (typeof value === 'boolean') {
-                    updateFilters({ [key]: false });
-                    return;
-                  }
-                }}
-                label={
-                  Array.isArray(value) ? value.join(', ') : typeof value === 'string' ? value : key
-                }
-                key={`chip-item-for-${key}-${value}`}
-              />
-            ))}
-        </section>
+        <FiltersTagsList
+          deleteTag={deleteTag}
+          filters={filters}
+          updateFilters={updateFilters}
+          tags={tags}
+        />
       }
     >
       <div
@@ -92,7 +70,12 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
       >
         <AreaFilter areaFrom={filters.areaFrom} areaTo={filters.areaTo} onChange={updateFilters} />
         <SearchField
-          onClick={updateFilters}
+          onClick={(data) => {
+            // TODO think how to make this better
+
+            updateFilters({ ...data });
+            applyFilters({ ...data });
+          }}
           search={getFlatsSearchResults}
           values={{
             district_rb: filters.district_rb,
@@ -101,7 +84,7 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
             street: filters.street,
           }}
         />
-        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={applyFilters}>
+        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={() => applyFilters()}>
           Применить
         </Button>
       </div>

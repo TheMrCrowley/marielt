@@ -31,6 +31,8 @@ const DefaultFiltersWrapper = ({
         'justify-center',
         'items-center',
         'gap-y-10',
+        'md:px-8',
+        'px-4',
       )}
     >
       <section
@@ -41,8 +43,6 @@ const DefaultFiltersWrapper = ({
           'w-full',
           'md:gap-y-10',
           'gap-y-5',
-          'md:px-8',
-          'px-4',
           'md:max-w-[1400px]',
           'max-w-full',
         )}

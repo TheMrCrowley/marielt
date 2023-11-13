@@ -119,6 +119,9 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
     categories: [],
     directions: [],
   },
+  deleteTag: () => {},
+  tags: {},
+  updateTags: () => {},
   updateFilters: (update) => {
     set((prev) => ({
       filters: {

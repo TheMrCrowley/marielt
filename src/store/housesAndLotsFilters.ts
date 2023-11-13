@@ -103,6 +103,9 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
     directions: [],
     housesAndLotasCategories: [],
   },
+  deleteTag: () => {},
+  tags: {},
+  updateTags: () => {},
   updateFilters: (update) => {
     set((prev) => ({
       filters: {

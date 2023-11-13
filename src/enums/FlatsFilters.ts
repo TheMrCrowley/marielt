@@ -31,6 +31,14 @@ export const roominessOptions: OptionType<RoominessValues> = [
   },
 ];
 
+export const roominessFilterTagsMap: Record<RoominessValues, string> = {
+  [RoominessValues.Part]: 'Доля',
+  [RoominessValues.One]: '1',
+  [RoominessValues.Two]: '2',
+  [RoominessValues.Three]: '3',
+  [RoominessValues.FourAndMore]: '4+',
+};
+
 export const roominessQueryMap: QueryMapType<RoominessValues> = {
   [RoominessValues.Part]: ['комната (доля)'],
   [RoominessValues.One]: ['однокомнатная квартира'],
@@ -77,7 +85,7 @@ export const houseTypeQueryMap: QueryMapType<HouseTypeValues> = {
   [HouseTypeValues.Timbered]: 'бревенчатый',
 };
 
-enum BathroomValues {
+export enum BathroomValues {
   Separate = 'separate',
   Combined = 'combined',
   TwoAndMore = 'twoAndMore',
@@ -88,6 +96,13 @@ export const bathroomOptions: OptionType<BathroomValues> = [
   { value: BathroomValues.Combined, label: 'Совмещенный' },
   { value: BathroomValues.TwoAndMore, label: '2 и более' },
 ];
+
+export const bathroomFilterTagsMap: Record<BathroomValues, string> = bathroomOptions.reduce<
+  Record<BathroomValues, string>
+>((acc, cur) => {
+  acc[cur.value as BathroomValues] = cur.label;
+  return acc;
+}, {} as Record<BathroomValues, string>);
 
 export const bathroomQueryMap: QueryMapType<BathroomValues> = {
   [BathroomValues.Separate]: ['раздельный'],
@@ -149,6 +164,13 @@ export const finishingOptions: OptionType<FinishingValues> = [
   { value: FinishingValues.Without, label: 'Без отделки' },
   { value: FinishingValues.Construction, label: 'Строительная отделка' },
 ];
+
+export const finishingFilterTagsMap: Record<FinishingValues, string> = finishingOptions.reduce<
+  Record<FinishingValues, string>
+>((acc, cur) => {
+  acc[cur.value as FinishingValues] = cur.label;
+  return acc;
+}, {} as Record<FinishingValues, string>);
 
 export const finishingQueryMap: QueryMapType<FinishingValues> = {
   [FinishingValues.Good]: ['евроремонт', 'отличный ремонт', 'хороший ремонт'],

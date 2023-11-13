@@ -150,6 +150,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
           label="Адреса"
           onOptionClick={(streets) => {
             onClick({ ...values, street: streets });
+            resetStates();
           }}
           options={options.street}
           values={values.street}
@@ -158,6 +159,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
           label="Области"
           onOptionClick={(regions) => {
             onClick({ ...values, region: regions });
+            resetStates();
           }}
           options={options.region}
           values={values.region}
@@ -166,6 +168,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
           label="Районы"
           onOptionClick={(districts) => {
             onClick({ ...values, district_rb: districts });
+            resetStates();
           }}
           options={options.district_rb}
           values={values.district_rb}
@@ -174,6 +177,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
           label="Населенные пункты"
           onOptionClick={(localities) => {
             onClick({ ...values, locality: localities });
+            resetStates();
           }}
           options={options.locality}
           values={values.locality}

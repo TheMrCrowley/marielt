@@ -6,7 +6,15 @@ import {
   BalconyValues,
   FinishingValues,
   SaleTermValues,
+  roominessFilterTagsMap,
+  houseTypeQueryMap,
+  BathroomValues,
+  bathroomFilterTagsMap,
+  finishingFilterTagsMap,
+  balconyQueryMap,
+  saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
+import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 import { District, MicroDistrict } from '@/src/types/Location';
 
@@ -14,44 +22,40 @@ export type FlatsFiltersType = BaseFilters<
   {
     priceFrom: string;
     priceTo: string;
-    district: string[];
-    microDistrict: string[];
-    metro: string[];
     areaFrom: string;
     areaTo: string;
-    roominess: RoominessValues[];
-
     floorFrom: string;
     floorTo: string;
-    isNotFirstFloor: boolean;
-    isNotLastFloor: boolean;
-    isLastFloor: boolean;
-
     maxFloorsFrom: string;
     maxFloorsTo: string;
-
-    houseType: HouseTypeValues[];
-
     livingAreaFrom: string;
     livingAreaTo: string;
     kitchenAreaFrom: string;
     kitchenAreaTo: string;
     ceilingHeight: string;
-
-    finishing: FinishingValues[];
-    bathroom: string[];
     renovationYearFrom: string;
     renovationYearTo: string;
     constructionYearFrom: string;
     constructionYearTo: string;
+    district: string[];
+    microDistrict: string[];
+    metro: string[];
+    roominess: RoominessValues[];
+    houseType: HouseTypeValues[];
+    finishing: FinishingValues[];
+    bathroom: string[];
     balcony: BalconyValues[];
     saleTerm: SaleTermValues[];
-    furniture: boolean;
-    parking: boolean;
     street: string[];
     locality: string[];
     district_rb: string[];
     region: string[];
+
+    isNotFirstFloor: boolean;
+    isNotLastFloor: boolean;
+    isLastFloor: boolean;
+    furniture: boolean;
+    parking: boolean;
   },
   {
     district: District[];
@@ -98,8 +102,114 @@ export const initialFlatsFilters: FlatsFiltersType['filters'] = {
   street: [],
 };
 
+const tagsDefaultState = {
+  areaFrom: '',
+  areaTo: '',
+  priceFrom: '',
+  priceTo: '',
+  floorFrom: '',
+  floorTo: '',
+  isLastFloor: '',
+  isNotFirstFloor: '',
+  isNotLastFloor: '',
+  maxFloorsFrom: '',
+  maxFloorsTo: '',
+  ceilingHeight: '',
+  kitchenAreaFrom: '',
+  kitchenAreaTo: '',
+  livingAreaFrom: '',
+  livingAreaTo: '',
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  renovationYearFrom: '',
+  renovationYearTo: '',
+  furniture: '',
+  parking: '',
+  district: [],
+  roominess: [],
+  microDistrict: [],
+  metro: [],
+  houseType: [],
+  bathroom: [],
+  finishing: [],
+  balcony: [],
+  saleTerm: [],
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
+};
+
+const filtersNameMap: Record<
+  string,
+  (value: string | string[], currency?: AvailableCurrencies) => string
+> = {
+  areaFrom: (value) => `Площадь от: ${value} м²`,
+  areaTo: (value) => `Площадь до: ${value} м²`,
+  priceFrom: (value, currency) => `Цена от: ${value} ${currency}`,
+  priceTo: (value, currency) => `Цена до: ${value} ${currency}`,
+  floorFrom: (value) => `Этаж от: ${value}`,
+  floorTo: (value) => `Этаж до: ${value}`,
+  maxFloorsFrom: (value) => `Этажей от: ${value}`,
+  maxFloorsTo: (value) => `Этажей до: ${value}`,
+  livingAreaFrom: (value) => `Жилая площадь от: ${value} м²`,
+  livingAreaTo: (value) => `Жилая площадь до: ${value} м²`,
+  kitchenAreaFrom: (value) => `Площадь кухни от: ${value} м²`,
+  kitchenAreaTo: (value) => `Площадь кухни до: ${value} м²`,
+  ceilingHeight: (value) => `Высота потолков от: ${value} м²`,
+  renovationYearFrom: (value) => `Год ремонта от: ${value}`,
+  renovationYearTo: (value) => `Год ремонта до: ${value}`,
+  constructionYearFrom: (value) => `Год постройки от: ${value}`,
+  constructionYearTo: (value) => `Год постройки до: ${value}`,
+  isNotFirstFloor: () => 'Не первый этаж',
+  isNotLastFloor: () => 'Не последний этаж',
+  isLastFloor: () => 'Последний этаж',
+  furniture: () => 'Мебель',
+  parking: () => 'Парковка',
+  roominess: (value) => `Комнатность: ${roominessFilterTagsMap[value as RoominessValues]}`,
+  houseType: (value) => `Тип дома: ${houseTypeQueryMap[value as HouseTypeValues]}`,
+  finishing: (value) => `Ремонт: ${finishingFilterTagsMap[value as FinishingValues]}`,
+  bathroom: (value) => `Санузел: ${bathroomFilterTagsMap[value as BathroomValues]}`,
+  balcony: (value) => `Балкон: ${balconyQueryMap[value as BalconyValues]}`,
+  saleTerm: (value) => `Тип сделки: ${saleTermQueryMap[value as SaleTermValues]}`,
+  street: (value) => value as string,
+  locality: (value) => value as string,
+  district_rb: (value) => value as string,
+  district: (value) => value as string,
+  microDistrict: (value) => value as string,
+  metro: (value) => value as string,
+  region: (value) => value as string,
+};
+
+const parseFiltersStateToTags = (
+  filters: Partial<Record<keyof FlatsFiltersType['filters'], string | string[] | boolean>>,
+  currency: AvailableCurrencies,
+): typeof tagsDefaultState => {
+  return Object.entries(filters)
+    .filter(([, value]) => {
+      return (
+        (Array.isArray(value) && value.length) ||
+        (typeof value === 'string' && value.length) ||
+        !!value
+      );
+    })
+    .reduce<typeof tagsDefaultState>((acc, [key, value]) => {
+      if ((typeof value === 'string' || typeof value === 'boolean') && !!value) {
+        return { ...acc, [key]: filtersNameMap[key](value as string, currency) };
+      }
+      return {
+        ...acc,
+        [key]: (value as string[]).map((item) => ({
+          value: item,
+          label: filtersNameMap[key](item as string, currency),
+        })),
+      };
+    }, tagsDefaultState);
+};
+
 export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
   filters: initialFlatsFilters,
+  tags: tagsDefaultState,
   data: {
     district: [],
     metro: [],
@@ -112,6 +222,33 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
         ...update,
       },
     }));
+  },
+  updateTags: (update, currency) => {
+    set({
+      tags: {
+        ...parseFiltersStateToTags(update, currency),
+      },
+    });
+  },
+  deleteTag: (key, value) => {
+    if (typeof tagsDefaultState[key] === 'string') {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: tagsDefaultState[key],
+        },
+      }));
+    }
+    if (Array.isArray(tagsDefaultState[key])) {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: (prev.tags[key] as Array<{ value: string; label: string }>)?.filter(
+            (item) => item.value !== value,
+          ),
+        },
+      }));
+    }
   },
   setData: (data) => set({ data }),
   isExpandedOpen: false,

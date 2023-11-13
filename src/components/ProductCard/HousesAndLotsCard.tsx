@@ -33,7 +33,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
   } = housesAndLotsItem;
 
   const { selectedCurrency, rates } = useCurrency();
-
+  console.log(plotSize);
   return (
     <CardWrapper
       address={address}

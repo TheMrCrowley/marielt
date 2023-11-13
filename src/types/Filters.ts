@@ -1,3 +1,5 @@
+import { AvailableCurrencies } from './Currency';
+
 export type OptionType<T extends string> = Array<{
   label: string;
   value: T;
@@ -10,6 +12,12 @@ export interface BaseFilters<
   D extends Record<string, unknown[] | null>,
 > {
   filters: T;
+  tags: Partial<Record<keyof T, string | Array<{ value: string; label: string }>>>;
+  updateTags: (
+    values: Partial<Record<keyof T, string | string[] | boolean>>,
+    currency: AvailableCurrencies,
+  ) => void;
+  deleteTag: (key: keyof T, value?: string) => void;
   data: D;
   updateFilters: <K extends keyof T>(
     values: Partial<Record<K, BaseFilters<T, D>['filters'][K]>>,

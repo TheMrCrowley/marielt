@@ -21,7 +21,8 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const { setData, isExpandedOpen, setIsExpandedOpen, updateFilters, filters } = useFlatsFilter();
+  const { setData, isExpandedOpen, setIsExpandedOpen, updateFilters, filters, updateTags } =
+    useFlatsFilter();
   const { selectedCurrency } = useCurrency();
 
   useEffect(() => {
@@ -30,8 +31,21 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
     setData(data);
   }, []);
 
-  const applyFilters = () => {
-    router.push(pathname + '?' + formatFiltersToSearchParams(filters, selectedCurrency));
+  useEffect(() => {
+    const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
+
+    updateTags(
+      {
+        ...initialFilters,
+      },
+      selectedCurrency,
+    );
+  }, [searchParams]);
+
+  const applyFilters = (f?: Partial<typeof filters>) => {
+    router.push(
+      pathname + '?' + formatFiltersToSearchParams({ ...filters, ...f }, selectedCurrency),
+    );
     router.refresh();
   };
 

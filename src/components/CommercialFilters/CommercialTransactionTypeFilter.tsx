@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import Select from '@/src/components/common/Select';
-import { useCommercialFilters } from '@/src/store/commercialFilters';
+import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
+import { getTransactionTypeUid, useCommercialFilters } from '@/src/store/commercialFilters';
+import { useCurrency } from '@/src/store/currency';
 
 const CommercialTransactionTypeFilter = () => {
   const {
@@ -9,6 +11,12 @@ const CommercialTransactionTypeFilter = () => {
     filters: { transactionType: selectedTransaction, rootCategoryType: selectedRootCategory },
     updateFilters,
   } = useCommercialFilters();
+  const { changeCurrency } = useCurrency();
+
+  useEffect(() => {
+    const transactionUid = getTransactionTypeUid(transactionOptions, selectedTransaction);
+    changeCurrency(transactionUid === TransactionTypeValues.Rent ? 'EUR' : 'USD');
+  }, [selectedTransaction]);
 
   const dataToRender = useMemo(() => {
     const filtered = transactionOptions?.filter((transactionOption) => {

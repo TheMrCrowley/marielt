@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import CheckboxGroup from '@/src/components/common/CheckboxGroup';
 import Typography from '@/src/components/common/Typography';
@@ -14,6 +14,7 @@ import {
   getTransactionTypeUid,
   useCommercialFilters,
 } from '@/src/store/commercialFilters';
+import { useCurrency } from '@/src/store/currency';
 import { CommercialCategory, CommercialTransaction } from '@/src/types/Commercial';
 
 import BusinessFilter from './BusinessFilter';
@@ -38,6 +39,13 @@ const TransactionChanger = () => {
     filters: { transactionType },
     updateFilters,
   } = useCommercialFilters();
+
+  const { changeCurrency } = useCurrency();
+
+  useEffect(() => {
+    const transactionUid = getTransactionTypeUid(transactions, transactionType);
+    changeCurrency(transactionUid === TransactionTypeValues.Rent ? 'EUR' : 'USD');
+  }, [transactionType]);
 
   return (
     <div className={clsx('flex', 'border-y', 'border-[#B1B1B1]', 'max-w-max')}>

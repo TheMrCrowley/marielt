@@ -6,7 +6,13 @@ import Button from '@/src/components/common/Button';
 import DirectionFilter from '@/src/components/filters/DirectionFilter';
 import DistanceFilter from '@/src/components/filters/DistanceFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialFiltersToApply,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 
 interface PlotsFiltersProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
@@ -14,51 +20,24 @@ interface PlotsFiltersProps {
 
 const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
   const {
-    filters: {
-      plotAreaFrom,
-      plotAreaTo,
-      distance,
-      directions,
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      propertyType,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-    },
-    data: { directions: directionOptions },
+    filters,
+    data: { directions: directionOptions, categories, transactions },
     updateFilters,
   } = useCommercialFilters();
 
+  const { plotAreaFrom, plotAreaTo, distance, directions, transactionType, rootCategoryType } =
+    filters;
+
   const onApply = () => {
-    applyFilters({
-      //Default
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-      //
-      propertyType,
-      plotAreaFrom,
-      plotAreaTo,
-      directions,
-      distance,
-    });
+    const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
+    const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
+
+    const filtersToApply = getCommercialFiltersToApply(
+      selectedTransactionType,
+      selectedRootCategory,
+      filters,
+    );
+    applyFilters(filtersToApply);
   };
 
   return (

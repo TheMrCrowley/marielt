@@ -64,7 +64,7 @@ const getCommercialStrapiQueryParamsByFilters = (
     district_rb,
     locality,
     priceForMeterFrom,
-    priceFromMeterTo,
+    priceForMeterTo,
     region,
     street,
   } = filters as CommercialFiltersType['filters'];
@@ -104,9 +104,6 @@ const getCommercialStrapiQueryParamsByFilters = (
               $or: [
                 !!priceFrom &&
                   !priceTo && {
-                    to: {
-                      $null: true,
-                    },
                     from: {
                       $gte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
                     },
@@ -160,13 +157,10 @@ const getCommercialStrapiQueryParamsByFilters = (
             },
           },
           {
-            price_meter: (priceForMeterFrom || priceFromMeterTo) && {
+            price_meter: (priceForMeterFrom || priceForMeterTo) && {
               $or: [
                 !!priceForMeterFrom &&
-                  !priceFromMeterTo && {
-                    to: {
-                      $null: true,
-                    },
+                  !priceForMeterTo && {
                     from: {
                       $gte: getPriceByCurrency(
                         priceForMeterFrom,
@@ -176,11 +170,11 @@ const getCommercialStrapiQueryParamsByFilters = (
                       ),
                     },
                   },
-                !!priceFromMeterTo &&
+                !!priceForMeterTo &&
                   !priceForMeterFrom && {
                     from: {
                       $lte: getPriceByCurrency(
-                        priceFromMeterTo,
+                        priceForMeterTo,
                         selectedCurrency,
                         targetCurrency,
                         rates,
@@ -188,21 +182,21 @@ const getCommercialStrapiQueryParamsByFilters = (
                     },
                     to: {
                       $lte: getPriceByCurrency(
-                        priceFromMeterTo,
+                        priceForMeterTo,
                         selectedCurrency,
                         targetCurrency,
                         rates,
                       ),
                     },
                   },
-                !!priceFromMeterTo &&
+                !!priceForMeterTo &&
                   !priceForMeterFrom && {
                     from: {
-                      $between: [0, priceFromMeterTo],
+                      $between: [0, priceForMeterTo],
                     },
                   },
                 priceForMeterFrom &&
-                  priceFromMeterTo && {
+                  priceForMeterTo && {
                     to: {
                       $between: [
                         getPriceByCurrency(
@@ -211,12 +205,12 @@ const getCommercialStrapiQueryParamsByFilters = (
                           targetCurrency,
                           rates,
                         ),
-                        priceFromMeterTo,
+                        priceForMeterTo,
                       ],
                     },
                   },
                 priceForMeterFrom &&
-                  priceFromMeterTo && {
+                  priceForMeterTo && {
                     from: {
                       $between: [
                         getPriceByCurrency(
@@ -225,15 +219,15 @@ const getCommercialStrapiQueryParamsByFilters = (
                           targetCurrency,
                           rates,
                         ),
-                        priceFromMeterTo,
+                        priceForMeterTo,
                       ],
                     },
                   },
-                priceFromMeterTo &&
+                priceForMeterTo &&
                   priceForMeterFrom && {
                     to: {
                       $gte: getPriceByCurrency(
-                        priceFromMeterTo,
+                        priceForMeterTo,
                         selectedCurrency,
                         targetCurrency,
                         rates,
@@ -265,9 +259,6 @@ const getCommercialStrapiQueryParamsByFilters = (
                 $or: [
                   !!areaFrom &&
                     !areaTo && {
-                      max_area: {
-                        $null: true,
-                      },
                       min_area: {
                         $gte: areaFrom,
                       },
@@ -321,9 +312,6 @@ const getCommercialStrapiQueryParamsByFilters = (
                 $or: [
                   !!separateRoomsFrom &&
                     !separateRoomsTo && {
-                      to: {
-                        $null: true,
-                      },
                       from: {
                         $gte: separateRoomsFrom,
                       },

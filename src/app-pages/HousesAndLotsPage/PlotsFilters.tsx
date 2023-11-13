@@ -8,8 +8,10 @@ import SewerageFilter from '@/src/components/HousesAndLotsFilters/SewerageFilter
 import Button from '@/src/components/common/Button';
 import Switch from '@/src/components/common/Switch';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
+import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import {
   HousesAndLotsFiltersType,
+  getHousesAndLotsFiltersToApply,
   useHousesAndLotsFilters,
 } from '@/src/store/housesAndLotsFilters';
 
@@ -18,49 +20,12 @@ interface PlotsFiltersProps {
 }
 
 const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
-  const {
-    filters: {
-      gasSupply,
-      electricity,
-      lotsWater,
-      sewerage,
-      nearLake,
-      plotAreaFrom,
-      plotAreaTo,
-      //Default filters
-      priceFrom,
-      priceTo,
-      housesAndLotsRootCategory,
-      directions,
-      distance,
-      district_rb,
-      street,
-      region,
-      locality,
-    },
-    updateFilters,
-  } = useHousesAndLotsFilters();
+  const { filters, updateFilters } = useHousesAndLotsFilters();
+  const { gasSupply, electricity, sewerage, nearLake, plotAreaFrom, plotAreaTo } = filters;
 
   const onApply = () => {
-    applyFilters({
-      gasSupply,
-      electricity,
-      lotsWater,
-      sewerage,
-      nearLake,
-      plotAreaFrom,
-      plotAreaTo,
-      //Default filters
-      priceFrom,
-      priceTo,
-      housesAndLotsRootCategory,
-      directions,
-      distance,
-      district_rb,
-      street,
-      region,
-      locality,
-    });
+    const filtersToApply = getHousesAndLotsFiltersToApply(HousesAndLotsRootCategory.Plots, filters);
+    applyFilters(filtersToApply);
   };
 
   return (

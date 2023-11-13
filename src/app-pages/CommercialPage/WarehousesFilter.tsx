@@ -15,7 +15,13 @@ import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFil
 import DirectionFilter from '@/src/components/filters/DirectionFilter';
 import DistanceFilter from '@/src/components/filters/DistanceFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialFiltersToApply,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 
 interface WarehousesFilterProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
@@ -23,71 +29,34 @@ interface WarehousesFilterProps {
 
 const WarehousesFilter = ({ applyFilters }: WarehousesFilterProps) => {
   const {
-    filters: {
-      areaFrom,
-      areaTo,
-      plotAreaFrom,
-      plotAreaTo,
-      constructionYearFrom,
-      constructionYearTo,
-      directions,
-      distance,
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      propertyType,
-      wallMaterial,
-      ceilingHeightFrom,
-      ceilingHeightTo,
-      heating,
-      water,
-      sewerage,
-      electricity,
-      ramp,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-    },
-    data: { directions: directionOptions },
+    filters,
+    data: { directions: directionOptions, categories, transactions },
     updateFilters,
   } = useCommercialFilters();
 
+  const {
+    areaFrom,
+    areaTo,
+    plotAreaFrom,
+    plotAreaTo,
+    constructionYearFrom,
+    constructionYearTo,
+    directions,
+    distance,
+    transactionType,
+    rootCategoryType,
+  } = filters;
+
   const onApply = () => {
-    applyFilters({
-      //Default
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-      //
-      propertyType,
-      plotAreaFrom,
-      plotAreaTo,
-      wallMaterial,
-      ceilingHeightFrom,
-      ceilingHeightTo,
-      constructionYearFrom,
-      constructionYearTo,
-      directions,
-      distance,
-      heating,
-      water,
-      sewerage,
-      electricity,
-      ramp,
-    });
+    const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
+    const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
+
+    const filtersToApply = getCommercialFiltersToApply(
+      selectedTransactionType,
+      selectedRootCategory,
+      filters,
+    );
+    applyFilters(filtersToApply);
   };
 
   return (

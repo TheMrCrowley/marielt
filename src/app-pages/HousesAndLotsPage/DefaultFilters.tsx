@@ -17,6 +17,7 @@ import { getHousesAndLotsRoute } from '@/src/helpers/getHousesAndLotsRoute';
 import { getHousesAndLotsSearchResults } from '@/src/services/housesAndLotsServices';
 import {
   HousesAndLotsFiltersType,
+  getHousesAndLotsFiltersToApply,
   useHousesAndLotsFilters,
 } from '@/src/store/housesAndLotsFilters';
 
@@ -27,24 +28,26 @@ interface DefaultFiltersProps {
 
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
   const {
-    filters: {
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      housesAndLotsRootCategory,
-      plotAreaFrom,
-      plotAreaTo,
-      distance,
-      directions,
-      district_rb,
-      street,
-      region,
-      locality,
-    },
+    filters,
     data: { housesAndLotasCategories, directions: directionOptions },
     updateFilters,
   } = useHousesAndLotsFilters();
+
+  const {
+    priceFrom,
+    priceTo,
+    areaFrom,
+    areaTo,
+    housesAndLotsRootCategory,
+    plotAreaFrom,
+    plotAreaTo,
+    distance,
+    directions,
+    district_rb,
+    street,
+    region,
+    locality,
+  } = filters;
 
   const getAreaFilter = () => {
     const type =
@@ -70,21 +73,12 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       housesAndLotsRootCategory &&
       getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories);
 
-    applyFilters({
-      priceFrom,
-      priceTo,
-      areaFrom: type === HousesAndLotsRootCategory.Plots ? '' : areaFrom,
-      areaTo: type === HousesAndLotsRootCategory.Plots ? '' : areaTo,
-      plotAreaFrom: type !== HousesAndLotsRootCategory.Plots ? '' : plotAreaFrom,
-      plotAreaTo: type !== HousesAndLotsRootCategory.Plots ? '' : plotAreaTo,
-      distance,
-      directions,
-      housesAndLotsRootCategory,
-      district_rb,
-      street,
-      region,
-      locality,
-    });
+    const filtersToApply = getHousesAndLotsFiltersToApply(
+      type as HousesAndLotsRootCategory,
+      filters,
+    );
+
+    applyFilters(filtersToApply);
   };
 
   return (

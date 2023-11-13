@@ -13,7 +13,13 @@ import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
 import FloorsFilter from '@/src/components/filters/FloorsFilter';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialFiltersToApply,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 
 interface ShopsFilterProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
@@ -21,70 +27,33 @@ interface ShopsFilterProps {
 
 const ShopsFilter = ({ applyFilters }: ShopsFilterProps) => {
   const {
-    filters: {
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      commercialLocation,
-      floorFrom,
-      floorTo,
-      isFirstFloor,
-      isGroundFloor,
-      separateRoomsFrom,
-      separateRoomsTo,
-      ceilingHeightFrom,
-      ceilingHeightTo,
-      constructionYearFrom,
-      constructionYearTo,
-      finishing,
-      bathroom,
-      separateEntrance,
-      ramp,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-    },
+    filters,
     updateFilters,
+    data: { transactions, categories },
   } = useCommercialFilters();
 
+  const {
+    transactionType,
+    rootCategoryType,
+    areaFrom,
+    areaTo,
+    floorFrom,
+    floorTo,
+    constructionYearFrom,
+    constructionYearTo,
+  } = filters;
+
   const onApply = () => {
-    applyFilters({
-      //Default
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-      //
-      commercialLocation,
-      floorFrom,
-      floorTo,
-      isFirstFloor,
-      isGroundFloor,
-      separateRoomsFrom,
-      separateRoomsTo,
-      ceilingHeightFrom,
-      ceilingHeightTo,
-      constructionYearFrom,
-      constructionYearTo,
-      finishing,
-      bathroom,
-      separateEntrance,
-      ramp,
-    });
+    const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
+    const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
+
+    const filtersToApply = getCommercialFiltersToApply(
+      selectedTransactionType,
+      selectedRootCategory,
+      filters,
+    );
+
+    applyFilters(filtersToApply);
   };
 
   return (

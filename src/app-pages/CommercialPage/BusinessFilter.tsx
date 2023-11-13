@@ -11,7 +11,13 @@ import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
 import FloorsFilter from '@/src/components/filters/FloorsFilter';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialFiltersToApply,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 
 interface BusinessFilterProps {
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
@@ -19,66 +25,33 @@ interface BusinessFilterProps {
 
 const BusinessFilter = ({ applyFilters }: BusinessFilterProps) => {
   const {
-    filters: {
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      floorFrom,
-      floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
-      isFirstFloor,
-      isGroundFloor,
-      paybackFrom,
-      paybackTo,
-      profitabilityFrom,
-      profitabilityTo,
-      vat,
-      separateEntrance,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-    },
+    filters,
+    data: { transactions, categories },
     updateFilters,
   } = useCommercialFilters();
 
+  const {
+    transactionType,
+    rootCategoryType,
+    areaFrom,
+    areaTo,
+    floorFrom,
+    floorTo,
+    constructionYearFrom,
+    constructionYearTo,
+  } = filters;
+
   const onApply = () => {
-    applyFilters({
-      //Default
-      transactionType,
-      rootCategoryType,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-      //
-      floorFrom,
-      floorTo,
-      constructionYearFrom,
-      constructionYearTo,
-      propertyType,
-      isFirstFloor,
-      isGroundFloor,
-      paybackFrom,
-      paybackTo,
-      profitabilityFrom,
-      profitabilityTo,
-      vat,
-      separateEntrance,
-    });
+    const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
+    const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
+
+    const filtersToApply = getCommercialFiltersToApply(
+      selectedTransactionType,
+      selectedRootCategory,
+      filters,
+    );
+
+    applyFilters(filtersToApply);
   };
 
   return (

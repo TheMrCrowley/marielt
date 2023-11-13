@@ -7,10 +7,18 @@ import CommercialTransactionTypeFilter from '@/src/components/CommercialFilters/
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import DefaultFiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
+import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import PriceFilter from '@/src/components/filters/PriceFilter';
 import SearchField from '@/src/components/filters/SearchField';
+import { CommercialRootCategoryTypeValues } from '@/src/enums/CommercialFilters';
 import { getCommercialSearchResults } from '@/src/services/commercialServices';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialFiltersToApply,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 
 interface DefaultFiltersProps {
   openModal: () => void;
@@ -20,37 +28,54 @@ interface DefaultFiltersProps {
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
   const {
     updateFilters,
-    filters: {
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      transactionType,
-      rootCategoryType,
-      district_rb,
-      region,
-      street,
-      locality,
-      priceForMeterFrom,
-      priceFromMeterTo,
-    },
+    filters,
+    data: { categories, transactions },
   } = useCommercialFilters();
 
+  const {
+    priceFrom,
+    priceTo,
+    areaFrom,
+    areaTo,
+    transactionType,
+    rootCategoryType,
+    district_rb,
+    region,
+    street,
+    locality,
+    plotAreaFrom,
+    plotAreaTo,
+  } = filters;
+
+  const getAreaFilter = () => {
+    const isPlotsSelected =
+      getCommercialRootCategoryUid(categories, rootCategoryType) ===
+      CommercialRootCategoryTypeValues.Uchastki;
+
+    if (isPlotsSelected) {
+      return (
+        <PlotAreaFilter
+          plotAreaFrom={plotAreaFrom}
+          plotAreaTo={plotAreaTo}
+          onChange={updateFilters}
+        />
+      );
+    }
+
+    return <AreaFilter onChange={updateFilters} areaFrom={areaFrom} areaTo={areaTo} />;
+  };
+
   const onApply = () => {
-    applyFilters({
-      transactionType,
-      rootCategoryType,
-      priceForMeterFrom,
-      priceFromMeterTo,
-      priceFrom,
-      priceTo,
-      areaFrom,
-      areaTo,
-      district_rb,
-      region,
-      street,
-      locality,
-    });
+    const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
+    const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
+
+    const filtersToApply = getCommercialFiltersToApply(
+      selectedTransactionType,
+      selectedRootCategory,
+      filters,
+    );
+
+    applyFilters(filtersToApply);
   };
 
   return (
@@ -84,7 +109,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
           'flex-col',
         )}
       >
-        <AreaFilter onChange={updateFilters} areaFrom={areaFrom} areaTo={areaTo} />
+        {getAreaFilter()}
         <SearchField
           search={getCommercialSearchResults}
           onClick={updateFilters}

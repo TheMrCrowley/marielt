@@ -17,8 +17,10 @@ import KitchenAreaFilter from '@/src/components/filters/KitchenAreaFilter';
 import LivingAreaFilter from '@/src/components/filters/LivingAreaFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import SaleTermFilter from '@/src/components/filters/SaleTermFilter';
+import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import {
   HousesAndLotsFiltersType,
+  getHousesAndLotsFiltersToApply,
   useHousesAndLotsFilters,
 } from '@/src/store/housesAndLotsFilters';
 
@@ -27,78 +29,35 @@ interface DachiFiltersProps {
 }
 
 const DachiFilters = ({ applyFilters }: DachiFiltersProps) => {
-  const {
-    filters: {
-      areaFrom,
-      areaTo,
-      livingAreaFrom,
-      livingAreaTo,
-      kitchenAreaFrom,
-      kitchenAreaTo,
-      plotAreaFrom,
-      plotAreaTo,
-      wallMaterial,
-      houseLevels,
-      constructionYearFrom,
-      constructionYearTo,
-      readinessFrom,
-      readinessTo,
-      heating,
-      gasSupply,
-      electricity,
-      water,
-      sewerage,
-      nearLake,
-      saleTerm,
-      //Default filters
-      priceFrom,
-      priceTo,
-      district_rb,
-      street,
-      region,
-      locality,
+  const { filters, updateFilters } = useHousesAndLotsFilters();
 
-      housesAndLotsRootCategory,
-      directions,
-      distance,
-    },
-    updateFilters,
-  } = useHousesAndLotsFilters();
+  const {
+    areaFrom,
+    areaTo,
+    livingAreaFrom,
+    livingAreaTo,
+    kitchenAreaFrom,
+    kitchenAreaTo,
+    plotAreaFrom,
+    plotAreaTo,
+    wallMaterial,
+    houseLevels,
+    constructionYearFrom,
+    constructionYearTo,
+    readinessFrom,
+    readinessTo,
+    heating,
+    gasSupply,
+    electricity,
+    water,
+    sewerage,
+    nearLake,
+    saleTerm,
+  } = filters;
 
   const onApply = () => {
-    applyFilters({
-      areaFrom,
-      areaTo,
-      livingAreaFrom,
-      livingAreaTo,
-      kitchenAreaFrom,
-      kitchenAreaTo,
-      plotAreaFrom,
-      plotAreaTo,
-      wallMaterial,
-      houseLevels,
-      constructionYearFrom,
-      constructionYearTo,
-      readinessFrom,
-      readinessTo,
-      heating,
-      gasSupply,
-      electricity,
-      water,
-      sewerage,
-      nearLake,
-      saleTerm,
-      //Default filters
-      priceFrom,
-      district_rb,
-      street,
-      region,
-      locality,
-      priceTo,
-      housesAndLotsRootCategory,
-      directions,
-      distance,
-    });
+    const filtersToApply = getHousesAndLotsFiltersToApply(HousesAndLotsRootCategory.Dachi, filters);
+    applyFilters(filtersToApply);
   };
 
   return (

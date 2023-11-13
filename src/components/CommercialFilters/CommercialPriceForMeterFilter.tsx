@@ -8,7 +8,7 @@ import { AvailableCurrencies } from '@/src/types/Currency';
 
 const CommercialPriceForMeterFilter = () => {
   const {
-    filters: { priceForMeterFrom, priceFromMeterTo },
+    filters: { priceForMeterFrom, priceForMeterTo },
     updateFilters,
   } = useCommercialFilters();
 
@@ -22,9 +22,9 @@ const CommercialPriceForMeterFilter = () => {
         priceForMeterFrom:
           priceForMeterFrom &&
           getPriceByCurrency(priceForMeterFrom, prev.current, selectedCurrency, rates),
-        priceFromMeterTo:
-          priceFromMeterTo &&
-          getPriceByCurrency(priceFromMeterTo, prev.current, selectedCurrency, rates),
+        priceForMeterTo:
+          priceForMeterTo &&
+          getPriceByCurrency(priceForMeterTo, prev.current, selectedCurrency, rates),
       });
       prev.current = selectedCurrency;
     }
@@ -36,12 +36,12 @@ const CommercialPriceForMeterFilter = () => {
       subLabel={selectedCurrency}
       values={{
         from: priceForMeterFrom,
-        to: priceFromMeterTo,
+        to: priceForMeterTo,
       }}
       onChange={({ from, to }) =>
         updateFilters({
           priceForMeterFrom: from,
-          priceFromMeterTo: to,
+          priceForMeterTo: to,
         })
       }
     />

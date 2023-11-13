@@ -18,8 +18,10 @@ import KitchenAreaFilter from '@/src/components/filters/KitchenAreaFilter';
 import LivingAreaFilter from '@/src/components/filters/LivingAreaFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import SaleTermFilter from '@/src/components/filters/SaleTermFilter';
+import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import {
   HousesAndLotsFiltersType,
+  getHousesAndLotsFiltersToApply,
   useHousesAndLotsFilters,
 } from '@/src/store/housesAndLotsFilters';
 
@@ -29,79 +31,42 @@ interface CottagesFiltersProps {
 
 const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
   const {
-    filters: {
-      areaFrom,
-      areaTo,
-      livingAreaFrom,
-      livingAreaTo,
-      kitchenAreaFrom,
-      kitchenAreaTo,
-      plotAreaFrom,
-      plotAreaTo,
-      wallMaterial,
-      houseLevels,
-      constructionYearFrom,
-      constructionYearTo,
-      readinessFrom,
-      readinessTo,
-      heating,
-      gasSupply,
-      electricity,
-      water,
-      sewerage,
-      nearLake,
-      saleTerm,
-      housesAndLotsCategories,
-      // Default filters
-      priceFrom,
-      priceTo,
-      housesAndLotsRootCategory,
-      distance,
-      directions,
-      district_rb,
-      street,
-      region,
-      locality,
-    },
+    filters,
     data: { housesAndLotasCategories },
     updateFilters,
   } = useHousesAndLotsFilters();
+  const {
+    areaFrom,
+    areaTo,
+    livingAreaFrom,
+    livingAreaTo,
+    kitchenAreaFrom,
+    kitchenAreaTo,
+    plotAreaFrom,
+    plotAreaTo,
+    wallMaterial,
+    houseLevels,
+    constructionYearFrom,
+    constructionYearTo,
+    readinessFrom,
+    readinessTo,
+    heating,
+    gasSupply,
+    electricity,
+    water,
+    sewerage,
+    nearLake,
+    saleTerm,
+    housesAndLotsCategories,
+    housesAndLotsRootCategory,
+  } = filters;
 
   const onApply = () => {
-    applyFilters({
-      areaFrom,
-      areaTo,
-      livingAreaFrom,
-      livingAreaTo,
-      kitchenAreaFrom,
-      kitchenAreaTo,
-      plotAreaFrom,
-      plotAreaTo,
-      wallMaterial,
-      houseLevels,
-      constructionYearFrom,
-      constructionYearTo,
-      readinessFrom,
-      readinessTo,
-      heating,
-      gasSupply,
-      electricity,
-      water,
-      sewerage,
-      nearLake,
-      saleTerm,
-      housesAndLotsCategories,
-      //Default filters
-      priceFrom,
-      priceTo,
-      housesAndLotsRootCategory,
-      distance,
-      directions,
-      district_rb,
-      street,
-      region,
-      locality,
-    });
+    const filtersToApply = getHousesAndLotsFiltersToApply(
+      HousesAndLotsRootCategory.Cottages,
+      filters,
+    );
+    applyFilters(filtersToApply);
   };
 
   return (

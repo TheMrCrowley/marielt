@@ -8,7 +8,12 @@ import {
   CommercialRootCategoryTypeValues,
   TransactionTypeValues,
 } from '@/src/enums/CommercialFilters';
-import { CommercialFiltersType, useCommercialFilters } from '@/src/store/commercialFilters';
+import {
+  CommercialFiltersType,
+  getCommercialRootCategoryUid,
+  getTransactionTypeUid,
+  useCommercialFilters,
+} from '@/src/store/commercialFilters';
 import { CommercialCategory, CommercialTransaction } from '@/src/types/Commercial';
 
 import BusinessFilter from './BusinessFilter';
@@ -126,9 +131,7 @@ const getFilterByTransactionAndRootCategory = ({
   selectedRootCategory: string;
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
 }) => {
-  const transactionUid = transactionData.find(
-    (transaction) => transaction.transactionName === selectedTransaction,
-  )?.transactionUid;
+  const transactionUid = getTransactionTypeUid(transactionData, selectedTransaction);
 
   switch (transactionUid) {
     case TransactionTypeValues.Business:
@@ -147,9 +150,7 @@ const getFilterByRootCategory = ({
   selectedRootCategory: string;
   applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
 }) => {
-  const categoryUid = categoriesData.find(
-    (category) => category.categoryName === selectedRootCategory,
-  )?.categoryUid;
+  const categoryUid = getCommercialRootCategoryUid(categoriesData, selectedRootCategory);
 
   switch (categoryUid) {
     case CommercialRootCategoryTypeValues.Offices:

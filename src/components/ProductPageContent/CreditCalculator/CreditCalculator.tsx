@@ -16,20 +16,23 @@ const CreditCalculator = () => {
         variant="h2"
         fontSize={24}
         fontWeight="medium"
-        className={clsx('p-7', 'border-b', 'border-[#ffffff1a]')}
+        className={clsx('lg:p-7', 'p-5', 'border-b', 'border-[#ffffff1a]')}
       >
         Кредитный калькулятор
       </Title>
-      <div className={clsx('flex')}>
+      <div className={clsx('flex', 'lg:flex-row', 'flex-col')}>
         <div
           className={clsx(
             'flex',
             'flex-col',
-            'border-r',
+            'lg:border-r',
+            'border-b',
             'border-[#ffffff1a]',
-            'p-7',
+            'lg:p-7',
+            'p-5',
             'gap-y-12',
-            'w-[30%]',
+            'lg:w-[30%]',
+            'w-full',
           )}
         >
           <div>
@@ -40,7 +43,7 @@ const CreditCalculator = () => {
               70 546 USD
             </Typography>
           </div>
-          <div className={clsx('flex', 'flex-col', 'gap-y-8', 'max-w-xs', 'self-center')}>
+          <div className={clsx('flex', 'flex-col', 'gap-y-8', 'w-full')}>
             <div className={clsx('flex', 'flex-col', 'gap-y-5')}>
               <CreditInput placeholder="1000" labelText="Первоначальный взнос" rightUnits="usd" />
               <CreditInput placeholder="20" labelText="Срок кредита" rightUnits="лет" />
@@ -56,14 +59,16 @@ const CreditCalculator = () => {
             </Typography>
           </div>
         </div>
-        <div className={clsx('flex', 'flex-col', 'py-7', 'px-12', 'w-[70%]')}>
-          <div className={clsx('flex', 'gap-x-2', 'mb-24')}>
+        <div
+          className={clsx('flex', 'flex-col', 'py-7', 'lg:px-12', 'px-5', 'lg:w-[70%]', 'w-full')}
+        >
+          <div className={clsx('flex', 'gap-x-2', 'lg:mb-24', 'mb-16')}>
             <Image alt="bank" src={BankIcon} />
             <Typography fontSize={36} fontWeight="medium">
               Беларусбанк
             </Typography>
           </div>
-          <div className={clsx('flex', 'gap-x-32', 'self-center', 'mb-3')}>
+          <div className={clsx('flex', 'lg:gap-x-32', 'gap-x-16', 'self-center', 'mb-3')}>
             <div className={clsx('flex', 'flex-col', 'justify-center', 'gap-y-1', 'items-center')}>
               <Typography className={clsx('text-center')} fontSize={36} fontWeight="medium">
                 от 0 %
@@ -85,12 +90,38 @@ const CreditCalculator = () => {
           <Typography
             color="text-[#B1B1B1]"
             fontSize={14}
-            className={clsx('opacity-50', 'self-center', 'mb-20', 'max-w-xl', 'text-center')}
+            className={clsx(
+              'opacity-50',
+              'self-center',
+              'lg:mb-20',
+              'mb-12',
+              'max-w-xl',
+              'text-center',
+            )}
           >
             Для расчтета Первоначальной ставки и Ежемесячного платежа - введите необходимые
             параметры в калькуляторе
           </Typography>
-          <div className={clsx('flex', 'gap-x-5', 'bg-[#3D3D3D]', 'px-5', 'py-7', 'max-w-[740px]')}>
+          <div
+            className={clsx(
+              'flex',
+              'sm:flex-row',
+              'flex-col',
+              'justify-center',
+              'items-center',
+              'gap-y-2',
+              'gap-x-5',
+              'bg-[#3D3D3D]',
+              'sm:px-5',
+              'px-2',
+              'py-7',
+              'lg:max-w-[740px]',
+              'w-full',
+
+              'sm:text-left',
+              'text-center',
+            )}
+          >
             <Image alt="info" src={InfoIcon} />
             <Typography color="text-[#B8B8B8]" fontSize={14}>
               Расчет проведен по программе “Ипотека экспресс” от Беларусбанка. Компания Мариэлт

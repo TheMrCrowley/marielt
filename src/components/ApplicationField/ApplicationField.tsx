@@ -21,14 +21,18 @@ const ApplicationField = () => {
         'items-center',
         'py-16',
         'gap-y-16',
+        'px-10',
       )}
     >
-      <Typography fontSize={48}>Оставьте заявку и мы ответим на все ваши вопросы</Typography>
+      <Typography fontSize={48} className={clsx('lg:text-5xl', 'text-xl', 'text-center')}>
+        Оставьте заявку и мы ответим на все ваши вопросы
+      </Typography>
       <div className={clsx('flex', 'gap-8')}>
         <input
           placeholder="Имя"
           className={clsx('w-full', 'text-2xl', 'border-b', 'border-secondary', 'text-white')}
         />
+        {/**TODO: min validation, mask for tel-input? */}
         <input
           type="tel"
           placeholder="+375 25 784 65 47"
@@ -49,22 +53,25 @@ const ApplicationField = () => {
           setCheckedValue(value);
         }}
         values={checkedValue}
+        wrapperClassName={clsx('items-center', 'justify-center')}
       />
 
       <div className={clsx('flex', 'flex-col', 'gap-y-4', 'mt-8')}>
         <label
           className={clsx(
             'text-white',
-            'text-base',
+            'md:text-base',
+            'text-xs',
             'flex',
             'justify-center',
             'items-center',
             'font-light',
+            'text-center',
           )}
         >
           <input
             onChange={() => setIsChecked(!isChecked)}
-            className={clsx('w-4', 'h-4', 'mr-3')}
+            className={clsx('md:w-4', 'md:h-4', 'md:mr-3', 'w-[10px]', 'h-[10px]', 'mr-1')}
             type="checkbox"
             name="agreement"
             checked={isChecked}

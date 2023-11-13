@@ -98,142 +98,282 @@ const getCommercialStrapiQueryParamsByFilters = (
             $in: [rootCategoryType, ...(propertyType ? propertyType : [])].filter(Boolean),
           },
         },
-        price_total: (priceFrom || priceTo) && {
-          $or: [
-            {
-              to: {
-                $null: true,
-              },
-              from: {
-                $gte:
-                  priceFrom &&
-                  getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-                $lte:
-                  priceTo && getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
-              },
-            },
-            {
-              to: {
-                $between: priceFrom &&
-                  priceTo && [
-                    getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-                    getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
-                  ],
-              },
-            },
-            {
-              from: {
-                $between: priceFrom &&
-                  priceTo && [
-                    getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-                    getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
-                  ],
-              },
-            },
-            {
-              to: {
-                $gte: getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
-                $not: {
-                  $lt: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-                },
-              },
-              from: {
-                $lte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
-              },
-            },
-          ],
-        },
-        price_meter: (priceForMeterFrom || priceFromMeterTo) && {
-          $or: [
-            {
-              to: {
-                $null: true,
-              },
-              from: {
-                $gte:
-                  priceForMeterFrom &&
-                  getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
-                $lte:
-                  priceFromMeterTo &&
-                  getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
-              },
-            },
-            {
-              to: {
-                $between: priceForMeterFrom &&
-                  priceFromMeterTo && [
-                    getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
-                    getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
-                  ],
-              },
-            },
-            {
-              from: {
-                $between: priceForMeterFrom &&
-                  priceFromMeterTo && [
-                    getPriceByCurrency(priceForMeterFrom, selectedCurrency, targetCurrency, rates),
-                    getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
-                  ],
-              },
-            },
-            {
-              to: {
-                $gte: getPriceByCurrency(priceFromMeterTo, selectedCurrency, targetCurrency, rates),
-                $not: {
-                  $lt: getPriceByCurrency(
-                    priceForMeterFrom,
-                    selectedCurrency,
-                    targetCurrency,
-                    rates,
-                  ),
-                },
-              },
-              from: {
-                $lte: getPriceByCurrency(
-                  priceForMeterFrom,
-                  selectedCurrency,
-                  targetCurrency,
-                  rates,
-                ),
-              },
-            },
-          ],
-        },
-        parameters: {
-          premises_area: (areaFrom || areaTo) && {
-            $or: [
-              {
-                max_area: {
-                  $null: true,
-                },
-                min_area: {
-                  $gte: areaFrom,
-                  $lte: areaTo,
-                },
-              },
-              {
-                max_area: {
-                  $between: areaFrom && areaTo && [areaFrom, areaTo],
-                },
-              },
-              {
-                min_area: {
-                  $between: areaFrom && areaTo && [areaFrom, areaTo],
-                },
-              },
-              {
-                max_area: {
-                  $gte: areaTo,
-                  $not: {
-                    $lt: areaFrom,
+        $and: [
+          {
+            price_total: (priceFrom || priceTo) && {
+              $or: [
+                !!priceFrom &&
+                  !priceTo && {
+                    to: {
+                      $null: true,
+                    },
+                    from: {
+                      $gte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    },
                   },
-                },
-                min_area: {
-                  $lte: areaFrom,
-                },
-              },
-            ],
+                !!priceTo &&
+                  !priceFrom && {
+                    from: {
+                      $lte: getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                    },
+                    to: {
+                      $lte: getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                    },
+                  },
+                !!priceTo &&
+                  !priceFrom && {
+                    from: {
+                      $between: [0, priceTo],
+                    },
+                  },
+                priceFrom &&
+                  priceTo && {
+                    to: {
+                      $between: [
+                        getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                        priceTo,
+                      ],
+                    },
+                  },
+                priceFrom &&
+                  priceTo && {
+                    from: {
+                      $between: [
+                        getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                        priceTo,
+                      ],
+                    },
+                  },
+                priceTo &&
+                  priceFrom && {
+                    to: {
+                      $gte: getPriceByCurrency(priceTo, selectedCurrency, targetCurrency, rates),
+                      $not: {
+                        $lt: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                      },
+                    },
+                    from: {
+                      $lte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    },
+                  },
+              ].filter(Boolean),
+            },
           },
+          {
+            price_meter: (priceForMeterFrom || priceFromMeterTo) && {
+              $or: [
+                !!priceForMeterFrom &&
+                  !priceFromMeterTo && {
+                    to: {
+                      $null: true,
+                    },
+                    from: {
+                      $gte: getPriceByCurrency(
+                        priceForMeterFrom,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                  },
+                !!priceFromMeterTo &&
+                  !priceForMeterFrom && {
+                    from: {
+                      $lte: getPriceByCurrency(
+                        priceFromMeterTo,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                    to: {
+                      $lte: getPriceByCurrency(
+                        priceFromMeterTo,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                  },
+                !!priceFromMeterTo &&
+                  !priceForMeterFrom && {
+                    from: {
+                      $between: [0, priceFromMeterTo],
+                    },
+                  },
+                priceForMeterFrom &&
+                  priceFromMeterTo && {
+                    to: {
+                      $between: [
+                        getPriceByCurrency(
+                          priceForMeterFrom,
+                          selectedCurrency,
+                          targetCurrency,
+                          rates,
+                        ),
+                        priceFromMeterTo,
+                      ],
+                    },
+                  },
+                priceForMeterFrom &&
+                  priceFromMeterTo && {
+                    from: {
+                      $between: [
+                        getPriceByCurrency(
+                          priceForMeterFrom,
+                          selectedCurrency,
+                          targetCurrency,
+                          rates,
+                        ),
+                        priceFromMeterTo,
+                      ],
+                    },
+                  },
+                priceFromMeterTo &&
+                  priceForMeterFrom && {
+                    to: {
+                      $gte: getPriceByCurrency(
+                        priceFromMeterTo,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                      $not: {
+                        $lt: getPriceByCurrency(
+                          priceForMeterFrom,
+                          selectedCurrency,
+                          targetCurrency,
+                          rates,
+                        ),
+                      },
+                    },
+                    from: {
+                      $lte: getPriceByCurrency(
+                        priceForMeterFrom,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                  },
+              ].filter(Boolean),
+            },
+          },
+          {
+            parameters: {
+              premises_area: (areaFrom || areaTo) && {
+                $or: [
+                  !!areaFrom &&
+                    !areaTo && {
+                      max_area: {
+                        $null: true,
+                      },
+                      min_area: {
+                        $gte: areaFrom,
+                      },
+                    },
+                  !!areaTo &&
+                    !areaFrom && {
+                      min_area: {
+                        $lte: areaTo,
+                      },
+                      max_area: {
+                        $lte: areaTo,
+                      },
+                    },
+                  !!areaTo &&
+                    !areaFrom && {
+                      min_area: {
+                        $between: [0, areaTo],
+                      },
+                    },
+                  areaFrom &&
+                    areaTo && {
+                      max_area: {
+                        $between: [areaFrom, areaTo],
+                      },
+                    },
+                  areaFrom &&
+                    areaTo && {
+                      min_area: {
+                        $between: [areaFrom, areaTo],
+                      },
+                    },
+                  areaTo &&
+                    areaFrom && {
+                      max_area: {
+                        $gte: areaTo,
+                        $not: {
+                          $lt: areaFrom,
+                        },
+                      },
+                      min_area: {
+                        $lte: areaFrom,
+                      },
+                    },
+                ].filter(Boolean),
+              },
+            },
+          },
+          {
+            parameters: {
+              separate_rooms: (separateRoomsFrom || separateRoomsTo) && {
+                $or: [
+                  !!separateRoomsFrom &&
+                    !separateRoomsTo && {
+                      to: {
+                        $null: true,
+                      },
+                      from: {
+                        $gte: separateRoomsFrom,
+                      },
+                    },
+                  !!separateRoomsTo &&
+                    !separateRoomsFrom && {
+                      from: {
+                        $lte: separateRoomsTo,
+                      },
+                      to: {
+                        $lte: separateRoomsTo,
+                      },
+                    },
+                  !!separateRoomsTo &&
+                    !separateRoomsFrom && {
+                      from: {
+                        $between: [0, separateRoomsTo],
+                      },
+                    },
+                  separateRoomsFrom &&
+                    separateRoomsTo && {
+                      to: {
+                        $between: [separateRoomsFrom, separateRoomsTo],
+                      },
+                    },
+                  separateRoomsFrom &&
+                    separateRoomsTo && {
+                      from: {
+                        $between: [separateRoomsFrom, separateRoomsTo],
+                      },
+                    },
+                  separateRoomsTo &&
+                    separateRoomsFrom && {
+                      to: {
+                        $gte: separateRoomsTo,
+                        $not: {
+                          $lt: separateRoomsFrom,
+                        },
+                      },
+                      from: {
+                        $lte: separateRoomsFrom,
+                      },
+                    },
+                ].filter(Boolean),
+              },
+            },
+          },
+        ],
+
+        parameters: {
           $or: [
             {
               floor: {
@@ -254,40 +394,7 @@ const getCommercialStrapiQueryParamsByFilters = (
             $gte: constructionYearFrom,
             $lte: constructionYearTo,
           },
-          separate_rooms: (separateRoomsFrom || separateRoomsTo) && {
-            $or: [
-              {
-                to: {
-                  $null: true,
-                },
-                from: {
-                  $gte: separateRoomsFrom,
-                  $lte: separateRoomsTo,
-                },
-              },
-              {
-                to: {
-                  $between: [separateRoomsFrom, separateRoomsTo],
-                },
-              },
-              {
-                from: {
-                  $between: [separateRoomsFrom, separateRoomsTo],
-                },
-              },
-              {
-                to: {
-                  $gte: separateRoomsTo,
-                  $not: {
-                    $lt: separateRoomsFrom,
-                  },
-                },
-                from: {
-                  $lte: separateRoomsFrom,
-                },
-              },
-            ],
-          },
+
           ceiling_height: {
             $gte: ceilingHeightFrom,
             $lte: ceilingHeightTo,

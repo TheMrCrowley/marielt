@@ -12,7 +12,7 @@ const AreaFilter = ({ areaFrom, areaTo, onChange }: AreaFilterProps) => {
       label="Площадь"
       subLabel={
         <span>
-          м <sup>2</sup>
+          м<sup>2</sup>
         </span>
       }
       values={{

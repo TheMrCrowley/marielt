@@ -135,7 +135,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
   };
 
   useEffect(() => {
-    if (value && value.length >= 3) {
+    if (value) {
       getResults();
       return;
     }
@@ -191,7 +191,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
       <Input
         value={value}
         onChange={(val) => setValue(val)}
-        placeholder="Введите Адрес, Район, Микрорайон"
+        placeholder="Введите улицу, населенный пункт, район, область"
       />
       {loading && (
         <div

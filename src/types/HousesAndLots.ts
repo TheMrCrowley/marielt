@@ -9,7 +9,9 @@ export interface DefaultHousesAndLotsItem {
   img?: string;
   initialCurrency: AvailableCurrencies;
   parameters: {
-    plotSize: string;
+    plotSize?: string;
+    livingArea?: string;
+    kitchenArea?: string;
   };
 }
 

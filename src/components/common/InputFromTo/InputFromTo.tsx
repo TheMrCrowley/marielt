@@ -56,6 +56,11 @@ const InputFromTo = ({
         <input
           type="text"
           value={from}
+          onBlur={(e) => {
+            if (e.target.value && to && +e.target.value > +to) {
+              onChange({ from: '', to });
+            }
+          }}
           onChange={(e) =>
             onChange({
               from: handleChange(formatToNumber(e.target.value, maxLength)),
@@ -79,6 +84,11 @@ const InputFromTo = ({
         <input
           type="text"
           value={to}
+          onBlur={(e) => {
+            if (e.target.value && from && +e.target.value < +from) {
+              onChange({ from, to: '' });
+            }
+          }}
           onChange={(e) => {
             onChange({
               from,

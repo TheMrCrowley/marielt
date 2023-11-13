@@ -40,7 +40,6 @@ const ProductListWrapper = ({
           'gap-y-10',
           'grow-0',
           'shrink',
-          'basis-2/3',
         )}
       >
         <div

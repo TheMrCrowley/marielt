@@ -98,22 +98,32 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
   };
 
   const renderSlides = () => {
+    const slideWidth = breakpoint >= WindowWidth.MD ? 330 : 300;
     switch (type) {
       case 'flats':
         return products.map((product, index) => (
-          <SwiperSlide style={{ width: 330 }} key={`product-slider-${type}-swiper-slide-${index}`}>
+          <SwiperSlide
+            style={{ width: slideWidth }}
+            key={`product-slider-${type}-swiper-slide-${index}`}
+          >
             <FlatCard flatItem={product as DefaultFlatItem} />
           </SwiperSlide>
         ));
       case 'commercial':
         return products.map((product, index) => (
-          <SwiperSlide style={{ width: 330 }} key={`product-slider-${type}-swiper-slide-${index}`}>
+          <SwiperSlide
+            style={{ width: slideWidth }}
+            key={`product-slider-${type}-swiper-slide-${index}`}
+          >
             <CommercialCard commercialItem={product as DefaultCommercialItem} />
           </SwiperSlide>
         ));
       case 'houses-and-lots':
         return products.map((product, index) => (
-          <SwiperSlide style={{ width: 330 }} key={`product-slider-${type}-swiper-slide-${index}`}>
+          <SwiperSlide
+            style={{ width: slideWidth }}
+            key={`product-slider-${type}-swiper-slide-${index}`}
+          >
             <HousesAndLotsCard housesAndLotsItem={product as DefaultHousesAndLotsItem} />
           </SwiperSlide>
         ));

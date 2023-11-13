@@ -6,10 +6,6 @@ import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
 import {
-  CommercialRootCategoryTypeValues,
-  TransactionTypeValues,
-} from '@/src/enums/CommercialFilters';
-import {
   CommercialFiltersType,
   getCommercialFiltersToApply,
   getCommercialRootCategoryUid,

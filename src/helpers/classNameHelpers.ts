@@ -29,7 +29,7 @@ export const getFontSizeClassName = (fontSize: FontSizeType): string => {
     case 20:
       return 'lg:text-xl md:text-base text-sm';
     case 16:
-      return 'sm:text-base text-sm';
+      return 'md:text-base text-sm';
     case 14:
       return 'text-sm';
     default:

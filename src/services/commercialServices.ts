@@ -453,7 +453,7 @@ const getCommercialStrapiQueryParamsByFilters = (
           },
         },
       },
-      populate: '*',
+      populate: ['parameters.premises_area', 'price_total', 'price_meter'],
       pagination: {
         pageSize: 6,
         page: filters.page || 1,
@@ -480,17 +480,17 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
   );
 
   const url = `${process.env.API_BASE_URL}/commercial-property-items?${query}`;
-  console.log({ url });
+
   const response = await fetch(url, {
     cache: 'no-cache',
   });
 
-  const d = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
-  console.log({ d });
   const {
     data,
     meta: { pagination },
-  } = d;
+  } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+
+  console.log(data.forEach((i) => console.log(i.attributes)));
   return {
     commercial: formatToDefaultCommercial(data),
     pagination,

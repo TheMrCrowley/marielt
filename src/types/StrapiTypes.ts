@@ -154,6 +154,10 @@ export interface CommercialStrapiResponse {
     from?: string;
     to?: string;
   };
+  price_meter?: {
+    from?: string;
+    to?: string;
+  };
   commercial_phone: string;
   home_page: boolean;
   currency?: AvailableCurrencies;

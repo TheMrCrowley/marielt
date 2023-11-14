@@ -12,6 +12,23 @@ export interface DefaultCommercialItem {
   img?: string;
   initialCurrency: AvailableCurrencies;
   transactionType: TransactionTypeValues;
+  parameters: {
+    totalArea: {
+      minArea?: string;
+      maxArea?: string;
+    };
+    plotSize?: string;
+    floor?: string;
+    maxFloor?: string;
+    totalPrice: {
+      from?: string;
+      to?: string;
+    };
+    pricePerMeter: {
+      from?: string;
+      to?: string;
+    };
+  };
 }
 
 export interface CommercialTransaction {

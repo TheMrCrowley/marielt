@@ -47,16 +47,47 @@ export const formatToDefaultFlat = (
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
 ): DefaultCommercialItem[] =>
-  commercial.map(({ attributes: { locality, house_number, street, currency, comm_tran }, id }) => ({
-    address: getFullAddress({
-      locality,
-      houseNumber: house_number?.number,
-      street,
+  commercial.map(
+    ({
+      attributes: {
+        locality,
+        house_number,
+        street,
+        currency,
+        comm_tran,
+        parameters,
+        price_total,
+        price_meter,
+      },
+      id,
+    }) => ({
+      address: getFullAddress({
+        locality,
+        houseNumber: house_number?.number,
+        street,
+      }),
+      id,
+      initialCurrency: currency || 'USD',
+      transactionType: comm_tran?.data?.attributes?.uid,
+      parameters: {
+        totalArea: {
+          maxArea: parameters.premises_area?.max_area,
+          minArea: parameters.premises_area?.min_area,
+        },
+        plotSize: parameters.plot_size,
+        floor: parameters.floor,
+        maxFloor: parameters.floors_number,
+        pricePerMeter: {
+          from: price_meter?.from,
+          to: price_meter?.to,
+        },
+        totalPrice: {
+          from: price_total?.from,
+          to: price_total?.to,
+        },
+      },
     }),
-    id,
-    initialCurrency: currency || 'USD',
-    transactionType: comm_tran?.data?.attributes?.uid,
-  }));
+  );
 
 export const formatToDefaultHouseAndLotsItem = (
   housesAndLots: StrapiFindResponse<HousesAndLotsStrapiResponse>['data'],

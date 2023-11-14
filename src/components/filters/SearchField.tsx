@@ -121,6 +121,7 @@ const SearchField = ({ onClick, search, values }: SearchFieldProps) => {
   const wrapperRef = useClickOutside(() => setVisible(false));
 
   const getResults = async () => {
+    setNotFound(false);
     setLoading(true);
     const result = await search(value);
 

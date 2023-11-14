@@ -14,6 +14,7 @@ import {
   balconyQueryMap,
   saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
+import { parseFiltersStateToTags } from '@/src/helpers/parseFiltersStateToTags';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 import { District, MicroDistrict } from '@/src/types/Location';
@@ -141,7 +142,7 @@ const tagsDefaultState = {
 };
 
 const filtersNameMap: Record<
-  string,
+  keyof typeof tagsDefaultState,
   (value: string | string[], currency?: AvailableCurrencies) => string
 > = {
   areaFrom: (value) => `Площадь от: ${value} м²`,
@@ -181,32 +182,6 @@ const filtersNameMap: Record<
   region: (value) => value as string,
 };
 
-const parseFiltersStateToTags = (
-  filters: Partial<Record<keyof FlatsFiltersType['filters'], string | string[] | boolean>>,
-  currency: AvailableCurrencies,
-): typeof tagsDefaultState => {
-  return Object.entries(filters)
-    .filter(([, value]) => {
-      return (
-        (Array.isArray(value) && value.length) ||
-        (typeof value === 'string' && value.length) ||
-        !!value
-      );
-    })
-    .reduce<typeof tagsDefaultState>((acc, [key, value]) => {
-      if ((typeof value === 'string' || typeof value === 'boolean') && !!value) {
-        return { ...acc, [key]: filtersNameMap[key](value as string, currency) };
-      }
-      return {
-        ...acc,
-        [key]: (value as string[]).map((item) => ({
-          value: item,
-          label: filtersNameMap[key](item as string, currency),
-        })),
-      };
-    }, tagsDefaultState);
-};
-
 export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
   filters: initialFlatsFilters,
   tags: tagsDefaultState,
@@ -226,16 +201,28 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
   updateTags: (update, currency) => {
     set({
       tags: {
-        ...parseFiltersStateToTags(update, currency),
+        ...parseFiltersStateToTags(update, currency, tagsDefaultState, filtersNameMap),
       },
     });
   },
   deleteTag: (key, value) => {
+    if (typeof tagsDefaultState[key] === 'boolean') {
+      set((prev) => ({
+        filters: {
+          ...prev.filters,
+          [key]: false,
+        },
+      }));
+    }
     if (typeof tagsDefaultState[key] === 'string') {
       set((prev) => ({
         tags: {
           ...prev.tags,
           [key]: tagsDefaultState[key],
+        },
+        filters: {
+          ...prev.filters,
+          [key]: '',
         },
       }));
     }
@@ -246,6 +233,10 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
           [key]: (prev.tags[key] as Array<{ value: string; label: string }>)?.filter(
             (item) => item.value !== value,
           ),
+        },
+        filters: {
+          ...prev.filters,
+          [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
         },
       }));
     }

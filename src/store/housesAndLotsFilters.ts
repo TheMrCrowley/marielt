@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { SaleTermValues } from '@/src/enums/FlatsFilters';
+import { SaleTermValues, saleTermQueryMap } from '@/src/enums/FlatsFilters';
 import {
   GasSupplyValues,
   ElectricityValues,
@@ -11,9 +11,20 @@ import {
   HeatingValues,
   LotsWaterValues,
   HousesAndLotsRootCategory,
+  heatingFilterTagsMap,
+  wallMaterialTagsMap,
+  sewerageTagsMap,
+  lotsWaterTagsMap,
+  waterTagsMap,
+  electricityFilterTagsMap,
+  gasSupplyQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
+import { parseFiltersStateToTags } from '@/src/helpers/parseFiltersStateToTags';
+import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 import { HousesAndLotsCategory } from '@/src/types/HousesAndLots';
+
+import { houseLevelQueryMap } from './../enums/HousesAndLotsFilters';
 
 export type HousesAndLotsFiltersType = BaseFilters<
   {
@@ -97,15 +108,130 @@ export const initialHousesAndLotsFilters: HousesAndLotsFiltersType['filters'] = 
   street: [],
 };
 
+const tagsDefaultState = {
+  areaFrom: '',
+  areaTo: '',
+  priceFrom: '',
+  priceTo: '',
+  livingAreaFrom: '',
+  livingAreaTo: '',
+  kitchenAreaFrom: '',
+  kitchenAreaTo: '',
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  housesAndLotsRootCategory: '',
+  distance: '',
+  plotAreaFrom: '',
+  plotAreaTo: '',
+  nearLake: '',
+  readinessFrom: '',
+  readinessTo: '',
+  directions: [],
+  housesAndLotsCategories: [],
+  gasSupply: [],
+  electricity: [],
+  water: [],
+  lotsWater: [],
+  sewerage: [],
+  wallMaterial: [],
+  houseLevels: [],
+  heating: [],
+  saleTerm: [],
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
+};
+
+const filtersNameMap: Record<
+  keyof typeof tagsDefaultState,
+  (value: string | string[], currency?: AvailableCurrencies) => string
+> = {
+  areaFrom: (value) => `Площадь от: ${value} м²`,
+  areaTo: (value) => `Площадь до: ${value} м²`,
+  priceFrom: (value, currency) => `Цена от: ${value} ${currency}`,
+  priceTo: (value, currency) => `Цена до: ${value} ${currency}`,
+  livingAreaFrom: (value) => `Жилая площадь от: ${value} м²`,
+  livingAreaTo: (value) => `Жилая площадь до: ${value} м²`,
+  kitchenAreaFrom: (value) => `Площадь кухни от: ${value} м²`,
+  kitchenAreaTo: (value) => `Площадь кухни до: ${value} м²`,
+  constructionYearFrom: (value) => `Год постройки от: ${value}`,
+  constructionYearTo: (value) => `Год постройки до: ${value}`,
+  housesAndLotsRootCategory: (value) => `Тип: ${value}`,
+  street: (value) => value as string,
+  locality: (value) => value as string,
+  district_rb: (value) => value as string,
+  region: (value) => value as string,
+  distance: (value) => `Расстояние от МКАД до: ${value} км.`,
+  plotAreaFrom: (value) => `Площадь участка от: ${value} сот.`,
+  plotAreaTo: (value) => `Площадь участка до: ${value} сот.`,
+  readinessFrom: (value) => `Готовность от: ${value}%`,
+  readinessTo: (value) => `Готовность до: ${value}%`,
+  nearLake: () => 'Возле озера',
+  directions: (value) => `${value} направление`,
+  housesAndLotsCategories: (value) => `Вид объекта: ${value}`,
+  gasSupply: (value) => `Газоснабжение: ${gasSupplyQueryMap[value as GasSupplyValues]}`,
+  electricity: (value) =>
+    `Электроснабжение: ${electricityFilterTagsMap[value as ElectricityValues]}`,
+  water: (value) => `Водоснабжение: ${waterTagsMap[value as WaterValues]}`,
+  lotsWater: (value) => `Водоснабжение: ${lotsWaterTagsMap[value as LotsWaterValues]}`,
+  sewerage: (value) => `Канализация: ${sewerageTagsMap[value as SewerageValues]}`,
+  wallMaterial: (value) => `Материал стен: ${wallMaterialTagsMap[value as WallMaterialValues]}`,
+  houseLevels: (value) => `Уровней: ${houseLevelQueryMap[value as HouseLevelValues]}`,
+  heating: (value) => `Отопление: ${heatingFilterTagsMap[value as HeatingValues]}`,
+  saleTerm: (value) => `Тип сделки: ${saleTermQueryMap[value as SaleTermValues]}`,
+};
+
 export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) => ({
   filters: initialHousesAndLotsFilters,
   data: {
     directions: [],
     housesAndLotasCategories: [],
   },
-  deleteTag: () => {},
-  tags: {},
-  updateTags: () => {},
+  deleteTag: (key, value) => {
+    if (typeof tagsDefaultState[key] === 'boolean') {
+      set((prev) => ({
+        filters: {
+          ...prev.filters,
+          [key]: false,
+        },
+      }));
+    }
+    if (typeof tagsDefaultState[key] === 'string') {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: tagsDefaultState[key],
+        },
+        filters: {
+          ...prev.filters,
+          [key]: '',
+        },
+      }));
+    }
+    if (Array.isArray(tagsDefaultState[key])) {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: (prev.tags[key] as Array<{ value: string; label: string }>)?.filter(
+            (item) => item.value !== value,
+          ),
+        },
+        filters: {
+          ...prev.filters,
+          [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
+        },
+      }));
+    }
+  },
+  tags: tagsDefaultState,
+  updateTags: (update, currency) => {
+    set({
+      tags: {
+        ...parseFiltersStateToTags(update, currency, tagsDefaultState, filtersNameMap),
+      },
+    });
+  },
   updateFilters: (update) => {
     set((prev) => ({
       filters: {

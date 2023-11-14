@@ -1,15 +1,7 @@
 'use client';
 
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
-import CardMapPinIcon from '@/public/card-map-pin.svg';
-import ImagePlaceholder from '@/public/card-placeholder.png';
-import Button from '@/src/components/common/Button';
-import Title from '@/src/components/common/Title';
-import { getPriceByCurrencyMonetary } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
@@ -33,7 +25,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
   } = housesAndLotsItem;
 
   const { selectedCurrency, rates } = useCurrency();
-  console.log(plotSize);
+
   return (
     <CardWrapper
       address={address}

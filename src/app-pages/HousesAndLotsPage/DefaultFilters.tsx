@@ -9,6 +9,7 @@ import AreaFilter from '@/src/components/filters/AreaFilter';
 import FiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
 import DirectionFilter from '@/src/components/filters/DirectionFilter';
 import DistanceFilter from '@/src/components/filters/DistanceFilter';
+import FiltersTagsList from '@/src/components/filters/FiltersTagsList';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import PriceFilter from '@/src/components/filters/PriceFilter';
 import SearchField from '@/src/components/filters/SearchField';
@@ -23,7 +24,10 @@ import {
 
 interface DefaultFiltersProps {
   openModal: () => void;
-  applyFilters: (selectedFilters: Partial<HousesAndLotsFiltersType['filters']>) => void;
+  applyFilters: (
+    selectedFilters: Partial<HousesAndLotsFiltersType['filters']>,
+    searchFilters?: Partial<HousesAndLotsFiltersType['filters']>,
+  ) => void;
 }
 
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
@@ -31,6 +35,8 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     filters,
     data: { housesAndLotasCategories, directions: directionOptions },
     updateFilters,
+    tags,
+    deleteTag,
   } = useHousesAndLotsFilters();
 
   const {
@@ -68,7 +74,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     }
   };
 
-  const onApply = () => {
+  const onApply = (searchFilters?: Partial<typeof filters>) => {
     const type =
       housesAndLotsRootCategory &&
       getHousesAndLotsRoute(housesAndLotsRootCategory, housesAndLotasCategories);
@@ -78,11 +84,19 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       filters,
     );
 
-    applyFilters(filtersToApply);
+    applyFilters(filtersToApply, searchFilters);
   };
 
   return (
-    <FiltersWrapper openModal={openModal}>
+    <FiltersWrapper
+      openModal={openModal}
+      filtersList={
+        <FiltersTagsList
+          tags={tags}
+          deleteTag={deleteTag as (key: string, value?: string) => void}
+        />
+      }
+    >
       <div
         className={clsx(
           'flex',
@@ -124,9 +138,12 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
             region,
             locality,
           }}
-          onClick={updateFilters}
+          onClick={(data) => {
+            updateFilters({ ...data });
+            onApply(data);
+          }}
         />
-        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={onApply}>
+        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={() => onApply()}>
           Применить
         </Button>
       </div>

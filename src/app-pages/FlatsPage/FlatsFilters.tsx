@@ -42,9 +42,11 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
     );
   }, [searchParams]);
 
-  const applyFilters = (f?: Partial<typeof filters>) => {
+  const applyFilters = (searchFilters?: Partial<typeof filters>) => {
     router.push(
-      pathname + '?' + formatFiltersToSearchParams({ ...filters, ...f }, selectedCurrency),
+      pathname +
+        '?' +
+        formatFiltersToSearchParams({ ...filters, ...searchFilters }, selectedCurrency),
     );
     router.refresh();
   };

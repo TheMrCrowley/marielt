@@ -24,7 +24,7 @@ const HousesAndLotsFilters = ({ data }: HousesAndLotsFiltersProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const { setIsExpandedOpen, setData, updateFilters, filters, isExpandedOpen } =
+  const { setIsExpandedOpen, setData, updateFilters, filters, isExpandedOpen, updateTags } =
     useHousesAndLotsFilters();
   const { selectedCurrency } = useCurrency();
 
@@ -35,8 +35,26 @@ const HousesAndLotsFilters = ({ data }: HousesAndLotsFiltersProps) => {
     setData(data);
   }, []);
 
-  const applyFilters = (selectedFilters: Partial<typeof filters>) => {
-    router.push(pathname + '?' + formatFiltersToSearchParams(selectedFilters, selectedCurrency));
+  useEffect(() => {
+    const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
+
+    updateTags(
+      {
+        ...initialFilters,
+      },
+      selectedCurrency,
+    );
+  }, [searchParams]);
+
+  const applyFilters = (
+    selectedFilters: Partial<typeof filters>,
+    searchFilters?: Partial<typeof filters>,
+  ) => {
+    router.push(
+      pathname +
+        '?' +
+        formatFiltersToSearchParams({ ...selectedFilters, ...searchFilters }, selectedCurrency),
+    );
     router.refresh();
   };
 

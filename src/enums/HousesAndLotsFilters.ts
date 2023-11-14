@@ -20,6 +20,12 @@ export const electricityOptions: OptionType<ElectricityValues> = [
   { label: 'В380', value: ElectricityValues.V320 },
 ];
 
+export const electricityFilterTagsMap: Record<ElectricityValues, string> =
+  electricityOptions.reduce<Record<ElectricityValues, string>>((acc, cur) => {
+    acc[cur.value as ElectricityValues] = cur.label;
+    return acc;
+  }, {} as Record<ElectricityValues, string>);
+
 export const electricityQueryMap: QueryMapType<ElectricityValues> = {
   [ElectricityValues.Yes]: ['есть', 'рядом'],
   [ElectricityValues.No]: 'нет',
@@ -73,6 +79,13 @@ export const heatingOptions: OptionType<HeatingValues> = [
   { value: HeatingValues.No, label: 'Нет' },
   { value: HeatingValues.AlternativeSources, label: 'Альтернативные источники' },
 ];
+
+export const heatingFilterTagsMap: Record<HeatingValues, string> = heatingOptions.reduce<
+  Record<HeatingValues, string>
+>((acc, cur) => {
+  acc[cur.value as HeatingValues] = cur.label;
+  return acc;
+}, {} as Record<HeatingValues, string>);
 
 export const heatingQueryMap: QueryMapType<HeatingValues> = {
   [HeatingValues.Steam]: [
@@ -135,10 +148,24 @@ export const waterOptions: OptionType<WaterValues> = [
   { label: 'Сезонная', value: WaterValues.Seasonal },
 ];
 
+export const waterTagsMap: Record<WaterValues, string> = waterOptions.reduce<
+  Record<WaterValues, string>
+>((acc, cur) => {
+  acc[cur.value as WaterValues] = cur.label;
+  return acc;
+}, {} as Record<WaterValues, string>);
+
 export const lotsWaterOptions: OptionType<LotsWaterValues> = [
   { label: 'Есть', value: LotsWaterValues.Yes },
   { label: 'Нету', value: LotsWaterValues.No },
 ];
+
+export const lotsWaterTagsMap: Record<LotsWaterValues, string> = lotsWaterOptions.reduce<
+  Record<LotsWaterValues, string>
+>((acc, cur) => {
+  acc[cur.value as LotsWaterValues] = cur.label;
+  return acc;
+}, {} as Record<LotsWaterValues, string>);
 
 export const waterQueryMap: QueryMapType<WaterValues> = {
   [WaterValues.Hot]: 'горячая',
@@ -184,6 +211,13 @@ export const wallMaterialOptions: OptionType<WallMaterialValues> = [
   { label: 'Силикатные блоки', value: WallMaterialValues.SilicateBlock },
 ];
 
+export const wallMaterialTagsMap: Record<WallMaterialValues, string> = wallMaterialOptions.reduce<
+  Record<WallMaterialValues, string>
+>((acc, cur) => {
+  acc[cur.value as WallMaterialValues] = cur.label;
+  return acc;
+}, {} as Record<WallMaterialValues, string>);
+
 export const wallMaterialQueryMap: QueryMapType<WallMaterialValues> = {
   [WallMaterialValues.Brick]: ['кирпич', 'облицовочный кирпич', 'красный кирпич', 'белый кирпич'],
   [WallMaterialValues.Panel]: ['панельный'],
@@ -214,6 +248,13 @@ export const sewerageOptions: OptionType<SewerageValues> = [
   { label: 'Нет', value: SewerageValues.No },
   { label: 'С/у на улице', value: SewerageValues.Street },
 ];
+
+export const sewerageTagsMap: Record<SewerageValues, string> = sewerageOptions.reduce<
+  Record<SewerageValues, string>
+>((acc, cur) => {
+  acc[cur.value as SewerageValues] = cur.label;
+  return acc;
+}, {} as Record<SewerageValues, string>);
 
 export const sewerageQueryMap: QueryMapType<SewerageValues> = {
   [SewerageValues.Yes]: ['есть', 'центральная', 'местная'],

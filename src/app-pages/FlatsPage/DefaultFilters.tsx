@@ -16,7 +16,7 @@ import { FlatsFiltersType, useFlatsFilter } from '@/src/store/flatsFilters';
 
 interface DefaultFilterProps {
   openModal: () => void;
-  applyFilters: (f?: Partial<FlatsFiltersType['filters']>) => void;
+  applyFilters: (searchFilters?: Partial<FlatsFiltersType['filters']>) => void;
 }
 
 const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
@@ -27,9 +27,7 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
       openModal={openModal}
       filtersList={
         <FiltersTagsList
-          deleteTag={deleteTag}
-          filters={filters}
-          updateFilters={updateFilters}
+          deleteTag={deleteTag as (key: string, value?: string) => void}
           tags={tags}
         />
       }

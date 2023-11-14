@@ -53,7 +53,7 @@ export const commercialFloorOptions: Record<CommercialFloorValues, string> = {
   [CommercialFloorValues.Last]: 'Последний',
 };
 
-enum CommercialLocationValues {
+export enum CommercialLocationValues {
   House = 'house',
   BusinessCenter = 'business-center',
   ShoppingMall = 'shopping-mall',
@@ -74,7 +74,7 @@ export const commercialLocationQueryMap: QueryMapType<CommercialLocationValues> 
   [CommercialLocationValues.DetachedBuilding]: 'отдельно стоящее здание',
 };
 
-enum CommercialFinishingValues {
+export enum CommercialFinishingValues {
   With = 'with-finishing',
   Without = 'without-finishing',
 }
@@ -89,7 +89,7 @@ export const commercialFinishingQueryMap: QueryMapType<CommercialFinishingValues
   [CommercialFinishingValues.Without]: 'без отделки',
 };
 
-enum CommercialWallMaterialValues {
+export enum CommercialWallMaterialValues {
   Panel = 'panel',
   Monolith = 'monolith',
   Brick = 'brick',

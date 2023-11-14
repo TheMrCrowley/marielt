@@ -13,6 +13,7 @@ export interface BaseFilters<
 > {
   filters: T;
   tags: Partial<Record<keyof T, string | Array<{ value: string; label: string }>>>;
+  reset: () => void;
   updateTags: (
     values: Partial<Record<keyof T, string | string[] | boolean>>,
     currency: AvailableCurrencies,

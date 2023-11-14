@@ -20,7 +20,7 @@ interface DefaultFilterProps {
 }
 
 const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
-  const { filters, updateFilters, deleteTag, tags } = useFlatsFilter();
+  const { filters, updateFilters, deleteTag, tags, reset } = useFlatsFilter();
 
   return (
     <FiltersWrapper
@@ -29,6 +29,7 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
         <FiltersTagsList
           deleteTag={deleteTag as (key: string, value?: string) => void}
           tags={tags}
+          reset={reset}
         />
       }
     >

@@ -7,6 +7,7 @@ import CommercialTransactionTypeFilter from '@/src/components/CommercialFilters/
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import DefaultFiltersWrapper from '@/src/components/filters/DefaultFiltersWrapper';
+import FiltersTagsList from '@/src/components/filters/FiltersTagsList';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import PriceFilter from '@/src/components/filters/PriceFilter';
 import SearchField from '@/src/components/filters/SearchField';
@@ -22,7 +23,10 @@ import {
 
 interface DefaultFiltersProps {
   openModal: () => void;
-  applyFilters: (selectedFilters: Partial<CommercialFiltersType['filters']>) => void;
+  applyFilters: (
+    selectedFilters: Partial<CommercialFiltersType['filters']>,
+    searchFilters?: Partial<CommercialFiltersType['filters']>,
+  ) => void;
 }
 
 const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
@@ -30,6 +34,9 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     updateFilters,
     filters,
     data: { categories, transactions },
+    tags,
+    deleteTag,
+    reset,
   } = useCommercialFilters();
 
   const {
@@ -65,7 +72,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     return <AreaFilter onChange={updateFilters} areaFrom={areaFrom} areaTo={areaTo} />;
   };
 
-  const onApply = () => {
+  const onApply = (searchFilters?: Partial<typeof filters>) => {
     const selectedTransactionType = getTransactionTypeUid(transactions, transactionType);
     const selectedRootCategory = getCommercialRootCategoryUid(categories, rootCategoryType);
 
@@ -75,11 +82,20 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       filters,
     );
 
-    applyFilters(filtersToApply);
+    applyFilters(filtersToApply, searchFilters);
   };
 
   return (
-    <DefaultFiltersWrapper openModal={openModal}>
+    <DefaultFiltersWrapper
+      openModal={openModal}
+      filtersList={
+        <FiltersTagsList
+          deleteTag={deleteTag as (key: string, value?: string) => void}
+          tags={tags}
+          reset={reset}
+        />
+      }
+    >
       <div
         className={clsx(
           'flex',
@@ -112,10 +128,13 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
         {getAreaFilter()}
         <SearchField
           search={getCommercialSearchResults}
-          onClick={updateFilters}
+          onClick={(data) => {
+            updateFilters({ ...data });
+            applyFilters({ ...data });
+          }}
           values={{ district_rb, region, street, locality }}
         />
-        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={onApply}>
+        <Button className={clsx('md:self-end', 'flex-1', 'w-full')} onClick={() => onApply()}>
           Применить
         </Button>
       </div>

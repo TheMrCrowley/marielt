@@ -1,10 +1,18 @@
 import { create } from 'zustand';
 
 import {
+  CommercialFinishingValues,
+  CommercialLocationValues,
   CommercialRootCategoryTypeValues,
+  CommercialWallMaterialValues,
   TransactionTypeValues,
+  commercialFinishingQueryMap,
+  commercialLocationQueryMap,
+  commercialWallMaterialQueryMap,
 } from '@/src/enums/CommercialFilters';
+import { parseFiltersStateToTags } from '@/src/helpers/parseFiltersStateToTags';
 import { CommercialCategory, CommercialTransaction } from '@/src/types/Commercial';
+import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 
 export type CommercialFiltersType = BaseFilters<
@@ -112,6 +120,108 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   street: [],
 };
 
+const tagsDefaultState: CommercialFiltersType['tags'] = {
+  transactionType: '',
+  rootCategoryType: '',
+  priceFrom: '',
+  priceTo: '',
+  areaFrom: '',
+  areaTo: '',
+  floorFrom: '',
+  floorTo: '',
+  constructionYearFrom: '',
+  constructionYearTo: '',
+  profitabilityFrom: '',
+  profitabilityTo: '',
+  paybackFrom: '',
+  paybackTo: '',
+  separateRoomsFrom: '',
+  separateRoomsTo: '',
+  ceilingHeightFrom: '',
+  ceilingHeightTo: '',
+  plotAreaFrom: '',
+  plotAreaTo: '',
+  distance: '',
+  priceForMeterFrom: '',
+  priceForMeterTo: '',
+  propertyType: [],
+  commercialLocation: [],
+  finishing: [],
+  wallMaterial: [],
+  directions: [],
+  district_rb: [],
+  locality: [],
+  region: [],
+  street: [],
+  isFirstFloor: '',
+  isLastFloor: '',
+  isGroundFloor: '',
+  vat: '',
+  separateEntrance: '',
+  bathroom: '',
+  furniture: '',
+  ramp: '',
+  heating: '',
+  water: '',
+  sewerage: '',
+  electricity: '',
+  gas: '',
+};
+
+const filtersNameMap: Record<
+  keyof typeof tagsDefaultState,
+  (value: string | string[], currency?: AvailableCurrencies) => string
+> = {
+  areaFrom: (value) => `Площадь от: ${value} м²`,
+  areaTo: (value) => `Площадь до: ${value} м²`,
+  priceFrom: (value, currency) => `Цена от: ${value} ${currency}`,
+  priceTo: (value, currency) => `Цена до: ${value} ${currency}`,
+  floorFrom: (value) => `Этаж от: ${value}`,
+  floorTo: (value) => `Этаж до: ${value}`,
+  constructionYearFrom: (value) => `Год постройки от: ${value}`,
+  constructionYearTo: (value) => `Год постройки до: ${value}`,
+  isLastFloor: () => 'Последний этаж',
+  furniture: () => 'Мебель',
+  finishing: (value) =>
+    `Ремонт: ${commercialFinishingQueryMap[value as CommercialFinishingValues]}`,
+  bathroom: () => 'Санузел',
+  street: (value) => value as string,
+  locality: (value) => value as string,
+  district_rb: (value) => value as string,
+  region: (value) => value as string,
+  distance: (value) => `Расстояние от МКАД до: ${value} км.`,
+  plotAreaFrom: (value) => `Площадь участка от: ${value} сот.`,
+  plotAreaTo: (value) => `Площадь участка до: ${value} сот.`,
+  directions: (value) => `${value} направление`,
+  electricity: () => 'Электроснабжение',
+  water: () => 'Водоснабжение',
+  sewerage: () => 'Канализация',
+  wallMaterial: (value) =>
+    `Материал стен: ${commercialWallMaterialQueryMap[value as CommercialWallMaterialValues]}`,
+  heating: () => 'Отопление',
+  ceilingHeightFrom: (value) => `Высота потолков от: ${value}`,
+  ceilingHeightTo: (value) => `Высота потолков до: ${value}`,
+  gas: () => 'Газ',
+  vat: () => 'НДС',
+  commercialLocation: (value) =>
+    `Расположение: ${commercialLocationQueryMap[value as CommercialLocationValues]}`,
+  isFirstFloor: () => 'Первый этаж',
+  isGroundFloor: () => 'Цокольный этаж',
+  paybackFrom: (value) => `Окупаемость от: ${value}`,
+  paybackTo: (value) => `Окупаемость до: ${value}`,
+  priceForMeterFrom: (value, currency) => `Цена за м²: ${value}${currency}`,
+  priceForMeterTo: (value, currency) => `Цена за м²: ${value}${currency}`,
+  profitabilityFrom: (value) => `Доходность от: ${value}%`,
+  profitabilityTo: (value) => `Доходность до: ${value}%`,
+  propertyType: (value) => `Вид объекта: ${value}`,
+  ramp: () => 'Погрузка/разгрузка',
+  rootCategoryType: (value) => `Тип недвижимости: ${value}`,
+  separateEntrance: () => 'Отдельный вход',
+  separateRoomsFrom: (value) => `Раздельных помещений от: ${value}`,
+  separateRoomsTo: (value) => `Раздельных помещений до: ${value}`,
+  transactionType: (value) => `Тип сделки: ${value}`,
+};
+
 export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
   filters: initialCommercialFilters,
   data: {
@@ -119,9 +229,56 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
     categories: [],
     directions: [],
   },
-  deleteTag: () => {},
-  tags: {},
-  updateTags: () => {},
+  reset: () => {
+    set({
+      filters: initialCommercialFilters,
+      tags: tagsDefaultState,
+    });
+  },
+  deleteTag: (key, value) => {
+    if (typeof tagsDefaultState[key] === 'boolean') {
+      set((prev) => ({
+        filters: {
+          ...prev.filters,
+          [key]: false,
+        },
+      }));
+    }
+    if (typeof tagsDefaultState[key] === 'string') {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: tagsDefaultState[key],
+        },
+        filters: {
+          ...prev.filters,
+          [key]: '',
+        },
+      }));
+    }
+    if (Array.isArray(tagsDefaultState[key])) {
+      set((prev) => ({
+        tags: {
+          ...prev.tags,
+          [key]: (prev.tags[key] as Array<{ value: string; label: string }>)?.filter(
+            (item) => item.value !== value,
+          ),
+        },
+        filters: {
+          ...prev.filters,
+          [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
+        },
+      }));
+    }
+  },
+  tags: tagsDefaultState,
+  updateTags: (update, currency) => {
+    set({
+      tags: {
+        ...parseFiltersStateToTags(update, currency, tagsDefaultState, filtersNameMap),
+      },
+    });
+  },
   updateFilters: (update) => {
     set((prev) => ({
       filters: {

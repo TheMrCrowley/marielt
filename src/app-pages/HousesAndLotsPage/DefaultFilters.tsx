@@ -37,6 +37,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
     updateFilters,
     tags,
     deleteTag,
+    reset,
   } = useHousesAndLotsFilters();
 
   const {
@@ -94,6 +95,7 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
         <FiltersTagsList
           tags={tags}
           deleteTag={deleteTag as (key: string, value?: string) => void}
+          reset={reset}
         />
       }
     >

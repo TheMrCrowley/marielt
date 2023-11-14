@@ -21,7 +21,7 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const { setData, filters, updateFilters, setIsExpandedOpen, isExpandedOpen } =
+  const { setData, filters, updateFilters, setIsExpandedOpen, isExpandedOpen, updateTags } =
     useCommercialFilters();
   const { selectedCurrency } = useCurrency();
 
@@ -32,8 +32,26 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
     setData(data);
   }, []);
 
-  const applyFilters = (selectedFilters: Partial<typeof filters>) => {
-    router.push(pathname + '?' + formatFiltersToSearchParams(selectedFilters, selectedCurrency));
+  useEffect(() => {
+    const initialFilters = createFiltersStateBySearchParams(filters, searchParams);
+
+    updateTags(
+      {
+        ...initialFilters,
+      },
+      selectedCurrency,
+    );
+  }, [searchParams]);
+
+  const applyFilters = (
+    selectedFilters: Partial<typeof filters>,
+    searchFilters?: Partial<typeof filters>,
+  ) => {
+    router.push(
+      pathname +
+        '?' +
+        formatFiltersToSearchParams({ ...selectedFilters, ...searchFilters }, selectedCurrency),
+    );
     router.refresh();
   };
 

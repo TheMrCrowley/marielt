@@ -240,6 +240,12 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
       },
     }));
   },
+  reset: () => {
+    set({
+      filters: initialHousesAndLotsFilters,
+      tags: tagsDefaultState,
+    });
+  },
   setData: (data) => set({ data }),
   isExpandedOpen: false,
   setIsExpandedOpen: (isExpandedOpen) => set({ isExpandedOpen }),

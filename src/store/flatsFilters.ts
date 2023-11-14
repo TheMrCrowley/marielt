@@ -241,6 +241,12 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
       }));
     }
   },
+  reset: () => {
+    set({
+      filters: initialFlatsFilters,
+      tags: tagsDefaultState,
+    });
+  },
   setData: (data) => set({ data }),
   isExpandedOpen: false,
   setIsExpandedOpen: (isExpandedOpen) => set({ isExpandedOpen }),

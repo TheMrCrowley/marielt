@@ -182,13 +182,13 @@ const filtersNameMap: Record<
   saleTerm: (value) => `Тип сделки: ${saleTermQueryMap[value as SaleTermValues]}`,
 };
 
-export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) => ({
+export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set, get) => ({
   filters: initialHousesAndLotsFilters,
   data: {
     directions: [],
     housesAndLotasCategories: [],
   },
-  deleteTag: (key, value) => {
+  deleteTag: (key, value, cb) => {
     if (typeof tagsDefaultState[key] === 'boolean') {
       set((prev) => ({
         filters: {
@@ -196,6 +196,8 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
           [key]: false,
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (typeof tagsDefaultState[key] === 'string') {
       set((prev) => ({
@@ -208,6 +210,8 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
           [key]: '',
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (Array.isArray(tagsDefaultState[key])) {
       set((prev) => ({
@@ -222,6 +226,8 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
           [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
         },
       }));
+      cb?.(get().filters);
+      return;
     }
   },
   tags: tagsDefaultState,
@@ -240,11 +246,12 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set) =>
       },
     }));
   },
-  reset: () => {
+  reset: (cb) => {
     set({
       filters: initialHousesAndLotsFilters,
       tags: tagsDefaultState,
     });
+    cb(get().filters);
   },
   setData: (data) => set({ data }),
   isExpandedOpen: false,

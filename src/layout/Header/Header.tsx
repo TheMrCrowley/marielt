@@ -24,12 +24,18 @@ const Header = () => {
           'bg-contain',
           'sm:bg-[url(/header-background.png)]',
           'bg-[url(/header_bg_mob.png)]',
+          'bg-[#3D3D3D]',
           'sm:bg-bottom',
           'bg-right',
           'bg-no-repeat',
           'border-b',
           'border-solid',
           'border-white',
+          'sm:relative',
+          'fixed',
+          'sm:z-0',
+          'z-50',
+          'w-full',
         )}
       >
         <Link href="/">

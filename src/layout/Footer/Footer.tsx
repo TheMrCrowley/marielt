@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import RatingImg from '@/public/footer_rating.png';
@@ -112,8 +113,20 @@ const Footer = () => {
         >
           <Typography fontSize={16}>© 2019 «ГРУППА КОМПАНИЙ Мариэлт»</Typography>
           <div className={clsx('flex', 'justify-center', 'gap-2')}>
-            <Image src={RatingImg} alt="rating-realt" />
-            <Image src={WeOnRealtImg} alt="we-on-realt" />
+            <Link
+              href="https://realt.by/agencies/rating/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={RatingImg} alt="rating-realt" />
+            </Link>
+            <Link
+              href="https://realt.by/agencies/gruppa-kompanii-mariehlt/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={WeOnRealtImg} alt="we-on-realt" />
+            </Link>
           </div>
           <Typography fontSize={16}>VUCA - digital studio © {new Date().getFullYear()}</Typography>
         </div>

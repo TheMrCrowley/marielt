@@ -21,7 +21,8 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
       <div
         className={clsx(
           'fixed',
-          'top-0',
+          'sm:top-0',
+          'top-16',
           'left-0',
           'right-0',
           'bottom-0',

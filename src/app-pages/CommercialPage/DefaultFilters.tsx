@@ -90,9 +90,13 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       openModal={openModal}
       filtersList={
         <FiltersTagsList
-          deleteTag={deleteTag as (key: string, value?: string) => void}
+          deleteTag={(key, value) => {
+            deleteTag(key as keyof CommercialFiltersType['filters'], value, onApply);
+          }}
           tags={tags}
-          reset={reset}
+          reset={() => {
+            reset(onApply);
+          }}
         />
       }
     >

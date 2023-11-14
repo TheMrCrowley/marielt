@@ -26,12 +26,7 @@ const CommercialPrice = ({
   totalPrice: { from, to },
 }: CommercialPriceProps) => {
   const { selectedCurrency, rates } = useCurrency();
-  console.log({
-    pricePerMeterFrom,
-    pricePerMeterTo,
-    from,
-    to,
-  });
+
   if (!pricePerMeterFrom && !pricePerMeterTo && !from && !to) {
     return null;
   }
@@ -44,11 +39,11 @@ const CommercialPrice = ({
     return (
       <div className={clsx('flex', 'justify-between', 'items-center')}>
         <Typography fontWeight="medium">
-          {getPriceByCurrencySign(+from, initialCurrency, selectedCurrency, rates)}
-          {to && `-${getPriceByCurrencySign(+to, initialCurrency, selectedCurrency, rates)}`}
+          {from && to && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+from, initialCurrency, selectedCurrency, rates)}
         </Typography>
         <Typography className={'opacity-50'}>
-          {getPriceByCurrencyMonetary(+from, initialCurrency, 'BYN', rates)}
+          {from && to && 'от'} {getPriceByCurrencyMonetary(+from, initialCurrency, 'BYN', rates)}
         </Typography>
       </div>
     );
@@ -62,16 +57,20 @@ const CommercialPrice = ({
     return (
       <div className={clsx('flex', 'justify-between', 'items-center')}>
         <Typography fontWeight="medium">
-          {getPriceByCurrencyMonetary(+pricePerMeterFrom, initialCurrency, selectedCurrency, rates)}
-        </Typography>
-        {pricePerMeterTo && (
-          <Typography className={'opacity-50'}>
-            {getPriceByCurrencyMonetary(+pricePerMeterTo, initialCurrency, 'BYN', rates)}
+          {pricePerMeterFrom && pricePerMeterTo && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+pricePerMeterFrom, initialCurrency, selectedCurrency, rates)}{' '}
+          <Typography fontSize={16} fontWeight="light" className="inline">
+            за м²
           </Typography>
-        )}
+        </Typography>
+        <Typography className={'opacity-50'}>
+          {pricePerMeterFrom && pricePerMeterTo && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+pricePerMeterFrom, initialCurrency, 'BYN', rates)}
+        </Typography>
       </div>
     );
   };
+
   return renderTotalPrice() || renderPricePerMeter();
 };
 

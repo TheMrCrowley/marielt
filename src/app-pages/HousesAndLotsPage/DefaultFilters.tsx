@@ -94,8 +94,12 @@ const DefaultFilters = ({ applyFilters, openModal }: DefaultFiltersProps) => {
       filtersList={
         <FiltersTagsList
           tags={tags}
-          deleteTag={deleteTag as (key: string, value?: string) => void}
-          reset={reset}
+          deleteTag={(key, value) => {
+            deleteTag(key as keyof HousesAndLotsFiltersType['filters'], value, onApply);
+          }}
+          reset={() => {
+            reset(onApply);
+          }}
         />
       }
     >

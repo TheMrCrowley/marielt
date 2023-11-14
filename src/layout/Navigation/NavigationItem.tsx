@@ -14,9 +14,10 @@ export interface NavItem {
 
 interface NavigationItemProps {
   navItem: NavItem;
+  onClick?: () => void;
 }
 
-const NavigationItem = ({ navItem }: NavigationItemProps) => {
+const NavigationItem = ({ navItem, onClick }: NavigationItemProps) => {
   const { href, title } = navItem;
   const pathname = usePathname();
 
@@ -48,6 +49,10 @@ const NavigationItem = ({ navItem }: NavigationItemProps) => {
         //TODO Remove comment
         // target="_blank"
         rel="noopener noreferrer"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick?.();
+        }}
       >
         {title}
       </Link>

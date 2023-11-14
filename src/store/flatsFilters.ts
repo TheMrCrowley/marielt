@@ -182,7 +182,7 @@ const filtersNameMap: Record<
   region: (value) => value as string,
 };
 
-export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
+export const useFlatsFilter = create<FlatsFiltersType>((set, get) => ({
   filters: initialFlatsFilters,
   tags: tagsDefaultState,
   data: {
@@ -205,7 +205,7 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
       },
     });
   },
-  deleteTag: (key, value) => {
+  deleteTag: (key, value, cb) => {
     if (typeof tagsDefaultState[key] === 'boolean') {
       set((prev) => ({
         filters: {
@@ -213,6 +213,8 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
           [key]: false,
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (typeof tagsDefaultState[key] === 'string') {
       set((prev) => ({
@@ -225,6 +227,8 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
           [key]: '',
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (Array.isArray(tagsDefaultState[key])) {
       set((prev) => ({
@@ -239,13 +243,16 @@ export const useFlatsFilter = create<FlatsFiltersType>((set) => ({
           [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
         },
       }));
+      cb?.(get().filters);
+      return;
     }
   },
-  reset: () => {
+  reset: (cb) => {
     set({
       filters: initialFlatsFilters,
       tags: tagsDefaultState,
     });
+    cb(get().filters);
   },
   setData: (data) => set({ data }),
   isExpandedOpen: false,

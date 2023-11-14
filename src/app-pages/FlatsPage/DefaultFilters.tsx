@@ -27,9 +27,13 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
       openModal={openModal}
       filtersList={
         <FiltersTagsList
-          deleteTag={deleteTag as (key: string, value?: string) => void}
+          deleteTag={(key, value) => {
+            deleteTag(key as keyof FlatsFiltersType['filters'], value, applyFilters);
+          }}
           tags={tags}
-          reset={reset}
+          reset={() => {
+            reset(applyFilters);
+          }}
         />
       }
     >

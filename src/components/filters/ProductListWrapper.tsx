@@ -29,34 +29,9 @@ const ProductListWrapper = ({
   };
 
   return (
-    <section className="container flex">
-      <section
-        className={clsx(
-          'max-w-max',
-          'flex',
-          'flex-col',
-          'py-20',
-          'items-center',
-          'gap-y-10',
-          'grow-0',
-          'shrink',
-        )}
-      >
-        <div
-          className={clsx(
-            'flex',
-            'gap-x-12',
-            'gap-y-8',
-            'flex-wrap',
-            'w-full',
-            'justify-between',
-            'items-center',
-          )}
-        >
-          {children}
-        </div>
-        <Pagination currentPage={page} totalPages={pageCount} onChange={handlePageChange} />
-      </section>
+    <section className={clsx('flex', 'flex-col', 'items-center', 'gap-4', 'basis-2/3', 'w-full')}>
+      <div className={clsx('flex', 'justify-between', 'flex-wrap', 'gap-8')}>{children}</div>
+      <Pagination currentPage={page} totalPages={pageCount} onChange={handlePageChange} />
     </section>
   );
 };

@@ -95,7 +95,10 @@ const getCommercialStrapiQueryParamsByFilters = (
         },
         commercial_categories: {
           name: {
-            $in: [rootCategoryType, ...(propertyType ? propertyType : [])].filter(Boolean),
+            $in: [
+              rootCategoryType,
+              ...(propertyType && Array.isArray(propertyType) ? propertyType : [propertyType]),
+            ].filter(Boolean),
           },
         },
         $and: [
@@ -105,6 +108,15 @@ const getCommercialStrapiQueryParamsByFilters = (
                 !!priceFrom &&
                   !priceTo && {
                     from: {
+                      $gte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    },
+                  },
+                !!priceFrom &&
+                  !priceTo && {
+                    from: {
+                      $lte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
+                    },
+                    to: {
                       $gte: getPriceByCurrency(priceFrom, selectedCurrency, targetCurrency, rates),
                     },
                   },
@@ -162,6 +174,25 @@ const getCommercialStrapiQueryParamsByFilters = (
                 !!priceForMeterFrom &&
                   !priceForMeterTo && {
                     from: {
+                      $gte: getPriceByCurrency(
+                        priceForMeterFrom,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                  },
+                !!priceForMeterFrom &&
+                  !priceForMeterTo && {
+                    from: {
+                      $lte: getPriceByCurrency(
+                        priceForMeterFrom,
+                        selectedCurrency,
+                        targetCurrency,
+                        rates,
+                      ),
+                    },
+                    to: {
                       $gte: getPriceByCurrency(
                         priceForMeterFrom,
                         selectedCurrency,
@@ -263,6 +294,24 @@ const getCommercialStrapiQueryParamsByFilters = (
                         $gte: areaFrom,
                       },
                     },
+                  !!areaFrom &&
+                    !areaTo && {
+                      min_area: {
+                        $lte: areaFrom,
+                      },
+                      max_area: {
+                        $null: true,
+                      },
+                    },
+                  !!areaFrom &&
+                    !areaTo && {
+                      min_area: {
+                        $lte: areaFrom,
+                      },
+                      max_area: {
+                        $gte: areaFrom,
+                      },
+                    },
                   !!areaTo &&
                     !areaFrom && {
                       min_area: {
@@ -316,6 +365,16 @@ const getCommercialStrapiQueryParamsByFilters = (
                         $gte: separateRoomsFrom,
                       },
                     },
+
+                  !!separateRoomsFrom &&
+                    !separateRoomsTo && {
+                      min_fromarea: {
+                        $lte: separateRoomsFrom,
+                      },
+                      to: {
+                        $gte: separateRoomsFrom,
+                      },
+                    },
                   !!separateRoomsTo &&
                     !separateRoomsFrom && {
                       from: {
@@ -360,7 +419,6 @@ const getCommercialStrapiQueryParamsByFilters = (
             },
           },
         ],
-
         parameters: {
           $or: [
             {
@@ -382,7 +440,6 @@ const getCommercialStrapiQueryParamsByFilters = (
             $gte: constructionYearFrom,
             $lte: constructionYearTo,
           },
-
           ceiling_height: {
             $gte: ceilingHeightFrom,
             $lte: ceilingHeightTo,
@@ -445,8 +502,8 @@ const getCommercialStrapiQueryParamsByFilters = (
             $lte: profitabilityTo,
           },
           payback: {
-            $lte: paybackFrom,
-            $gte: paybackTo,
+            $gte: paybackFrom,
+            $lte: paybackTo,
           },
           vat: {
             $eq: vat,

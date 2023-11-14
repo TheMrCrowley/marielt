@@ -1,16 +1,7 @@
 'use client';
 
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
-import CardMapPinIcon from '@/public/card-map-pin.svg';
-import ImagePlaceholder from '@/public/card-placeholder.png';
-import Button from '@/src/components/common/Button';
-import Title from '@/src/components/common/Title';
-import { getPriceByCurrencyMonetary } from '@/src/helpers/currencyHelpers';
-import { useCurrency } from '@/src/store/currency';
 import { DefaultCommercialItem } from '@/src/types/Commercial';
 
 import CardWrapper from './CardWrapper';
@@ -39,7 +30,15 @@ const CommercialCard = ({ commercialItem }: CommercialCardProps) => {
       imgUrl={img}
       title={name}
     >
-      <CommercialArea totalArea={totalArea} floor={floor} maxFloor={maxFloor} plotSize={plotSize} />
+      <CommercialArea
+        totalArea={totalArea}
+        floor={floor}
+        maxFloor={maxFloor}
+        plotSize={plotSize}
+        initialCurrency={initialCurrency}
+        pricePerMeter={pricePerMeter}
+        totalPrice={!!totalPrice.from}
+      />
       <CommercialPrice
         initialCurrency={initialCurrency}
         pricePerMeter={pricePerMeter}

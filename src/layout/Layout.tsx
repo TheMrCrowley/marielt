@@ -11,7 +11,7 @@ const Layout = ({ children }: PropsWithChildren) => {
     <div className="wrapper dark">
       <div className="content">
         <Header />
-        <main className="main">
+        <main className="main sm:mt-0 mt-16">
           <CurrencyProvider>
             <WindowResizeProvider>{children}</WindowResizeProvider>
           </CurrencyProvider>

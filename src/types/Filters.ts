@@ -13,12 +13,12 @@ export interface BaseFilters<
 > {
   filters: T;
   tags: Partial<Record<keyof T, string | Array<{ value: string; label: string }>>>;
-  reset: () => void;
+  reset: (cb: (data: Partial<T>) => void) => void;
   updateTags: (
     values: Partial<Record<keyof T, string | string[] | boolean>>,
     currency: AvailableCurrencies,
   ) => void;
-  deleteTag: (key: keyof T, value?: string) => void;
+  deleteTag: (key: keyof T, value?: string, cb?: (data: Partial<T>) => void) => void;
   data: D;
   updateFilters: <K extends keyof T>(
     values: Partial<Record<K, BaseFilters<T, D>['filters'][K]>>,

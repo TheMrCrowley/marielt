@@ -222,20 +222,21 @@ const filtersNameMap: Record<
   transactionType: (value) => `Тип сделки: ${value}`,
 };
 
-export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
+export const useCommercialFilters = create<CommercialFiltersType>((set, get) => ({
   filters: initialCommercialFilters,
   data: {
     transactions: [],
     categories: [],
     directions: [],
   },
-  reset: () => {
+  reset: (cb) => {
     set({
       filters: initialCommercialFilters,
       tags: tagsDefaultState,
     });
+    cb(get().filters);
   },
-  deleteTag: (key, value) => {
+  deleteTag: (key, value, cb) => {
     if (typeof tagsDefaultState[key] === 'boolean') {
       set((prev) => ({
         filters: {
@@ -243,6 +244,8 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
           [key]: false,
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (typeof tagsDefaultState[key] === 'string') {
       set((prev) => ({
@@ -255,6 +258,8 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
           [key]: '',
         },
       }));
+      cb?.(get().filters);
+      return;
     }
     if (Array.isArray(tagsDefaultState[key])) {
       set((prev) => ({
@@ -269,6 +274,8 @@ export const useCommercialFilters = create<CommercialFiltersType>((set) => ({
           [key]: (prev.filters[key] as string[]).filter((item) => item !== value),
         },
       }));
+      cb?.(get().filters);
+      return;
     }
   },
   tags: tagsDefaultState,
@@ -403,6 +410,7 @@ export const getCommercialFiltersToApply = (
     paybackTo,
     vat,
     separateEntrance,
+    propertyType,
   };
 
   const officeFilters = {
@@ -528,8 +536,6 @@ export const getCommercialFiltersToApply = (
     constructionYearFrom,
     constructionYearTo,
   };
-
-  console.log(selectedRootCategory !== CommercialRootCategoryTypeValues.Uchastki);
 
   switch (selectedTransaction) {
     case TransactionTypeValues.Business:

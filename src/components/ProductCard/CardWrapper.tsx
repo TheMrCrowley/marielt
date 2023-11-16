@@ -22,20 +22,17 @@ const CardWrapper = ({ to, imgUrl, title, address, children }: CardWrapperProps)
       className={clsx(
         'flex',
         'flex-col',
-        'md:max-w-[330px]',
-        'max-w-[300px]',
-        'w-full',
         'bg-[#262626]',
         'md:h-[450px]',
         'h-[400px]',
+        'md:w-[330px]',
+        'w-[300px]',
       )}
     >
       <Link href={to} target="_blank" rel="noopener noreferrer">
         <Image
-          className={clsx('object-cover')}
+          className={clsx('object-fill', 'w-full', 'h-[165px]')}
           src={imgUrl || ImagePlaceholder}
-          width={330}
-          height={165}
           alt="product-card"
         />
       </Link>

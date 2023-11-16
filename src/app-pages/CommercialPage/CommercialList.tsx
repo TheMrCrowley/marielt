@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import CommercialCard from '@/src/components/ProductCard/CommercialCard';
@@ -12,11 +13,24 @@ interface CommercialListProps {
 
 const CommercialList = ({ commercial, pagination }: CommercialListProps) => {
   return (
-    <ProductListWrapper pagination={pagination}>
-      {commercial.map((item) => (
-        <CommercialCard commercialItem={item} key={`flats-list-flats-item-${item.id}`} />
-      ))}
-    </ProductListWrapper>
+    <section
+      className={clsx(
+        'w-full',
+        'md:py-12',
+        'md:px-20',
+        'py-6',
+        'px-6',
+        'gap-8',
+        'flex',
+        'items-stretch',
+      )}
+    >
+      <ProductListWrapper pagination={pagination}>
+        {commercial.map((item) => (
+          <CommercialCard commercialItem={item} key={`flats-list-flats-item-${item.id}`} />
+        ))}
+      </ProductListWrapper>
+    </section>
   );
 };
 

@@ -1,0 +1,12 @@
+.pin-container {
+  /* display: flex; */
+
+  /* justify-content: center; */
+
+  /* align-items: center; */
+  font-size: 20px;
+  background-color: tomato;
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+}

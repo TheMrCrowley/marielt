@@ -190,6 +190,8 @@ export const useFlatsFilter = create<FlatsFiltersType>((set, get) => ({
     metro: [],
     microDistrict: [],
   },
+  viewType: 'list',
+  changeView: (type) => set({ viewType: type }),
   updateFilters: (update) => {
     set((prev) => ({
       filters: {

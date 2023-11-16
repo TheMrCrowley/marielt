@@ -163,10 +163,13 @@ const getFlatsStrapiQueryParamsByFilters = (
             $in: microDistrict,
           },
         },
+        location: {
+          $notNull: true,
+        },
       },
       populate: '*',
       pagination: {
-        pageSize: 6,
+        pageSize: 16,
         page: filters.page || 1,
       },
     },

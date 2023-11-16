@@ -42,6 +42,7 @@ export const formatToDefaultFlat = (
       maxFloor: attributes.parameters.floors_number,
       totalArea: attributes.parameters.total_area,
     },
+    location: attributes.location?.coordinates,
   }));
 
 export const formatToDefaultCommercial = (

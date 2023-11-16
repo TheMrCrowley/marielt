@@ -12,17 +12,19 @@ import ContactItem from '@/src/components/common/ContactItem';
 import Portal from '@/src/components/common/Portal';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
-import { AppRoutes, navigationMap } from '@/src/enums/AppRoutes';
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
-import NavigationItem, { NavItem } from '@/src/layout/Navigation/NavigationItem';
+import NavigationItem from '@/src/layout/Navigation/NavigationItem';
 
-const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
-  title: navigationMap[key as keyof typeof AppRoutes],
-  href: value,
-}));
+interface BurgerMenuProps {
+  navigationItems: Array<{
+    title: string;
+    to: AppRoutes;
+  }>;
+}
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
   const breakpoint = useWindowSize();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -76,7 +78,7 @@ const BurgerMenu = () => {
           >
             <nav className={clsx('flex', 'w-full')}>
               <ul className={clsx('max-w-6xl', 'w-full', 'flex', 'flex-col')}>
-                {navItems.map((navItem) => (
+                {navigationItems.map((navItem) => (
                   <div
                     key={navItem.title}
                     className={clsx(
@@ -91,7 +93,10 @@ const BurgerMenu = () => {
                   >
                     <NavigationItem
                       onClick={() => setIsOpen(false)}
-                      navItem={navItem}
+                      navItem={{
+                        title: navItem.title,
+                        href: navItem.to,
+                      }}
                       key={navItem.title}
                     />
                   </div>

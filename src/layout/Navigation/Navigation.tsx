@@ -3,18 +3,20 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { AppRoutes, navigationMap } from '@/src/enums/AppRoutes';
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 
-import NavigationItem, { NavItem } from './NavigationItem';
+import NavigationItem from './NavigationItem';
 
-const navItems: NavItem[] = Object.entries(AppRoutes).map(([key, value]) => ({
-  title: navigationMap[key as keyof typeof AppRoutes],
-  href: value,
-}));
+interface NavigationProps {
+  navigationItems: Array<{
+    title: string;
+    to: AppRoutes;
+  }>;
+}
 
-const Navigation = () => {
+const Navigation = ({ navigationItems }: NavigationProps) => {
   const breakpoint = useWindowSize();
 
   if (breakpoint < WindowWidth.SM) {
@@ -33,8 +35,14 @@ const Navigation = () => {
           'justify-items-center',
         )}
       >
-        {navItems.map((navItem) => (
-          <NavigationItem navItem={navItem} key={navItem.title} />
+        {navigationItems.map((navItem) => (
+          <NavigationItem
+            navItem={{
+              href: navItem.to,
+              title: navItem.title,
+            }}
+            key={navItem.title}
+          />
         ))}
       </ul>
     </nav>

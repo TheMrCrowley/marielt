@@ -13,4 +13,8 @@ export interface DefaultFlatItem {
     maxFloor: string;
     livingArea: string;
   };
+  location?: {
+    lng: number;
+    lat: number;
+  };
 }

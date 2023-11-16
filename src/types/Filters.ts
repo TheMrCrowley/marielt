@@ -26,6 +26,8 @@ export interface BaseFilters<
   setData: (data: D) => void;
   isExpandedOpen: boolean;
   setIsExpandedOpen: (isExpandedOpen: boolean) => void;
+  viewType: 'list' | 'map';
+  changeView: (type: 'list' | 'map') => void;
 }
 
 export interface SearchResults {

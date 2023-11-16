@@ -1,3 +1,4 @@
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import {
   CommercialRootCategoryTypeValues,
   TransactionTypeValues,
@@ -17,6 +18,20 @@ export interface StrapiFindOneResponse<T> {
   data: {
     id: number;
     attributes: T;
+  };
+}
+
+export interface HomePageItemResponse {
+  title: string;
+  navigation_title: string;
+  description: string;
+  variant: 'primary' | 'secondary';
+  to: AppRoutes;
+  type: 'product' | 'opportunity';
+  image: {
+    data: {
+      attributes: StrapiImage;
+    };
   };
 }
 
@@ -98,6 +113,12 @@ export interface FlatStrapiResponse {
   price?: string;
   name?: string;
   image?: StrapiImage;
+  location?: {
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
 }
 
 export interface CommercialStrapiResponse {

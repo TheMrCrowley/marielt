@@ -1,5 +1,10 @@
 import { AppRoutes } from '@/src/enums/AppRoutes';
-import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
+import {
+  HomePageItemResponse,
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+  StrapiImage,
+} from '@/src/types/StrapiTypes';
 
 export interface HomePageItem {
   title: string;
@@ -12,19 +17,6 @@ export interface HomePageItem {
   variant: 'primary' | 'secondary';
   type: 'product' | 'opportunity';
   to: AppRoutes;
-}
-
-interface HomePageItemResponse {
-  title: string;
-  description: string;
-  variant: 'primary' | 'secondary';
-  to: AppRoutes;
-  type: 'product' | 'opportunity';
-  image: {
-    data: {
-      attributes: StrapiImage;
-    };
-  };
 }
 
 interface WelcomeSectionItem {
@@ -71,9 +63,13 @@ export const getHomePageItems = async (): Promise<{
   const response = await fetch(`${process.env.API_BASE_URL}/home-pages?populate=*`, {});
   const { data } = (await response.json()) as StrapiFindResponse<HomePageItemResponse>;
 
-  const { opportunityItems, productItems } = data.reduce<{
+  const { opportunityItems, productItems, navigationItems } = data.reduce<{
     opportunityItems: HomePageItem[];
     productItems: HomePageItem[];
+    navigationItems: Array<{
+      title: string;
+      to: string;
+    }>;
   }>(
     (acc, cur) => {
       const target = {
@@ -97,7 +93,7 @@ export const getHomePageItems = async (): Promise<{
 
       return acc;
     },
-    { opportunityItems: [], productItems: [] },
+    { opportunityItems: [], productItems: [], navigationItems: [] },
   );
 
   return {

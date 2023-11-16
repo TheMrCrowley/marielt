@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Academy = () => {
-  return <div>Marielt DUBAI</div>;
-};
+import DubaiPage from '@/src/app-pages/Dubai/DubaiPage';
 
-export default Academy;
+export default function Page() {
+  return <DubaiPage />;
+}

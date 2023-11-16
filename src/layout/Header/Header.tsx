@@ -6,8 +6,10 @@ import React from 'react';
 import Logo from '@/public/logo.svg';
 import BurgerMenu from '@/src/layout/BurgerMenu';
 import Navigation from '@/src/layout/Navigation';
+import { getNavigationItems } from '@/src/services/navigationServices';
 
-const Header = () => {
+const Header = async () => {
+  const navigationItems = await getNavigationItems();
   return (
     <>
       <header
@@ -45,9 +47,9 @@ const Header = () => {
             className={clsx('lg:w-[220px]', 'md:w-[200px]', 'sm:w-[180px]', 'w-[120px]')}
           />
         </Link>
-        <BurgerMenu />
+        <BurgerMenu navigationItems={navigationItems} />
       </header>
-      <Navigation />
+      <Navigation navigationItems={navigationItems} />
     </>
   );
 };

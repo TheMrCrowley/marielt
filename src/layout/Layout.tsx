@@ -10,11 +10,12 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="wrapper dark">
       <div className="content">
-        <Header />
+        {/* <Header /> */}
         <main className="main sm:mt-0 mt-16">
-          <CurrencyProvider>
+          {/* <CurrencyProvider>
             <WindowResizeProvider>{children}</WindowResizeProvider>
-          </CurrencyProvider>
+          </CurrencyProvider> */}
+          {children}
         </main>
       </div>
 

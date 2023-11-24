@@ -18,7 +18,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
     address,
     id,
     initialCurrency,
-    img,
+    image,
     name,
     price,
     parameters: { plotSize },
@@ -29,8 +29,9 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
   return (
     <CardWrapper
       address={address}
-      to={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::houses-and-lots-item.houses-and-lots-item/${id}`}
-      imgUrl={img}
+      to={`https://marielt.site/admin/content-manager/collectionType/api::houses-and-lots-item.houses-and-lots-item/${id}`}
+      imgUrl={image?.url}
+      placeholderUrl={image?.placeholderUrl}
       title={name}
     >
       <CardArea plotSize={plotSize} />

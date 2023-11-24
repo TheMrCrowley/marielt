@@ -12,6 +12,10 @@ interface CommercialListProps {
 }
 
 const CommercialList = ({ commercial, pagination }: CommercialListProps) => {
+  if (!commercial.length) {
+    return null;
+  }
+
   return (
     <section
       className={clsx(

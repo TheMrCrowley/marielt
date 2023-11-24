@@ -13,10 +13,18 @@ interface CardWrapperProps extends PropsWithChildren {
   address: string;
   title?: string;
   imgUrl?: string;
+  placeholderUrl?: string;
   to: string;
 }
 
-const CardWrapper = ({ to, imgUrl, title, address, children }: CardWrapperProps) => {
+const CardWrapper = ({
+  to,
+  imgUrl,
+  title,
+  address,
+  children,
+  placeholderUrl,
+}: CardWrapperProps) => {
   return (
     <div
       className={clsx(
@@ -33,6 +41,10 @@ const CardWrapper = ({ to, imgUrl, title, address, children }: CardWrapperProps)
         <Image
           className={clsx('object-fill', 'w-full', 'h-[165px]')}
           src={imgUrl || ImagePlaceholder}
+          placeholder="blur"
+          blurDataURL={placeholderUrl || ImagePlaceholder.blurDataURL}
+          width={330}
+          height={160}
           alt="product-card"
         />
       </Link>

@@ -26,7 +26,7 @@ const CommercialCard = ({ commercialItem }: CommercialCardProps) => {
   return (
     <CardWrapper
       address={address}
-      to={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::commercial-property-item.commercial-property-item/${id}`}
+      to={`https://marielt.site/admin/content-manager/collectionType/api::commercial-property-item.commercial-property-item/${id}`}
       imgUrl={img}
       title={name}
     >

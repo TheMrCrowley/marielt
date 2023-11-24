@@ -18,6 +18,7 @@ import { SearchResults } from '@/src/types/Filters';
 import { DefaultFlatItem } from '@/src/types/Flats';
 import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { ViewType } from './../types/ViewType';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (
@@ -168,10 +169,13 @@ const getFlatsStrapiQueryParamsByFilters = (
         },
       },
       populate: '*',
-      pagination: {
-        pageSize: 16,
-        page: filters.page || 1,
-      },
+      pagination:
+        (filters.viewType as ViewType) === 'map'
+          ? { limit: -1 }
+          : {
+              pageSize: 24,
+              page: filters.page || 1,
+            },
     },
     {
       encodeValuesOnly: true,
@@ -185,7 +189,7 @@ export const getFlats = async (
   searchParams: Record<string, string | string[]>,
 ): Promise<{
   flats: DefaultFlatItem[];
-  pagination: StrapiFindResponse<{}>['meta']['pagination'];
+  pagination?: StrapiFindResponse<{}>['meta']['pagination'];
 }> => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getFlatsStrapiQueryParamsByFilters(
@@ -198,19 +202,17 @@ export const getFlats = async (
     },
   );
 
-  const url = `${process.env.API_BASE_URL}/apartments-items?${query}`;
+  const url = `${process.env.API_BASE_URL}/apart-items?${query}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',
   });
-  const {
-    data,
-    meta: { pagination },
-  } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  const { data, meta } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
   return {
     flats: formatToDefaultFlat(data),
-    pagination,
+    pagination: (searchParams.viewType as ViewType) !== 'map' ? meta.pagination : undefined,
   };
 };
 

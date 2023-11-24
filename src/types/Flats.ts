@@ -5,7 +5,12 @@ export interface DefaultFlatItem {
   id: string;
   price?: string;
   name?: string;
-  img?: string;
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+    placeholderUrl: string;
+  };
   initialCurrency: AvailableCurrencies;
   parameters: {
     totalArea: string;

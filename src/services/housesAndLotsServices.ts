@@ -88,7 +88,7 @@ const getHousesAndLotsStrapiQuery = (
             $eq: nearLake && 'водоем/река рядом',
           },
         },
-        houses_and_lots_categories: {
+        house_categories: {
           name: {
             $in:
               housesAndLotsCategories && housesAndLotsCategories.length
@@ -181,7 +181,7 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     },
   );
 
-  const url = `${process.env.API_BASE_URL}/houses-and-lots-items?${query}`;
+  const url = `${process.env.API_BASE_URL}/house-items?${query}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',

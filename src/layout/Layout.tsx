@@ -12,14 +12,13 @@ const Layout = ({ children }: PropsWithChildren) => {
       <div className="content">
         {/* <Header /> */}
         <main className="main sm:mt-0 mt-16">
-          {/* <CurrencyProvider>
+          <CurrencyProvider>
             <WindowResizeProvider>{children}</WindowResizeProvider>
-          </CurrencyProvider> */}
-          {children}
+          </CurrencyProvider>
         </main>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

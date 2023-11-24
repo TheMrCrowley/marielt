@@ -93,7 +93,7 @@ const getCommercialStrapiQueryParamsByFilters = (
             $in: [transactionType],
           },
         },
-        commercial_categories: {
+        comm_categories: {
           name: {
             $in: [
               rootCategoryType,
@@ -536,7 +536,7 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
     },
   );
 
-  const url = `${process.env.API_BASE_URL}/commercial-property-items?${query}`;
+  const url = `${process.env.API_BASE_URL}/comm-items?${query}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',

@@ -100,11 +100,11 @@ enum ProductModelNames {
 
 const strapiModelNameMap: Record<ProductModelNames, (id: number) => string> = {
   [ProductModelNames.ApartmentsItem]: (id: number) =>
-    `${process.env.API_BASE_URL}/apartments-items/${id}?populate=*`,
+    `${process.env.API_BASE_URL}/apart-items/${id}?populate=*`,
   [ProductModelNames.CommercialItem]: (id: number) =>
-    `${process.env.API_BASE_URL}/commercial-property-items/${id}?populate=*`,
+    `${process.env.API_BASE_URL}/comm-items/${id}?populate=*`,
   [ProductModelNames.HouseAndLotsItem]: (id: number) =>
-    `${process.env.API_BASE_URL}/houses-and-lots-items/${id}?populate=*`,
+    `${process.env.API_BASE_URL}/house-items/${id}?populate=*`,
 };
 
 const strapiVariableNameMap: Record<

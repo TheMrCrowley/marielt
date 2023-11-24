@@ -24,7 +24,7 @@ const actualQuery = qs.stringify({
 });
 
 const getActualFlats = async (): Promise<DefaultFlatItem[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items?${actualQuery}`);
+  const response = await fetch(`${process.env.API_BASE_URL}/apart-items?${actualQuery}`);
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
@@ -32,9 +32,7 @@ const getActualFlats = async (): Promise<DefaultFlatItem[]> => {
 };
 
 const getActualCommercial = async (): Promise<DefaultCommercialItem[]> => {
-  const response = await fetch(
-    `${process.env.API_BASE_URL}/commercial-property-items?${actualQuery}`,
-  );
+  const response = await fetch(`${process.env.API_BASE_URL}/comm-items?${actualQuery}`);
 
   const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
@@ -42,7 +40,7 @@ const getActualCommercial = async (): Promise<DefaultCommercialItem[]> => {
 };
 
 const getActualHousesAndLots = async (): Promise<DefaultHousesAndLotsItem[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots-items?${actualQuery}`);
+  const response = await fetch(`${process.env.API_BASE_URL}/house-items?${actualQuery}`);
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 

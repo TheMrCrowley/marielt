@@ -7,11 +7,11 @@ import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes'
 const getUrlByType = (type: ProductType): string => {
   switch (type) {
     case 'flats':
-      return 'http://185.251.38.44:1337/api/apartments-items';
+      return `${process.env.API_BASE_URL}/apart-items`;
     case 'commercial':
-      return 'http://185.251.38.44:1337/api/commercial-property-items';
+      return `${process.env.API_BASE_URL}/comm-items`;
     case 'houses-and-lots':
-      return 'http://185.251.38.44:1337/api/houses-and-lots-items';
+      return `${process.env.API_BASE_URL}/house-items`;
     default:
       return null as never;
   }

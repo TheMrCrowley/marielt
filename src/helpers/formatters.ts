@@ -34,7 +34,14 @@ export const formatToDefaultFlat = (
     id,
     price: attributes.price,
     name: attributes.name,
-    img: attributes.image?.url,
+    image: Array.isArray(attributes.image.data)
+      ? {
+          height: attributes.image.data[0].attributes.height,
+          width: attributes.image.data[0].attributes.width,
+          url: attributes.image.data[0].attributes.url,
+          placeholderUrl: attributes.image.data[0].attributes.placeholder,
+        }
+      : undefined,
     initialCurrency: attributes.currency || 'USD',
     parameters: {
       floor: attributes.parameters.floor,
@@ -172,7 +179,7 @@ export const formatToCommercialTransaction = (
     transactionId: transaction.id,
     transactionName: transaction.attributes.name,
     transactionUid: transaction.attributes.uid,
-    commercialCategories: transaction.attributes.commercial_categories.data.map((category) => ({
+    commercialCategories: transaction.attributes.comm_categories.data.map((category) => ({
       categoryId: category.id,
       categoryName: category.attributes.name,
     })),

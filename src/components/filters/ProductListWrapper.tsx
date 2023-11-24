@@ -41,7 +41,19 @@ const ProductListWrapper = ({
   };
 
   return (
-    <section className={clsx('flex', 'flex-col', 'items-center', 'gap-4', 'w-full')}>
+    <section
+      className={clsx(
+        'flex',
+        'flex-col',
+        'items-center',
+        'gap-4',
+        'max-w-screen-2xl',
+        'w-full',
+        'md:py-12',
+        'py-6',
+        'px-4',
+      )}
+    >
       <button
         className={clsx(
           'flex',
@@ -53,7 +65,6 @@ const ProductListWrapper = ({
           'underline',
           'hover:cursor-pointer',
           'transition-all',
-          'ml-auto',
         )}
         onClick={handleViewChange}
       >

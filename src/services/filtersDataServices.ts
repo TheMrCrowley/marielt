@@ -109,7 +109,7 @@ const getHouseAndLotsCategories = async () => {
     },
   );
 
-  const url = `${process.env.API_BASE_URL}/houses-and-lots-categories?${query}`;
+  const url = `${process.env.API_BASE_URL}/house-categories?${query}`;
 
   const directionsResponse = await fetch(url);
 
@@ -134,7 +134,7 @@ export const getHousesAndLotsFiltersData = async () => {
 const getCommercialTransactions = async (): Promise<Array<CommercialTransaction>> => {
   const query = qs.stringify(
     {
-      populate: 'commercial_categories',
+      populate: 'comm_categories',
       pagination: {
         limit: -1,
       },
@@ -146,7 +146,6 @@ const getCommercialTransactions = async (): Promise<Array<CommercialTransaction>
   const response = await fetch(`${process.env.API_BASE_URL}/comm-trans?${query}`);
 
   const { data } = (await response.json()) as StrapiFindResponse<CommercialTransactionResponse>;
-
   return formatToCommercialTransaction(data);
 };
 
@@ -162,13 +161,11 @@ const getCommercialCategories = async (): Promise<Array<CommercialCategory>> => 
       encodeValuesOnly: true,
     },
   );
-  const response = await fetch(
-    `${process.env.API_BASE_URL}/commercial-property-categories?${query}`,
-    { cache: 'no-cache' },
-  );
+  const response = await fetch(`${process.env.API_BASE_URL}/comm-categories?${query}`, {
+    cache: 'no-cache',
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<CommercialCategoryResponse>;
-
   return formatToCommercialCategory(data);
 };
 

@@ -47,6 +47,7 @@ export interface StrapiImage {
   mime: string;
   size: number;
   url: string;
+  placeholder: string;
   previewUrl: string | null;
   provider: string;
   provider_metadata: ProviderMetadata;
@@ -112,7 +113,11 @@ export interface FlatStrapiResponse {
   currency?: AvailableCurrencies;
   price?: string;
   name?: string;
-  image?: StrapiImage;
+  image: {
+    data: Array<{
+      attributes: StrapiImage;
+    }>;
+  };
   location?: {
     coordinates: {
       lat: number;
@@ -262,7 +267,7 @@ export interface MicroDistrictResponse {
 export interface CommercialTransactionResponse {
   name: string;
   uid: TransactionTypeValues;
-  commercial_categories: {
+  comm_categories: {
     data: Array<{
       id: string;
       attributes: {

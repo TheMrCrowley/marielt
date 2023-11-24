@@ -1,10 +1,12 @@
 // @ts-nocheck
 'use client';
 
-import { Clusterer, Map, ObjectManager, Placemark, YMaps } from '@pbe/react-yandex-maps';
-import React, { useEffect, useRef, useState } from 'react';
+import { Map, ObjectManager, YMaps } from '@pbe/react-yandex-maps';
+import React, { useRef, useState } from 'react';
 import ymaps from 'yandex-maps';
 
+import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
+import { useCurrency } from '@/src/store/currency';
 import { DefaultFlatItem } from '@/src/types/Flats';
 
 import './Map.css';
@@ -13,54 +15,10 @@ interface ProductMapProps {
   items: DefaultFlatItem[];
 }
 
-const CustomPlacemark = ({ flat, api }: { flat: DefaultFlatItem; api: typeof ymaps }) => {
-  const placeMarkRef = useRef();
-
-  // const layout = api.templateLayoutFactory.createClass(
-  //   `<div class="pin-container">${flat.price}</div>`,
-  // {
-  //   build: function () {
-  //     layout.superclass.build.call(this);
-  //     const el = this.getParentElement().getElementsByClassName('pin-container')[0];
-
-  //     console.log(this);
-
-  //     window.api = this;
-
-  //     this.getData().options.set('shape', {
-  //       type: 'Rectangle',
-  //       coordinates: [
-  //         [-0, -0],
-  //         [el.offsetWidth, el.offsetHeight],
-  //       ],
-  //     });
-  //     this.getData().geoObject.events.add(
-  //       'click',
-  //       () => {
-  //         console.log(flat.price);
-  //       },
-  //       this,
-  //     );
-  //   },
-  // },
-  // );
-
-  return (
-    <Placemark
-      instanceRef={placeMarkRef}
-      geometry={[flat.location?.lat, flat.location?.lng]}
-      options={{
-        // iconLayout: layout,
-        hasBalloon: true,
-      }}
-      onClick={console.log}
-    />
-  );
-};
-
 const ProductMap = ({ items }: ProductMapProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [api, setApi] = useState<typeof ymaps | null>(null);
+  const { selectedCurrency, rates } = useCurrency();
 
   const mapRef = useRef<ymaps.Map>();
   const objectManagerRef = useRef();
@@ -69,14 +27,16 @@ const ProductMap = ({ items }: ProductMapProps) => {
     <YMaps
       query={{
         apikey: '3df8e968-877a-4154-8425-2833bdbcb517',
-        // load: 'package.full',
       }}
       version={'2.1.79'}
     >
       <Map
         instanceRef={mapRef}
         width={'100%'}
-        height={900}
+        height={'100%'}
+        style={{
+          flex: '1 1 auto',
+        }}
         state={{
           center: [53.902287, 27.561824],
           zoom: 11,
@@ -88,11 +48,6 @@ const ProductMap = ({ items }: ProductMapProps) => {
         }}
       >
         {isLoaded && api && (
-          // <ObjectManager>
-          //   {items.map((item) => (
-          //     <CustomPlacemark flat={item} key={item.id} api={api} />
-          //   ))}
-          // </ObjectManager>
           <ObjectManager
             instanceRef={objectManagerRef}
             options={{
@@ -105,11 +60,32 @@ const ProductMap = ({ items }: ProductMapProps) => {
             }}
             clusters={{
               clusterIconLayout: api.templateLayoutFactory.createClass(
-                '<div class="pin-container">{{ properties.geoObjects.length}}</div>',
+                '<div class="cluster-wrapper">{{ properties.geoObjects.length}}</div>',
                 {
                   build: function () {
                     this.constructor.superclass.build.call(this);
-                    const el = this.getParentElement().getElementsByClassName('pin-container')[0];
+                    const el = this.getParentElement().getElementsByClassName(
+                      'cluster-wrapper',
+                    )[0] as HTMLDivElement;
+
+                    const lowestPrice = Math.min(
+                      ...(
+                        this.getData().features as Array<{
+                          data: {
+                            price: number;
+                          };
+                        }>
+                      ).map((item) => item.data.price),
+                    );
+
+                    el.innerHTML = `
+                        <span>${this.getData().features.length}</span>
+                        <p>от ${
+                          lowestPrice
+                            ? getPriceByCurrencySign(lowestPrice, 'USD', selectedCurrency, rates)
+                            : 'Договорная'
+                        }</p>
+                    `;
 
                     this.getData().options.set('shape', {
                       type: 'Rectangle',
@@ -130,9 +106,17 @@ const ProductMap = ({ items }: ProductMapProps) => {
                 type: 'Point',
                 coordinates: [item.location?.lat, item.location?.lng],
               },
+              data: {
+                price: item.price,
+              },
               options: {
                 iconLayout: api.templateLayoutFactory.createClass(
-                  `<div class="pin-container">${item.price}${item.initialCurrency}</div>`,
+                  `<div class="pin-container">${getPriceByCurrencySign(
+                    item.price,
+                    item.initialCurrency || 'USD',
+                    selectedCurrency,
+                    rates,
+                  )}</div>`,
                   {
                     build: function () {
                       this.constructor.superclass.build.call(this);

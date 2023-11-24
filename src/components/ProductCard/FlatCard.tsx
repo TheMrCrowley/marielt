@@ -17,7 +17,7 @@ interface FlatCardProps {
 
 const FlatCard = ({ flatItem }: FlatCardProps) => {
   const {
-    img,
+    image,
     name,
     address,
     id,
@@ -31,8 +31,9 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
   return (
     <CardWrapper
       address={address}
-      to={`http://185.251.38.44:1337/admin/content-manager/collectionType/api::apartments-item.apartments-item/${id}`}
-      imgUrl={img}
+      to={`https://marielt.site/admin/content-manager/collectionType/api::apartments-item.apartments-item/${id}`}
+      imgUrl={image?.url}
+      placeholderUrl={image?.placeholderUrl}
       title={name}
     >
       <CardFloor floor={floor} maxFloor={maxFloor} />

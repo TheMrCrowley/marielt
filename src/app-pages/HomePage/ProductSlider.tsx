@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 import 'swiper/css';
 import { Navigation } from 'swiper/modules';
+import 'swiper/modules/navigation.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import CommercialCard from '@/src/components/ProductCard/CommercialCard';

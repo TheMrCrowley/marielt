@@ -3,13 +3,12 @@ import Image from 'next/image';
 
 import BankIcon from '@/public/bank-icon.svg';
 import InfoIcon from '@/public/info-icon.svg';
+import CreditInput from '@/src/components/ProductPageContent/CreditInput';
 import Button from '@/src/components/common/Button/Button';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
 
-import CreditInput from './CreditInput';
-
-const CreditCalculator = () => {
+const CreditCalculator = ({ price }: { price: number }) => {
   return (
     <div className={clsx('flex', 'flex-col', 'bg-[#262626]')}>
       <Title
@@ -40,7 +39,7 @@ const CreditCalculator = () => {
               Стоимость квартиры
             </Typography>
             <Typography fontSize={36} fontWeight="medium">
-              70 546 USD
+              {price} USD
             </Typography>
           </div>
           <div className={clsx('flex', 'flex-col', 'gap-y-8', 'w-full')}>

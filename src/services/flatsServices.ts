@@ -9,13 +9,17 @@ import {
   saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultFlat, formatToDefaultMapFlat } from '@/src/helpers/formatters';
+import {
+  formatToDefaultFlat,
+  formatToDefaultMapFlat,
+  formatToDetailedFlat,
+} from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
 import {
   FlatStrapiResponse,
   StrapiFindOneResponse,
@@ -335,13 +339,15 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
   return searchResults;
 };
 
-export const getFlatById = async (id: string): Promise<DefaultFlatItem> => {
+export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
   const query = qs.stringify({
     populate: '*',
   });
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items/${id}?${query}`);
+
+  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items/${id}?${query}`, {
+    cache: 'no-cache',
+  });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
-
-  return formatToDefaultFlat([data])[0];
+  return formatToDetailedFlat(data);
 };

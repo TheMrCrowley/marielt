@@ -94,7 +94,18 @@ export interface FlatStrapiResponse {
     kitchen_area?: string;
     ceiling_height?: string;
     bathroom?: string;
+    separate_rooms?: string;
+    share_in_apartment?: string;
+    floor_type?: string;
+    balcony_area?: string;
+    snb_area?: string;
+    flooring?: string;
+    telephone?: string;
+    layout?: string;
+    level_number?: string;
   };
+  additional_info?: Array<{ name: string }>;
+  note: string;
   coordinates: string;
   locality: string;
   street?: string;

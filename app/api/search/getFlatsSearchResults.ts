@@ -26,7 +26,10 @@ export const getFlatsSearchResults = async (
   const url = `${getUrlByType(type)}?${query}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    // cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;

@@ -14,8 +14,6 @@ const PropertyTypeFilter = () => {
     updateFilters,
   } = useCommercialFilters();
 
-  console.log({ categories });
-
   const dataToRender = useMemo(() => {
     const filtered = categories
       .filter((category) =>

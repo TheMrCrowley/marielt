@@ -9,16 +9,16 @@ import {
   saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultFlat } from '@/src/helpers/formatters';
+import { formatToDefaultFlat, formatToDefaultMapFlat } from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
 import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { ViewType } from './../types/ViewType';
+import { getPaginationQuery } from './../helpers/getPaginationQuery';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (
@@ -164,18 +164,7 @@ const getFlatsStrapiQueryParamsByFilters = (
             $in: microDistrict,
           },
         },
-        location: {
-          $notNull: true,
-        },
       },
-      populate: '*',
-      pagination:
-        (filters.viewType as ViewType) === 'map'
-          ? { limit: -1 }
-          : {
-              pageSize: 24,
-              page: filters.page || 1,
-            },
     },
     {
       encodeValuesOnly: true,
@@ -185,11 +174,44 @@ const getFlatsStrapiQueryParamsByFilters = (
   return { query };
 };
 
-export const getFlats = async (
+const getDefaultFlatListPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        house_number: {
+          fields: ['number'],
+        },
+        parameters: {
+          fields: ['floor', 'living_area', 'floors_number', 'total_area'],
+        },
+        location: '*',
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};
+
+const getDefaultFlatMapPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        location: '*',
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+};
+
+export const getFlatsForList = async (
   searchParams: Record<string, string | string[]>,
 ): Promise<{
   flats: DefaultFlatItem[];
-  pagination?: StrapiFindResponse<{}>['meta']['pagination'];
+  pagination: StrapiFindResponse<{}>['meta']['pagination'];
 }> => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getFlatsStrapiQueryParamsByFilters(
@@ -201,18 +223,64 @@ export const getFlats = async (
       usd,
     },
   );
+  const paginationQuery = getPaginationQuery('list', searchParams.page as string);
 
-  const url = `${process.env.API_BASE_URL}/apart-items?${query}`;
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${paginationQuery}&${getDefaultFlatListPopulateQuery()}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    // cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
-  const { data, meta } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+  const {
+    data,
+    meta: { pagination },
+  } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
   return {
     flats: formatToDefaultFlat(data),
-    pagination: (searchParams.viewType as ViewType) !== 'map' ? meta.pagination : undefined,
+    pagination,
+  };
+};
+
+export const getFlatsForMap = async (
+  searchParams: Record<string, string | string[]>,
+): Promise<{
+  flats: DefaultMapFlatItem[];
+}> => {
+  const { eur, rub, usd } = await getCurrencies();
+  const { query } = getFlatsStrapiQueryParamsByFilters(
+    searchParams,
+    (searchParams.currency as AvailableCurrencies) || 'USD',
+    {
+      rub,
+      eur,
+      usd,
+    },
+  );
+  const paginationQuery = getPaginationQuery('map');
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${paginationQuery}&${getDefaultFlatMapPopulateQuery()}`;
+
+  console.log(url);
+
+  const response = await fetch(url, {
+    // cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return {
+    flats: formatToDefaultMapFlat(data),
   };
 };
 

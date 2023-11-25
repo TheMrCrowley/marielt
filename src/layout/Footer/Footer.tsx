@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,8 +13,15 @@ import TelegramIcon from '@/public/telegram.svg';
 import ContactItem from '@/src/components/common/ContactItem';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
+import { useViewType } from '@/src/hooks/useViewType';
 
 const Footer = () => {
+  const viewType = useViewType();
+
+  if (viewType === 'map') {
+    return null;
+  }
+
   return (
     <footer
       className={clsx(

@@ -40,7 +40,7 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
       <div
         className={clsx(
           'flex',
-          'gap-9',
+          'gap-8',
           'flex-wrap',
           'w-full',
           'md:items-center',
@@ -59,12 +59,11 @@ const DefaultFilters = ({ openModal, applyFilters }: DefaultFilterProps) => {
         <MicroDistrictFilter />
         <MetroFilter />
       </div>
-
       <div
         className={clsx(
           'flex',
           'md:justify-between',
-          'gap-5',
+          'gap-8',
           'md:flex-row',
           'md:items-end',
           'flex-col',

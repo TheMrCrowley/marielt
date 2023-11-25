@@ -35,7 +35,7 @@ const getDistricts = async (): Promise<District[]> => {
   const url = `${process.env.API_BASE_URL}/districts?${query}`;
 
   const districtsResponse = await fetch(url, {
-    cache: 'no-cache',
+    // cache: 'no-cache',
   });
   const { data } = (await districtsResponse.json()) as StrapiFindResponse<DistrictResponse>;
 
@@ -58,7 +58,7 @@ const getMicroDistricts = async (): Promise<MicroDistrict[]> => {
   const url = `${process.env.API_BASE_URL}/microdistricts?${query}`;
 
   const microDistrictsResponse = await fetch(url, {
-    cache: 'no-cache',
+    // cache: 'no-cache',
   });
 
   const { data } =
@@ -68,7 +68,9 @@ const getMicroDistricts = async (): Promise<MicroDistrict[]> => {
 };
 
 const getMetro = async () => {
-  const metroResponse = await fetch(`${process.env.API_BASE_URL}/metros`);
+  const metroResponse = await fetch(`${process.env.API_BASE_URL}/metros`, {
+    // cache: 'no-cache'
+  });
   const { data } = (await metroResponse.json()) as StrapiFindResponse<{ name: string }>;
 
   return data.map((district) => district.attributes.name);

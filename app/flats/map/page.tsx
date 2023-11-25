@@ -1,24 +1,25 @@
 import React from 'react';
 
 import FlatsFilters from '@/src/app-pages/FlatsPage/FlatsFilters';
-import FlatsList from '@/src/app-pages/FlatsPage/FlatsList';
+import FlatsMap from '@/src/app-pages/FlatsPage/FlatsMap';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
-import { getFlatsForList } from '@/src/services/flatsServices';
+import { getFlatsForMap } from '@/src/services/flatsServices';
 
 type FlatsProps = {
   searchParams: Record<string, string | string[]>;
 };
 
 const Flats = async ({ searchParams }: FlatsProps) => {
-  const [data, { flats, pagination }] = await Promise.all([
+  const [data, { flats }] = await Promise.all([
     getFlatsFiltersData(),
-    getFlatsForList(searchParams),
+    getFlatsForMap(searchParams),
   ]);
 
+  console.log('Map view flats:', flats.length);
   return (
     <>
       <FlatsFilters data={data} />
-      <FlatsList flats={flats} pagination={pagination!} />
+      <FlatsMap flats={flats} />
     </>
   );
 };

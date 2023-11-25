@@ -23,3 +23,13 @@ export interface DefaultFlatItem {
     lat: number;
   };
 }
+
+export interface DefaultMapFlatItem {
+  id: string;
+  price?: string;
+  location?: {
+    lng: number;
+    lat: number;
+  };
+  initialCurrency: AvailableCurrencies;
+}

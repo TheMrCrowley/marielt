@@ -9,12 +9,12 @@ import ProductPreview from './ProductPreview';
 import WelcomeSection from './WelcomeSection';
 
 const HomePage = async () => {
-  const { opportunityItems, productItems } = await getHomePageItems();
+  // const { opportunityItems, productItems } = await getHomePageItems();
 
   return (
     <>
       <WelcomeSection />
-      <section className={clsx('w-full', 'py-8', 'flex', 'flex-col', 'gap-8')}>
+      {/* <section className={clsx('w-full', 'py-8', 'flex', 'flex-col', 'gap-8')}>
         {productItems.map((item) => (
           <ProductPreview key={item.to} data={item} />
         ))}
@@ -24,7 +24,7 @@ const HomePage = async () => {
         {opportunityItems.map((opportunity) => (
           <OpportunityPreview key={opportunity.to} opportunity={opportunity} />
         ))}
-      </section>
+      </section> */}
     </>
   );
 };

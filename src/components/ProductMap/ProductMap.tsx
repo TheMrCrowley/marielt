@@ -1,27 +1,44 @@
 // @ts-nocheck
 'use client';
 
-import { Map, ObjectManager, YMaps } from '@pbe/react-yandex-maps';
+import {
+  Button,
+  FullscreenControl,
+  Map,
+  ObjectManager,
+  RulerControl,
+  TypeSelector,
+  YMaps,
+  ZoomControl,
+} from '@pbe/react-yandex-maps';
+import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import ymaps from 'yandex-maps';
 
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
-import { DefaultFlatItem } from '@/src/types/Flats';
+import { DefaultMapFlatItem } from '@/src/types/Flats';
 
 import './Map.css';
 
 interface ProductMapProps {
-  items: DefaultFlatItem[];
+  items: DefaultMapFlatItem[];
 }
 
 const ProductMap = ({ items }: ProductMapProps) => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [api, setApi] = useState<typeof ymaps | null>(null);
   const { selectedCurrency, rates } = useCurrency();
 
   const mapRef = useRef<ymaps.Map>();
   const objectManagerRef = useRef();
+
+  const handleButtonClick = () => {
+    router.push(location.href.replace('/map', ''), {
+      scroll: true,
+    });
+  };
 
   return (
     <YMaps
@@ -33,10 +50,7 @@ const ProductMap = ({ items }: ProductMapProps) => {
       <Map
         instanceRef={mapRef}
         width={'100%'}
-        height={'100%'}
-        style={{
-          flex: '1 1 auto',
-        }}
+        height={'80vh'}
         state={{
           center: [53.902287, 27.561824],
           zoom: 11,
@@ -47,6 +61,15 @@ const ProductMap = ({ items }: ProductMapProps) => {
           setApi(yapi);
         }}
       >
+        <FullscreenControl />
+        <RulerControl />
+        <TypeSelector />
+        <ZoomControl />
+        <Button
+          options={{ maxWidth: 128 }}
+          data={{ content: 'Списком' }}
+          onClick={handleButtonClick}
+        />
         {isLoaded && api && (
           <ObjectManager
             instanceRef={objectManagerRef}
@@ -99,7 +122,7 @@ const ProductMap = ({ items }: ProductMapProps) => {
               ),
             }}
             modules={['objectManager.addon.objectsBalloon']}
-            defaultFeatures={items.map((item) => ({
+            features={items.map((item) => ({
               type: 'Feature',
               id: item.id,
               geometry: {

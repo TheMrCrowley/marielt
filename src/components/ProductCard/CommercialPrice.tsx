@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import Typography from '@/src/components/common/Typography';
-import { getPriceByCurrencyMonetary, getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
+import { getPriceByCurrencyMonetary } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
 import { AvailableCurrencies } from '@/src/types/Currency';
 

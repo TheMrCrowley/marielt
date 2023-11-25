@@ -1,5 +1,4 @@
 'use client';
-import clsx from 'clsx';
 import React from 'react';
 
 import FlatCard from '@/src/components/ProductCard/FlatCard';

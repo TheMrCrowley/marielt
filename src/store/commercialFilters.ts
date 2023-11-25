@@ -297,9 +297,6 @@ export const useCommercialFilters = create<CommercialFiltersType>((set, get) => 
   setData: (data) => {
     set({ data });
   },
-  viewType: 'list',
-  changeView: (type) => set({ viewType: type }),
-
   isExpandedOpen: false,
   setIsExpandedOpen: (isExpandedOpen) => set({ isExpandedOpen }),
 }));

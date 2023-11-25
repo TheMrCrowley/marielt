@@ -188,9 +188,6 @@ export const useHousesAndLotsFilters = create<HousesAndLotsFiltersType>((set, ge
     directions: [],
     housesAndLotasCategories: [],
   },
-  viewType: 'list',
-  changeView: (type) => set({ viewType: type }),
-
   deleteTag: (key, value, cb) => {
     if (typeof tagsDefaultState[key] === 'boolean') {
       set((prev) => ({

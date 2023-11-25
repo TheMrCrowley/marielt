@@ -4,7 +4,7 @@ import {
   DefaultCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
-import { DefaultFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem, HousesAndLotsCategory } from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
 import {
@@ -34,7 +34,7 @@ export const formatToDefaultFlat = (
     id,
     price: attributes.price,
     name: attributes.name,
-    image: Array.isArray(attributes.image.data)
+    image: Array.isArray(attributes?.image?.data)
       ? {
           height: attributes.image.data[0].attributes.height,
           width: attributes.image.data[0].attributes.width,
@@ -49,6 +49,16 @@ export const formatToDefaultFlat = (
       maxFloor: attributes.parameters.floors_number,
       totalArea: attributes.parameters.total_area,
     },
+    location: attributes.location?.coordinates,
+  }));
+
+export const formatToDefaultMapFlat = (
+  flats: StrapiFindResponse<FlatStrapiResponse>['data'],
+): DefaultMapFlatItem[] =>
+  flats.map(({ attributes, id }) => ({
+    id,
+    price: attributes.price,
+    initialCurrency: attributes.currency || 'USD',
     location: attributes.location?.coordinates,
   }));
 

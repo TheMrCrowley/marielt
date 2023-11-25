@@ -33,9 +33,7 @@ const ProductListWrapper = ({
   const handleViewChange = () => {
     const currentSearchParams = new URLSearchParams(window.location.search);
 
-    currentSearchParams.set('viewType', 'map');
-
-    router.push(pathname + '?' + currentSearchParams.toString(), {
+    router.push(pathname + '/map' + '?' + currentSearchParams.toString(), {
       scroll: true,
     });
   };

@@ -547,7 +547,6 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
     meta: { pagination },
   } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  console.log(data.forEach((i) => console.log(i.attributes)));
   return {
     commercial: formatToDefaultCommercial(data),
     pagination,

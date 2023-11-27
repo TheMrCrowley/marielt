@@ -1,4 +1,4 @@
-import { flatCharacteristicsMap, getRoominessByStrapiValue } from '@/src/enums/FlatsFilters';
+import { flatCharacteristicsMap } from '@/src/enums/FlatsFilters';
 import {
   CommercialCategory,
   CommercialTransaction,
@@ -83,7 +83,7 @@ export const formatToDetailedFlat = ({
     maxFloor: attributes.parameters.floors_number,
     totalArea: attributes.parameters.total_area,
     constructionYear: attributes.parameters.construction_year,
-    roominess: getRoominessByStrapiValue(attributes.parameters.roominess),
+    roominess: attributes.parameters.roominess,
     bathroom: attributes.parameters.bathroom,
     houseType: attributes.parameters.house_type,
     finishing: attributes.parameters.finishing,
@@ -103,6 +103,7 @@ export const formatToDetailedFlat = ({
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
+  location: attributes.location?.coordinates,
   images: Array.isArray(attributes.image.data)
     ? attributes.image.data.map((item) => ({
         height: item.attributes.height as number,

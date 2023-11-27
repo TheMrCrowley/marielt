@@ -2,30 +2,36 @@
 
 import clsx from 'clsx';
 
-import Title from '@/src/components/common/Title/Title';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 
 import AgentForm from './AgentForm';
-import Characteristics from './Characteristics';
-import CreditCalculator from './CreditCalculator';
 import DescriptionField from './DescriptionField';
-import NoteField from './NoteField';
 
 interface ProductPageContentProps {
   productHeader: React.ReactNode | React.ReactElement;
-  characteristics: Array<{ name: string; value: string }>;
-  note: string;
-  cost: number;
+  characteristics: React.ReactElement | React.ReactNode;
+  note: React.ReactElement | React.ReactNode;
+  locationField: React.ReactNode | React.ReactElement;
+  similarObjectsField: React.ReactNode | React.ReactElement;
+  creditCalculator?: React.ReactNode | React.ReactElement;
 }
 
 const ProductPageContent = ({
   productHeader,
   characteristics,
+  creditCalculator,
   note,
-  cost,
+  locationField,
+  similarObjectsField,
 }: ProductPageContentProps) => {
   const breakpoint = useWindowSize();
+
+  const renderMobileLocationField = () =>
+    breakpoint < WindowWidth.LG && breakpoint > WindowWidth.XS && locationField;
+
+  const renderDesktopLocationField = () =>
+    (breakpoint >= WindowWidth.LG || breakpoint <= WindowWidth.XS) && locationField;
 
   return (
     <div className={clsx('w-full', 'lg:px-12', 'px-5')}>
@@ -43,131 +49,11 @@ const ProductPageContent = ({
         <div className={clsx('flex', 'flex-col', 'gap-y-[30px]', 'w-[calc(100% - 340px)]')}>
           {productHeader}
           {/*TODO //move gap value to taiwind? */}
-          {breakpoint < WindowWidth.LG && breakpoint > WindowWidth.XS && (
-            <div className={clsx('flex', 'flex-col', 'bg-[#262626]', 'p-5')}>
-              <Title variant="h2" className={clsx('px-[10px]', 'pb-[17px]')} fontSize={32}>
-                Местоположение
-              </Title>
-              <div className={clsx('w-full', 'h-[460px]', 'p-[10px]', 'relative')}>
-                <div
-                  className={clsx(
-                    'w-[91px]',
-                    'h-[91px]',
-                    'absolute',
-                    'block',
-                    'top-0',
-                    'border-secondary',
-                    'border-t-2',
-                    'border-l-2',
-                    'left-0',
-                  )}
-                />
-                <div
-                  className={clsx(
-                    'w-[91px]',
-                    'h-[91px]',
-                    'absolute',
-                    'block',
-                    'top-0',
-                    'border-secondary',
-                    'border-t-2',
-                    'border-r-2',
-                    'right-0',
-                  )}
-                />
-                <div
-                  className={clsx(
-                    'w-[91px]',
-                    'h-[91px]',
-                    'absolute',
-                    'block',
-                    'bottom-0',
-                    'border-secondary',
-                    'border-b-2',
-                    'border-l-2',
-                    'left-0',
-                  )}
-                />
-                <div
-                  className={clsx(
-                    'w-[91px]',
-                    'h-[91px]',
-                    'absolute',
-                    'block',
-                    'bottom-0',
-                    'border-secondary',
-                    'border-b-2',
-                    'border-r-2',
-                    'right-0',
-                  )}
-                />
-              </div>
-            </div>
-          )}
-          <div className={clsx('flex', 'gap-[30px]', 'md:flex-row', 'flex-col')}>
-            <Characteristics characteristics={characteristics} />
-            <div className={clsx('flex', 'flex-col', 'gap-y-[30px]', 'lg:w-[65%]', 'w-full')}>
-              {(breakpoint >= WindowWidth.LG || breakpoint <= WindowWidth.XS) && (
-                <div className={clsx('flex', 'flex-col', 'bg-[#262626]', 'p-5')}>
-                  <Title variant="h2" className={clsx('px-[10px]', 'pb-[17px]')} fontSize={32}>
-                    Местоположение
-                  </Title>
-                  <div className={clsx('w-full', 'h-[460px]', 'p-[10px]', 'relative')}>
-                    <div
-                      className={clsx(
-                        'w-[91px]',
-                        'h-[91px]',
-                        'absolute',
-                        'block',
-                        'top-0',
-                        'border-secondary',
-                        'border-t-2',
-                        'border-l-2',
-                        'left-0',
-                      )}
-                    />
-                    <div
-                      className={clsx(
-                        'w-[91px]',
-                        'h-[91px]',
-                        'absolute',
-                        'block',
-                        'top-0',
-                        'border-secondary',
-                        'border-t-2',
-                        'border-r-2',
-                        'right-0',
-                      )}
-                    />
-                    <div
-                      className={clsx(
-                        'w-[91px]',
-                        'h-[91px]',
-                        'absolute',
-                        'block',
-                        'bottom-0',
-                        'border-secondary',
-                        'border-b-2',
-                        'border-l-2',
-                        'left-0',
-                      )}
-                    />
-                    <div
-                      className={clsx(
-                        'w-[91px]',
-                        'h-[91px]',
-                        'absolute',
-                        'block',
-                        'bottom-0',
-                        'border-secondary',
-                        'border-b-2',
-                        'border-r-2',
-                        'right-0',
-                      )}
-                    />
-                  </div>
-                </div>
-              )}
+          {renderMobileLocationField()}
+          <div className={clsx('flex', 'gap-8', 'xl:flex-row', 'flex-col')}>
+            {characteristics}
+            <div className={clsx('flex', 'flex-col', 'gap-8', 'xl:w-[65%]', 'w-full')}>
+              {renderDesktopLocationField()}
               <DescriptionField
                 description="Однокомнатная квартира в квартале Мировые танцы ЖК Minsk World 430053. Площадь 33,8 м2 по
         СНБ свободной планировки на 7 этаже 10-ти этажного дома по улице Н.Теслы д.17 дом
@@ -181,14 +67,15 @@ const ProductPageContent = ({
         Лот 430053"
               />
 
-              <NoteField note={note} />
+              {note}
             </div>
           </div>
-          <CreditCalculator price={cost} />
+          {creditCalculator}
         </div>
 
         {breakpoint > WindowWidth.SM && <AgentForm />}
       </div>
+      {similarObjectsField}
     </div>
   );
 };

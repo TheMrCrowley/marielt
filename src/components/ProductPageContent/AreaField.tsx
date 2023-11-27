@@ -1,14 +1,9 @@
 import clsx from 'clsx';
-import { FC } from 'react';
 
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography';
-import { ProductType } from '@/src/types/Product';
 
-interface AreaFieldProps {
-  type: ProductType;
-}
-const AreaField: FC<AreaFieldProps> = ({ type }) => {
+const AreaField = () => {
   return (
     <div
       className={clsx(

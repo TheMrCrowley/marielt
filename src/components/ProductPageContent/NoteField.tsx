@@ -3,7 +3,11 @@ import clsx from 'clsx';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
 
-const NoteField = ({ note }: { note: string }) => {
+const NoteField = ({ note }: { note?: string }) => {
+  if (!note) {
+    return null;
+  }
+
   return (
     <div
       className={clsx(

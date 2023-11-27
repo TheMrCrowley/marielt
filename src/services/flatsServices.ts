@@ -344,10 +344,121 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
     populate: '*',
   });
 
-  const response = await fetch(`${process.env.API_BASE_URL}/apartments-items/${id}?${query}`, {
+  const response = await fetch(`${process.env.API_BASE_URL}/apart-items/${id}?${query}`, {
     cache: 'no-cache',
   });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
   return formatToDetailedFlat(data);
+};
+
+export const getSimilarByPrice = async ({
+  price,
+  roominess,
+}: {
+  price: string;
+  roominess: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        price: {
+          $between: [+price - 5000, +price + 5000],
+        },
+        parameters: {
+          roominess: {
+            $eq: roominess,
+          },
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
+};
+
+export const getSimilarByLocation = async ({
+  latitude,
+  longitude,
+  roominess,
+}: {
+  latitude: number;
+  longitude: number;
+  roominess: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        location: {
+          lat: { $between: [latitude - 0.008, latitude + 0.008] },
+          lng: { $between: [longitude - 0.008, longitude + 0.008] },
+        },
+        parameters: {
+          roominess: {
+            $eq: roominess,
+          },
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
+};
+
+export const getSimilarByLayout = async ({
+  layout,
+  roominess,
+}: {
+  layout: string;
+  roominess: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        parameters: {
+          layout: {
+            $eq: layout,
+          },
+          roominess: {
+            $eq: roominess,
+          },
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
 };

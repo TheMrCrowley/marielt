@@ -112,7 +112,7 @@ const convertToRUB = (
   }
 };
 
-const convertToBYN = (
+export const convertToBYN = (
   target: number,
   fromCurrency: AvailableCurrencies,
   rates: CurrencyState['rates'],
@@ -125,6 +125,6 @@ const convertToBYN = (
     case 'RUB':
       return target * rates.rub;
     default:
-      return null as never;
+      return target;
   }
 };

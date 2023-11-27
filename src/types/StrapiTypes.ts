@@ -312,3 +312,7 @@ export interface HousesAndLotsCategoryResponse {
   category: string | null;
   uid: HousesAndLotsRootCategory;
 }
+
+export interface CreditStrapiResponse {
+  interest_rate: number;
+}

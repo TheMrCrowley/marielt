@@ -9,14 +9,24 @@ interface CreditInputProps {
   labelText: string;
   rightUnits: string;
   placeholder: string;
+  value: string;
+  setValue: (value: string) => void;
 }
 
-const CreditInput: FC<CreditInputProps> = ({ labelText, rightUnits, placeholder }) => {
+const CreditInput: FC<CreditInputProps> = ({
+  labelText,
+  rightUnits,
+  placeholder,
+  value,
+  setValue,
+}) => {
   return (
     <InputWrapper label={labelText}>
       <div className={clsx('relative')}>
         {/*TODO: add validation*/}
         <input
+          value={value}
+          onChange={(e) => setValue(e.target.value.replace(/[^\d]/, ''))}
           placeholder={placeholder}
           className={clsx('w-full', 'text-2xl', 'border-b', 'border-secondary', 'text-secondary')}
         />

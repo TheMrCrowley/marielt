@@ -90,7 +90,7 @@ const DefaultFiltersWrapper = ({
                 type: 'spring',
                 bounce: 0,
                 duration: 0.7,
-                delayChildren: 0.3,
+                delayChildren: 1,
                 staggerChildren: 0.05,
               },
               height: 'min-content',
@@ -101,6 +101,8 @@ const DefaultFiltersWrapper = ({
                 type: 'spring',
                 bounce: 0,
                 duration: 0.7,
+                delayChildren: 1,
+                staggerChildren: 0.05,
               },
               height: 0,
             },
@@ -137,6 +139,8 @@ const DefaultFiltersWrapper = ({
         'gap-y-10',
         'md:px-8',
         'px-4',
+        isMapView ? 'sticky' : 'relative',
+        isMapView ? 'z-20' : 'z-0',
       )}
     >
       <section

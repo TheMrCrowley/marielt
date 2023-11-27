@@ -8,18 +8,20 @@ import Header from './Header';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="wrapper dark">
-      <div className="content">
-        {/* <Header /> */}
-        <main className="main sm:mt-0 mt-16">
-          <CurrencyProvider>
-            <WindowResizeProvider>{children}</WindowResizeProvider>
-          </CurrencyProvider>
-        </main>
-      </div>
+    <>
+      <Header />
+      <div className="wrapper dark">
+        <div className="content">
+          <main className="main">
+            <CurrencyProvider>
+              <WindowResizeProvider>{children}</WindowResizeProvider>
+            </CurrencyProvider>
+          </main>
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -50,7 +50,12 @@ const ProductMap = ({ items }: ProductMapProps) => {
       <Map
         instanceRef={mapRef}
         width={'100%'}
-        height={'80vh'}
+        height={'100%'}
+        style={{
+          display: 'flex',
+          alignItems: 'stretch',
+          flex: '1 1 auto',
+        }}
         state={{
           center: [53.902287, 27.561824],
           zoom: 11,

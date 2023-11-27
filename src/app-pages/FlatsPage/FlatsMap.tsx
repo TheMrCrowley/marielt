@@ -10,9 +10,7 @@ interface FlatsMapProps {
 
 const FlatsMap = ({ flats }: FlatsMapProps) => {
   return (
-    <section
-      className={clsx('flex', 'w-full', 'py-6', 'px-8', 'flex-auto', 'h-full', 'items-stretch')}
-    >
+    <section className={clsx('flex', 'w-full', 'flex-auto', 'items-stretch', 'h-full')}>
       <ProductMap items={flats} />
     </section>
   );

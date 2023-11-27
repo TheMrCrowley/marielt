@@ -129,7 +129,7 @@ const DefaultFiltersWrapper = ({
         'w-full',
         'bg-[#262626]',
         'md:py-8',
-        'py-4',
+        'py-5',
         'flex',
         'flex-col',
         'justify-center',
@@ -153,7 +153,7 @@ const DefaultFiltersWrapper = ({
       >
         {renderFilters()}
       </section>
-      {filtersList}
+      {(!isMobile || !isMapView) && filtersList}
     </div>
   );
 };

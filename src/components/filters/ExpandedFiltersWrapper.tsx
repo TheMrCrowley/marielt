@@ -21,8 +21,7 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
       <div
         className={clsx(
           'fixed',
-          'sm:top-0',
-          'top-16',
+          'top-0',
           'left-0',
           'right-0',
           'bottom-0',
@@ -30,7 +29,7 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
           'md:p-4',
           'p-0',
           'box-border',
-          'z-10',
+          'z-50',
           'flex',
           'justify-center',
           'items-center',

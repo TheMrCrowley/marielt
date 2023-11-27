@@ -24,7 +24,18 @@ const Navigation = ({ navigationItems }: NavigationProps) => {
   }
 
   return (
-    <nav className={clsx('px-4', 'flex', 'justify-center', 'items-center')}>
+    <nav
+      className={clsx(
+        'px-4',
+        'flex',
+        'justify-center',
+        'items-center',
+        'bg-[#3d3d3d]',
+        'sticky',
+        'top-0',
+        'z-50',
+      )}
+    >
       <ul
         className={clsx(
           'max-w-6xl',

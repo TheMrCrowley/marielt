@@ -12,10 +12,12 @@ import {
   ZoomControl,
 } from '@pbe/react-yandex-maps';
 import { useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import ymaps from 'yandex-maps';
+import ymapsTouchScroll from 'ymaps-touch-scroll';
 
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
+import { isMobile } from '@/src/helpers/userAgent';
 import { useCurrency } from '@/src/store/currency';
 import { DefaultMapFlatItem } from '@/src/types/Flats';
 
@@ -39,6 +41,12 @@ const ProductMap = ({ items }: ProductMapProps) => {
       scroll: true,
     });
   };
+
+  useEffect(() => {
+    if (mapRef.current && isMobile()) {
+      mapRef.current.behaviors.disable('drag');
+    }
+  }, [mapRef.current]);
 
   return (
     <YMaps

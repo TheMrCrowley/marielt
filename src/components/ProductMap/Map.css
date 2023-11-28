@@ -1,22 +1,55 @@
-.cluster-wrapper {
-  padding: .5rem;
-  display: flex;
-  gap: .5rem;
-  justify-content: space-between;
-  align-items: center;
-  color:#fff;
-  background-color: #202026;
-  font-size: 1rem;
-  cursor: pointer;
+.cluster-with-tooltip {
   width: max-content;
-  border-radius: .5rem;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.cluster-wrapper {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #e3c496;
+  background-color: #343434;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.tooltiptext {
+  position: relative;
+  background-color: #e3c496;
+  color: #343434;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  padding: 0.75rem;
+}
+
+.tooltiptext::after {
+  content: ' ';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #e3c496 transparent transparent;
 }
 
 .pin-container {
-  padding: .5rem;
-  border-radius: .5rem;
-  color:#fff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
   font-size: 1rem;
   background-color: #202026;
   width: max-content;

@@ -13,7 +13,7 @@ const HomePage = async () => {
 
   return (
     <>
-      <WelcomeSection />
+      {/* <WelcomeSection /> */}
       {/* <section className={clsx('w-full', 'py-8', 'flex', 'flex-col', 'gap-8')}>
         {productItems.map((item) => (
           <ProductPreview key={item.to} data={item} />

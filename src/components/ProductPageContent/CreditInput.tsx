@@ -4,13 +4,14 @@ import { FC } from 'react';
 
 import InputWrapper from '@/src/components/common/InputWrapper/InputWrapper';
 import Typography from '@/src/components/common/Typography/Typography';
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 
 interface CreditInputProps {
   labelText: string;
   rightUnits: string;
   placeholder: string;
   value: string;
-  setValue: (value: string) => void;
+  onChange: (value: string) => void;
 }
 
 const CreditInput: FC<CreditInputProps> = ({
@@ -18,7 +19,7 @@ const CreditInput: FC<CreditInputProps> = ({
   rightUnits,
   placeholder,
   value,
-  setValue,
+  onChange,
 }) => {
   return (
     <InputWrapper label={labelText}>
@@ -26,7 +27,7 @@ const CreditInput: FC<CreditInputProps> = ({
         {/*TODO: add validation*/}
         <input
           value={value}
-          onChange={(e) => setValue(e.target.value.replace(/[^\d]/, ''))}
+          onChange={(e) => onChange(formatToNumber(e.target.value))}
           placeholder={placeholder}
           className={clsx('w-full', 'text-2xl', 'border-b', 'border-secondary', 'text-secondary')}
         />

@@ -6,7 +6,11 @@ import {
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
-import { DefaultHousesAndLotsItem, HousesAndLotsCategory } from '@/src/types/HousesAndLots';
+import {
+  DefaultHousesAndLotsItem,
+  DetailedHousesAndLotsItem,
+  HousesAndLotsCategory,
+} from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
 import {
   CommercialCategoryResponse,
@@ -208,6 +212,56 @@ export const formatToDefaultHouseAndLotsItem = (
       },
     }),
   );
+
+export const formatToDetailedHousesAndLots = ({
+  attributes,
+  id,
+}: StrapiFindOneResponse<HousesAndLotsStrapiResponse>['data']): DetailedHousesAndLotsItem => ({
+  address: getFullAddress({
+    locality: attributes.locality,
+    houseNumber: attributes.house_number?.number,
+    street: attributes.street,
+  }),
+  id,
+  price: attributes.price,
+  name: attributes.name,
+  initialCurrency: attributes.currency || 'USD',
+  parameters: {
+    plotSize: attributes.parameters.plot_size,
+    livingArea: attributes.parameters.living_area,
+    kitchenArea: attributes.parameters.kitchen_area,
+    totalArea: attributes.parameters.total_area,
+    constructionYear: attributes.parameters.construction_year,
+    levelNumber: attributes.parameters.level_number,
+    roofMaterial: attributes.parameters.roof_material,
+    wallMaterial: attributes.parameters.wall_material,
+    wallMaterialAdd: attributes.parameters.wall_material_add,
+    roomsNumber: attributes.parameters.rooms_number,
+    heating: attributes.parameters.heating,
+    gas: attributes.parameters.gas,
+    water: attributes.parameters.water,
+    waterAdd: attributes.parameters.water_add,
+    sewerage: attributes.parameters.sewerage,
+    sewerageAdd: attributes.parameters.sewerage_add,
+    electricity: attributes.parameters.electricity,
+    telephone: attributes.parameters.telephone,
+    balcony: attributes.parameters.balcony,
+    parking: attributes.parameters.parking,
+    readinessPercentage: attributes.parameters.readiness_percentage,
+    builtUpArea: attributes.parameters.built_up_area,
+  },
+  additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
+  note: attributes.note,
+  // location: attributes.location?.coordinates,
+  // images: Array.isArray(attributes.image.data)
+  //   ? attributes.image.data.map((item) => ({
+  //       height: item.attributes.height as number,
+  //       placeholderUrl: item.attributes.placeholder as string,
+  //       url: item.attributes.url as string,
+  //       width: item.attributes.width as number,
+  //     }))
+  //   : [],
+});
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) =>
   new Intl.NumberFormat('by-BY', {

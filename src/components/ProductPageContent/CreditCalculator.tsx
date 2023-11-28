@@ -1,13 +1,12 @@
 'use client';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import BankIcon from '@/public/bank-icon.svg';
 import InfoIcon from '@/public/info-icon.svg';
 import CreditInput from '@/src/components/ProductPageContent/CreditInput';
 import Button from '@/src/components/common/Button/Button';
-import InputWrapper from '@/src/components/common/InputWrapper/InputWrapper';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
 import { convertToBYN, getPriceByCurrencyMonetary } from '@/src/helpers/currencyHelpers';
@@ -28,26 +27,20 @@ const CreditCalculator = ({
     `${Math.round(convertToBYN(price, initialCurrency || 'USD', rates) / 2)}`,
   );
   const [loanTermValue, setLoanTermValue] = useState<string>('20');
-  const [loanAmount, setLoanAmount] = useState<number>(
-    Math.round(convertToBYN(price, initialCurrency || 'USD', rates)) - +initialFeeValue,
-  );
-  const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
-  const [interestRate, setInterestRate] = useState<number>(0);
+  const [creditResult, setCreditResult] = useState({ monthlyPayment: 0, interestRate: 0 });
 
-  const calculateMonthlyPayment = () => {
-    setMonthlyPayment(
-      +(+loanAmount / (+loanTermValue * 12) + +loanAmount * (rate / 12 / 100)).toFixed(2),
-    );
-    setInterestRate(rate / 12);
-  };
+  const loanAmount = useMemo(() => {
+    return Math.round(convertToBYN(price, initialCurrency || 'USD', rates)) - +initialFeeValue;
+  }, [initialFeeValue]);
 
-  const calculateLoanAmount = (val: string) => {
-    setInitialFeeValue(val.replace(/[^\d]/, ''));
-    setLoanAmount(Math.round(convertToBYN(price, initialCurrency || 'USD', rates)) - +val);
-    if (+val > Math.round(convertToBYN(price, initialCurrency || 'USD', rates))) {
-      setInitialFeeValue(`${Math.round(convertToBYN(price, initialCurrency || 'USD', rates))}`);
-      setLoanAmount(0);
-    }
+  const calculate = () => {
+    setCreditResult({
+      monthlyPayment: +(
+        +loanAmount / (+loanTermValue * 12) +
+        +loanAmount * (rate / 12 / 100)
+      ).toFixed(2),
+      interestRate: rate / 12,
+    });
   };
 
   return (
@@ -85,57 +78,22 @@ const CreditCalculator = ({
           </div>
           <div className={clsx('flex', 'flex-col', 'gap-y-8', 'w-full')}>
             <div className={clsx('flex', 'flex-col', 'gap-y-5')}>
-              {/* <CreditInput
-                setValue={setInitialFeeValue}
+              <CreditInput
+                onChange={setInitialFeeValue}
                 value={initialFeeValue}
                 placeholder="0"
                 labelText="Первоначальный взнос"
                 rightUnits="byn"
-              /> */}
-              <InputWrapper label="Первоначальный взнос">
-                <div className={clsx('relative')}>
-                  {/*TODO: add validation*/}
-                  <input
-                    value={initialFeeValue}
-                    onChange={(e) => {
-                      calculateLoanAmount(e.target.value);
-                    }}
-                    placeholder="0"
-                    className={clsx(
-                      'w-full',
-                      'text-2xl',
-                      'border-b',
-                      'border-secondary',
-                      'text-secondary',
-                    )}
-                  />
-                  <Typography
-                    className={clsx(
-                      'absolute',
-                      'right-0',
-                      'z-10',
-                      'uppercase',
-                      'top-1/2',
-                      '-translate-y-1/2',
-                      'pointer-events-none',
-                    )}
-                    fontWeight="medium"
-                    fontSize={24}
-                    color="text-secondary"
-                  >
-                    BYN
-                  </Typography>
-                </div>
-              </InputWrapper>
+              />
               <CreditInput
                 value={loanTermValue}
-                setValue={setLoanTermValue}
+                onChange={setLoanTermValue}
                 placeholder="0"
                 labelText="Срок кредита"
                 rightUnits="лет"
               />
             </div>
-            <Button onClick={calculateMonthlyPayment}>Рассчитать</Button>
+            <Button onClick={calculate}>Рассчитать</Button>
           </div>
           <div>
             <Typography fontWeight="medium" color="text-[#B1B1B1]">
@@ -158,7 +116,7 @@ const CreditCalculator = ({
           <div className={clsx('flex', 'lg:gap-x-32', 'gap-x-16', 'self-center', 'mb-3')}>
             <div className={clsx('flex', 'flex-col', 'justify-center', 'gap-y-1', 'items-center')}>
               <Typography className={clsx('text-center')} fontSize={36} fontWeight="medium">
-                от {interestRate} %
+                от {creditResult.interestRate} %
               </Typography>
               <Typography className={clsx('text-center')} fontSize={16} fontWeight="medium">
                 Первоначальная ставка
@@ -166,7 +124,7 @@ const CreditCalculator = ({
             </div>
             <div className={clsx('flex', 'flex-col', 'justify-center', 'gap-y-1', 'items-center')}>
               <Typography fontSize={36} fontWeight="medium" className={clsx('text-center')}>
-                {monthlyPayment} BYN
+                {creditResult.monthlyPayment} BYN
               </Typography>
               <Typography className={clsx('text-center')} fontSize={16} fontWeight="medium">
                 Ежемесячный платёж

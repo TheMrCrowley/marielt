@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ProductSlider from '@/src/app-pages/HomePage/ProductSlider';
 import ApplicationField from '@/src/components/ApplicationField/ApplicationField';
 import {
   Characteristics,
@@ -15,8 +14,8 @@ import SimilarProducts from '@/src/components/ProductPageContent/SimilarProducts
 import { getRoominessByStrapiValue } from '@/src/enums/FlatsFilters';
 import { formatToFlatCharacteristics } from '@/src/helpers/formatters';
 import {
-  // getSimilarByLayout,
-  // getSimilarByLocation,
+  getSimilarByLayout,
+  getSimilarByLocation,
   getSimilarByPrice,
 } from '@/src/services/flatsServices';
 import { DetailedFlatItem } from '@/src/types/Flats';
@@ -27,7 +26,7 @@ interface FlatPageProps {
 }
 
 const FlatPage = async ({ flat }: FlatPageProps) => {
-  const { name, address, price, initialCurrency, note, images, location } = flat;
+  const { name, address, price, initialCurrency, note, images, location, id } = flat;
   const {
     roominess,
     floor,
@@ -36,7 +35,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     totalArea,
     livingArea,
     kitchenArea,
-    // layout,
+    layout,
   } = flat.parameters;
 
   const flatCharacteristics = [
@@ -47,21 +46,24 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     },
   ];
 
-  const similar = await getSimilarByPrice({
+  const similarByPrice = await getSimilarByPrice({
     price: price || '0',
     roominess: roominess || '',
+    id,
   });
 
-  // const similarByLocation = await getSimilarByLocation({
-  //   latitude: location?.lat || 0,
-  //   longitude: location?.lng || 0,
-  //   roominess: roominess || '',
-  // });
+  const similarByLocation = await getSimilarByLocation({
+    latitude: location?.lat || 0,
+    longitude: location?.lng || 0,
+    roominess: roominess || '',
+    id,
+  });
 
-  // const similarByLayout = await getSimilarByLayout({
-  //   layout: layout || '',
-  //   roominess: roominess || '',
-  // });
+  const similarByLayout = await getSimilarByLayout({
+    layout: layout || '',
+    roominess: roominess || '',
+    id,
+  });
 
   const getInterestRate = async () => {
     const interestRate = await fetch(`${process.env.API_BASE_URL}/credits`, { cache: 'no-cache' });
@@ -84,8 +86,18 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
         }
         similarObjectsField={
           <SimilarProducts
-            product={'квартиры'}
-            productSlider={<ProductSlider products={similar} type="flats" />}
+            type="flats"
+            similarProducts={[
+              { label: 'По цене', data: similarByPrice },
+              {
+                label: 'По расположению',
+                data: similarByLocation,
+              },
+              {
+                label: 'По планировке',
+                data: similarByLayout,
+              },
+            ]}
           />
         }
         productHeader={

@@ -244,11 +244,31 @@ export interface HousesAndLotsStrapiResponse {
     water?: string;
     sewerage?: string;
     electricity?: string;
+    built_up_area?: {
+      length?: string;
+      width?: string;
+    };
+    wall_material_add?: string;
+    rooms_number?: string;
+    water_add?: string;
+    sewerage_add?: string;
+    telephone?: string;
+    balcony?: string;
+    parking?: string;
+    readiness_percentage?: string;
+    construction_year?: string;
   };
   currency?: AvailableCurrencies;
   price: string;
   image?: StrapiImage;
   name?: string;
+  additional_info?: Array<{ name: string }>;
+  note?: string;
+  // image?: {
+  //   data: Array<{
+  //     attributes: StrapiImage;
+  //   }>;
+  // };
 }
 
 export interface DistrictResponse {

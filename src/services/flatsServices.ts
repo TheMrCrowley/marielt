@@ -355,20 +355,31 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
 export const getSimilarByPrice = async ({
   price,
   roominess,
+  id,
 }: {
   price: string;
   roominess: string;
+  id: string;
 }) => {
   const query = qs.stringify(
     {
       filters: {
         price: {
-          $between: [+price - 5000, +price + 5000],
+          ...(+price
+            ? {
+                $between: [+price - 5000, +price + 5000],
+              }
+            : {
+                $between: [0, 25000],
+              }),
         },
         parameters: {
           roominess: {
             $eq: roominess,
           },
+        },
+        id: {
+          $ne: id,
         },
       },
     },
@@ -392,22 +403,27 @@ export const getSimilarByLocation = async ({
   latitude,
   longitude,
   roominess,
+  id,
 }: {
   latitude: number;
   longitude: number;
   roominess: string;
+  id: string;
 }) => {
   const query = qs.stringify(
     {
       filters: {
-        location: {
-          lat: { $between: [latitude - 0.008, latitude + 0.008] },
-          lng: { $between: [longitude - 0.008, longitude + 0.008] },
+        coordinates: {
+          latitude: { $between: [latitude - 0.008, latitude + 0.008] },
+          longitude: { $between: [longitude - 0.008, longitude + 0.008] },
         },
         parameters: {
           roominess: {
             $eq: roominess,
           },
+        },
+        id: {
+          $ne: id,
         },
       },
     },
@@ -430,20 +446,29 @@ export const getSimilarByLocation = async ({
 export const getSimilarByLayout = async ({
   layout,
   roominess,
+  id,
 }: {
   layout: string;
   roominess: string;
+  id: string;
 }) => {
   const query = qs.stringify(
     {
       filters: {
         parameters: {
           layout: {
-            $eq: layout,
+            ...(layout
+              ? {
+                  $eq: layout,
+                }
+              : { $null: true }),
           },
           roominess: {
             $eq: roominess,
           },
+        },
+        id: {
+          $ne: id,
         },
       },
     },

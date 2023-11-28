@@ -1,7 +1,7 @@
 import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
-export interface DefaultHousesAndLotsItem {
+export type DefaultHousesAndLotsItem = {
   address: string;
   id: string;
   price?: string;
@@ -18,7 +18,42 @@ export interface DefaultHousesAndLotsItem {
     livingArea?: string;
     kitchenArea?: string;
   };
-}
+};
+
+export type DetailedHousesAndLotsItem = {
+  parameters: {
+    builtUpArea?: {
+      length?: string;
+      width?: string;
+    };
+    levelNumber?: string;
+    roofMaterial?: string;
+    wallMaterial?: string;
+    wallMaterialAdd?: string;
+    totalArea?: string;
+    roomsNumber?: string;
+    heating?: string;
+    gas?: string;
+    water?: string;
+    waterAdd?: string;
+    sewerage?: string;
+    sewerageAdd?: string;
+    electricity?: string;
+    telephone?: string;
+    balcony?: string;
+    parking?: string;
+    readinessPercentage?: string;
+    constructionYear?: string;
+  };
+  additionalInfo?: Array<{ name: string }>;
+  note?: string;
+  images?: Array<{
+    width: number;
+    height: number;
+    url: string;
+    placeholderUrl: string;
+  }>;
+} & DefaultHousesAndLotsItem;
 
 export interface HousesAndLotsCategory {
   categoryName: string;

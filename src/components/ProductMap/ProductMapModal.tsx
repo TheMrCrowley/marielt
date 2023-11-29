@@ -1,17 +1,17 @@
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import Portal from '@/src/components/common/Portal';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 
-interface ProductMapModalProps {
+interface ProductMapModalProps extends PropsWithChildren {
   isOpen: boolean;
   closeModal: () => void;
 }
 
-const ProductMapModal = ({ closeModal, isOpen }: ProductMapModalProps) => {
+const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps) => {
   const breakpoint = useWindowSize();
 
   if (!isOpen) {
@@ -22,7 +22,16 @@ const ProductMapModal = ({ closeModal, isOpen }: ProductMapModalProps) => {
     if (breakpoint < WindowWidth.LG) {
       return (
         <motion.div
-          className={clsx('absolute', 'w-full', 'h-72', 'bg-white')}
+          className={clsx(
+            'absolute',
+            'w-full',
+            'h-[50vh]',
+            'bg-[#3D3D3D]',
+            'scrollbar-thin',
+            'scrollbar-thumb-primary',
+            'scrollbar-track-secondary',
+            'overflow-y-auto',
+          )}
           initial={{
             y: '100%',
             bottom: 0,
@@ -30,13 +39,25 @@ const ProductMapModal = ({ closeModal, isOpen }: ProductMapModalProps) => {
           animate={{
             y: '0%',
           }}
-        ></motion.div>
+        >
+          {children}
+        </motion.div>
       );
     }
 
     return (
       <motion.div
-        className={clsx('absolute', 'w-96', 'h-full', 'bg-white', 'left-0')}
+        className={clsx(
+          'absolute',
+          'w-96',
+          'h-full',
+          'bg-[#3D3D3D]',
+          'left-0',
+          'scrollbar-thin',
+          'scrollbar-thumb-primary',
+          'scrollbar-track-secondary',
+          'overflow-y-auto',
+        )}
         initial={{
           x: '-100%',
           left: 0,
@@ -44,7 +65,9 @@ const ProductMapModal = ({ closeModal, isOpen }: ProductMapModalProps) => {
         animate={{
           x: '0%',
         }}
-      ></motion.div>
+      >
+        {children}
+      </motion.div>
     );
   };
 

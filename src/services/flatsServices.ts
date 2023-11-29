@@ -230,7 +230,6 @@ export const getFlatsForList = async (
   }/apart-items?${query}&${paginationQuery}&${getDefaultFlatListPopulateQuery()}`;
 
   const response = await fetch(url, {
-    // cache: 'no-cache',
     next: {
       revalidate: 60,
     },
@@ -268,10 +267,7 @@ export const getFlatsForMap = async (
     process.env.API_BASE_URL
   }/apart-items?${query}&${paginationQuery}&${getDefaultFlatMapPopulateQuery()}`;
 
-  console.log(url);
-
   const response = await fetch(url, {
-    // cache: 'no-cache',
     next: {
       revalidate: 60,
     },
@@ -282,6 +278,37 @@ export const getFlatsForMap = async (
   return {
     flats: formatToDefaultMapFlat(data),
   };
+};
+
+export const getFlatsByIds = async (ids: string[]) => {
+  if (!ids.length) {
+    return;
+  }
+
+  const idsQuery = qs.stringify(
+    {
+      filters: {
+        id: {
+          $in: ids,
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `${process.env.API_BASE_URL}/apart-items?${getPaginationQuery(
+    'map',
+  )}&${getDefaultFlatListPopulateQuery()}&${idsQuery}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
 };
 
 export const getFlatsSearchResults = async (value: string): Promise<SearchResults> => {

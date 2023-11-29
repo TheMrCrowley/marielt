@@ -11,8 +11,8 @@ import {
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ymaps from 'yandex-maps';
 
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
@@ -23,12 +23,13 @@ import { DefaultMapFlatItem } from '@/src/types/Flats';
 import './Map.css';
 import ProductMapModal from './ProductMapModal';
 
-interface ProductMapProps {
+interface ProductMapProps extends PropsWithChildren {
   items: DefaultMapFlatItem[];
 }
 
-const ProductMap = ({ items }: ProductMapProps) => {
+const ProductMap = ({ items, children }: ProductMapProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [api, setApi] = useState<typeof ymaps | null>(null);
@@ -66,7 +67,7 @@ const ProductMap = ({ items }: ProductMapProps) => {
             alignItems: 'stretch',
             flex: '1 1 auto',
           }}
-          state={{
+          defaultState={{
             center: [53.902287, 27.561824],
             zoom: 11,
           }}
@@ -95,12 +96,6 @@ const ProductMap = ({ items }: ProductMapProps) => {
                 clusterize: true,
                 gridSize: 256,
               }}
-              objects={
-                {
-                  // openBalloonOnClick: true,
-                  // preset: 'islands#greenDotIcon',
-                }
-              }
               clusters={{
                 clusterIconLayout: api.templateLayoutFactory.createClass(
                   '<div class="cluster-wrapper">{{ properties.geoObjects.length}}</div>',
@@ -202,6 +197,9 @@ const ProductMap = ({ items }: ProductMapProps) => {
                 if (isObject) {
                   const objectId = objectManagerRef.current.objects.getById(id);
                   const targetSingleItem = items.find((item) => item.id === objectId.id)!;
+
+                  router.push(pathname + '?' + `productIds=${targetSingleItem.id}`);
+
                   setIsModalOpen(true);
                 } else {
                   const geometrySet = new Set<number>();
@@ -212,14 +210,35 @@ const ProductMap = ({ items }: ProductMapProps) => {
                       geometrySet.add(feature.geometry.coordinates[1]);
                     });
                   const isFiniteCluster = geometrySet.size === 2;
-                  console.log({ isFiniteCluster });
+
+                  if (isFiniteCluster) {
+                    const searchParams = new URLSearchParams();
+                    const targetClusterItem = (
+                      objectManagerRef.current.clusters as ymaps.ObjectManager['clusters']
+                    ).getById(id);
+
+                    targetClusterItem.features.forEach((feature) =>
+                      searchParams.append('productIds', feature.id),
+                    );
+
+                    router.push(pathname + '?' + searchParams.toString());
+                    setIsModalOpen(true);
+                  }
                 }
               }}
             />
           )}
         </Map>
       </YMaps>
-      <ProductMapModal closeModal={() => setIsModalOpen(false)} isOpen={isModalOpen} />
+      <ProductMapModal
+        closeModal={() => {
+          setIsModalOpen(false);
+          router.push(pathname);
+        }}
+        isOpen={isModalOpen}
+      >
+        {children}
+      </ProductMapModal>
     </>
   );
 };

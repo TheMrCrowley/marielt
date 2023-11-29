@@ -19,7 +19,7 @@ const Flats = async ({ searchParams }: FlatsProps) => {
   return (
     <>
       <FlatsFilters data={data} />
-      <FlatsMap flats={flats} />
+      <FlatsMap productIds={searchParams.productIds || []} flats={flats} />
     </>
   );
 };

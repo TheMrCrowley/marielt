@@ -352,20 +352,20 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
   return formatToDetailedFlat(data);
 };
 
-export const getSimilarByPrice = async ({
+const getSimilarByPrice = async ({
   price,
   roominess,
   id,
 }: {
-  price: string;
-  roominess: string;
+  price?: string;
+  roominess?: string;
   id: string;
 }) => {
   const query = qs.stringify(
     {
       filters: {
         price: {
-          ...(+price
+          ...(price
             ? {
                 $between: [+price - 5000, +price + 5000],
               }
@@ -375,7 +375,7 @@ export const getSimilarByPrice = async ({
         },
         parameters: {
           roominess: {
-            $eq: roominess,
+            $eq: roominess || '',
           },
         },
         id: {
@@ -399,27 +399,27 @@ export const getSimilarByPrice = async ({
   return formatToDefaultFlat(data);
 };
 
-export const getSimilarByLocation = async ({
+const getSimilarByLocation = async ({
   latitude,
   longitude,
   roominess,
   id,
 }: {
-  latitude: number;
-  longitude: number;
-  roominess: string;
+  latitude?: number;
+  longitude?: number;
+  roominess?: string;
   id: string;
 }) => {
   const query = qs.stringify(
     {
       filters: {
         coordinates: {
-          latitude: { $between: [latitude - 0.008, latitude + 0.008] },
-          longitude: { $between: [longitude - 0.008, longitude + 0.008] },
+          latitude: { $between: [(latitude || 0) - 0.008, (latitude || 0) + 0.008] },
+          longitude: { $between: [(longitude || 0) - 0.008, (longitude || 0) + 0.008] },
         },
         parameters: {
           roominess: {
-            $eq: roominess,
+            $eq: roominess || '',
           },
         },
         id: {
@@ -443,13 +443,13 @@ export const getSimilarByLocation = async ({
   return formatToDefaultFlat(data);
 };
 
-export const getSimilarByLayout = async ({
+const getSimilarByLayout = async ({
   layout,
   roominess,
   id,
 }: {
-  layout: string;
-  roominess: string;
+  layout?: string;
+  roominess?: string;
   id: string;
 }) => {
   const query = qs.stringify(
@@ -464,7 +464,7 @@ export const getSimilarByLayout = async ({
               : { $null: true }),
           },
           roominess: {
-            $eq: roominess,
+            $eq: roominess || '',
           },
         },
         id: {
@@ -486,4 +486,43 @@ export const getSimilarByLayout = async ({
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
   return formatToDefaultFlat(data);
+};
+
+export const getSimilarFlatsItems = async (flat: DetailedFlatItem) => {
+  const {
+    parameters: { roominess, layout },
+    price,
+    id,
+    location,
+  } = flat;
+  const [similarByPrice, similarByLocation, similarByLayout] = await Promise.all([
+    getSimilarByPrice({
+      price: price,
+      roominess: roominess,
+      id,
+    }),
+    getSimilarByLocation({
+      latitude: location?.lat,
+      longitude: location?.lng,
+      roominess: roominess,
+      id,
+    }),
+    getSimilarByLayout({
+      layout: layout,
+      roominess: roominess,
+      id,
+    }),
+  ]);
+
+  return [
+    { label: 'По цене', data: similarByPrice },
+    {
+      label: 'По расположению',
+      data: similarByLocation,
+    },
+    {
+      label: 'По планировке',
+      data: similarByLayout,
+    },
+  ];
 };

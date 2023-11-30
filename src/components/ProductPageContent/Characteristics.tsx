@@ -15,8 +15,6 @@ interface CharacteristicsProps {
 const Characteristics: FC<CharacteristicsProps> = ({ characteristics }) => {
   return (
     <div className={clsx('flex', 'flex-col', 'xl:w-[35%]', 'w-full')}>
-      {/*TODO // bg value to taiwind? */}
-
       <Title fontSize={32} className={clsx('bg-[#262626]', 'py-6', 'px-5')}>
         Характеристики
       </Title>

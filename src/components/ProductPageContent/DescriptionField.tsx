@@ -10,6 +10,7 @@ const DescriptionField = ({ description }: { description?: string }) => {
   if (!description) {
     return null;
   }
+
   return (
     <div
       className={clsx(

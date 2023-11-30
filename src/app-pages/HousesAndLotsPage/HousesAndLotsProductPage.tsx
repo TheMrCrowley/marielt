@@ -17,7 +17,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
   return (
     <>
       {/* <ImagesSwiper images={images} type="flats" /> */}
-      <ProductPageContent
+      {/* <ProductPageContent
         locationField={<LocationField location={{ lat: 0, lng: 0 }} />}
         note={<NoteField note={note} />}
         characteristics={<div>x</div>}
@@ -38,7 +38,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
         }
         productHeader={<div />}
       />
-      <ApplicationField />
+      <ApplicationField /> */}
     </>
   );
 };

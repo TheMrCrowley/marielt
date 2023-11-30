@@ -1,5 +1,13 @@
 'use client';
-import { Map, Placemark, YMaps } from '@pbe/react-yandex-maps';
+import {
+  FullscreenControl,
+  Map,
+  Placemark,
+  RulerControl,
+  TypeSelector,
+  YMaps,
+  ZoomControl,
+} from '@pbe/react-yandex-maps';
 import clsx from 'clsx';
 
 import Title from '@/src/components/common/Title/Title';
@@ -49,6 +57,10 @@ const LocationField = ({ location }: LocationFieldProps) => {
               zoom: 15,
             }}
           >
+            <FullscreenControl />
+            <RulerControl />
+            <TypeSelector />
+            <ZoomControl />
             <Placemark geometry={[location.lat, location.lng]} />
           </Map>
         </YMaps>

@@ -97,7 +97,6 @@ const AgentForm = ({ name, phoneNumber, position }: AgentFormProps) => {
           placeholder="Имя"
           className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black', 'mb-5')}
         />
-        {/**TODO: min validation, mask for tel-input? */}
         <input
           type="tel"
           placeholder="+375 25 784 65 47"

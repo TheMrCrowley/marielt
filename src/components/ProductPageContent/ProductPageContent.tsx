@@ -53,10 +53,8 @@ const ProductPageContent = ({
           'relative',
         )}
       >
-        {/*TODO //move gap value to taiwind? */}
         <div className={clsx('flex', 'flex-col', 'gap-y-[30px]', 'w-[calc(100% - 340px)]')}>
           {productHeader}
-          {/*TODO //move gap value to taiwind? */}
           {renderMobileLocationField()}
           <div className={clsx('flex', 'gap-8', 'xl:flex-row', 'flex-col')}>
             {characteristics}

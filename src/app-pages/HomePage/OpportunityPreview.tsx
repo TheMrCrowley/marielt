@@ -5,7 +5,7 @@ import React from 'react';
 import LinkButton from '@/src/components/LinkButton';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
-import { HomePageItem } from '@/src/services/homePageServices';
+import { HomePageItem } from '@/src/types/HomePage';
 
 interface OpportunityPreviewProps {
   opportunity: HomePageItem;

@@ -9,7 +9,8 @@ import Navigation from '@/src/layout/Navigation';
 import { getNavigationItems } from '@/src/services/navigationServices';
 
 const Header = async () => {
-  // const navigationItems = await getNavigationItems();
+  const navigationItems = await getNavigationItems();
+
   return (
     <>
       <header
@@ -48,9 +49,9 @@ const Header = async () => {
             className={clsx('lg:w-[220px]', 'md:w-[200px]', 'sm:w-[180px]', 'w-[120px]')}
           />
         </Link>
-        {/* <BurgerMenu navigationItems={navigationItems} /> */}
+        <BurgerMenu navigationItems={navigationItems} />
       </header>
-      {/* <Navigation navigationItems={navigationItems} /> */}
+      <Navigation navigationItems={navigationItems} />
     </>
   );
 };

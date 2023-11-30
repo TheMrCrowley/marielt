@@ -74,6 +74,10 @@ const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps)
     );
   }
 
+  if (!isOpen) {
+    return null;
+  }
+
   return (
     <Portal>
       <div

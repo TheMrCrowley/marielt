@@ -6,7 +6,7 @@ import LinkButton from '@/src/components/LinkButton';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 import { getProductTypeByRoute } from '@/src/helpers/getProductTypeByRoute';
-import { HomePageItem } from '@/src/services/homePageServices';
+import { HomePageItem } from '@/src/types/HomePage';
 
 import ProductSliderWrapper from './ProductSliderWrapper';
 
@@ -54,6 +54,8 @@ const ProductPreview = ({ data }: ProductPreviewProps) => {
               src={image.src}
               width={image.width}
               height={image.height}
+              placeholder="blur"
+              blurDataURL={image.placeholder}
               alt=""
             />
           </>
@@ -66,6 +68,8 @@ const ProductPreview = ({ data }: ProductPreviewProps) => {
               src={image.src}
               width={image.width}
               height={image.height}
+              placeholder="blur"
+              blurDataURL={image.placeholder}
               alt=""
             />
             {renderDescription()}

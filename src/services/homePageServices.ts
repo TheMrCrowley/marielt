@@ -1,91 +1,59 @@
-import { AppRoutes } from '@/src/enums/AppRoutes';
-import {
-  HomePageItemResponse,
-  StrapiFindOneResponse,
-  StrapiFindResponse,
-  StrapiImage,
-} from '@/src/types/StrapiTypes';
+import qs from 'qs';
 
-export interface HomePageItem {
-  title: string;
-  description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-  };
-  variant: 'primary' | 'secondary';
-  type: 'product' | 'opportunity';
-  to: AppRoutes;
-}
+import { HomePageData, HomePageItem } from '@/src/types/HomePage';
+import { HomePageItemResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
-interface WelcomeSectionItem {
-  title: string;
-  description: string;
-  image: {
-    src: string;
-    width: number;
-    height: number;
-  };
-}
-
-interface CarouselItemResponse {
-  text_1: string;
-  text_2: string;
-  banner: {
-    data: {
-      attributes: StrapiImage;
-    };
-  };
-}
-
-export const getWelcomeSectionItem = async (): Promise<WelcomeSectionItem> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/carousels/1?populate=*`, {
-    cache: 'no-cache',
-  });
-  const { data } = (await response.json()) as StrapiFindOneResponse<CarouselItemResponse>;
-
-  return {
-    description: data.attributes.text_2,
-    title: data.attributes.text_1,
-    image: {
-      src: data.attributes.banner.data.attributes.url,
-      width: data.attributes.banner.data.attributes.width,
-      height: data.attributes.banner.data.attributes.height,
+export const getHomePageData = async (): Promise<HomePageData> => {
+  const query = qs.stringify(
+    {
+      populate: {
+        banner: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        section: {
+          populate: {
+            image: {
+              fields: ['width', 'height', 'url', 'placeholder'],
+            },
+          },
+        },
+      },
     },
-  };
-};
+    {
+      encodeValuesOnly: true,
+    },
+  );
 
-export const getHomePageItems = async (): Promise<{
-  productItems: HomePageItem[];
-  opportunityItems: HomePageItem[];
-}> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/home-pages?populate=*`, {});
-  const { data } = (await response.json()) as StrapiFindResponse<HomePageItemResponse>;
+  const url = `${process.env.API_BASE_URL}/home-page?${query}`;
 
-  const { opportunityItems, productItems, navigationItems } = data.reduce<{
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<HomePageItemResponse>;
+
+  const { opportunityItems, productItems } = data.attributes.section.reduce<{
     opportunityItems: HomePageItem[];
     productItems: HomePageItem[];
-    navigationItems: Array<{
-      title: string;
-      to: string;
-    }>;
   }>(
     (acc, cur) => {
       const target = {
-        title: cur.attributes.title,
-        description: cur.attributes.description,
-        variant: cur.attributes.variant,
-        to: cur.attributes.to,
-        type: cur.attributes.type,
+        title: cur.title,
+        description: cur.description,
+        variant: cur.variant,
+        to: cur.to,
+        type: cur.type,
         image: {
-          src: cur.attributes.image.data.attributes.url,
-          width: cur.attributes.image.data.attributes.width,
-          height: cur.attributes.image.data.attributes.height,
+          src: cur.image.data.attributes.url,
+          width: cur.image.data.attributes.width,
+          height: cur.image.data.attributes.height,
+          placeholder: cur.image.data.attributes.placeholder,
         },
       };
 
-      if (cur.attributes.type === 'product') {
+      if (cur.type === 'product') {
         acc = { ...acc, productItems: [...acc.productItems, target] };
       } else {
         acc = { ...acc, opportunityItems: [...acc.opportunityItems, target] };
@@ -93,11 +61,16 @@ export const getHomePageItems = async (): Promise<{
 
       return acc;
     },
-    { opportunityItems: [], productItems: [], navigationItems: [] },
+    { opportunityItems: [], productItems: [] },
   );
 
   return {
-    opportunityItems,
-    productItems,
+    products: productItems,
+    opportunities: opportunityItems,
+    welcomeSection: {
+      description: data.attributes.text_2,
+      title: data.attributes.text_1,
+      image: data.attributes.banner.data.attributes,
+    },
   };
 };

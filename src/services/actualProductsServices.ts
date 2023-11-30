@@ -20,7 +20,18 @@ const actualQuery = qs.stringify({
   filters: {
     home_page: true,
   },
-  populate: '*',
+  populate: {
+    image: {
+      fields: ['width', 'height', 'url', 'placeholder'],
+    },
+    house_number: {
+      fields: ['number'],
+    },
+    parameters: {
+      fields: ['floor', 'living_area', 'floors_number', 'total_area'],
+    },
+    location: '*',
+  },
 });
 
 const getActualFlats = async (): Promise<DefaultFlatItem[]> => {

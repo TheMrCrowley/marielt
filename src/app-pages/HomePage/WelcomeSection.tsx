@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { getWelcomeSectionItem } from '@/src/services/homePageServices';
+import { HomePageData } from '@/src/types/HomePage';
 
-const WelcomeSection = async () => {
-  const { description, image, title } = await getWelcomeSectionItem();
+interface WelcomeSectionProps {
+  data: HomePageData['welcomeSection'];
+}
 
+const WelcomeSection = ({ data: { description, image, title } }: WelcomeSectionProps) => {
   return (
     <section
       className={clsx(
@@ -16,7 +18,7 @@ const WelcomeSection = async () => {
         'md:min-h-[750px]',
         'min-h-[600px]',
       )}
-      style={{ backgroundImage: `url(${image.src})` }}
+      style={{ backgroundImage: `url(${image.url})` }}
     >
       <div
         className={clsx(

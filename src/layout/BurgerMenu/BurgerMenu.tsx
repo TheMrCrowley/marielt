@@ -63,7 +63,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
               'md:p-4',
               'p-0',
               'box-border',
-              'z-10',
+              'z-50',
               'flex',
               'flex-col',
               'gap-5',

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import ArrowRight from '@/public/arrow-right.svg';
-import { HomePageItem } from '@/src/services/homePageServices';
+import { HomePageItem } from '@/src/types/HomePage';
 
 interface LinkButtonProps {
   type: HomePageItem['type'];

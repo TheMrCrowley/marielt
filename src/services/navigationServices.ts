@@ -1,5 +1,9 @@
+import qs from 'qs';
+
 import { AppRoutes } from '@/src/enums/AppRoutes';
-import { HomePageItemResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import { HomePageItemResponse } from '@/src/types/StrapiTypes';
+
+import { StrapiFindOneResponse } from './../types/StrapiTypes';
 
 export const getNavigationItems = async (): Promise<
   Array<{
@@ -7,8 +11,22 @@ export const getNavigationItems = async (): Promise<
     to: AppRoutes;
   }>
 > => {
-  const response = await fetch(`${process.env.API_BASE_URL}/home-pages?populate=*`, {});
-  const { data } = (await response.json()) as StrapiFindResponse<HomePageItemResponse>;
+  const query = qs.stringify(
+    {
+      populate: {
+        section: {
+          fields: ['navigation_title', 'to'],
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+  const response = await fetch(`${process.env.API_BASE_URL}/home-page?${query}`, {
+    next: {
+      revalidate: 60,
+    },
+  });
+  const { data } = (await response.json()) as StrapiFindOneResponse<HomePageItemResponse>;
 
-  return data.map((item) => ({ title: item.attributes.navigation_title, to: item.attributes.to }));
+  return data.attributes.section.map((item) => ({ title: item.navigation_title, to: item.to }));
 };

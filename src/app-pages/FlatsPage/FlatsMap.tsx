@@ -12,7 +12,7 @@ interface FlatsMapProps {
 
 const FlatsMap = ({ flats, productIds }: FlatsMapProps) => {
   return (
-    <section className={clsx('flex', 'w-full', 'flex-auto', 'items-stretch', 'h-full')}>
+    <section className={clsx('flex', 'w-full', 'flex-auto', 'items-stretch', 'h-full', 'relative')}>
       <ProductMap items={flats}>
         <ProductMapList ids={Array.isArray(productIds) ? productIds : [productIds]} type="flats" />
       </ProductMap>

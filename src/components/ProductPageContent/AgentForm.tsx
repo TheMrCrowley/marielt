@@ -7,16 +7,17 @@ import { useState } from 'react';
 import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import Typography from '@/src/components/common/Typography';
+import { DetailedFlatItem } from '@/src/types/Flats';
 
 interface AgentFormProps {
-  name: string;
-  phoneNumber: string;
-  position?: string;
+  agentData: DetailedFlatItem['agents'];
 }
 
-const AgentForm = ({ name, phoneNumber, position }: AgentFormProps) => {
+const AgentForm = ({ agentData }: AgentFormProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isPhoneVisible, setIsPhoneVisible] = useState<boolean>(false);
+
+  const { fullName, phone1, position } = agentData;
 
   return (
     <div
@@ -57,7 +58,7 @@ const AgentForm = ({ name, phoneNumber, position }: AgentFormProps) => {
             {position || 'Агент по недвижимости'}
           </Typography>
           <Typography fontSize={24} fontWeight="medium">
-            {name}
+            {fullName}
           </Typography>
         </div>
         <Image
@@ -79,9 +80,7 @@ const AgentForm = ({ name, phoneNumber, position }: AgentFormProps) => {
         <div className={clsx('flex')}>
           <Image alt="phone" src={PhoneIcon} />
           <Typography fontSize={14} fontWeight="medium" color="#000000">
-            {isPhoneVisible
-              ? phoneNumber
-              : phoneNumber.substring(0, phoneNumber.length - 9) + 'XXXXXXXXX'}
+            {isPhoneVisible ? phone1 : phone1.substring(0, phone1.length - 9) + 'XXXXXXXXX'}
           </Typography>
         </div>
         <button

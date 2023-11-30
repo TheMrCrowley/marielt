@@ -31,7 +31,7 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
   return (
     <CardWrapper
       address={address}
-      to={`https://marielt.site/admin/content-manager/collectionType/api::apartments-item.apartments-item/${id}`}
+      to={`/flats/${id}`}
       imgUrl={image?.url}
       placeholderUrl={image?.placeholderUrl}
       title={name}

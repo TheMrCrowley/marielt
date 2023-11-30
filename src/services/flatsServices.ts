@@ -349,6 +349,8 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
   });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
+
+  console.log(data);
   return formatToDetailedFlat(data);
 };
 

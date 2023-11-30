@@ -56,3 +56,21 @@
   height: max-content;
   cursor: pointer;
 }
+
+.listButton {
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+  background-color: #3D3D3D;
+  color: #B1B1B1;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .25s all ease-in-out;
+}
+
+.listButton:hover {
+  background-color:#B1B1B1 ;
+  color: #202026;
+}

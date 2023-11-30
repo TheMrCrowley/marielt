@@ -76,17 +76,20 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
             setIsLoaded(true);
             setApi(yapi);
           }}
-          onClick={() => {
-            console.log(mapRef.current?.getZoom());
-          }}
         >
           <FullscreenControl />
           <RulerControl />
           <TypeSelector />
           <ZoomControl />
           <Button
-            options={{ maxWidth: 128 }}
-            data={{ content: 'Списком' }}
+            options={{
+              layout:
+                api &&
+                api.templateLayoutFactory.createClass(
+                  `<button class='listButton'>${'Список'}</button>`,
+                ),
+            }}
+            data={{ content: 'Список' }}
             onClick={handleButtonClick}
           />
           {isLoaded && api && (

@@ -23,7 +23,7 @@ interface FlatPageProps {
   flat: DetailedFlatItem;
 }
 
-const getflatCharacteristics = (flat: DetailedFlatItem) => [
+const getFlatCharacteristics = (flat: DetailedFlatItem) => [
   ...formatToFlatCharacteristics(flat),
   {
     name: 'Этаж/этажность',
@@ -68,14 +68,8 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
             price={+price!}
           />
         }
-        agentForm={
-          <AgentForm
-            name={agents.fullName}
-            phoneNumber={agents.phone1}
-            position={agents.position}
-          />
-        }
-        characteristics={<Characteristics characteristics={getflatCharacteristics(flat)} />}
+        agentForm={<AgentForm agentData={agents} />}
+        characteristics={<Characteristics characteristics={getFlatCharacteristics(flat)} />}
         detailedDescription={<DescriptionField description={detailedDescription} />}
         locationField={<LocationField location={location} />}
         note={<NoteField note={note} />}

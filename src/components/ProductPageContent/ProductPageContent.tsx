@@ -45,7 +45,6 @@ const ProductPageContent = ({
       <div
         className={clsx(
           'flex',
-          'lg:justify-between',
           'justify-center',
           'gap-[30px]',
           'min-[1440px]:flex-row',

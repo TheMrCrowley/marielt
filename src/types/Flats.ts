@@ -1,5 +1,7 @@
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import { StrapiVideo } from './VideoLink';
+
 export type DefaultFlatItem = {
   address: string;
   id: string;
@@ -64,6 +66,7 @@ export type DetailedFlatItem = {
     url: string;
     placeholderUrl: string;
   }>;
+  video?: StrapiVideo;
   agents: {
     fullName: string;
     phone1: string;

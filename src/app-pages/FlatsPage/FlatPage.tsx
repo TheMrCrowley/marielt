@@ -42,6 +42,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     location,
     agents,
     detailedDescription,
+    video,
   } = flat;
 
   const { roominess, floor, maxFloor, constructionYear, totalArea, livingArea, kitchenArea } =
@@ -51,7 +52,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
 
   return (
     <>
-      <ProductPageSlider images={images} type="flats" />
+      <ProductPageSlider images={images} type="flats" video={video} />
       <ProductPageContent
         productHeader={
           <FlatPageHeader

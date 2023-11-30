@@ -143,6 +143,7 @@ export interface FlatStrapiResponse {
     branch?: string;
     position?: string;
   }>;
+  video_link?: string;
 }
 
 export interface CommercialStrapiResponse {

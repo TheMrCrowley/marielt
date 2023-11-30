@@ -10,6 +10,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { ProductType } from '@/src/types/Product';
+import { StrapiVideo } from '@/src/types/VideoLink';
 
 import FullScreenSlider from './FullScreenSlider';
 import FullScreenSliderWrapper from './FullScreenSliderWrapper';
@@ -18,7 +19,9 @@ import SliderButton from './SliderButton';
 const ProductPageSlider = ({
   images,
   type,
+  video,
 }: {
+  video?: StrapiVideo;
   images: Array<{ url: string; width: number; height: number; placeholderUrl: string }>;
   type: ProductType;
 }) => {
@@ -93,10 +96,60 @@ const ProductPageSlider = ({
         }}
         centeredSlides
         grabCursor
-        loop
         keyboard
         onClick={() => setIsFullScreen(true)}
+        initialSlide={currentRealIndex}
       >
+        {video && (
+          <SwiperSlide
+            className={clsx(
+              'lg:!w-1/3',
+              'md:!w-2/3',
+              '!w-4/5',
+              'relative',
+              'after',
+              'after:z-50',
+              'after:block',
+              'after:absolute',
+              'after:top-1/2',
+              'after:left-1/2',
+              'after:-translate-x-1/2',
+              'after:-translate-y-1/2',
+              'after:w-16',
+              'after:h-16',
+              'after:bg-[url(/play-icon.svg)]',
+              'after:bg-no-repeat',
+              'after:bg-contain',
+              'after:bg-center',
+            )}
+            style={{
+              height: getSlideHeight(),
+            }}
+          >
+            {({ isActive }) => {
+              return (
+                <Image
+                  src={video.thumbnail}
+                  alt=""
+                  width={video.rawData.thumbnail_width}
+                  height={video.rawData.thumbnail_height}
+                  className={clsx(
+                    'relative',
+                    'object-cover',
+                    'w-full',
+                    'h-full',
+                    'transition-all',
+                    'border-solid',
+                    isActive ? 'sm:border-y-8' : 'sm:border-y-4',
+                    isActive ? 'border-y-4' : 'border-y-2',
+                    isActive ? 'border-secondary' : 'border-white',
+                    isActive ? 'opacity-100' : 'opacity-50',
+                  )}
+                />
+              );
+            }}
+          </SwiperSlide>
+        )}
         {images.map(({ url, height, width, placeholderUrl }) => (
           <SwiperSlide
             className={clsx('lg:!w-1/3', 'md:!w-2/3', '!w-4/5')}
@@ -109,7 +162,7 @@ const ProductPageSlider = ({
               return (
                 <Image
                   src={url}
-                  alt=""
+                  alt="product-page-slide"
                   width={width}
                   height={height}
                   className={clsx(
@@ -143,9 +196,58 @@ const ProductPageSlider = ({
         onSwiper={setThumbsSwiper}
         slidesPerView={getThumbSlidesPerView()}
         modules={[Thumbs]}
+        initialSlide={currentRealIndex}
         className="md:!w-3/4 !w-full sm:mb-10 mb-6 cursor-pointer"
         watchSlidesProgress
       >
+        {video && (
+          <SwiperSlide
+            className={clsx(
+              'lg:!w-1/6',
+              'md:!w-1/5',
+              '!w-1/4',
+              'relative',
+              'after',
+              'after:z-50',
+              'after:block',
+              'after:absolute',
+              'after:top-1/2',
+              'after:left-1/2',
+              'after:-translate-x-1/2',
+              'after:-translate-y-1/2',
+              'md:after:w-16',
+              'md:after:h-16',
+              'after:w-h-10',
+              'after:h-10',
+              'after:bg-[url(/play-icon.svg)]',
+              'after:bg-no-repeat',
+              'after:bg-contain',
+              'after:bg-center',
+            )}
+            style={{
+              height: getThumbSlideHeight(),
+            }}
+          >
+            <Image
+              src={video.thumbnail}
+              alt=""
+              width={video.rawData.thumbnail_width}
+              height={video.rawData.thumbnail_height}
+              className={clsx(
+                'object-cover',
+                'w-full',
+                'h-full',
+                'transition-all',
+                'border-solid',
+                'sm:border-4',
+                'border-2',
+                'sm:p-1',
+                'p-0',
+                currentRealIndex === 0 ? 'border-secondary' : 'border-transparent',
+              )}
+            />
+          </SwiperSlide>
+        )}
         {images.map(({ url, height, width, placeholderUrl }, i) => (
           <SwiperSlide
             style={{
@@ -168,7 +270,9 @@ const ProductPageSlider = ({
                 'border-2',
                 'sm:p-1',
                 'p-0',
-                i === currentRealIndex ? 'border-secondary' : 'border-transparent',
+                (video ? i + 1 === currentRealIndex : i === currentRealIndex)
+                  ? 'border-secondary'
+                  : 'border-transparent',
               )}
               placeholder="blur"
               blurDataURL={placeholderUrl}
@@ -182,6 +286,7 @@ const ProductPageSlider = ({
           images={images}
           initialSlide={currentRealIndex}
           type={type}
+          video={video}
         />
       </FullScreenSliderWrapper>
     </>

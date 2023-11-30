@@ -5,6 +5,7 @@ import {
   DefaultCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
+import { SearchResults } from '@/src/types/Filters';
 import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
 import {
   DefaultHousesAndLotsItem,
@@ -25,7 +26,6 @@ import {
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
-import { SearchResults } from './../types/Filters';
 import { getFullAddress } from './getFullAddress';
 
 export const formatToDefaultFlat = (
@@ -124,6 +124,7 @@ export const formatToDetailedFlat = ({
     phone2: attributes.agents.data[0].attributes.phone2,
     position: attributes.agents.data[0].attributes.position,
   },
+  video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
 export const formatToFlatCharacteristics = (

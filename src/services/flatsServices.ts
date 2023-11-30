@@ -350,7 +350,8 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
 
   const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
 
-  console.log(data);
+  console.log(JSON.parse(data.attributes.video_link!));
+
   return formatToDetailedFlat(data);
 };
 

@@ -9,17 +9,29 @@ import WithDisabledScroll from '@/src/components/common/WithDisabledScroll';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { ProductType } from '@/src/types/Product';
+import { StrapiVideo } from '@/src/types/VideoLink';
 
 import SliderButton from './SliderButton';
+
+const getVideoId = (url: string) => {
+  return url.split('=')[1];
+};
 
 interface FullScreenSliderProps {
   closeModal: () => void;
   images: Array<{ url: string; width: number; height: number; placeholderUrl: string }>;
   type: ProductType;
   initialSlide: number;
+  video?: StrapiVideo;
 }
 
-const FullScreenSlider = ({ closeModal, images, initialSlide, type }: FullScreenSliderProps) => {
+const FullScreenSlider = ({
+  closeModal,
+  images,
+  initialSlide,
+  type,
+  video,
+}: FullScreenSliderProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [currentRealIndex, setCurrentRealIndex] = useState<number>(0);
   const breakpoint = useWindowSize();
@@ -90,6 +102,25 @@ const FullScreenSlider = ({ closeModal, images, initialSlide, type }: FullScreen
             grabCursor
             keyboard
           >
+            {video && (
+              <SwiperSlide
+                className={clsx('!w-full')}
+                style={{
+                  height: '70vh',
+                }}
+              >
+                <div
+                  className={clsx('h-full', 'sm:w-4/5', 'w-full', 'my-0', 'mx-auto')}
+                  dangerouslySetInnerHTML={{
+                    __html: `<iframe src="https://www.youtube.com/embed/${getVideoId(
+                      video.url,
+                    )}?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen title="${
+                      video.title
+                    }" class="w-full h-full"></iframe>`,
+                  }}
+                />
+              </SwiperSlide>
+            )}
             {images.map(({ url, height, width, placeholderUrl }) => (
               <SwiperSlide
                 className={clsx('!w-full')}
@@ -117,6 +148,54 @@ const FullScreenSlider = ({ closeModal, images, initialSlide, type }: FullScreen
             className="md:!w-3/4 !w-full cursor-pointer"
             watchSlidesProgress
           >
+            {video && (
+              <SwiperSlide
+                className={clsx(
+                  'lg:!w-1/6',
+                  'md:!w-1/5',
+                  '!w-1/4',
+                  'relative',
+                  'after',
+                  'after:z-50',
+                  'after:block',
+                  'after:absolute',
+                  'after:top-1/2',
+                  'after:left-1/2',
+                  'after:-translate-x-1/2',
+                  'after:-translate-y-1/2',
+                  'md:after:w-16',
+                  'md:after:h-16',
+                  'after:w-h-10',
+                  'after:h-10',
+                  'after:bg-[url(/play-icon.svg)]',
+                  'after:bg-no-repeat',
+                  'after:bg-contain',
+                  'after:bg-center',
+                )}
+                style={{
+                  height: '15vh',
+                }}
+              >
+                <Image
+                  src={video.thumbnail}
+                  alt=""
+                  width={video.rawData.thumbnail_width}
+                  height={video.rawData.thumbnail_height}
+                  className={clsx(
+                    'object-cover',
+                    'w-full',
+                    'h-full',
+                    'transition-all',
+                    'border-solid',
+                    'sm:border-4',
+                    'border-2',
+                    'sm:p-1',
+                    'p-0',
+                    currentRealIndex === 0 ? 'border-secondary' : 'border-transparent',
+                  )}
+                />
+              </SwiperSlide>
+            )}
             {images.map(({ url, height, width, placeholderUrl }, i) => (
               <SwiperSlide
                 style={{
@@ -137,7 +216,9 @@ const FullScreenSlider = ({ closeModal, images, initialSlide, type }: FullScreen
                     'border-solid',
                     'border-2',
                     'p-1',
-                    i === currentRealIndex ? 'border-secondary' : 'border-transparent',
+                    (video ? i + 1 === currentRealIndex : i === currentRealIndex)
+                      ? 'border-secondary'
+                      : 'border-transparent',
                   )}
                   placeholder="blur"
                   blurDataURL={placeholderUrl}

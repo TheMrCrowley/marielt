@@ -16,7 +16,7 @@ export interface StrapiFindResponse<T> {
 
 export interface StrapiFindOneResponse<T> {
   data: {
-    id: number;
+    id: string;
     attributes: T;
   };
 }
@@ -94,7 +94,18 @@ export interface FlatStrapiResponse {
     kitchen_area?: string;
     ceiling_height?: string;
     bathroom?: string;
+    separate_rooms?: string;
+    share_in_apartment?: string;
+    floor_type?: string;
+    balcony_area?: string;
+    snb_area?: string;
+    flooring?: string;
+    telephone?: string;
+    layout?: string;
+    level_number?: string;
   };
+  additional_info?: Array<{ name: string }>;
+  note: string;
   coordinates: string;
   locality: string;
   street?: string;
@@ -118,12 +129,20 @@ export interface FlatStrapiResponse {
       attributes: StrapiImage;
     }>;
   };
+  detailed_description: string;
   location?: {
     coordinates: {
       lat: number;
       lng: number;
     };
   };
+  agents: StrapiFindResponse<{
+    full_name: string;
+    phone1: string;
+    phone2?: string;
+    branch?: string;
+    position?: string;
+  }>;
 }
 
 export interface CommercialStrapiResponse {
@@ -233,11 +252,31 @@ export interface HousesAndLotsStrapiResponse {
     water?: string;
     sewerage?: string;
     electricity?: string;
+    built_up_area?: {
+      length?: string;
+      width?: string;
+    };
+    wall_material_add?: string;
+    rooms_number?: string;
+    water_add?: string;
+    sewerage_add?: string;
+    telephone?: string;
+    balcony?: string;
+    parking?: string;
+    readiness_percentage?: string;
+    construction_year?: string;
   };
   currency?: AvailableCurrencies;
   price: string;
   image?: StrapiImage;
   name?: string;
+  additional_info?: Array<{ name: string }>;
+  note?: string;
+  // image?: {
+  //   data: Array<{
+  //     attributes: StrapiImage;
+  //   }>;
+  // };
 }
 
 export interface DistrictResponse {
@@ -300,4 +339,8 @@ export interface HousesAndLotsCategoryResponse {
   name: string;
   category: string | null;
   uid: HousesAndLotsRootCategory;
+}
+
+export interface CreditStrapiResponse {
+  interest_rate: number;
 }

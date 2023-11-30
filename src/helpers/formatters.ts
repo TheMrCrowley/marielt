@@ -1,11 +1,16 @@
+import { flatCharacteristicsMap } from '@/src/enums/FlatsFilters';
 import {
   CommercialCategory,
   CommercialTransaction,
   DefaultCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
-import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
-import { DefaultHousesAndLotsItem, HousesAndLotsCategory } from '@/src/types/HousesAndLots';
+import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import {
+  DefaultHousesAndLotsItem,
+  DetailedHousesAndLotsItem,
+  HousesAndLotsCategory,
+} from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
 import {
   CommercialCategoryResponse,
@@ -16,6 +21,7 @@ import {
   HousesAndLotsCategoryResponse,
   HousesAndLotsStrapiResponse,
   MicroDistrictResponse,
+  StrapiFindOneResponse,
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
@@ -61,6 +67,90 @@ export const formatToDefaultMapFlat = (
     initialCurrency: attributes.currency || 'USD',
     location: attributes.location?.coordinates,
   }));
+
+export const formatToDetailedFlat = ({
+  attributes,
+  id,
+}: StrapiFindOneResponse<FlatStrapiResponse>['data']): DetailedFlatItem => ({
+  address: getFullAddress({
+    locality: attributes.locality,
+    houseNumber: attributes.house_number?.number,
+    street: attributes.street,
+  }),
+  id,
+  price: attributes.price,
+  name: attributes.name,
+  initialCurrency: attributes.currency || 'USD',
+  parameters: {
+    floor: attributes.parameters.floor,
+    livingArea: attributes.parameters.living_area,
+    maxFloor: attributes.parameters.floors_number,
+    totalArea: attributes.parameters.total_area,
+    constructionYear: attributes.parameters.construction_year,
+    roominess: attributes.parameters.roominess,
+    bathroom: attributes.parameters.bathroom,
+    houseType: attributes.parameters.house_type,
+    finishing: attributes.parameters.finishing,
+    ceilingHeight: attributes.parameters.ceiling_height,
+    kitchenArea: attributes.parameters.kitchen_area,
+    separateRooms: attributes.parameters.separate_rooms,
+    shareInApartment: attributes.parameters.share_in_apartment,
+    floorType: attributes.parameters.floor_type,
+    balconyArea: attributes.parameters.balcony_area,
+    balcony: attributes.parameters.balcony,
+    flooring: attributes.parameters.flooring,
+    layout: attributes.parameters.layout,
+    levelNumber: attributes.parameters.level_number,
+    majorRenovationYear: attributes.parameters.major_renovation_year,
+    snbArea: attributes.parameters.snb_area,
+    telephone: attributes.parameters.telephone,
+  },
+  additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
+  note: attributes.note,
+  location: attributes.location?.coordinates,
+  detailedDescription: attributes.detailed_description,
+  images: Array.isArray(attributes.image.data)
+    ? attributes.image.data.map((item) => ({
+        height: item.attributes.height as number,
+        placeholderUrl: item.attributes.placeholder as string,
+        url: item.attributes.url as string,
+        width: item.attributes.width as number,
+      }))
+    : [],
+  agents: {
+    fullName: attributes.agents.data[0].attributes.full_name,
+    phone1: attributes.agents.data[0].attributes.phone1,
+    branch: attributes.agents.data[0].attributes.branch,
+    phone2: attributes.agents.data[0].attributes.phone2,
+    position: attributes.agents.data[0].attributes.position,
+  },
+});
+
+export const formatToFlatCharacteristics = (
+  flatItem: DetailedFlatItem,
+): Array<{ name: string; value: string }> => {
+  const result: Array<{ name: string; value: string }> = [];
+
+  Object.entries(flatItem.parameters).forEach(([key, value]) => {
+    const fn = flatCharacteristicsMap[key as keyof DefaultFlatItem['parameters']];
+    if (!!value && fn) {
+      result.push(fn(value));
+    }
+  });
+
+  flatItem.additionalInfo.forEach(({ name }) => {
+    result.push({ name, value: 'Есть' });
+  });
+
+  const keySet = new Set<string>();
+  return result.filter(({ name }) => {
+    if (keySet.has(name.toLocaleLowerCase())) {
+      return false;
+    }
+    keySet.add(name.toLocaleLowerCase());
+    return true;
+  });
+};
 
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
@@ -130,6 +220,56 @@ export const formatToDefaultHouseAndLotsItem = (
       },
     }),
   );
+
+export const formatToDetailedHousesAndLots = ({
+  attributes,
+  id,
+}: StrapiFindOneResponse<HousesAndLotsStrapiResponse>['data']): DetailedHousesAndLotsItem => ({
+  address: getFullAddress({
+    locality: attributes.locality,
+    houseNumber: attributes.house_number?.number,
+    street: attributes.street,
+  }),
+  id,
+  price: attributes.price,
+  name: attributes.name,
+  initialCurrency: attributes.currency || 'USD',
+  parameters: {
+    plotSize: attributes.parameters.plot_size,
+    livingArea: attributes.parameters.living_area,
+    kitchenArea: attributes.parameters.kitchen_area,
+    totalArea: attributes.parameters.total_area,
+    constructionYear: attributes.parameters.construction_year,
+    levelNumber: attributes.parameters.level_number,
+    roofMaterial: attributes.parameters.roof_material,
+    wallMaterial: attributes.parameters.wall_material,
+    wallMaterialAdd: attributes.parameters.wall_material_add,
+    roomsNumber: attributes.parameters.rooms_number,
+    heating: attributes.parameters.heating,
+    gas: attributes.parameters.gas,
+    water: attributes.parameters.water,
+    waterAdd: attributes.parameters.water_add,
+    sewerage: attributes.parameters.sewerage,
+    sewerageAdd: attributes.parameters.sewerage_add,
+    electricity: attributes.parameters.electricity,
+    telephone: attributes.parameters.telephone,
+    balcony: attributes.parameters.balcony,
+    parking: attributes.parameters.parking,
+    readinessPercentage: attributes.parameters.readiness_percentage,
+    builtUpArea: attributes.parameters.built_up_area,
+  },
+  additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
+  note: attributes.note,
+  // location: attributes.location?.coordinates,
+  // images: Array.isArray(attributes.image.data)
+  //   ? attributes.image.data.map((item) => ({
+  //       height: item.attributes.height as number,
+  //       placeholderUrl: item.attributes.placeholder as string,
+  //       url: item.attributes.url as string,
+  //       width: item.attributes.width as number,
+  //     }))
+  //   : [],
+});
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) =>
   new Intl.NumberFormat('by-BY', {

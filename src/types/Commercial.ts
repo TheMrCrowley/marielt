@@ -4,7 +4,7 @@ import {
 } from '@/src/enums/CommercialFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
-export interface DefaultCommercialItem {
+export type DefaultCommercialItem = {
   address: string;
   id: string;
   price?: string;
@@ -29,7 +29,35 @@ export interface DefaultCommercialItem {
       to?: string;
     };
   };
-}
+};
+
+// export type DetailedCommercialItem = {
+//   parameters: {
+//     premises_area?:string
+// separate_rooms?:string
+
+// floor/floors_number?:string
+// is_ground_floor?:string
+// ceiling_height?:string
+// wall_material?:string
+// construction_year?:string
+// finishing?:string
+// equipment?:string
+// daylight?:string
+// electricity?:string
+// heating?:string
+// gas?:string
+// water?:string
+// bathroom?:string
+// ventilation?:string
+// sewerage?:string
+// furniture?:string
+// location?:string
+// separate_entrance?:string
+// ramp?:string
+//   }
+
+// } & DefaultCommercialItem
 
 export interface CommercialTransaction {
   transactionName: string;

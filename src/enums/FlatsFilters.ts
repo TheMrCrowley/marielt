@@ -1,4 +1,5 @@
 import { OptionType, QueryMapType } from '@/src/types/Filters';
+import { DetailedFlatItem } from '@/src/types/Flats';
 
 export enum RoominessValues {
   Part = 'part',
@@ -53,6 +54,14 @@ export const roominessQueryMap: QueryMapType<RoominessValues> = {
     'девятикомнатная квартира',
     'десять и более комнат',
   ],
+};
+
+export const getRoominessByStrapiValue = (value: string) => {
+  const [key] = Object.entries(roominessQueryMap).find(([, queryValue]) =>
+    queryValue.includes(value),
+  )!;
+
+  return roominessFilterTagsMap[key as RoominessValues];
 };
 
 export enum HouseTypeValues {
@@ -202,3 +211,26 @@ export const ceilingHeightValues = [
     label: 'От 4 м',
   },
 ];
+
+export const flatCharacteristicsMap: Partial<
+  Record<keyof DetailedFlatItem['parameters'], (value: string) => { name: string; value: string }>
+> = {
+  houseType: (value) => ({ name: 'Тип дома', value }),
+  separateRooms: (value) => ({ name: 'Раздельных комнат', value }),
+  shareInApartment: (value) => ({ name: 'Доля в квартире', value }),
+  livingArea: (value) => ({ name: 'Площадь жилая', value }),
+  kitchenArea: (value) => ({ name: 'Площадь кухни', value }),
+  totalArea: (value) => ({ name: 'Площадь общая', value }),
+  floorType: (value) => ({ name: 'Вид этажа', value }),
+  balconyArea: (value) => ({ name: 'Площадь балконов (лоджий, террас)', value }),
+  snbArea: (value) => ({ name: 'Площадь по СНБ', value }),
+  bathroom: (value) => ({ name: 'Санузел', value }),
+  flooring: (value) => ({ name: 'Полы', value }),
+  balcony: (value) => ({ name: 'Балкон', value }),
+  telephone: (value) => ({ name: 'Телефон', value }),
+  layout: (value) => ({ name: 'Планировка', value }),
+  finishing: (value) => ({ name: 'Ремонт', value }),
+  majorRenovationYear: (value) => ({ name: 'Год капитального ремонта', value }),
+  ceilingHeight: (value) => ({ name: 'Высота потолков', value }),
+  levelNumber: (value) => ({ name: 'Число уровней', value }),
+};

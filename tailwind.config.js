@@ -64,7 +64,9 @@ module.exports = {
         secondary: '#e3c496',
       },
 
-      screens: {},
+      screens: {
+        xs: '375px',
+      },
     },
   },
   darkMode: 'class',

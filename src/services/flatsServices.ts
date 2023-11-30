@@ -9,14 +9,22 @@ import {
   saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultFlat, formatToDefaultMapFlat } from '@/src/helpers/formatters';
+import {
+  formatToDefaultFlat,
+  formatToDefaultMapFlat,
+  formatToDetailedFlat,
+} from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DefaultMapFlatItem } from '@/src/types/Flats';
-import { FlatStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import {
+  FlatStrapiResponse,
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+} from '@/src/types/StrapiTypes';
 
 import { getPaginationQuery } from './../helpers/getPaginationQuery';
 import { getCurrencies } from './currencyServices';
@@ -329,4 +337,192 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
   const searchResults = (await response.json()) as SearchResults;
 
   return searchResults;
+};
+
+export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
+  const query = qs.stringify({
+    populate: '*',
+  });
+
+  const response = await fetch(`${process.env.API_BASE_URL}/apart-items/${id}?${query}`, {
+    cache: 'no-cache',
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
+  return formatToDetailedFlat(data);
+};
+
+const getSimilarByPrice = async ({
+  price,
+  roominess,
+  id,
+}: {
+  price?: string;
+  roominess?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        price: {
+          ...(price
+            ? {
+                $between: [+price - 5000, +price + 5000],
+              }
+            : {
+                $between: [0, 25000],
+              }),
+        },
+        parameters: {
+          roominess: {
+            $eq: roominess || '',
+          },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
+};
+
+const getSimilarByLocation = async ({
+  latitude,
+  longitude,
+  roominess,
+  id,
+}: {
+  latitude?: number;
+  longitude?: number;
+  roominess?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        coordinates: {
+          latitude: { $between: [(latitude || 0) - 0.008, (latitude || 0) + 0.008] },
+          longitude: { $between: [(longitude || 0) - 0.008, (longitude || 0) + 0.008] },
+        },
+        parameters: {
+          roominess: {
+            $eq: roominess || '',
+          },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
+};
+
+const getSimilarByLayout = async ({
+  layout,
+  roominess,
+  id,
+}: {
+  layout?: string;
+  roominess?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        parameters: {
+          layout: {
+            ...(layout
+              ? {
+                  $eq: layout,
+                }
+              : { $null: true }),
+          },
+          roominess: {
+            $eq: roominess || '',
+          },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+
+  return formatToDefaultFlat(data);
+};
+
+export const getSimilarFlatsItems = async (flat: DetailedFlatItem) => {
+  const {
+    parameters: { roominess, layout },
+    price,
+    id,
+    location,
+  } = flat;
+  const [similarByPrice, similarByLocation, similarByLayout] = await Promise.all([
+    getSimilarByPrice({
+      price: price,
+      roominess: roominess,
+      id,
+    }),
+    getSimilarByLocation({
+      latitude: location?.lat,
+      longitude: location?.lng,
+      roominess: roominess,
+      id,
+    }),
+    getSimilarByLayout({
+      layout: layout,
+      roominess: roominess,
+      id,
+    }),
+  ]);
+
+  return [
+    { label: 'По цене', data: similarByPrice },
+    {
+      label: 'По расположению',
+      data: similarByLocation,
+    },
+    {
+      label: 'По планировке',
+      data: similarByLayout,
+    },
+  ];
 };

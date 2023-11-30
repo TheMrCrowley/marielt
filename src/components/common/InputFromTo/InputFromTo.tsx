@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import InputWrapper from '@/src/components/common/InputWrapper';
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 
 interface InputFromToProps {
   label: string | React.ReactNode | React.ReactElement;
@@ -19,9 +20,6 @@ interface InputFromToProps {
   inputWrapperClassName?: string;
   maxLength?: number;
 }
-
-const formatToNumber = (value: string, maxLength?: number) =>
-  maxLength ? value.substring(0, maxLength).replace(/[\D\s]/gim, '') : value.replace(/\D/gim, '');
 
 const InputFromTo = ({
   label,

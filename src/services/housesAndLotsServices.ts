@@ -11,13 +11,21 @@ import {
   sewerageQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/formatters';
+import {
+  formatToDefaultHouseAndLotsItem,
+  formatToDetailedHousesAndLots,
+} from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { HousesAndLotsStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
+import {
+  HousesAndLotsStrapiResponse,
+  StrapiFindOneResponse,
+  StrapiFindResponse,
+} from '@/src/types/StrapiTypes';
 
 import { lotsWaterQueryMap } from './../enums/HousesAndLotsFilters';
 import { getCurrencies } from './currencyServices';
@@ -196,6 +204,19 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     housesAndLots: formatToDefaultHouseAndLotsItem(data),
     pagination,
   };
+};
+
+export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAndLotsItem> => {
+  const query = qs.stringify({
+    populate: '*',
+  });
+
+  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots/${id}?${query}`, {
+    cache: 'no-cache',
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<HousesAndLotsStrapiResponse>;
+  return formatToDetailedHousesAndLots(data);
 };
 
 export const getHousesAndLotsSearchResults = async (value: string): Promise<SearchResults> => {

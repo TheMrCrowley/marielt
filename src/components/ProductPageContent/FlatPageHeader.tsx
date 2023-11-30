@@ -86,8 +86,8 @@ const FlatPageHeader = ({
           className={clsx(
             'flex',
             'flex-col',
-            'lg:gap-y-[38px]',
-            'gap-y-5',
+            'lg:gap-0',
+            'gap-5',
             'lg:px-8',
             'px-4',
             'py-5',
@@ -108,59 +108,48 @@ const FlatPageHeader = ({
               'xs:justify-start',
               'justify-center',
               'items-center',
+              'my-auto',
             )}
           >
-            <div
-              className={clsx(
-                'flex',
-                'flex-col',
-                'lg:px-8',
-                'border-r',
-                'border-[#ffffff1a]',
-                'px-4',
-              )}
-            >
-              <Typography>
-                {totalArea}
-                <span className={clsx('text-[#B1B1B1]')}>
-                  м<sup>2</sup>
-                </span>
-              </Typography>
-              <Typography fontSize={16} fontWeight={'light'}>
-                общая
-              </Typography>
-            </div>
-            <div
-              className={clsx(
-                'flex',
-                'flex-col',
-                'lg:px-8',
-                'px-4',
-                'border-r',
-                'border-[#ffffff1a]',
-              )}
-            >
-              <Typography>
-                {livingArea}
-                <span className={clsx('text-[#B1B1B1]')}>
-                  м<sup>2</sup>
-                </span>
-              </Typography>
-              <Typography fontSize={16} fontWeight={'light'}>
-                жилая
-              </Typography>
-            </div>
-            <div className={clsx('flex', 'flex-col', 'lg:px-8', 'px-5')}>
-              <Typography>
-                {kitchenArea}
-                <span className={clsx('text-[#B1B1B1]')}>
-                  м<sup>2</sup>
-                </span>
-              </Typography>
-              <Typography fontSize={16} fontWeight={'light'}>
-                кухня
-              </Typography>
-            </div>
+            {totalArea && (
+              <div className={clsx('flex', 'flex-col', 'lg:px-8', 'px-4')}>
+                <Typography>
+                  {totalArea}
+                  <span className={clsx('text-[#B1B1B1]')}>
+                    м<sup>2</sup>
+                  </span>
+                </Typography>
+                <Typography fontSize={16} fontWeight={'light'}>
+                  общая
+                </Typography>
+              </div>
+            )}
+            {livingArea && (
+              <div className={clsx('flex', 'flex-col', 'lg:px-8', 'px-4')}>
+                <Typography>
+                  {livingArea}
+                  <span className={clsx('text-[#B1B1B1]')}>
+                    м<sup>2</sup>
+                  </span>
+                </Typography>
+                <Typography fontSize={16} fontWeight={'light'}>
+                  жилая
+                </Typography>
+              </div>
+            )}
+            {kitchenArea && (
+              <div className={clsx('flex', 'flex-col', 'lg:px-8', 'px-5')}>
+                <Typography>
+                  {kitchenArea}
+                  <span className={clsx('text-[#B1B1B1]')}>
+                    м<sup>2</sup>
+                  </span>
+                </Typography>
+                <Typography fontSize={16} fontWeight={'light'}>
+                  кухня
+                </Typography>
+              </div>
+            )}
           </div>
         </div>
       }

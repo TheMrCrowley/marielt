@@ -108,6 +108,7 @@ export const formatToDetailedFlat = ({
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
   location: attributes.location?.coordinates,
+  detailedDescription: attributes.detailed_description,
   images: Array.isArray(attributes.image.data)
     ? attributes.image.data.map((item) => ({
         height: item.attributes.height as number,
@@ -116,6 +117,13 @@ export const formatToDetailedFlat = ({
         width: item.attributes.width as number,
       }))
     : [],
+  agents: {
+    fullName: attributes.agents.data[0].attributes.full_name,
+    phone1: attributes.agents.data[0].attributes.phone1,
+    branch: attributes.agents.data[0].attributes.branch,
+    phone2: attributes.agents.data[0].attributes.phone2,
+    position: attributes.agents.data[0].attributes.position,
+  },
 });
 
 export const formatToFlatCharacteristics = (

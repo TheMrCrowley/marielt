@@ -55,12 +55,20 @@ export type DetailedFlatItem = {
     majorRenovationYear?: string;
     levelNumber?: string;
   };
+  detailedDescription?: string;
   additionalInfo: Array<{ name: string }>;
-  note: string;
+  note?: string;
   images: Array<{
     width: number;
     height: number;
     url: string;
     placeholderUrl: string;
   }>;
+  agents: {
+    fullName: string;
+    phone1: string;
+    phone2?: string;
+    branch?: string;
+    position?: string;
+  };
 } & DefaultFlatItem;

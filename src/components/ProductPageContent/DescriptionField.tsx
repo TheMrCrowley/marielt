@@ -6,7 +6,10 @@ import ImageComma from '@/public/comma.svg';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
 
-const DescriptionField = ({ description }: { description: string }) => {
+const DescriptionField = ({ description }: { description?: string }) => {
+  if (!description) {
+    return null;
+  }
   return (
     <div
       className={clsx(

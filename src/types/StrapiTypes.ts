@@ -129,12 +129,20 @@ export interface FlatStrapiResponse {
       attributes: StrapiImage;
     }>;
   };
+  detailed_description: string;
   location?: {
     coordinates: {
       lat: number;
       lng: number;
     };
   };
+  agents: StrapiFindResponse<{
+    full_name: string;
+    phone1: string;
+    phone2?: string;
+    branch?: string;
+    position?: string;
+  }>;
 }
 
 export interface CommercialStrapiResponse {

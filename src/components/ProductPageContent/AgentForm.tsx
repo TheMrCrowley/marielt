@@ -4,26 +4,67 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { useState } from 'react';
 
+import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import Typography from '@/src/components/common/Typography';
 
-const AgentForm = () => {
+interface AgentFormProps {
+  name: string;
+  phoneNumber: string;
+  position?: string;
+}
+
+const AgentForm = ({ name, phoneNumber, position }: AgentFormProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isPhoneVisible, setIsPhoneVisible] = useState<boolean>(false);
 
   return (
     <div
       className={clsx(
         'flex',
-        'flex-row',
-        'min-[1440px]:min-w-[337px]',
+        'min-[1440px]:max-w-[337px]',
         'min-[1440px]:flex-col',
+        'sm:flex-row',
+        'flex-col',
         'w-full',
       )}
     >
-      <div className={clsx('bg-[#262626]', 'relative', 'h-[337px]', 'min-w-[337px]')}>
-        <Typography fontSize={24} fontWeight="medium" className={clsx('absolute')}>
-          Ольга Лазаренкова
-        </Typography>
+      <div
+        className={clsx(
+          'bg-[#262626]',
+          'flex',
+          'justify-between',
+          'items-end',
+          'p-4',
+          'relative',
+          'before:block',
+          'before:absolute',
+          'before:w-2/5',
+          'before:h-4/5',
+          'before:border-4',
+          'before:border-secondary',
+          'before:bottom-4',
+          'before:right-8',
+          'before:z-10',
+        )}
+        style={{
+          minHeight: AgentPlaceholder.height + 24,
+          minWidth: AgentPlaceholder.width + 32,
+        }}
+      >
+        <div className={clsx('flex', 'flex-col', 'gap-4', 'relative', 'z-20')}>
+          <Typography fontSize={12} color="text-[#B1B1B1]">
+            {position || 'Агент по недвижимости'}
+          </Typography>
+          <Typography fontSize={24} fontWeight="medium">
+            {name}
+          </Typography>
+        </div>
+        <Image
+          alt="agent"
+          src={AgentPlaceholder}
+          className={clsx('block', 'absolute', 'right-0', 'bottom-0', 'z-10')}
+        />
       </div>
       <form
         className={clsx(
@@ -33,18 +74,20 @@ const AgentForm = () => {
           'justify-center',
           'items-center',
           'p-6',
-          'w-full',
         )}
       >
         <div className={clsx('flex')}>
           <Image alt="phone" src={PhoneIcon} />
           <Typography fontSize={14} fontWeight="medium" color="#000000">
-            +375 29 XXX-XX-XX
+            {isPhoneVisible
+              ? phoneNumber
+              : phoneNumber.substring(0, phoneNumber.length - 9) + 'XXXXXXXXX'}
           </Typography>
         </div>
         <button
           onClick={(e) => {
             e.preventDefault();
+            setIsPhoneVisible(true);
           }}
           className={clsx('text-black', 'underline', 'text-sm', 'opacity-50', 'mb-6')}
         >

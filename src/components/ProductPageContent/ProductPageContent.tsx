@@ -1,12 +1,14 @@
 'use client';
 
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useState } from 'react';
 
+import CrossIcon from '@/public/plus.svg';
+import Button from '@/src/components/common/Button/Button';
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
-
-import AgentForm from './AgentForm';
-import DescriptionField from './DescriptionField';
 
 interface ProductPageContentProps {
   productHeader: React.ReactNode | React.ReactElement;
@@ -15,6 +17,8 @@ interface ProductPageContentProps {
   locationField: React.ReactNode | React.ReactElement;
   similarObjectsField: React.ReactNode | React.ReactElement;
   creditCalculator?: React.ReactNode | React.ReactElement;
+  agentForm: React.ReactNode | React.ReactElement;
+  detailedDescription?: React.ReactNode | React.ReactElement;
 }
 
 const ProductPageContent = ({
@@ -23,9 +27,12 @@ const ProductPageContent = ({
   creditCalculator,
   note,
   locationField,
+  agentForm,
   similarObjectsField,
+  detailedDescription,
 }: ProductPageContentProps) => {
   const breakpoint = useWindowSize();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const renderMobileLocationField = () =>
     breakpoint < WindowWidth.LG && breakpoint > WindowWidth.XS && locationField;
@@ -43,6 +50,7 @@ const ProductPageContent = ({
           'gap-[30px]',
           'min-[1440px]:flex-row',
           'flex-col',
+          'relative',
         )}
       >
         {/*TODO //move gap value to taiwind? */}
@@ -54,18 +62,7 @@ const ProductPageContent = ({
             {characteristics}
             <div className={clsx('flex', 'flex-col', 'gap-8', 'xl:w-[65%]', 'w-full')}>
               {renderDesktopLocationField()}
-              <DescriptionField
-                description="Однокомнатная квартира в квартале Мировые танцы ЖК Minsk World 430053. Площадь 33,8 м2 по
-        СНБ свободной планировки на 7 этаже 10-ти этажного дома по улице Н.Теслы д.17 дом
-        Полька.Уютная, светлая квартира-студия. Кухня выполнена из качественного материала. Квартира
-        оборудована бытовой техникой и импортной сантехникой. Совмещённый санузел, отдельная
-        гардеробная, просторная лоджия. Первое заселение. Дом расположен рядом со зданием старого
-        аэропорта, шикарный вид из окна, развитая инфраструктура, отличное транспортное сообщение,
-        современная детская площадка с резиновым покрытием, множество парковочных мест.Чистая
-        продажа. Показываем в удобное для вас время.Гарантия безопасности сделки и полное
-        юридическое сопровождение.Поможем продать Вашу недвижимость для приобретения этой квартиры!
-        Лот 430053"
-              />
+              {detailedDescription}
 
               {note}
             </div>
@@ -73,8 +70,67 @@ const ProductPageContent = ({
           {creditCalculator}
         </div>
 
-        {breakpoint > WindowWidth.SM && <AgentForm />}
+        {breakpoint >= WindowWidth.SM && agentForm}
+        {breakpoint < WindowWidth.SM && (
+          <Button
+            className={clsx(
+              'fixed',
+              'z-20',
+              'bottom-5',
+              'w-[90vw]',
+              'left-[50%]',
+              'translate-x-[-50%]',
+            )}
+            onClick={() => setIsOpen(true)}
+          >
+            Показать контакты
+          </Button>
+        )}
       </div>
+      {isOpen && (
+        <motion.div
+          initial={{
+            position: 'fixed',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 30,
+            bottom: 0,
+            left: 0,
+            y: '-100%',
+            opacity: '0',
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+        >
+          <button
+            className={clsx(
+              'flex',
+              'justify-center',
+              'items-center',
+              'absolute',
+              'md:top-4',
+              'md:right-4',
+              'top-4',
+              'right-4',
+              'z-20',
+            )}
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          >
+            <Image
+              src={CrossIcon}
+              alt="close-icon"
+              className={clsx('md:w-8', 'md:h-8', 'w-5', 'h-5')}
+            />
+          </button>
+          {agentForm}
+        </motion.div>
+      )}
       {similarObjectsField}
     </div>
   );

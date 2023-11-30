@@ -2,7 +2,9 @@ import React from 'react';
 
 import ApplicationField from '@/src/components/ApplicationField/ApplicationField';
 import {
+  AgentForm,
   Characteristics,
+  DescriptionField,
   FlatPageHeader,
   LocationField,
   NoteField,
@@ -26,7 +28,18 @@ interface FlatPageProps {
 }
 
 const FlatPage = async ({ flat }: FlatPageProps) => {
-  const { name, address, price, initialCurrency, note, images, location, id } = flat;
+  const {
+    name,
+    address,
+    price,
+    initialCurrency,
+    note,
+    images,
+    location,
+    id,
+    agents,
+    detailedDescription,
+  } = flat;
   const {
     roominess,
     floor,
@@ -78,6 +91,14 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     <>
       <ImagesSwiper images={images} type="flats" />
       <ProductPageContent
+        detailedDescription={<DescriptionField description={detailedDescription} />}
+        agentForm={
+          <AgentForm
+            name={agents.fullName}
+            phoneNumber={agents.phone1}
+            position={agents.position}
+          />
+        }
         locationField={<LocationField location={location} />}
         note={<NoteField note={note} />}
         characteristics={<Characteristics characteristics={flatCharacteristics} />}

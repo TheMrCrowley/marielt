@@ -1,19 +1,7 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import { FC } from 'react';
 
-import LocationIcon from '@/public/card-map-pin.svg';
-import DirectionIcon from '@/public/direction.svg';
-import HouseIcon from '@/public/house-icon.svg';
-import AreaField from '@/src/components/ProductPageContent/AreaField';
-import CommercialType from '@/src/components/ProductPageContent/CommercialType';
 import Title from '@/src/components/common/Title/Title';
-import Typography from '@/src/components/common/Typography';
-import { ProductType } from '@/src/types/Product';
-
-interface ProductHeaderProps {
-  type: ProductType;
-}
 
 // const renderHeaderField = (type: ProductType) => {
 //   switch (type) {
@@ -109,7 +97,8 @@ const ProductHeader: FC<Props> = ({ area, description, price }) => {
         className={clsx(
           'flex',
           'flex-col',
-          'gap-y-8',
+          'lg:gap-0',
+          'gap-5',
           'lg:px-8',
           'py-5',
           'px-5',

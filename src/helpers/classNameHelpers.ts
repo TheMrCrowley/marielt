@@ -1,4 +1,4 @@
-export type FontSizeType = 48 | 40 | 36 | 32 | 24 | 20 | 16 | 14;
+export type FontSizeType = 48 | 40 | 36 | 32 | 24 | 20 | 16 | 14 | 12;
 export type FontWeightType = 'medium' | 'normal' | 'light';
 
 export const getFontWeightClassName = (fontWeight: FontWeightType): string => {
@@ -32,6 +32,8 @@ export const getFontSizeClassName = (fontSize: FontSizeType): string => {
       return 'md:text-base text-sm';
     case 14:
       return 'text-sm';
+    case 12:
+      return 'text-xs';
     default:
       return 'text-[32px]';
   }

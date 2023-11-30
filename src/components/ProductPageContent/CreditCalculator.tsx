@@ -43,6 +43,10 @@ const CreditCalculator = ({
     });
   };
 
+  if (!price) {
+    return null;
+  }
+
   return (
     <div className={clsx('flex', 'flex-col', 'bg-[#262626]')}>
       <Title
@@ -113,7 +117,16 @@ const CreditCalculator = ({
               Беларусбанк
             </Typography>
           </div>
-          <div className={clsx('flex', 'lg:gap-x-32', 'gap-x-16', 'self-center', 'mb-3')}>
+          <div
+            className={clsx(
+              'flex',
+              'lg:gap-x-32',
+              'sm:gap-x-16',
+              'gap-x-10',
+              'self-center',
+              'mb-3',
+            )}
+          >
             <div className={clsx('flex', 'flex-col', 'justify-center', 'gap-y-1', 'items-center')}>
               <Typography className={clsx('text-center')} fontSize={36} fontWeight="medium">
                 от {creditResult.interestRate} %

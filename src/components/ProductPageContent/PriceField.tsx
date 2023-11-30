@@ -25,19 +25,33 @@ const PriceField: FC<PriceFieldProps> = ({ price, initialCurrency }) => {
         'flex-wrap',
         'lg:gap-3',
         'gap-2',
+        'my-auto',
       )}
     >
-      <Typography
-        fontSize={24}
-        fontWeight="medium"
-        color="text-[#343434]"
-        className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
-      >
-        {getPriceByCurrencyMonetary(price, initialCurrency, initialCurrency, rates)}
-      </Typography>
-      <Typography fontSize={24}>
-        {getPriceByCurrencyMonetary(price, initialCurrency, 'BYN', rates)}
-      </Typography>
+      {price ? (
+        <>
+          <Typography
+            fontSize={24}
+            fontWeight="medium"
+            color="text-[#343434]"
+            className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
+          >
+            {getPriceByCurrencyMonetary(price, initialCurrency, initialCurrency, rates)}
+          </Typography>
+          <Typography fontSize={24}>
+            {getPriceByCurrencyMonetary(price, initialCurrency, 'BYN', rates)}
+          </Typography>
+        </>
+      ) : (
+        <Typography
+          fontSize={24}
+          fontWeight="medium"
+          color="text-[#343434]"
+          className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
+        >
+          Договорная
+        </Typography>
+      )}
     </div>
   );
 };

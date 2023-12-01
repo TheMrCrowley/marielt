@@ -8,9 +8,10 @@ import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import Typography from '@/src/components/common/Typography';
 import { DetailedFlatItem } from '@/src/types/Flats';
+import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
 interface AgentFormProps {
-  agentData: DetailedFlatItem['agents'];
+  agentData: DetailedFlatItem['agents'] | DetailedHousesAndLotsItem['agent'];
 }
 
 const AgentForm = ({ agentData }: AgentFormProps) => {

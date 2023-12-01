@@ -17,10 +17,12 @@ const CreditCalculator = ({
   price,
   initialCurrency,
   rate,
+  product,
 }: {
   rate: number;
   price: number;
   initialCurrency: AvailableCurrencies;
+  product: string;
 }) => {
   const { rates } = useCurrency();
   const [initialFeeValue, setInitialFeeValue] = useState<string>(
@@ -39,7 +41,7 @@ const CreditCalculator = ({
         +loanAmount / (+loanTermValue * 12) +
         +loanAmount * (rate / 12 / 100)
       ).toFixed(2),
-      interestRate: rate / 12,
+      interestRate: rate,
     });
   };
 
@@ -74,7 +76,7 @@ const CreditCalculator = ({
         >
           <div>
             <Typography fontWeight="medium" color="text-[#B1B1B1]">
-              Стоимость квартиры
+              Стоимость {product}
             </Typography>
             <Typography fontSize={36} fontWeight="medium">
               {getPriceByCurrencyMonetary(price, initialCurrency, 'BYN', rates)}

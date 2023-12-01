@@ -211,7 +211,7 @@ export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAn
     populate: '*',
   });
 
-  const response = await fetch(`${process.env.API_BASE_URL}/houses-and-lots/${id}?${query}`, {
+  const response = await fetch(`${process.env.API_BASE_URL}/house-items/${id}?${query}`, {
     cache: 'no-cache',
   });
 

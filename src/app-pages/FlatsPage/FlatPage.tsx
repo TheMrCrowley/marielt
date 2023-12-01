@@ -75,7 +75,12 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
         locationField={<LocationField location={location} />}
         note={<NoteField note={note} />}
         creditCalculator={
-          <CreditCalculator rate={rate} initialCurrency={initialCurrency} price={+price!} />
+          <CreditCalculator
+            product="квартиры"
+            rate={rate}
+            initialCurrency={initialCurrency}
+            price={+price!}
+          />
         }
         similarObjectsField={<SimilarProducts type="flats" similarProducts={similarFlats} />}
       />

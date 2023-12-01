@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Markdown from 'react-markdown';
 
 import ImageCommaRev from '@/public/comma-reverse.svg';
 import ImageComma from '@/public/comma.svg';
@@ -34,7 +35,8 @@ const DescriptionField = ({ description }: { description?: string }) => {
         Описание
       </Title>
       <Typography fontSize={16} fontWeight="light" className={clsx('leading-6')}>
-        {description}
+        {/* {JSON.stringify(description, null, 2)} */}
+        <Markdown>{description}</Markdown>
       </Typography>
       <Image
         alt="comma"

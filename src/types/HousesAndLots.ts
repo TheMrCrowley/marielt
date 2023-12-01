@@ -1,6 +1,8 @@
 import { HousesAndLotsRootCategory } from '@/src/enums/HousesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import { StrapiVideo } from './VideoLink';
+
 export type DefaultHousesAndLotsItem = {
   address: string;
   id: string;
@@ -47,12 +49,31 @@ export type DetailedHousesAndLotsItem = {
   };
   additionalInfo?: Array<{ name: string }>;
   note?: string;
-  images?: Array<{
+  images: Array<{
     width: number;
     height: number;
     url: string;
     placeholderUrl: string;
   }>;
+  agent: {
+    fullName: string;
+    phone1: string;
+    phone2?: string;
+    branch?: string;
+    position?: string;
+  };
+  detailedDescription?: string;
+  video?: StrapiVideo;
+  location?: {
+    lng: number;
+    lat: number;
+  };
+  category?: string;
+  houseCategories: {
+    category?: string;
+    name?: string;
+  };
+  direction: { name: string };
 } & DefaultHousesAndLotsItem;
 
 export interface HousesAndLotsCategory {

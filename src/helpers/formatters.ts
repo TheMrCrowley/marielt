@@ -140,7 +140,7 @@ export const formatToFlatCharacteristics = (
   });
 
   flatItem.additionalInfo.forEach(({ name }) => {
-    result.push({ name, value: 'Есть' });
+    result.push({ name, value: 'Да' });
   });
 
   const keySet = new Set<string>();
@@ -213,7 +213,7 @@ export const formatToDefaultHouseAndLotsItem = (
         street,
       }),
       initialCurrency: currency || 'USD',
-      img: image?.url,
+      img: image?.data[0].attributes.url,
       name,
       price,
       parameters: {
@@ -261,15 +261,29 @@ export const formatToDetailedHousesAndLots = ({
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
-  // location: attributes.location?.coordinates,
-  // images: Array.isArray(attributes.image.data)
-  //   ? attributes.image.data.map((item) => ({
-  //       height: item.attributes.height as number,
-  //       placeholderUrl: item.attributes.placeholder as string,
-  //       url: item.attributes.url as string,
-  //       width: item.attributes.width as number,
-  //     }))
-  //   : [],
+  detailedDescription: attributes.detailed_description,
+  agent: {
+    fullName: attributes.agents.data[0].attributes.full_name,
+    phone1: attributes.agents.data[0].attributes.phone1,
+    branch: attributes.agents.data[0].attributes.branch,
+    phone2: attributes.agents.data[0].attributes.phone2,
+    position: attributes.agents.data[0].attributes.position,
+  },
+  houseCategories: {
+    category: attributes.house_categories.data[0].attributes.category,
+    name: attributes.house_categories.data[0].attributes.name,
+  },
+  direction: { name: attributes.direction.data.attributes.name },
+  location: attributes.location?.coordinates,
+  images: Array.isArray(attributes?.image?.data)
+    ? attributes!.image!.data.map((item) => ({
+        height: item.attributes.height as number,
+        placeholderUrl: item.attributes.placeholder as string,
+        url: item.attributes.url as string,
+        width: item.attributes.width as number,
+      }))
+    : [],
+  video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) =>

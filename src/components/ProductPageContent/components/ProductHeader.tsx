@@ -86,6 +86,7 @@ const ProductHeader: FC<Props> = ({ area, description, price }) => {
           'lg:border-0',
           'border-t',
           'border-[#ffffff1a]',
+          'flex-auto',
         )}
       >
         <Title variant="h2" fontSize={24} fontWeight={'medium'}>

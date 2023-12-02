@@ -83,8 +83,8 @@ const ProductPageSlider = ({
         onSlideChange={(swiper) => {
           setCurrentRealIndex(swiper.realIndex);
         }}
-        wrapperClass={clsx('w-full', 'relative')}
-        className="md:mb-4 mb-2"
+        wrapperClass={clsx('w-full', 'relative', '!m-0')}
+        className="md:!my-4 !my-2 !m-0 w-full"
         slidesPerView="auto"
         modules={[Navigation, Keyboard, Thumbs]}
         thumbs={{
@@ -93,6 +93,7 @@ const ProductPageSlider = ({
         navigation={{
           prevEl: `.${prevClassName}`,
           nextEl: `.${nextClassName}`,
+          disabledClass: '!hidden',
         }}
         centeredSlides
         grabCursor

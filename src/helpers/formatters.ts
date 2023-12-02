@@ -127,19 +127,20 @@ export const formatToDetailedFlat = ({
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
-export const formatToFlatCharacteristics = (
-  flatItem: DetailedFlatItem,
-): Array<{ name: string; value: string }> => {
+export function formatItemToCharacteristics<T extends DetailedFlatItem | DetailedHousesAndLotsItem>(
+  item: T,
+  map: Partial<Record<keyof T['parameters'], (value: string) => { name: string; value: string }>>,
+) {
   const result: Array<{ name: string; value: string }> = [];
 
-  Object.entries(flatItem.parameters).forEach(([key, value]) => {
-    const fn = flatCharacteristicsMap[key as keyof DefaultFlatItem['parameters']];
+  Object.entries(item.parameters).forEach(([key, value]) => {
+    const fn = map[key as keyof T['parameters']];
     if (!!value && fn) {
       result.push(fn(value));
     }
   });
 
-  flatItem.additionalInfo.forEach(({ name }) => {
+  item.additionalInfo.forEach(({ name }) => {
     result.push({ name, value: 'Да' });
   });
 
@@ -151,7 +152,7 @@ export const formatToFlatCharacteristics = (
     keySet.add(name.toLocaleLowerCase());
     return true;
   });
-};
+}
 
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
@@ -257,7 +258,11 @@ export const formatToDetailedHousesAndLots = ({
     balcony: attributes.parameters.balcony,
     parking: attributes.parameters.parking,
     readinessPercentage: attributes.parameters.readiness_percentage,
-    builtUpArea: attributes.parameters.built_up_area,
+    builtUpArea:
+      attributes.parameters.built_up_area &&
+      (
+        +attributes.parameters.built_up_area.length * +attributes.parameters.built_up_area.width
+      ).toString(),
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
@@ -273,7 +278,7 @@ export const formatToDetailedHousesAndLots = ({
     category: attributes.house_categories.data[0].attributes.category,
     name: attributes.house_categories.data[0].attributes.name,
   },
-  direction: { name: attributes.direction.data.attributes.name },
+  direction: { name: attributes.direction?.data?.attributes.name },
   location: attributes.location?.coordinates,
   images: Array.isArray(attributes?.image?.data)
     ? attributes!.image!.data.map((item) => ({

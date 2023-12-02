@@ -97,6 +97,7 @@ const FullScreenSlider = ({
             navigation={{
               prevEl: `.${prevClassName}`,
               nextEl: `.${nextClassName}`,
+              disabledClass: '!hidden',
             }}
             centeredSlides
             grabCursor

@@ -266,8 +266,8 @@ export interface HousesAndLotsStrapiResponse {
     sewerage?: string;
     electricity?: string;
     built_up_area?: {
-      length?: string;
-      width?: string;
+      length: string;
+      width: string;
     };
     wall_material_add?: string;
     rooms_number?: string;

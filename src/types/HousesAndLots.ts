@@ -24,10 +24,7 @@ export type DefaultHousesAndLotsItem = {
 
 export type DetailedHousesAndLotsItem = {
   parameters: {
-    builtUpArea?: {
-      length?: string;
-      width?: string;
-    };
+    builtUpArea?: string;
     levelNumber?: string;
     roofMaterial?: string;
     wallMaterial?: string;
@@ -47,7 +44,7 @@ export type DetailedHousesAndLotsItem = {
     readinessPercentage?: string;
     constructionYear?: string;
   };
-  additionalInfo?: Array<{ name: string }>;
+  additionalInfo: Array<{ name: string }>;
   note?: string;
   images: Array<{
     width: number;

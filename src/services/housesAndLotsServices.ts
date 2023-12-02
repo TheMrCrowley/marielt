@@ -207,15 +207,21 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
 };
 
 export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAndLotsItem> => {
-  const query = qs.stringify({
-    populate: '*',
-  });
+  const query = qs.stringify(
+    {
+      populate: '*',
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
 
   const response = await fetch(`${process.env.API_BASE_URL}/house-items/${id}?${query}`, {
     cache: 'no-cache',
   });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<HousesAndLotsStrapiResponse>;
+
   return formatToDetailedHousesAndLots(data);
 };
 

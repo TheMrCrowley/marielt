@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 
 import BankIcon from '@/public/bank-icon.svg';
 import InfoIcon from '@/public/info-icon.svg';
-import CreditInput from '@/src/components/ProductPageContent/CreditInput';
+import CreditInput from '@/src/components/ProductPageContent/components/CreditInput';
 import Button from '@/src/components/common/Button/Button';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';

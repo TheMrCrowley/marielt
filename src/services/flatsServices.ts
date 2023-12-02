@@ -100,14 +100,17 @@ const getFlatsStrapiQueryParamsByFilters = (
         sale_terms: {
           $in: getQueryArray(saleTermQueryMap, saleTerm),
         },
-
+        additional_info: (furniture || parking) && {
+          $or: [
+            {
+              name: furniture ? { $containsi: 'мебель' } : '',
+            },
+            {
+              name: parking ? { $in: ['гараж', 'стоянка автомобиля'] } : '',
+            },
+          ],
+        },
         parameters: {
-          furniture: {
-            $eq: furniture,
-          },
-          parking: {
-            $eq: parking,
-          },
           is_last_floor: {
             $eq: isLastFloor ? isLastFloor : isNotFirstFloor ? !isNotLastFloor : undefined,
           },
@@ -331,7 +334,9 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
   const url = `/api/search?${query}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const searchResults = (await response.json()) as SearchResults;
@@ -380,7 +385,9 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
   const url = `${process.env.API_BASE_URL}/apart-items/${id}?${query}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
@@ -428,7 +435,11 @@ const getSimilarByPrice = async ({
     process.env.API_BASE_URL
   }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
@@ -472,7 +483,11 @@ const getSimilarByLocation = async ({
     process.env.API_BASE_URL
   }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
@@ -517,7 +532,11 @@ const getSimilarByLayout = async ({
     process.env.API_BASE_URL
   }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 

@@ -32,10 +32,11 @@ export const formatToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
 ): DefaultFlatItem[] =>
   flats.map(({ attributes, id }) => ({
-    address: getSmallAddress({
-      locality: attributes.locality,
-      houseNumber: attributes.house_number?.number,
+    address: getFullAddress({
       street: attributes.street,
+      houseNumber: attributes.house_number?.number,
+      locality: attributes.locality,
+      region: attributes.region?.data.attributes.name,
     }),
     id,
     price: attributes.price,
@@ -182,14 +183,29 @@ export const formatToDefaultHouseAndLotsItem = (
 ): DefaultHousesAndLotsItem[] =>
   housesAndLots.map(
     ({
-      attributes: { name, price, locality, street, house_number, currency, parameters, image },
+      attributes: {
+        name,
+        price,
+        locality,
+        street,
+        house_number,
+        currency,
+        parameters,
+        image,
+        village_council,
+        district_rb,
+        region,
+      },
       id,
     }) => ({
       id,
-      address: getSmallAddress({
-        locality,
+      address: getFullAddress({
+        street: street,
         houseNumber: house_number?.number,
-        street,
+        locality,
+        village: village_council,
+        districtRb: district_rb,
+        region: region?.data.attributes.name,
       }),
       initialCurrency: currency || 'USD',
       image:

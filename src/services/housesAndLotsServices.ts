@@ -226,7 +226,9 @@ export const getHousesAndLotsForList = async (searchParams: Record<string, strin
   const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const {
@@ -259,7 +261,9 @@ export const getHousesAndLotsForMap = async (searchParams: Record<string, string
   const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
@@ -342,7 +346,9 @@ export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAn
   const url = `${process.env.API_BASE_URL}/house-items/${id}?${query}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const { data } = (await response.json()) as StrapiFindOneResponse<HousesAndLotsStrapiResponse>;
@@ -362,7 +368,9 @@ export const getHousesAndLotsSearchResults = async (value: string): Promise<Sear
   const url = `/api/search?${query}`;
 
   const response = await fetch(url, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
 
   const searchResults = (await response.json()) as SearchResults;
@@ -404,7 +412,11 @@ const getSimilarByPrice = async ({
     process.env.API_BASE_URL
   }/house-items?${query}&${getDefaultHouseListPopulateQuery()}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 
@@ -441,7 +453,11 @@ const getSimilarByLocation = async ({
     process.env.API_BASE_URL
   }/house-items?${query}&${getDefaultHouseListPopulateQuery()}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 

@@ -32,7 +32,7 @@ const CommercialPriceForMeterFilter = () => {
 
   return (
     <InputFromTo
-      label={<>Стоимость за м{<sup>2</sup>}</>}
+      label={<>Стоимость за м²</>}
       subLabel={selectedCurrency}
       values={{
         from: priceForMeterFrom,

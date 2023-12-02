@@ -16,11 +16,7 @@ const KitchenAreaFilter = ({
   return (
     <InputFromTo
       label="Площадь Кухни"
-      subLabel={
-        <span>
-          м <sup>2</sup>
-        </span>
-      }
+      subLabel="м²"
       values={{
         from: kitchenAreaFrom,
         to: kitchenAreaTo,

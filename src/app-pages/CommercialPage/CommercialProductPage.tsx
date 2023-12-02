@@ -4,7 +4,7 @@ interface CommercialProducPageProps {
   commercialItem: DefaultCommercialItem;
 }
 
-const CommercialProductPage = ({ commercialItem }: CommercialProducPageProps) => {
+const CommercialProductPage = ({}: CommercialProducPageProps) => {
   // <>
   //   <ImagesSwiper images={images} type="flats" />
   //   <ProductPageContent

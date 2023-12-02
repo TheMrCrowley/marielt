@@ -42,9 +42,7 @@ const HousesAndLotsPageHeader = ({
         <div className={clsx('flex', 'flex-col')}>
           <Typography>
             {totalArea}
-            <span className={clsx('text-[#B1B1B1]')}>
-              м<sup>2</sup>
-            </span>
+            <span className={clsx('text-[#B1B1B1]')}>м²</span>
           </Typography>
           <Typography fontSize={16} fontWeight={'light'}>
             общая
@@ -55,9 +53,7 @@ const HousesAndLotsPageHeader = ({
         <div className={clsx('flex', 'flex-col')}>
           <Typography>
             {livingArea}
-            <span className={clsx('text-[#B1B1B1]')}>
-              м<sup>2</sup>
-            </span>
+            <span className={clsx('text-[#B1B1B1]')}>м²</span>
           </Typography>
           <Typography fontSize={16} fontWeight={'light'}>
             жилая

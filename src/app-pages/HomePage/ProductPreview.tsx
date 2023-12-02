@@ -90,12 +90,13 @@ const ProductPreview = ({ data }: ProductPreviewProps) => {
             'justify-between',
             // TODO add colors to TAILWIND
             'bg-[#343434]',
+            'mb-4',
           )}
         >
           {renderPreview()}
         </div>
+        <ProductSliderWrapper type={type} />
       </div>
-      <ProductSliderWrapper type={type} />
     </section>
   );
 };

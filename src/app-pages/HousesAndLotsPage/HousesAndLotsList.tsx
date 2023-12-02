@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 
 import HousesAndLotsCard from '@/src/components/ProductCard/HousesAndLotsCard';
@@ -13,24 +12,11 @@ interface HousesAndLotsListProps {
 
 const HousesAndLotsList = ({ housesAndLots, pagination }: HousesAndLotsListProps) => {
   return (
-    <section
-      className={clsx(
-        'w-full',
-        'md:py-12',
-        'md:px-20',
-        'py-6',
-        'px-6',
-        'gap-8',
-        'flex',
-        'items-stretch',
-      )}
-    >
-      <ProductListWrapper pagination={pagination}>
-        {housesAndLots.map((item) => (
-          <HousesAndLotsCard housesAndLotsItem={item} key={`flats-list-flats-item-${item.id}`} />
-        ))}
-      </ProductListWrapper>
-    </section>
+    <ProductListWrapper pagination={pagination}>
+      {housesAndLots.map((item) => (
+        <HousesAndLotsCard housesAndLotsItem={item} key={`flats-list-flats-item-${item.id}`} />
+      ))}
+    </ProductListWrapper>
   );
 };
 

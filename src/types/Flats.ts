@@ -26,16 +26,6 @@ export type DefaultFlatItem = {
   };
 };
 
-export interface DefaultMapFlatItem {
-  id: string;
-  price?: string;
-  location?: {
-    lng: number;
-    lat: number;
-  };
-  initialCurrency: AvailableCurrencies;
-}
-
 export type DetailedFlatItem = {
   parameters: {
     constructionYear?: string;

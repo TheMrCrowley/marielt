@@ -1,8 +1,9 @@
 import React from 'react';
 
-import HousesAndLotsPage from '@/src/app-pages/HousesAndLotsPage';
+import HousesAndLotsFilters from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsFilters';
+import HousesAndLotsList from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsList';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
-import { getHousesAndLots } from '@/src/services/housesAndLotsServices';
+import { getHousesAndLotsForList } from '@/src/services/housesAndLotsServices';
 
 type HousesAndLotsProps = {
   searchParams: Record<string, string | string[]>;
@@ -11,11 +12,17 @@ type HousesAndLotsProps = {
 const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
   const [data, { housesAndLots, pagination }] = await Promise.all([
     getHousesAndLotsFiltersData(),
-    getHousesAndLots(searchParams),
+    getHousesAndLotsForList(searchParams),
   ]);
 
   console.log('Found houses and Lots: ', housesAndLots.length);
-  return <HousesAndLotsPage data={data} housesAndLots={housesAndLots} pagination={pagination} />;
+
+  return (
+    <>
+      <HousesAndLotsFilters data={data} />
+      <HousesAndLotsList housesAndLots={housesAndLots} pagination={pagination} />
+    </>
+  );
 };
 
 export default HousesAndLots;

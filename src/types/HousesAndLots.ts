@@ -19,6 +19,7 @@ export type DefaultHousesAndLotsItem = {
     plotSize?: string;
     livingArea?: string;
     kitchenArea?: string;
+    totalArea?: string;
   };
 };
 

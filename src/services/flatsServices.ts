@@ -11,22 +11,23 @@ import {
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import {
   formatToDefaultFlat,
-  formatToDefaultMapFlat,
+  formatToDefaultMapItem,
   formatToDetailedFlat,
 } from '@/src/helpers/formatters';
+import { getPaginationQuery } from '@/src/helpers/getPaginationQuery';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import { DefaultMapItem } from '@/src/types/Product';
 import {
   FlatStrapiResponse,
   StrapiFindOneResponse,
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
-import { getPaginationQuery } from './../helpers/getPaginationQuery';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (
@@ -233,9 +234,9 @@ export const getFlatsForList = async (
   );
   const paginationQuery = getPaginationQuery('list', searchParams.page as string);
 
-  const url = `${
-    process.env.API_BASE_URL
-  }/apart-items?${query}&${paginationQuery}&${getDefaultFlatListPopulateQuery()}`;
+  const populateQuery = getDefaultFlatListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
     next: {
@@ -257,7 +258,7 @@ export const getFlatsForList = async (
 export const getFlatsForMap = async (
   searchParams: Record<string, string | string[]>,
 ): Promise<{
-  flats: DefaultMapFlatItem[];
+  flats: DefaultMapItem[];
 }> => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getFlatsStrapiQueryParamsByFilters(
@@ -270,10 +271,9 @@ export const getFlatsForMap = async (
     },
   );
   const paginationQuery = getPaginationQuery('map');
+  const populateQuery = getDefaultFlatMapPopulateQuery();
 
-  const url = `${
-    process.env.API_BASE_URL
-  }/apart-items?${query}&${paginationQuery}&${getDefaultFlatMapPopulateQuery()}`;
+  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
     next: {
@@ -284,7 +284,7 @@ export const getFlatsForMap = async (
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
   return {
-    flats: formatToDefaultMapFlat(data),
+    flats: formatToDefaultMapItem(data),
   };
 };
 
@@ -303,10 +303,10 @@ export const getFlatsByIds = async (ids: string[]) => {
     },
     { encodeValuesOnly: true },
   );
+  const paginationQuery = getPaginationQuery('map');
+  const populateQuery = getDefaultFlatListPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/apart-items?${getPaginationQuery(
-    'map',
-  )}&${getDefaultFlatListPopulateQuery()}&${idsQuery}`;
+  const url = `${process.env.API_BASE_URL}/apart-items?${paginationQuery}&${populateQuery}&${idsQuery}`;
 
   const response = await fetch(url, {
     next: {
@@ -371,7 +371,7 @@ const getSimilarByPrice = async ({
                 $between: [+price - 5000, +price + 5000],
               }
             : {
-                $between: [0, 25000],
+                $eq: price,
               }),
         },
         parameters: {

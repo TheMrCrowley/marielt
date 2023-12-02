@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import ProductSlider from '@/src/components/Swiper/ProductSlider';
 import Title from '@/src/components/common/Title';
 import { getActualProductsByType } from '@/src/services/actualProductsServices';
 import { ProductType } from '@/src/types/Product';
-
-import ProductSlider from './ProductSlider';
 
 interface ProductSliderWrapperProps {
   type: ProductType;
@@ -32,7 +31,7 @@ const ProductSliderWrapper = async ({ type }: ProductSliderWrapperProps) => {
 
   return (
     <>
-      <Title className={clsx('container', 'mb-8')} fontSize={36}>
+      <Title className={clsx('mb-8')} fontSize={36}>
         {title}
       </Title>
       <ProductSlider products={actualData} type={type} />

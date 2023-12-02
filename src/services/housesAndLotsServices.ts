@@ -28,6 +28,8 @@ import {
 } from '@/src/types/StrapiTypes';
 
 import { lotsWaterQueryMap } from './../enums/HousesAndLotsFilters';
+import { formatToDefaultMapItem } from './../helpers/formatters';
+import { getPaginationQuery } from './../helpers/getPaginationQuery';
 import { getCurrencies } from './currencyServices';
 
 const getHousesAndLotsStrapiQuery = (
@@ -165,11 +167,6 @@ const getHousesAndLotsStrapiQuery = (
           },
         },
       },
-      populate: '*',
-      pagination: {
-        pageSize: 6,
-        page: filters.page || 1,
-      },
     },
     { encodeValuesOnly: true },
   );
@@ -177,7 +174,40 @@ const getHousesAndLotsStrapiQuery = (
   return { query };
 };
 
-export const getHousesAndLots = async (searchParams: Record<string, string | string[]>) => {
+const getDefaultHouseListPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        house_number: {
+          fields: ['number'],
+        },
+        parameters: {
+          fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],
+        },
+        location: '*',
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};
+
+const getDefaultHouseMapPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        location: '*',
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+};
+
+export const getHousesAndLotsForList = async (searchParams: Record<string, string | string[]>) => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getHousesAndLotsStrapiQuery(
     searchParams,
@@ -189,7 +219,11 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     },
   );
 
-  const url = `${process.env.API_BASE_URL}/house-items?${query}`;
+  const paginationQuery = getPaginationQuery('list', searchParams.page as string);
+
+  const populateQuery = getDefaultHouseListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',
@@ -204,6 +238,66 @@ export const getHousesAndLots = async (searchParams: Record<string, string | str
     housesAndLots: formatToDefaultHouseAndLotsItem(data),
     pagination,
   };
+};
+
+export const getHousesAndLotsForMap = async (searchParams: Record<string, string | string[]>) => {
+  const { eur, rub, usd } = await getCurrencies();
+  const { query } = getHousesAndLotsStrapiQuery(
+    searchParams,
+    (searchParams.currency as AvailableCurrencies) || 'USD',
+    {
+      rub,
+      eur,
+      usd,
+    },
+  );
+
+  const paginationQuery = getPaginationQuery('map');
+
+  const populateQuery = getDefaultHouseMapPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
+
+  const response = await fetch(url, {
+    cache: 'no-cache',
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+
+  return {
+    houses: formatToDefaultMapItem(data),
+  };
+};
+
+export const getHousesByIds = async (ids: string[]) => {
+  if (!ids.length) {
+    return;
+  }
+
+  const idsQuery = qs.stringify(
+    {
+      filters: {
+        id: {
+          $in: ids,
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+  const paginationQuery = getPaginationQuery('map');
+  const populateQuery = getDefaultHouseListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/house-items?${paginationQuery}&${populateQuery}&${idsQuery}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+
+  return formatToDefaultHouseAndLotsItem(data);
 };
 
 export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAndLotsItem> => {
@@ -243,4 +337,105 @@ export const getHousesAndLotsSearchResults = async (value: string): Promise<Sear
   const searchResults = (await response.json()) as SearchResults;
 
   return searchResults;
+};
+
+const getSimilarByPrice = async ({
+  price,
+  id,
+}: {
+  price?: string;
+  roominess?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        price: {
+          ...(price
+            ? {
+                $between: [+price - 5000, +price + 5000],
+              }
+            : {
+                $eq: price,
+              }),
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/house-items?${query}&${getDefaultHouseListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+
+  return formatToDefaultHouseAndLotsItem(data);
+};
+
+const getSimilarByLocation = async ({
+  latitude,
+  longitude,
+  id,
+}: {
+  latitude?: number;
+  longitude?: number;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        coordinates: {
+          latitude: { $between: [(latitude || 0) - 0.016, (latitude || 0) + 0.016] },
+          longitude: { $between: [(longitude || 0) - 0.016, (longitude || 0) + 0.016] },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/house-items?${query}&${getDefaultHouseListPopulateQuery()}`;
+
+  const response = await fetch(url);
+
+  const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
+
+  return formatToDefaultHouseAndLotsItem(data);
+};
+
+export const getSimilarHouseItems = async (flat: DetailedHousesAndLotsItem) => {
+  const { price, id, location } = flat;
+  const [similarByPrice, similarByLocation] = await Promise.all([
+    getSimilarByPrice({
+      price: price,
+      id,
+    }),
+    getSimilarByLocation({
+      latitude: location?.lat,
+      longitude: location?.lng,
+      id,
+    }),
+  ]);
+
+  return [
+    { label: 'По цене', data: similarByPrice },
+    {
+      label: 'По расположению',
+      data: similarByLocation,
+    },
+  ];
 };

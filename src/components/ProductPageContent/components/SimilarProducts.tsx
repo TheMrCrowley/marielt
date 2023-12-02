@@ -2,10 +2,11 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import ProductSlider from '@/src/app-pages/HomePage/ProductSlider';
+import ProductSlider from '@/src/components/Swiper/ProductSlider';
 import CheckboxGroup from '@/src/components/common/CheckboxGroup/CheckboxGroup';
 import Title from '@/src/components/common/Title/Title';
 import { DefaultFlatItem } from '@/src/types/Flats';
+import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
 
 const SimilarProducts = ({
@@ -15,7 +16,7 @@ const SimilarProducts = ({
   type: ProductType;
   similarProducts: Array<{
     label: string;
-    data: DefaultFlatItem[];
+    data: DefaultFlatItem[] | DefaultHousesAndLotsItem[];
   }>;
 }) => {
   const [checkedValue, setCheckedValue] = useState<string>(

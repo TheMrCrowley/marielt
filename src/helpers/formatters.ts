@@ -1,4 +1,3 @@
-import { flatCharacteristicsMap } from '@/src/enums/FlatsFilters';
 import {
   CommercialCategory,
   CommercialTransaction,
@@ -6,13 +5,14 @@ import {
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DefaultMapFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
 import {
   DefaultHousesAndLotsItem,
   DetailedHousesAndLotsItem,
   HousesAndLotsCategory,
 } from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
+import { DefaultMapItem } from '@/src/types/Product';
 import {
   CommercialCategoryResponse,
   CommercialStrapiResponse,
@@ -26,13 +26,13 @@ import {
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
-import { getFullAddress } from './getFullAddress';
+import { getSmallAddress } from './addressHelpers';
 
 export const formatToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
 ): DefaultFlatItem[] =>
   flats.map(({ attributes, id }) => ({
-    address: getFullAddress({
+    address: getSmallAddress({
       locality: attributes.locality,
       houseNumber: attributes.house_number?.number,
       street: attributes.street,
@@ -58,10 +58,12 @@ export const formatToDefaultFlat = (
     location: attributes.location?.coordinates,
   }));
 
-export const formatToDefaultMapFlat = (
-  flats: StrapiFindResponse<FlatStrapiResponse>['data'],
-): DefaultMapFlatItem[] =>
-  flats.map(({ attributes, id }) => ({
+export const formatToDefaultMapItem = (
+  items:
+    | StrapiFindResponse<FlatStrapiResponse>['data']
+    | StrapiFindResponse<HousesAndLotsStrapiResponse>['data'],
+): DefaultMapItem[] =>
+  items.map(({ attributes, id }) => ({
     id,
     price: attributes.price,
     initialCurrency: attributes.currency || 'USD',
@@ -72,7 +74,7 @@ export const formatToDetailedFlat = ({
   attributes,
   id,
 }: StrapiFindOneResponse<FlatStrapiResponse>['data']): DetailedFlatItem => ({
-  address: getFullAddress({
+  address: getSmallAddress({
     locality: attributes.locality,
     houseNumber: attributes.house_number?.number,
     street: attributes.street,
@@ -127,33 +129,6 @@ export const formatToDetailedFlat = ({
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
-export function formatItemToCharacteristics<T extends DetailedFlatItem | DetailedHousesAndLotsItem>(
-  item: T,
-  map: Partial<Record<keyof T['parameters'], (value: string) => { name: string; value: string }>>,
-) {
-  const result: Array<{ name: string; value: string }> = [];
-
-  Object.entries(item.parameters).forEach(([key, value]) => {
-    const fn = map[key as keyof T['parameters']];
-    if (!!value && fn) {
-      result.push(fn(value));
-    }
-  });
-
-  item.additionalInfo.forEach(({ name }) => {
-    result.push({ name, value: 'Да' });
-  });
-
-  const keySet = new Set<string>();
-  return result.filter(({ name }) => {
-    if (keySet.has(name.toLocaleLowerCase())) {
-      return false;
-    }
-    keySet.add(name.toLocaleLowerCase());
-    return true;
-  });
-}
-
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
 ): DefaultCommercialItem[] =>
@@ -171,7 +146,7 @@ export const formatToDefaultCommercial = (
       },
       id,
     }) => ({
-      address: getFullAddress({
+      address: getSmallAddress({
         locality,
         houseNumber: house_number?.number,
         street,
@@ -208,17 +183,28 @@ export const formatToDefaultHouseAndLotsItem = (
       id,
     }) => ({
       id,
-      address: getFullAddress({
+      address: getSmallAddress({
         locality,
         houseNumber: house_number?.number,
         street,
       }),
       initialCurrency: currency || 'USD',
-      img: image?.data[0].attributes.url,
+      image:
+        image && Array.isArray(image.data)
+          ? {
+              height: image.data[0].attributes.height,
+              width: image.data[0].attributes.width,
+              url: image.data[0].attributes.url,
+              placeholderUrl: image.data[0].attributes.placeholder,
+            }
+          : undefined,
       name,
       price,
       parameters: {
-        plotSize: parameters.plot_size || 'Нету площади',
+        plotSize: parameters.plot_size,
+        kitchenArea: parameters.kitchen_area,
+        livingArea: parameters.living_area,
+        totalArea: parameters.total_area,
       },
     }),
   );
@@ -227,7 +213,7 @@ export const formatToDetailedHousesAndLots = ({
   attributes,
   id,
 }: StrapiFindOneResponse<HousesAndLotsStrapiResponse>['data']): DetailedHousesAndLotsItem => ({
-  address: getFullAddress({
+  address: getSmallAddress({
     locality: attributes.locality,
     houseNumber: attributes.house_number?.number,
     street: attributes.street,
@@ -412,3 +398,30 @@ export const formatResponseToSearchResult = (
     street: Array.from(streets),
   };
 };
+
+export function formatItemToCharacteristics<T extends DetailedFlatItem | DetailedHousesAndLotsItem>(
+  item: T,
+  map: Partial<Record<keyof T['parameters'], (value: string) => { name: string; value: string }>>,
+) {
+  const result: Array<{ name: string; value: string }> = [];
+
+  Object.entries(item.parameters).forEach(([key, value]) => {
+    const fn = map[key as keyof T['parameters']];
+    if (!!value && fn) {
+      result.push(fn(value));
+    }
+  });
+
+  item.additionalInfo.forEach(({ name }) => {
+    result.push({ name, value: 'Да' });
+  });
+
+  const keySet = new Set<string>();
+  return result.filter(({ name }) => {
+    if (keySet.has(name.toLocaleLowerCase())) {
+      return false;
+    }
+    keySet.add(name.toLocaleLowerCase());
+    return true;
+  });
+}

@@ -1,4 +1,4 @@
-export const getFullAddress = ({
+export const getSmallAddress = ({
   locality,
   houseNumber,
   street,

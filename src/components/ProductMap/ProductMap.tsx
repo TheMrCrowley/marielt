@@ -18,13 +18,13 @@ import ymaps from 'yandex-maps';
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
 import { isMobile } from '@/src/helpers/userAgent';
 import { useCurrency } from '@/src/store/currency';
-import { DefaultMapFlatItem } from '@/src/types/Flats';
+import { DefaultMapItem } from '@/src/types/Product';
 
 import './Map.css';
 import ProductMapModal from './ProductMapModal';
 
 interface ProductMapProps extends PropsWithChildren {
-  items: DefaultMapFlatItem[];
+  items: DefaultMapItem[];
 }
 
 const ProductMap = ({ items, children }: ProductMapProps) => {

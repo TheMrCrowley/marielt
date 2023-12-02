@@ -7,7 +7,7 @@ const SliderButton = ({
 }: {
   buttonType: 'next' | 'prev';
   sliderClassName: string;
-  className: string;
+  className?: string;
 }) => {
   const renderButton = () => {
     return (

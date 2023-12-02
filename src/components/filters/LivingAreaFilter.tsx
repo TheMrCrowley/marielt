@@ -12,11 +12,7 @@ const LivingAreaFilter = ({ livingAreaFrom, livingAreaTo, onChange }: LivingArea
   return (
     <InputFromTo
       label="Площадь Жилая"
-      subLabel={
-        <span>
-          м <sup>2</sup>
-        </span>
-      }
+      subLabel={<span>м²</span>}
       values={{
         from: livingAreaFrom,
         to: livingAreaTo,

@@ -15,6 +15,8 @@ import SimilarProducts from '@/src/components/ProductPageContent/components/Simi
 import ProductPageSlider from '@/src/components/Swiper/ProductPageSlider';
 import { houseCharacteristicsMap } from '@/src/enums/HousesAndLotsFilters';
 import { formatItemToCharacteristics } from '@/src/helpers/formatters';
+import { getInterestRate } from '@/src/services/creditsService';
+import { getSimilarHouseItems } from '@/src/services/housesAndLotsServices';
 import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
 interface HousesAndLotsProductPageProps {
@@ -44,7 +46,9 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
   console.log(item.parameters.builtUpArea);
 
   const { constructionYear, totalArea, livingArea, plotSize } = item.parameters;
+  const [similarHouses, rate] = await Promise.all([getSimilarHouseItems(item), getInterestRate()]);
 
+  console.log(similarHouses);
   return (
     <>
       <ProductPageSlider images={images} type="houses-and-lots" video={video} />
@@ -56,23 +60,14 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
         characteristics={<Characteristics characteristics={getHouseCharacteristics(item)} />}
         creditCalculator={
           <CreditCalculator
-            rate={14.4}
+            rate={rate}
             product="объекта"
             initialCurrency={initialCurrency}
             price={+price!}
           />
         }
         similarObjectsField={
-          <SimilarProducts
-            type="houses-and-lots"
-            similarProducts={[
-              { label: 'По цене', data: [] },
-              {
-                label: 'По расположению',
-                data: [],
-              },
-            ]}
-          />
+          <SimilarProducts type="houses-and-lots" similarProducts={similarHouses} />
         }
         productHeader={
           <HousesAndLotsPageHeader

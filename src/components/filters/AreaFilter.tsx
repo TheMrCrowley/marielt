@@ -10,11 +10,7 @@ const AreaFilter = ({ areaFrom, areaTo, onChange }: AreaFilterProps) => {
   return (
     <InputFromTo
       label="Площадь"
-      subLabel={
-        <span>
-          м<sup>2</sup>
-        </span>
-      }
+      subLabel="м²"
       values={{
         from: areaFrom,
         to: areaTo,

@@ -23,10 +23,7 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {totalArea}
-          <span className={clsx('text-xs', 'opacity-50')}>
-            м<sup>2</sup>
-          </span>
+          {totalArea} <span className={clsx('text-xs', 'opacity-50')}>м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>общая</p>
       </div>
@@ -41,10 +38,7 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {livingArea}
-          <span className={clsx('text-xs', 'opacity-50')}>
-            м<sup>2</sup>
-          </span>
+          {livingArea} <span className={clsx('text-xs', 'opacity-50')}>м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>жилая</p>
       </div>
@@ -60,10 +54,8 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
           {priceByMeter}
-        </Typography>
-        <p className={clsx('text-white', 'text-xs', 'font-light')}>
-          за м<sup>2</sup>
-        </p>
+        </Typography>{' '}
+        <p className={clsx('text-white', 'text-xs', 'font-light')}>за м²</p>
       </div>
     );
   };
@@ -74,24 +66,23 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     }
 
     return (
-      <Typography fontSize={14} fontWeight="light" className="flex gap-x-1">
-        Площадь участка:{' '}
+      <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {plotSize}
-        </Typography>{' '}
-        <span className={clsx('opacity-50')}>соток</span>
-      </Typography>
+          {plotSize} <span className={clsx('opacity-50')}>соток</span>
+        </Typography>
+        <p className={clsx('text-white', 'text-xs', 'font-light')}>участок</p>
+      </div>
     );
   };
 
   return (
     <>
-      <div className={clsx('flex', 'items-center', 'justify-between')}>
+      <div className={clsx('flex', 'items-center', 'justify-start', 'gap-4')}>
         {renderTotalArea()}
         {renderLivingArea()}
         {renderPriceByMeter()}
+        {renderPlotSize()}
       </div>
-      {renderPlotSize()}
     </>
   );
 };

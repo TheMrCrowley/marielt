@@ -1,44 +1,41 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React from 'react';
 
 import LocationIcon from '@/public/card-map-pin.svg';
-import {
-  AreaField,
-  PriceField,
-  ProductHeader,
-} from '@/src/components/ProductPageContent/components';
+import DirectionIcon from '@/public/direction.svg';
+import HouseIcon from '@/public/house-icon.svg';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
-interface FlatPageHeaderProps {
+import { AreaField, PriceField, ProductHeader } from './components';
+
+interface HousesAndLotsPageHeaderProps {
   address?: string;
   title?: string;
-  roominess?: string;
-  floor?: string;
-  maxFloor?: string;
   constructionYear?: string;
   totalArea?: string;
   livingArea?: string;
   kitchenArea?: string;
+  plotSize?: string;
   initialCurrency: AvailableCurrencies;
   price?: number;
+  category?: string;
+  direction?: string;
 }
 
-const FlatPageHeader = ({
-  address,
-  title,
-  constructionYear,
-  floor,
-  maxFloor,
-  roominess,
+const HousesAndLotsPageHeader = ({
   initialCurrency,
-  kitchenArea,
-  livingArea,
-  price,
+  address,
+  constructionYear,
   totalArea,
-}: FlatPageHeaderProps) => {
+  livingArea,
+  plotSize,
+  price,
+  title,
+  category,
+  direction,
+}: HousesAndLotsPageHeaderProps) => {
   const renderAreas = () => (
     <>
       {totalArea && (
@@ -67,16 +64,11 @@ const FlatPageHeader = ({
           </Typography>
         </div>
       )}
-      {kitchenArea && (
+      {plotSize && (
         <div className={clsx('flex', 'flex-col')}>
-          <Typography>
-            {kitchenArea}
-            <span className={clsx('text-[#B1B1B1]')}>
-              м<sup>2</sup>
-            </span>
-          </Typography>
+          <Typography>{plotSize} сот.</Typography>
           <Typography fontSize={16} fontWeight={'light'}>
-            кухня
+            участок
           </Typography>
         </div>
       )}
@@ -90,11 +82,19 @@ const FlatPageHeader = ({
           <Title variant="h2" fontSize={24} fontWeight={'medium'}>
             {title}
           </Title>
-          <div className={clsx('flex', 'h-full', 'justify-between', 'gap-4', 'flex-col')}>
+          <div className={clsx('h-full', 'flex', 'justify-between', 'gap-4', 'flex-col')}>
             <div className={clsx('flex', 'gap-1.5')}>
               <Image alt="map-pin" src={LocationIcon} />
               <Typography fontSize={16}>{address}</Typography>
             </div>
+            {direction && (
+              <div className={clsx('flex', 'gap-1.5')}>
+                <Image alt="direction" src={DirectionIcon} />
+                <Typography color="text-[#A3A3A3]" fontSize={16}>
+                  {direction}
+                </Typography>
+              </div>
+            )}
             <div
               className={clsx(
                 'flex',
@@ -106,18 +106,11 @@ const FlatPageHeader = ({
                 'gap-4',
               )}
             >
-              {roominess && (
-                <Typography fontSize={16}>
-                  Комнат:
-                  <span className="text-secondary"> {roominess}</span>
-                </Typography>
-              )}
-              {floor && (
-                <Typography fontSize={16}>
-                  Этаж:
-                  <span className="text-secondary"> {floor}</span>
-                  {maxFloor && <>/{maxFloor}</>}
-                </Typography>
+              {category && (
+                <div className={clsx('flex', 'gap-1.5')}>
+                  <Image alt="house" src={HouseIcon} />
+                  <Typography fontSize={16}>{category}</Typography>
+                </div>
               )}
               {constructionYear && (
                 <Typography fontSize={16}>
@@ -130,9 +123,9 @@ const FlatPageHeader = ({
         </>
       }
       area={<AreaField>{renderAreas()}</AreaField>}
-      price={<PriceField initialCurrency={initialCurrency} price={+price!} />}
+      price={<PriceField totalArea={totalArea} initialCurrency={initialCurrency} price={+price!} />}
     />
   );
 };
 
-export default FlatPageHeader;
+export default HousesAndLotsPageHeader;

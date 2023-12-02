@@ -3,71 +3,6 @@ import { FC } from 'react';
 
 import Title from '@/src/components/common/Title/Title';
 
-// const renderHeaderField = (type: ProductType) => {
-//   switch (type) {
-//     case 'flats':
-//       return (
-// <div
-//   className={clsx(
-//     'flex',
-//     'justify-between',
-//     'mt-4',
-//     'lg:flex-row',
-//     'flex-col',
-//     'flex-wrap',
-//     'gap-2',
-//   )}
-// >
-//   <Typography fontSize={16}>Комнат:2</Typography>
-//   <Typography fontSize={16}>Этаж:7/16</Typography>
-//   <Typography fontSize={16}>Год постройки:2020</Typography>
-// </div>
-//       );
-//     case 'commercial':
-//       return <CommercialType />;
-
-//     case 'houses-and-lots':
-//       return (
-//         <div
-//           className={clsx(
-//             'flex',
-//             'justify-between',
-//             'mt-4',
-//             'lg:flex-row',
-//             'flex-col',
-//             'flex-wrap',
-//             'gap-2',
-//           )}
-//         >
-//           <div className={clsx('flex', 'gap-1.5')}>
-//             <Image alt="house" src={HouseIcon} />
-//             <Typography fontSize={16}>Коттедж</Typography>
-//           </div>
-
-//           <Typography fontSize={16}>Год постройки:2020</Typography>
-//         </div>
-//       );
-//   }
-// };
-
-/* <Title variant="h2" fontSize={24} fontWeight={'medium'}>
-          Название двухкомнатной квартиры
-        </Title>
-        <div className={clsx('flex', 'gap-1.5')}>
-          <Image alt="map-pin" src={LocationIcon} />
-          <Typography fontSize={16}>Минск, Мира пр-т</Typography>
-        </div>
-        {type !== 'flats' && (
-          <div className={clsx('flex', 'gap-1.5')}>
-            <Image alt="direction" src={DirectionIcon} />
-            <Typography color="text-[#A3A3A3]" fontSize={16}>
-              Московское, 7 км от МКАД
-            </Typography>
-          </div>
-        )} */
-
-/* {renderHeaderField('flats')} */
-
 /* <div
           className={clsx(
             'flex',
@@ -151,6 +86,7 @@ const ProductHeader: FC<Props> = ({ area, description, price }) => {
           'lg:border-0',
           'border-t',
           'border-[#ffffff1a]',
+          'flex-auto',
         )}
       >
         <Title variant="h2" fontSize={24} fontWeight={'medium'}>

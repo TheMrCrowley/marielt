@@ -22,10 +22,12 @@ const Characteristics: FC<CharacteristicsProps> = ({ characteristics }) => {
         <div
           key={`product-item-characteristic-item-${name}-${value}-${i}`}
           className={clsx(
-            'flex',
+            'grid',
+            'grid-flow-col',
+            'grid-rows-1',
             'justify-between',
-            'py-3',
-            'px-5',
+            'py-2',
+            'px-4',
             'gap-4',
             i % 2 ? 'bg-[#262626]' : 'bg-primary',
           )}
@@ -33,7 +35,11 @@ const Characteristics: FC<CharacteristicsProps> = ({ characteristics }) => {
           <Typography fontWeight="light" className="capitalize">
             {name}
           </Typography>
-          <Typography fontWeight="light" className="capitalize">
+          <Typography
+            fontWeight="light"
+            fontSize={16}
+            className="capitalize place-self-end max-w-max w-full text-left"
+          >
             {value}
           </Typography>
         </div>

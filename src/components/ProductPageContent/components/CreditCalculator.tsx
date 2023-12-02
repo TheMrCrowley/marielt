@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 
 import BankIcon from '@/public/bank-icon.svg';
 import InfoIcon from '@/public/info-icon.svg';
-import CreditInput from '@/src/components/ProductPageContent/CreditInput';
+import CreditInput from '@/src/components/ProductPageContent/components/CreditInput';
 import Button from '@/src/components/common/Button/Button';
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
@@ -17,10 +17,12 @@ const CreditCalculator = ({
   price,
   initialCurrency,
   rate,
+  product,
 }: {
   rate: number;
   price: number;
   initialCurrency: AvailableCurrencies;
+  product: string;
 }) => {
   const { rates } = useCurrency();
   const [initialFeeValue, setInitialFeeValue] = useState<string>(
@@ -39,7 +41,7 @@ const CreditCalculator = ({
         +loanAmount / (+loanTermValue * 12) +
         +loanAmount * (rate / 12 / 100)
       ).toFixed(2),
-      interestRate: rate / 12,
+      interestRate: rate,
     });
   };
 
@@ -74,7 +76,7 @@ const CreditCalculator = ({
         >
           <div>
             <Typography fontWeight="medium" color="text-[#B1B1B1]">
-              Стоимость квартиры
+              Стоимость {product}
             </Typography>
             <Typography fontSize={36} fontWeight="medium">
               {getPriceByCurrencyMonetary(price, initialCurrency, 'BYN', rates)}

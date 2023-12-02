@@ -17,7 +17,7 @@ interface ProductPageContentProps {
   locationField: React.ReactNode | React.ReactElement;
   similarObjectsField: React.ReactNode | React.ReactElement;
   creditCalculator?: React.ReactNode | React.ReactElement;
-  agentForm: React.ReactNode | React.ReactElement;
+  agentForm?: React.ReactNode | React.ReactElement;
   detailedDescription?: React.ReactNode | React.ReactElement;
 }
 

@@ -141,7 +141,7 @@ export interface FlatStrapiResponse {
       attributes: StrapiImage;
     }>;
   };
-  detailed_description: string;
+  detailed_description?: string;
   location?: {
     coordinates: {
       lat: number;
@@ -266,8 +266,8 @@ export interface HousesAndLotsStrapiResponse {
     sewerage?: string;
     electricity?: string;
     built_up_area?: {
-      length?: string;
-      width?: string;
+      length: string;
+      width: string;
     };
     wall_material_add?: string;
     rooms_number?: string;
@@ -281,15 +281,34 @@ export interface HousesAndLotsStrapiResponse {
   };
   currency?: AvailableCurrencies;
   price: string;
-  image?: StrapiImage;
   name?: string;
   additional_info?: Array<{ name: string }>;
   note?: string;
-  // image?: {
-  //   data: Array<{
-  //     attributes: StrapiImage;
-  //   }>;
-  // };
+  agents: StrapiFindResponse<{
+    full_name: string;
+    phone1: string;
+    phone2?: string;
+    branch?: string;
+    position?: string;
+  }>;
+  detailed_description?: string;
+  image?: {
+    data: Array<{
+      attributes: StrapiImage;
+    }>;
+  };
+  video_link?: string;
+  location?: {
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
+  house_categories: StrapiFindResponse<{
+    category: string;
+    name: string;
+  }>;
+  direction: StrapiFindOneResponse<{ name: string }>;
 }
 
 export interface DistrictResponse {

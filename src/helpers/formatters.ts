@@ -127,20 +127,21 @@ export const formatToDetailedFlat = ({
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
-export const formatToFlatCharacteristics = (
-  flatItem: DetailedFlatItem,
-): Array<{ name: string; value: string }> => {
+export function formatItemToCharacteristics<T extends DetailedFlatItem | DetailedHousesAndLotsItem>(
+  item: T,
+  map: Partial<Record<keyof T['parameters'], (value: string) => { name: string; value: string }>>,
+) {
   const result: Array<{ name: string; value: string }> = [];
 
-  Object.entries(flatItem.parameters).forEach(([key, value]) => {
-    const fn = flatCharacteristicsMap[key as keyof DefaultFlatItem['parameters']];
+  Object.entries(item.parameters).forEach(([key, value]) => {
+    const fn = map[key as keyof T['parameters']];
     if (!!value && fn) {
       result.push(fn(value));
     }
   });
 
-  flatItem.additionalInfo.forEach(({ name }) => {
-    result.push({ name, value: 'Есть' });
+  item.additionalInfo.forEach(({ name }) => {
+    result.push({ name, value: 'Да' });
   });
 
   const keySet = new Set<string>();
@@ -151,7 +152,7 @@ export const formatToFlatCharacteristics = (
     keySet.add(name.toLocaleLowerCase());
     return true;
   });
-};
+}
 
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
@@ -213,7 +214,7 @@ export const formatToDefaultHouseAndLotsItem = (
         street,
       }),
       initialCurrency: currency || 'USD',
-      img: image?.url,
+      img: image?.data[0].attributes.url,
       name,
       price,
       parameters: {
@@ -257,19 +258,37 @@ export const formatToDetailedHousesAndLots = ({
     balcony: attributes.parameters.balcony,
     parking: attributes.parameters.parking,
     readinessPercentage: attributes.parameters.readiness_percentage,
-    builtUpArea: attributes.parameters.built_up_area,
+    builtUpArea:
+      attributes.parameters.built_up_area &&
+      (
+        +attributes.parameters.built_up_area.length * +attributes.parameters.built_up_area.width
+      ).toString(),
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
-  // location: attributes.location?.coordinates,
-  // images: Array.isArray(attributes.image.data)
-  //   ? attributes.image.data.map((item) => ({
-  //       height: item.attributes.height as number,
-  //       placeholderUrl: item.attributes.placeholder as string,
-  //       url: item.attributes.url as string,
-  //       width: item.attributes.width as number,
-  //     }))
-  //   : [],
+  detailedDescription: attributes.detailed_description,
+  agent: {
+    fullName: attributes.agents.data[0].attributes.full_name,
+    phone1: attributes.agents.data[0].attributes.phone1,
+    branch: attributes.agents.data[0].attributes.branch,
+    phone2: attributes.agents.data[0].attributes.phone2,
+    position: attributes.agents.data[0].attributes.position,
+  },
+  houseCategories: {
+    category: attributes.house_categories.data[0].attributes.category,
+    name: attributes.house_categories.data[0].attributes.name,
+  },
+  direction: { name: attributes.direction?.data?.attributes.name },
+  location: attributes.location?.coordinates,
+  images: Array.isArray(attributes?.image?.data)
+    ? attributes!.image!.data.map((item) => ({
+        height: item.attributes.height as number,
+        placeholderUrl: item.attributes.placeholder as string,
+        url: item.attributes.url as string,
+        width: item.attributes.width as number,
+      }))
+    : [],
+  video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) =>

@@ -1,4 +1,5 @@
 import { OptionType, QueryMapType } from '@/src/types/Filters';
+import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
 export enum HousesAndLotsRootCategory {
   Dachi = 'dachi',
@@ -260,4 +261,33 @@ export const sewerageQueryMap: QueryMapType<SewerageValues> = {
   [SewerageValues.Yes]: ['есть', 'центральная', 'местная'],
   [SewerageValues.No]: 'нет',
   [SewerageValues.Street]: 'с/у на улице',
+};
+
+export const houseCharacteristicsMap: Partial<
+  Record<
+    keyof DetailedHousesAndLotsItem['parameters'],
+    (value: string) => { name: string; value: string }
+  >
+> = {
+  plotSize: (value) => ({ name: 'Площадь участка', value }),
+  levelNumber: (value) => ({ name: 'Число уровней', value }),
+  roofMaterial: (value) => ({ name: 'Материал крыши', value }),
+  wallMaterial: (value) => ({ name: 'Материал стен', value }),
+  wallMaterialAdd: (value) => ({ name: 'Материал стен (доп.)', value }),
+  totalArea: (value) => ({ name: 'Площадь общая', value }),
+  livingArea: (value) => ({ name: 'Площадь жилая', value }),
+  kitchenArea: (value) => ({ name: 'Площадь кухни', value }),
+  roomsNumber: (value) => ({ name: 'Количество комнат', value }),
+  heating: (value) => ({ name: 'Отопление', value }),
+  gas: (value) => ({ name: 'Газ', value }),
+  water: (value) => ({ name: 'Вода', value }),
+  waterAdd: (value) => ({ name: 'Вода (доп.)', value }),
+  sewerage: (value) => ({ name: 'Канализация', value }),
+  sewerageAdd: (value) => ({ name: 'Канализация (доп.)', value }),
+  electricity: (value) => ({ name: 'Электроснабжение', value }),
+  telephone: (value) => ({ name: 'Телефон', value }),
+  balcony: (value) => ({ name: 'Балкон', value }),
+  parking: (value) => ({ name: 'Парковочное место', value }),
+  readinessPercentage: (value) => ({ name: 'Процент готовности', value }),
+  builtUpArea: (value) => ({ name: 'Площадь застройки', value }),
 };

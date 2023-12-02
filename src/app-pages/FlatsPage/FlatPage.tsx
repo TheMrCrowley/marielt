@@ -1,20 +1,19 @@
 import React from 'react';
 
-import ApplicationField from '@/src/components/ApplicationField/ApplicationField';
+import ApplicationField from '@/src/components/ApplicationField';
+import ProductPageContent, { FlatPageHeader } from '@/src/components/ProductPageContent';
 import {
   AgentForm,
   Characteristics,
+  CreditCalculator,
   DescriptionField,
-  FlatPageHeader,
   LocationField,
   NoteField,
-} from '@/src/components/ProductPageContent';
-import CreditCalculator from '@/src/components/ProductPageContent/CreditCalculator';
-import ProductPageContent from '@/src/components/ProductPageContent/ProductPageContent';
-import SimilarProducts from '@/src/components/ProductPageContent/SimilarProducts';
-import ProductPageSlider from '@/src/components/Swiper/ProductPageSlider';
-import { getRoominessByStrapiValue } from '@/src/enums/FlatsFilters';
-import { formatToFlatCharacteristics } from '@/src/helpers/formatters';
+} from '@/src/components/ProductPageContent/components';
+import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
+import { ProductPageSlider } from '@/src/components/Swiper';
+import { flatCharacteristicsMap, getRoominessByStrapiValue } from '@/src/enums/FlatsFilters';
+import { formatItemToCharacteristics } from '@/src/helpers/formatters';
 import { getInterestRate } from '@/src/services/creditsService';
 import { getSimilarFlatsItems } from '@/src/services/flatsServices';
 import { DetailedFlatItem } from '@/src/types/Flats';
@@ -24,7 +23,7 @@ interface FlatPageProps {
 }
 
 const getFlatCharacteristics = (flat: DetailedFlatItem) => [
-  ...formatToFlatCharacteristics(flat),
+  ...formatItemToCharacteristics(flat, flatCharacteristicsMap),
   {
     name: 'Этаж/этажность',
     value: `${flat.parameters.floor}/${flat.parameters.maxFloor}`,
@@ -75,7 +74,12 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
         locationField={<LocationField location={location} />}
         note={<NoteField note={note} />}
         creditCalculator={
-          <CreditCalculator rate={rate} initialCurrency={initialCurrency} price={+price!} />
+          <CreditCalculator
+            product="квартиры"
+            rate={rate}
+            initialCurrency={initialCurrency}
+            price={+price!}
+          />
         }
         similarObjectsField={<SimilarProducts type="flats" similarProducts={similarFlats} />}
       />

@@ -43,12 +43,9 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     direction,
   } = item;
 
-  console.log(item.parameters.builtUpArea);
-
   const { constructionYear, totalArea, livingArea, plotSize } = item.parameters;
   const [similarHouses, rate] = await Promise.all([getSimilarHouseItems(item), getInterestRate()]);
 
-  console.log(similarHouses);
   return (
     <>
       <ProductPageSlider images={images} type="houses-and-lots" video={video} />
@@ -80,7 +77,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
             totalArea={totalArea}
             price={+price!}
             title={name}
-            direction={direction.name}
+            direction={direction}
           />
         }
       />

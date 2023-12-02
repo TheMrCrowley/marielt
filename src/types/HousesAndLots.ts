@@ -71,7 +71,7 @@ export type DetailedHousesAndLotsItem = {
     category?: string;
     name?: string;
   };
-  direction: { name: string };
+  direction: string;
 } & DefaultHousesAndLotsItem;
 
 export interface HousesAndLotsCategory {

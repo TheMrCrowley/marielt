@@ -118,6 +118,21 @@ export interface FlatStrapiResponse {
   };
   additional_info?: Array<{ name: string }>;
   note: string;
+  village_council?: string;
+  district?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
+  microdistrict?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
   coordinates: string;
   locality: string;
   street?: string;
@@ -162,6 +177,7 @@ export interface CommercialStrapiResponse {
   locality: string;
   coordinates: string;
   district_rb?: string;
+  village_council?: string;
   region?: {
     data: {
       attributes: {
@@ -240,6 +256,7 @@ export interface HousesAndLotsStrapiResponse {
   locality: string;
   street?: string;
   district_rb?: string;
+  village_council?: string;
   region?: {
     data: {
       attributes: {

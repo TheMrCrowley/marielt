@@ -19,6 +19,7 @@ const AreaField = ({ children }: PropsWithChildren) => {
         'lg:border-t-0',
         'border-t',
         'border-[#ffffff1a]',
+        'basis-1/3',
       )}
     >
       <Title variant="h2" fontSize={24} fontWeight={'medium'}>

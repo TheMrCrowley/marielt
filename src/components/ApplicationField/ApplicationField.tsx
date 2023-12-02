@@ -10,6 +10,9 @@ import Typography from '@/src/components/common/Typography/Typography';
 const ApplicationField = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [checkedValue, setCheckedValue] = useState<string>('');
+  const [nameValue, setNameValue] = useState<string>('');
+  const [phoneValue, setPhoneValue] = useState<string>('');
+
   return (
     <form
       className={clsx(
@@ -19,9 +22,12 @@ const ApplicationField = () => {
         'flex-col',
         'justify-center',
         'items-center',
-        'py-16',
-        'gap-y-16',
-        'px-10',
+        'lg:py-16',
+        'md:py-8',
+        'py-4',
+        'gap-8',
+        'lg:px-10',
+        'px-4',
       )}
     >
       <Typography fontSize={48} className={clsx('lg:text-5xl', 'text-xl', 'text-center')}>
@@ -30,13 +36,28 @@ const ApplicationField = () => {
       <div className={clsx('flex', 'gap-8')}>
         <input
           placeholder="Имя"
-          className={clsx('w-full', 'text-2xl', 'border-b', 'border-secondary', 'text-white')}
+          className={clsx(
+            'w-full',
+            'lg:text-2xl',
+            'md:text-xl',
+            'text-base',
+            'border-b',
+            'border-secondary',
+            'text-white',
+          )}
         />
-        {/**TODO: min validation, mask for tel-input? */}
         <input
           type="tel"
           placeholder="+375 25 784 65 47"
-          className={clsx('w-full', 'text-2xl', 'border-b', 'border-secondary', 'text-white')}
+          className={clsx(
+            'w-full',
+            'lg:text-2xl',
+            'md:text-xl',
+            'text-base',
+            'border-b',
+            'border-secondary',
+            'text-white',
+          )}
         />
       </div>
       <CheckboxGroup
@@ -53,10 +74,11 @@ const ApplicationField = () => {
           setCheckedValue(value);
         }}
         values={checkedValue}
-        wrapperClassName={clsx('items-center', 'justify-center')}
+        checkBoxWrapperClassName={clsx('justify-center', 'items-center')}
+        checkBoxClassName="!flex-auto"
       />
 
-      <div className={clsx('flex', 'flex-col', 'gap-y-4', 'mt-8')}>
+      <div className={clsx('flex', 'flex-col', 'gap-y-4')}>
         <label
           className={clsx(
             'text-white',

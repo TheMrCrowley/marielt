@@ -340,11 +340,46 @@ export const getFlatsSearchResults = async (value: string): Promise<SearchResult
 };
 
 export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
-  const query = qs.stringify({
-    populate: '*',
-  });
+  const query = qs.stringify(
+    {
+      populate: {
+        additional_info: {
+          populate: '*',
+        },
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        agents: {
+          populate: '*',
+        },
+        region: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        district: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        microdistrict: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        parameters: {
+          populate: '*',
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
 
-  const response = await fetch(`${process.env.API_BASE_URL}/apart-items/${id}?${query}`, {
+  const url = `${process.env.API_BASE_URL}/apart-items/${id}?${query}`;
+
+  const response = await fetch(url, {
     cache: 'no-cache',
   });
 

@@ -12,6 +12,8 @@ interface CheckboxGroupProps<T extends boolean> extends InputWrapperProps {
     label: string;
   }>;
   values: T extends true ? string[] : string;
+  checkBoxWrapperClassName?: string;
+  checkBoxClassName?: string;
 }
 
 function CheckboxGroup<T extends boolean>({
@@ -22,6 +24,8 @@ function CheckboxGroup<T extends boolean>({
   wrapperClassName,
   items,
   values,
+  checkBoxClassName,
+  checkBoxWrapperClassName,
 }: CheckboxGroupProps<T>) {
   const handleClick = (value: string) => {
     if (isMulti) {
@@ -45,12 +49,13 @@ function CheckboxGroup<T extends boolean>({
 
   return (
     <InputWrapper label={label} subLabel={subLabel} wrapperClassName={wrapperClassName}>
-      <div className={clsx('flex', 'gap-2', 'flex-wrap', 'max-w-max')}>
+      <div className={clsx('flex', 'gap-2', 'flex-wrap', 'max-w-max', checkBoxWrapperClassName)}>
         {items.map((item) => (
           <CheckboxButton
             key={`checkbox-group-checkbox-item-${label}-${item.label}-${item.value}`}
             isChecked={isValueChecked(item.value)}
             onChange={() => handleClick(item.value)}
+            checkBoxClassName={checkBoxClassName}
           >
             {item.label}
           </CheckboxButton>

@@ -4,9 +4,15 @@ import React, { PropsWithChildren } from 'react';
 interface CheckboxButtonProps extends PropsWithChildren {
   isChecked: boolean;
   onChange: (checked: boolean) => void;
+  checkBoxClassName?: string;
 }
 
-const CheckboxButton = ({ isChecked, onChange, children }: CheckboxButtonProps) => {
+const CheckboxButton = ({
+  isChecked,
+  onChange,
+  children,
+  checkBoxClassName,
+}: CheckboxButtonProps) => {
   return (
     <label
       className={clsx(
@@ -24,6 +30,7 @@ const CheckboxButton = ({ isChecked, onChange, children }: CheckboxButtonProps) 
         isChecked ? 'text-white' : 'text-[#A3A3A3]',
         isChecked ? 'bg-[#E3C49680]' : 'bg-[#4C4C4C]',
         'first-letter:uppercase',
+        checkBoxClassName,
       )}
     >
       {children}

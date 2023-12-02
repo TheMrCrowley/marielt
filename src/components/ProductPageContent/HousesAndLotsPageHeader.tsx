@@ -81,7 +81,9 @@ const HousesAndLotsPageHeader = ({
           <div className={clsx('h-full', 'flex', 'justify-between', 'gap-4', 'flex-col')}>
             <div className={clsx('flex', 'gap-1.5')}>
               <Image alt="map-pin" src={LocationIcon} />
-              <Typography fontSize={16}>{address}</Typography>
+              <Typography className="inline" fontSize={16}>
+                {address}
+              </Typography>
             </div>
             {direction && (
               <div className={clsx('flex', 'gap-1.5')}>

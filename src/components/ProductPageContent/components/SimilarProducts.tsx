@@ -30,7 +30,7 @@ const SimilarProducts = ({
   }
 
   return (
-    <div className={clsx('flex', 'flex-col', 'md:my-24', 'my-12')}>
+    <div className={clsx('flex', 'flex-col')}>
       <div
         className={clsx(
           'flex',

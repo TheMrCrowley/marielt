@@ -303,14 +303,45 @@ export const getHousesByIds = async (ids: string[]) => {
 export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAndLotsItem> => {
   const query = qs.stringify(
     {
-      populate: '*',
+      populate: {
+        fields: ['price'],
+        region: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        house_number: {
+          populate: '*',
+        },
+        house_categories: {
+          populate: {
+            fields: ['category', 'name'],
+          },
+        },
+        agents: {
+          populate: '*',
+        },
+        direction: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        parameters: {
+          populate: '*',
+        },
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+      },
     },
     {
       encodeValuesOnly: true,
     },
   );
 
-  const response = await fetch(`${process.env.API_BASE_URL}/house-items/${id}?${query}`, {
+  const url = `${process.env.API_BASE_URL}/house-items/${id}?${query}`;
+
+  const response = await fetch(url, {
     cache: 'no-cache',
   });
 
@@ -393,8 +424,8 @@ const getSimilarByLocation = async ({
     {
       filters: {
         coordinates: {
-          latitude: { $between: [(latitude || 0) - 0.016, (latitude || 0) + 0.016] },
-          longitude: { $between: [(longitude || 0) - 0.016, (longitude || 0) + 0.016] },
+          latitude: { $between: [(latitude || 0) - 0.1, (latitude || 0) + 0.1] },
+          longitude: { $between: [(longitude || 0) - 0.1, (longitude || 0) + 0.1] },
         },
         id: {
           $ne: id,

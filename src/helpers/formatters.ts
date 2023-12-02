@@ -26,7 +26,7 @@ import {
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
-import { getSmallAddress } from './addressHelpers';
+import { getSmallAddress, getFullAddress } from './addressHelpers';
 
 export const formatToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
@@ -74,10 +74,13 @@ export const formatToDetailedFlat = ({
   attributes,
   id,
 }: StrapiFindOneResponse<FlatStrapiResponse>['data']): DetailedFlatItem => ({
-  address: getSmallAddress({
+  address: getFullAddress({
+    region: attributes.region?.data.attributes.name,
+    districtRb: attributes.district_rb,
     locality: attributes.locality,
-    houseNumber: attributes.house_number?.number,
+    district: attributes.district?.data.attributes.name,
     street: attributes.street,
+    houseNumber: attributes.house_number?.number,
   }),
   id,
   price: attributes.price,
@@ -213,10 +216,13 @@ export const formatToDetailedHousesAndLots = ({
   attributes,
   id,
 }: StrapiFindOneResponse<HousesAndLotsStrapiResponse>['data']): DetailedHousesAndLotsItem => ({
-  address: getSmallAddress({
+  address: getFullAddress({
+    region: attributes.region?.data.attributes.name,
+    districtRb: attributes.district_rb,
+    village: attributes.village_council,
     locality: attributes.locality,
-    houseNumber: attributes.house_number?.number,
     street: attributes.street,
+    houseNumber: attributes.house_number?.number,
   }),
   id,
   price: attributes.price,
@@ -246,9 +252,11 @@ export const formatToDetailedHousesAndLots = ({
     readinessPercentage: attributes.parameters.readiness_percentage,
     builtUpArea:
       attributes.parameters.built_up_area &&
-      (
-        +attributes.parameters.built_up_area.length * +attributes.parameters.built_up_area.width
-      ).toString(),
+      Object.values(attributes.parameters.built_up_area).every((item) => !!item)
+        ? (
+            +attributes.parameters.built_up_area.length * +attributes.parameters.built_up_area.width
+          ).toString()
+        : '',
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
@@ -264,7 +272,7 @@ export const formatToDetailedHousesAndLots = ({
     category: attributes.house_categories.data[0].attributes.category,
     name: attributes.house_categories.data[0].attributes.name,
   },
-  direction: { name: attributes.direction?.data?.attributes.name },
+  direction: attributes.direction?.data?.attributes.name,
   location: attributes.location?.coordinates,
   images: Array.isArray(attributes?.image?.data)
     ? attributes!.image!.data.map((item) => ({

@@ -41,20 +41,21 @@ const ProductPageContent = ({
     (breakpoint >= WindowWidth.LG || breakpoint <= WindowWidth.XS) && locationField;
 
   return (
-    <div className={clsx('w-full', 'lg:px-12', 'px-5')}>
+    <div className={clsx('w-full', 'lg:px-12', 'px-5', 'mb-8')}>
       <div
         className={clsx(
           'flex',
           'justify-center',
-          'gap-[30px]',
+          'gap-8',
           'min-[1440px]:flex-row',
           'flex-col',
           'relative',
+          'mb-8',
         )}
       >
-        <div className={clsx('flex', 'flex-col', 'gap-y-[30px]', 'w-[calc(100% - 340px)]')}>
+        <div className={clsx('flex', 'flex-col', 'gap-8', 'w-[calc(100% - 340px)]')}>
           {productHeader}
-          {renderMobileLocationField()}
+
           <div className={clsx('flex', 'gap-8', 'xl:flex-row', 'flex-col')}>
             {characteristics}
             <div className={clsx('flex', 'flex-col', 'gap-8', 'xl:w-[65%]', 'w-full')}>
@@ -64,9 +65,9 @@ const ProductPageContent = ({
               {note}
             </div>
           </div>
+          {renderMobileLocationField()}
           {creditCalculator}
         </div>
-
         {breakpoint >= WindowWidth.SM && agentForm}
         {breakpoint < WindowWidth.SM && (
           <Button

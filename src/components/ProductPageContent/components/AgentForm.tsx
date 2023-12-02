@@ -7,6 +7,7 @@ import { useState } from 'react';
 import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import Typography from '@/src/components/common/Typography';
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { DetailedFlatItem } from '@/src/types/Flats';
 import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
@@ -17,6 +18,8 @@ interface AgentFormProps {
 const AgentForm = ({ agentData }: AgentFormProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isPhoneVisible, setIsPhoneVisible] = useState<boolean>(false);
+  const [nameValue, setNameValue] = useState<string>('');
+  const [phoneValue, setPhoneValue] = useState<string>('');
 
   const { fullName, phone1, position } = agentData;
 
@@ -76,6 +79,7 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
           'justify-center',
           'items-center',
           'p-6',
+          'w-full',
         )}
       >
         <div className={clsx('flex')}>
@@ -93,15 +97,29 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
         >
           Показать контакты
         </button>
-        <input
-          placeholder="Имя"
-          className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black', 'mb-5')}
-        />
-        <input
-          type="tel"
-          placeholder="+375 25 784 65 47"
+
+        <label
           className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black', 'mb-12')}
-        />
+        >
+          <input
+            placeholder="Имя"
+            className={clsx('placeholder:text-[#3434347f]')}
+            value={nameValue}
+            onChange={(e) => setNameValue(e.target.value.replace(/\d/i, ''))}
+          />
+        </label>
+        <label
+          className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black', 'mb-12')}
+        >
+          +375
+          <input
+            type="tel"
+            placeholder=" 25 784 65 47"
+            className={clsx('placeholder:text-[#3434347f]')}
+            value={phoneValue}
+            onChange={(e) => setPhoneValue(formatToNumber(e.target.value))}
+          />
+        </label>
         <label
           className={clsx(
             'text-black',
@@ -112,11 +130,12 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
             'font-light',
             'text-center',
             'mb-5',
+            'gap-4',
           )}
         >
           <input
             onChange={() => setIsChecked(!isChecked)}
-            className={clsx('w-[15px]', 'h-[15px]')}
+            className={clsx('w-4', 'h-4', 'bg-transparent', 'outline-none', 'border-none')}
             type="checkbox"
             name="agreement"
             checked={isChecked}
@@ -127,7 +146,7 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
           onClick={(e) => {
             e.preventDefault();
           }}
-          disabled={!isChecked}
+          disabled={!isChecked && !(phoneValue.length === 9) && !nameValue.length}
           className={clsx(
             'disabled:pointer-events-none',
             'bg-[#262626]',

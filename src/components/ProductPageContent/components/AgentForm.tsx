@@ -3,6 +3,8 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState } from 'react';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input/input';
 
 import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
@@ -19,10 +21,11 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isPhoneVisible, setIsPhoneVisible] = useState<boolean>(false);
   const [nameValue, setNameValue] = useState<string>('');
-  const [phoneValue, setPhoneValue] = useState<string>('');
+  const [phoneValue, setPhoneValue] = useState<string | undefined>('');
 
   const { fullName, phone1, position } = agentData;
 
+  const disabled = !(isChecked && isValidPhoneNumber(phoneValue || '', 'BY') && nameValue.length);
   return (
     <div
       className={clsx(
@@ -111,13 +114,14 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
         <label
           className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black', 'mb-12')}
         >
-          +375
-          <input
-            type="tel"
-            placeholder=" 25 784 65 47"
-            className={clsx('placeholder:text-[#3434347f]')}
+          <PhoneInput
             value={phoneValue}
-            onChange={(e) => setPhoneValue(formatToNumber(e.target.value))}
+            onChange={setPhoneValue}
+            country="BY"
+            smartCaret
+            withCountryCallingCode
+            international
+            useNationalFormatForDefaultCountryValue
           />
         </label>
         <label
@@ -146,13 +150,14 @@ const AgentForm = ({ agentData }: AgentFormProps) => {
           onClick={(e) => {
             e.preventDefault();
           }}
-          disabled={!isChecked && !(phoneValue.length === 9) && !nameValue.length}
+          disabled={disabled}
           className={clsx(
             'disabled:pointer-events-none',
             'bg-[#262626]',
             'text-white',
             'w-full',
             'py-3',
+            'disabled:opacity-50',
           )}
         >
           Оставить заявку

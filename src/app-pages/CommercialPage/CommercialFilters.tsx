@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
+import { SortValues } from '@/src/enums/SortOptions';
 import {
   createFiltersStateBySearchParams,
   formatFiltersToSearchParams,
@@ -47,10 +48,15 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
     selectedFilters: Partial<typeof filters>,
     searchFilters?: Partial<typeof filters>,
   ) => {
+    console.log(searchParams.get('sort') as SortValues);
     router.push(
       pathname +
         '?' +
-        formatFiltersToSearchParams({ ...selectedFilters, ...searchFilters }, selectedCurrency),
+        formatFiltersToSearchParams(
+          { ...selectedFilters, ...searchFilters },
+          selectedCurrency,
+          searchParams.get('sort') as SortValues,
+        ),
     );
     router.refresh();
   };

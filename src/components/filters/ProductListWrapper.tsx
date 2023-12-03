@@ -9,6 +9,8 @@ import MapIcon from '@/public/map.png';
 import Pagination from '@/src/components/common/Pagination';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import SortSelect from './SortSelect';
+
 interface ProductListWrapperProps extends PropsWithChildren {
   pagination: StrapiFindResponse<{}>['meta']['pagination'];
 }
@@ -52,24 +54,35 @@ const ProductListWrapper = ({
         'px-4',
       )}
     >
-      <button
-        className={clsx(
-          'flex',
-          'justify-center',
-          'items-center',
-          'w-max',
-          'gap-4',
-          'text-[#B1B1B1]',
-          'underline',
-          'hover:cursor-pointer',
-          'transition-all',
-        )}
-        onClick={handleViewChange}
+      <div className={clsx('w-full', 'flex', 'items-center', 'justify-end', 'gap-8')}>
+        <SortSelect />
+        <button
+          className={clsx(
+            'flex',
+            'justify-center',
+            'items-center',
+            'w-max',
+            'gap-4',
+            'text-[#B1B1B1]',
+            'underline',
+            'hover:cursor-pointer',
+            'transition-all',
+          )}
+          onClick={handleViewChange}
+        >
+          <Image src={MapIcon} alt="map-icon" />
+          На карте
+        </button>
+      </div>
+      <div
+        className={clsx('grid', 'w-full', 'gap-8')}
+        style={{
+          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gap: 'calc(1.25rem + 20 * ((100vw - 320px) / 1600))',
+        }}
       >
-        <Image src={MapIcon} alt="map-icon" />
-        На карте
-      </button>
-      <div className={clsx('flex', 'justify-center', 'flex-wrap', 'gap-8')}>{children}</div>
+        {children}
+      </div>
       <Pagination currentPage={page} totalPages={pageCount} onChange={handlePageChange} />
     </section>
   );

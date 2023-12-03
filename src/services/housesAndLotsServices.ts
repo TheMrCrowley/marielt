@@ -30,6 +30,7 @@ import {
 import { lotsWaterQueryMap } from './../enums/HousesAndLotsFilters';
 import { formatToDefaultMapItem } from './../helpers/formatters';
 import { getPaginationQuery } from './../helpers/getPaginationQuery';
+import { getSortQuery } from './../helpers/getSortQuery';
 import { getCurrencies } from './currencyServices';
 
 const getHousesAndLotsStrapiQuery = (
@@ -223,7 +224,9 @@ export const getHousesAndLotsForList = async (searchParams: Record<string, strin
 
   const populateQuery = getDefaultHouseListPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
+  const sortQuery = getSortQuery(searchParams.sort as string);
+
+  const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}&${sortQuery}`;
 
   const response = await fetch(url, {
     next: {

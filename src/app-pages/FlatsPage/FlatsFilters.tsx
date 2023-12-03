@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 
+import { SortValues } from '@/src/enums/SortOptions';
 import {
   createFiltersStateBySearchParams,
   formatFiltersToSearchParams,
@@ -46,7 +47,11 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
     router.push(
       pathname +
         '?' +
-        formatFiltersToSearchParams({ ...filters, ...searchFilters }, selectedCurrency),
+        formatFiltersToSearchParams(
+          { ...filters, ...searchFilters },
+          selectedCurrency,
+          searchParams.get('sort') as SortValues,
+        ),
     );
     router.refresh();
   };

@@ -1,12 +1,15 @@
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
+import { SortValues } from '@/src/enums/SortOptions';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 
 export const formatFiltersToSearchParams = <T extends Record<string, string | string[] | boolean>>(
   filters: BaseFilters<T, {}>['filters'],
   currency: AvailableCurrencies,
+  sort: SortValues,
 ) => {
+  console.log(new URLSearchParams(location.search).get('sort'));
   const searchParams = new URLSearchParams();
 
   Object.entries(filters).forEach(([key, value]) => {
@@ -28,6 +31,7 @@ export const formatFiltersToSearchParams = <T extends Record<string, string | st
   });
 
   searchParams.set('currency', currency);
+  searchParams.set('sort', sort);
 
   return searchParams;
 };

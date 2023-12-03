@@ -2,6 +2,8 @@
 
 import clsx from 'clsx';
 import { useState } from 'react';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input/input';
 
 import Button from '@/src/components/common/Button/Button';
 import CheckboxGroup from '@/src/components/common/CheckboxGroup/CheckboxGroup';
@@ -11,7 +13,14 @@ const ApplicationField = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [checkedValue, setCheckedValue] = useState<string>('');
   const [nameValue, setNameValue] = useState<string>('');
-  const [phoneValue, setPhoneValue] = useState<string>('');
+  const [phoneValue, setPhoneValue] = useState<string | undefined>('');
+
+  const disabled = !(
+    isChecked &&
+    checkedValue &&
+    isValidPhoneNumber(phoneValue || '', 'BY') &&
+    nameValue.length
+  );
 
   return (
     <form
@@ -34,8 +43,7 @@ const ApplicationField = () => {
         Оставьте заявку и мы ответим на все ваши вопросы
       </Typography>
       <div className={clsx('flex', 'gap-8')}>
-        <input
-          placeholder="Имя"
+        <label
           className={clsx(
             'w-full',
             'lg:text-2xl',
@@ -45,10 +53,14 @@ const ApplicationField = () => {
             'border-secondary',
             'text-white',
           )}
-        />
-        <input
-          type="tel"
-          placeholder="+375 25 784 65 47"
+        >
+          <input
+            placeholder="Имя"
+            value={nameValue}
+            onChange={(e) => setNameValue(e.target.value)}
+          />
+        </label>
+        <label
           className={clsx(
             'w-full',
             'lg:text-2xl',
@@ -58,7 +70,17 @@ const ApplicationField = () => {
             'border-secondary',
             'text-white',
           )}
-        />
+        >
+          <PhoneInput
+            value={phoneValue}
+            onChange={setPhoneValue}
+            country="BY"
+            smartCaret
+            withCountryCallingCode
+            international
+            useNationalFormatForDefaultCountryValue
+          />
+        </label>
       </div>
       <CheckboxGroup
         isMulti={false}
@@ -104,8 +126,8 @@ const ApplicationField = () => {
           onClick={(e) => {
             e.preventDefault();
           }}
-          disabled={!isChecked || !checkedValue}
-          className={clsx('disabled:pointer-events-none')}
+          disabled={disabled}
+          className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}
         >
           Оставить заявку
         </Button>

@@ -68,6 +68,7 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
     );
     applyFilters(filtersToApply);
   };
+  console.log(housesAndLotasCategories, housesAndLotsRootCategory);
 
   return (
     <>
@@ -75,7 +76,10 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
         <Select
           isMulti={true}
           items={housesAndLotasCategories
-            .filter((item) => item.belongTo === housesAndLotsRootCategory)
+            .filter(
+              (item) =>
+                item.belongTo?.toLocaleLowerCase() === housesAndLotsRootCategory.toLowerCase(),
+            )
             .map((item) => ({
               label: item.categoryName,
               value: item.categoryName,

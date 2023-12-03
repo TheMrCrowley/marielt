@@ -26,20 +26,10 @@ const CardWrapper = ({
   placeholderUrl,
 }: CardWrapperProps) => {
   return (
-    <div
-      className={clsx(
-        'flex',
-        'flex-col',
-        'bg-[#262626]',
-        'md:h-[450px]',
-        'h-[400px]',
-        'md:w-[330px]',
-        'w-[300px]',
-      )}
-    >
+    <div className={clsx('bg-[#262626]', 'grid', 'w-full', 'h-full')}>
       <Link href={to} target="_blank" rel="noopener noreferrer">
         <Image
-          className={clsx('object-fill', 'w-full', 'h-[165px]')}
+          className={clsx('object-cover', 'w-full', 'h-[165px]')}
           src={imgUrl || ImagePlaceholder}
           placeholder="blur"
           blurDataURL={placeholderUrl || ImagePlaceholder.blurDataURL}
@@ -50,34 +40,36 @@ const CardWrapper = ({
       </Link>
       <div
         className={clsx(
-          'flex',
-          'flex-col',
-          'flex-auto',
-          'md:pt-3',
-          'md:pb-5',
+          'md:py-3',
           'md:px-5',
           'p-2',
-          'gap-2',
+          'gap-4',
+          'grid',
+          'justify-items-stretch',
+          'grid-flow-row',
         )}
       >
         <Title
-          className={clsx('text-ellipsis', 'whitespace-nowrap', 'overflow-hidden', 'w-full')}
+          className={clsx('max-w-full', 'w-full', 'text-ellipsis', 'line-clamp-2')}
           variant="h2"
           fontSize={20}
         >
           {title || 'Тут могло быть ваше название'}
         </Title>
-        <div className={clsx('flex', 'items-center', 'gap-2')}>
+        <div
+          className={clsx(
+            'flex',
+            'items-center',
+            'gap-2',
+            'max-w-full',
+            'w-full',
+            'overflow-hidden',
+          )}
+        >
           <Image src={CardMapPinIcon} alt="card-map-pin" />
           <Typography
             fontSize={16}
-            className={clsx(
-              'text-ellipsis',
-              'whitespace-nowrap',
-              'overflow-hidden',
-              'w-full',
-              'opacity-50',
-            )}
+            className={clsx('max-w-full', 'w-full', 'text-ellipsis', 'line-clamp-2')}
           >
             {address}
           </Typography>

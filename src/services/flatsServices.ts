@@ -28,6 +28,7 @@ import {
   StrapiFindResponse,
 } from '@/src/types/StrapiTypes';
 
+import { getSortQuery } from './../helpers/getSortQuery';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (
@@ -239,7 +240,9 @@ export const getFlatsForList = async (
 
   const populateQuery = getDefaultFlatListPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}`;
+  const sortQuery = getSortQuery(searchParams.sort as string);
+
+  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}&${sortQuery}`;
 
   const response = await fetch(url, {
     next: {

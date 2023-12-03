@@ -289,5 +289,6 @@ export const houseCharacteristicsMap: Partial<
   balcony: (value) => ({ name: 'Балкон', value }),
   parking: (value) => ({ name: 'Парковочное место', value }),
   readinessPercentage: (value) => ({ name: 'Процент готовности', value }),
-  builtUpArea: (value) => ({ name: 'Площадь застройки(длина/ширина)', value }),
+  builtUpAreaLength: (value) => ({ name: 'Длина застройки', value: `${value} м` }),
+  builtUpAreaWidth: (value) => ({ name: 'Ширина застройки', value: `${value} м` }),
 };

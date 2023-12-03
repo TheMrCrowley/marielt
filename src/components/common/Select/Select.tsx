@@ -95,8 +95,11 @@ function Select<T extends boolean>({
     if (isMulti) {
       return values.length ? `Выбрано: ${values.length}` : 'Выбрать';
     }
+
     return values
-      ? `${placeholderPrefix || ''} ${values} ${placeholderPostfix || ''}`
+      ? `${placeholderPrefix || ''} ${items.find((item) => item.value === values)?.label} ${
+          placeholderPostfix || ''
+        }`
       : placeholder;
   };
 

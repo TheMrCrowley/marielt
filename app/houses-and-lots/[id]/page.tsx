@@ -10,6 +10,7 @@ interface HousesAndLotsPageProps {
 }
 const page = async ({ params: { id } }: HousesAndLotsPageProps) => {
   const houseAndLotsItem = await getHousesAndLotsById(id);
+
   return <HousesAndLotsProductPage item={houseAndLotsItem} />;
 };
 export default page;

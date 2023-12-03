@@ -22,6 +22,7 @@ interface HousesAndLotsPageHeaderProps {
   price?: number;
   category?: string;
   direction?: string;
+  distance?: string;
 }
 
 const HousesAndLotsPageHeader = ({
@@ -35,6 +36,7 @@ const HousesAndLotsPageHeader = ({
   title,
   category,
   direction,
+  distance,
 }: HousesAndLotsPageHeaderProps) => {
   const renderAreas = () => (
     <>
@@ -90,6 +92,7 @@ const HousesAndLotsPageHeader = ({
                 <Image alt="direction" src={DirectionIcon} />
                 <Typography color="text-[#A3A3A3]" fontSize={16}>
                   {direction}
+                  {distance && `, ${distance} км от МКАД`}
                 </Typography>
               </div>
             )}

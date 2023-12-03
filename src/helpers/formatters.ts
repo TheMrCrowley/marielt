@@ -244,6 +244,7 @@ export const formatToDetailedHousesAndLots = ({
   price: attributes.price,
   name: attributes.name,
   initialCurrency: attributes.currency || 'USD',
+
   parameters: {
     plotSize: attributes.parameters.plot_size,
     livingArea: attributes.parameters.living_area,
@@ -266,13 +267,8 @@ export const formatToDetailedHousesAndLots = ({
     balcony: attributes.parameters.balcony,
     parking: attributes.parameters.parking,
     readinessPercentage: attributes.parameters.readiness_percentage,
-    builtUpArea:
-      attributes.parameters.built_up_area &&
-      Object.values(attributes.parameters.built_up_area).every((item) => !!item)
-        ? (
-            +attributes.parameters.built_up_area.length * +attributes.parameters.built_up_area.width
-          ).toString()
-        : '',
+    builtUpAreaLength: attributes.parameters.built_up_area?.length,
+    builtUpAreaWidth: attributes.parameters.built_up_area?.width,
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
@@ -298,6 +294,7 @@ export const formatToDetailedHousesAndLots = ({
         width: item.attributes.width as number,
       }))
     : [],
+  distance: attributes.distance,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 

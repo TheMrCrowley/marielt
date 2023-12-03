@@ -39,7 +39,6 @@ const ExpandedAreaFilter = () => {
         isMulti={false}
         label="Высота Потолков"
         subLabel="м"
-        placeholderPrefix="От"
         items={ceilingHeightValues}
         values={ceilingHeight}
         onChange={(height) => updateFilters({ ceilingHeight: height })}

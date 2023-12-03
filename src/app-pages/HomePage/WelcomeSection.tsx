@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import ApplicationField from '@/src/components/ApplicationField';
 import { HomePageData } from '@/src/types/HomePage';
 
 interface WelcomeSectionProps {
@@ -17,6 +18,12 @@ const WelcomeSection = ({ data: { description, image, title } }: WelcomeSectionP
         'bg-no-repeat',
         'md:min-h-[750px]',
         'min-h-[600px]',
+        'flex',
+        'md:flex-row',
+        'flex-col',
+        'justify-between',
+        'items-stretch',
+        'gap-4',
       )}
       style={{ backgroundImage: `url(${image.url})` }}
     >
@@ -31,11 +38,9 @@ const WelcomeSection = ({ data: { description, image, title } }: WelcomeSectionP
           'bg-[#00000080]',
           'flex',
           'flex-col',
-          'gap-y-3',
-          'lg:mt-44',
-          'md:mt-24',
-          'sm:mt-12',
-          'mt-6',
+          'gap-4',
+          'md:self-center',
+          'self-start',
           'max-w-max',
         )}
       >
@@ -56,7 +61,7 @@ const WelcomeSection = ({ data: { description, image, title } }: WelcomeSectionP
           {description}
         </p>
       </div>
-      {/*TODO //place for form */}
+      <ApplicationField type="home" />
     </section>
   );
 };

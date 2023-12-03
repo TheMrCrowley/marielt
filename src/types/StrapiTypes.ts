@@ -257,6 +257,7 @@ export interface HousesAndLotsStrapiResponse {
   street?: string;
   district_rb?: string;
   village_council?: string;
+  distance?: string;
   region?: {
     data: {
       attributes: {

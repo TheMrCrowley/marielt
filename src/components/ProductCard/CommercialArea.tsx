@@ -67,7 +67,7 @@ const CommercialArea = ({
         <Typography fontSize={14} fontWeight="medium">
           {plotSize}
         </Typography>{' '}
-        <span className={clsx('opacity-50')}>соток</span>
+        <span className={clsx('opacity-50')}>сот.</span>
       </Typography>
     );
   };

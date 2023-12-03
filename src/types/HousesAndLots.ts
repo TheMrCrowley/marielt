@@ -25,7 +25,8 @@ export type DefaultHousesAndLotsItem = {
 
 export type DetailedHousesAndLotsItem = {
   parameters: {
-    builtUpArea?: string;
+    builtUpAreaLength?: string;
+    builtUpAreaWidth?: string;
     levelNumber?: string;
     roofMaterial?: string;
     wallMaterial?: string;
@@ -53,6 +54,7 @@ export type DetailedHousesAndLotsItem = {
     url: string;
     placeholderUrl: string;
   }>;
+  distance?: string;
   agent: {
     fullName: string;
     phone1: string;

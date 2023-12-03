@@ -68,7 +68,7 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {plotSize} <span className={clsx('opacity-50')}>соток</span>
+          {plotSize} <span className={clsx('opacity-50')}>сот.</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>участок</p>
       </div>

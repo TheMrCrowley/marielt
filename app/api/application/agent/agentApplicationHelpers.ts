@@ -43,7 +43,7 @@ const getDynamicField = (type: ProductType) => {
 };
 
 export const getAgentFormBodyByType = ({ id, name, phone, type }: AgentFormRequestBody) => {
-  const body = {
+  const resBody = {
     data: {
       name,
       phone,
@@ -63,5 +63,16 @@ export const getAgentFormBodyByType = ({ id, name, phone, type }: AgentFormReque
     },
   };
 
-  return JSON.stringify(body);
+  const commBody = {
+    data: {
+      name,
+      phone,
+      type: 'купить',
+      comm_item: {
+        id,
+      },
+    },
+  };
+
+  return JSON.stringify(type === 'commercial' ? commBody : resBody);
 };

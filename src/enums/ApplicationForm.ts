@@ -1,4 +1,5 @@
-import { OptionType } from './../types/Filters';
+import { OptionType } from '@/src/types/Filters';
+
 export enum ApplicationFormType {
   Rest = 'rest',
   Comm = 'comm',

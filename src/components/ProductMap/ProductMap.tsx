@@ -16,7 +16,7 @@ import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ymaps from 'yandex-maps';
 
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
-import { isMobile } from '@/src/helpers/userAgent';
+import { isClientMobile } from '@/src/helpers/isClientMobile';
 import { useCurrency } from '@/src/store/currency';
 import { DefaultMapItem } from '@/src/types/Product';
 
@@ -45,8 +45,12 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
   };
 
   useEffect(() => {
-    if (mapRef.current && isMobile()) {
-      mapRef.current.behaviors.disable('drag');
+    if (mapRef.current) {
+      if (isClientMobile()) {
+        mapRef.current.behaviors.disable('drag');
+      } else {
+        mapRef.current?.behaviors.enable('drag');
+      }
     }
   }, [mapRef.current]);
 

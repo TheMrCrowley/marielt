@@ -41,6 +41,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     houseCategories,
     name,
     direction,
+    id,
   } = item;
 
   const { constructionYear, totalArea, livingArea, plotSize } = item.parameters;
@@ -50,7 +51,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     <>
       <ProductPageSlider images={images} type="houses-and-lots" video={video} />
       <ProductPageContent
-        agentForm={<AgentForm agentData={agent} />}
+        agentForm={<AgentForm productId={id} type="houses-and-lots" agentData={agent} />}
         detailedDescription={<DescriptionField description={detailedDescription} />}
         locationField={<LocationField location={location} />}
         note={<NoteField note={note} />}

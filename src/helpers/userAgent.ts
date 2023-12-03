@@ -1,5 +1,8 @@
-export const isMobile = () => {
-  const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile/i;
+import { headers } from 'next/headers';
 
-  return regex.test(navigator.userAgent);
+export const isMobile = () => {
+  const headersList = headers();
+
+  const userAgent = headersList.get('user-agent');
+  return !!userAgent!.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
 };

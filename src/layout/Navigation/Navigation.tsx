@@ -4,8 +4,6 @@ import clsx from 'clsx';
 import React from 'react';
 
 import { AppRoutes } from '@/src/enums/AppRoutes';
-import { WindowWidth } from '@/src/enums/Width';
-import { useWindowSize } from '@/src/hooks/useWindowSize';
 
 import NavigationItem from './NavigationItem';
 
@@ -17,12 +15,6 @@ interface NavigationProps {
 }
 
 const Navigation = ({ navigationItems }: NavigationProps) => {
-  const breakpoint = useWindowSize();
-
-  if (breakpoint < WindowWidth.SM) {
-    return null;
-  }
-
   return (
     <nav
       className={clsx(

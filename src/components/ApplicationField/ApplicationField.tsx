@@ -8,19 +8,42 @@ import PhoneInput from 'react-phone-number-input/input';
 import Button from '@/src/components/common/Button/Button';
 import CheckboxGroup from '@/src/components/common/CheckboxGroup/CheckboxGroup';
 import Typography from '@/src/components/common/Typography/Typography';
+import { ApplicationFormType, applicationFormOptions } from '@/src/enums/ApplicationForm';
+import { removeDigits } from '@/src/helpers/removeDigits';
+import { sendGenericApplication } from '@/src/services/applicationServices';
+
+const defaultFormState = {
+  checkedValue: '',
+  isChecked: false,
+  nameValue: '',
+  phoneValue: '',
+};
 
 const ApplicationField = () => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [checkedValue, setCheckedValue] = useState<string>('');
-  const [nameValue, setNameValue] = useState<string>('');
-  const [phoneValue, setPhoneValue] = useState<string | undefined>('');
+  const [formState, setFormState] = useState<{
+    isChecked: boolean;
+    checkedValue: string;
+    nameValue: string;
+    phoneValue: string | undefined;
+  }>(defaultFormState);
 
   const disabled = !(
-    isChecked &&
-    checkedValue &&
-    isValidPhoneNumber(phoneValue || '', 'BY') &&
-    nameValue.length
+    formState.isChecked &&
+    formState.checkedValue &&
+    isValidPhoneNumber(formState.phoneValue || '', 'BY') &&
+    formState.nameValue.length
   );
+
+  const onApply = async () => {
+    if (formState.checkedValue && formState.phoneValue && formState.nameValue) {
+      sendGenericApplication({
+        name: formState.nameValue,
+        phone: formState.phoneValue,
+        type: formState.checkedValue as ApplicationFormType,
+      });
+      setFormState(defaultFormState);
+    }
+  };
 
   return (
     <form
@@ -42,12 +65,13 @@ const ApplicationField = () => {
       <Typography fontSize={48} className={clsx('lg:text-5xl', 'text-xl', 'text-center')}>
         Оставьте заявку и мы ответим на все ваши вопросы
       </Typography>
-      <div className={clsx('flex', 'gap-8')}>
+      <div className={clsx('flex', 'gap-8', 'flex-wrap')}>
         <label
           className={clsx(
-            'w-full',
             'lg:text-2xl',
             'md:text-xl',
+            'sm:w-2/5',
+            'w-full',
             'text-base',
             'border-b',
             'border-secondary',
@@ -56,15 +80,19 @@ const ApplicationField = () => {
         >
           <input
             placeholder="Имя"
-            value={nameValue}
-            onChange={(e) => setNameValue(e.target.value)}
+            value={formState.nameValue}
+            onChange={(e) =>
+              setFormState((prev) => ({ ...prev, nameValue: removeDigits(e.target.value) }))
+            }
+            className="w-full"
           />
         </label>
         <label
           className={clsx(
-            'w-full',
             'lg:text-2xl',
             'md:text-xl',
+            'sm:w-2/5',
+            'w-full',
             'text-base',
             'border-b',
             'border-secondary',
@@ -72,30 +100,27 @@ const ApplicationField = () => {
           )}
         >
           <PhoneInput
-            value={phoneValue}
-            onChange={setPhoneValue}
+            value={formState.phoneValue}
+            onChange={(value) => setFormState((prev) => ({ ...prev, phoneValue: value }))}
             country="BY"
             smartCaret
             withCountryCallingCode
             international
             useNationalFormatForDefaultCountryValue
+            style={{
+              width: '100%',
+            }}
           />
         </label>
       </div>
+
       <CheckboxGroup
         isMulti={false}
-        items={[
-          'Продать жилой объект',
-          'Продать/сдать в аренду коммерческий объект',
-          'Интересует работа',
-        ].map((item) => ({
-          label: item,
-          value: item,
-        }))}
+        items={applicationFormOptions}
         onChange={(value) => {
-          setCheckedValue(value);
+          setFormState((prev) => ({ ...prev, checkedValue: value }));
         }}
-        values={checkedValue}
+        values={formState.checkedValue}
         checkBoxWrapperClassName={clsx('justify-center', 'items-center')}
         checkBoxClassName="!flex-auto"
       />
@@ -111,20 +136,22 @@ const ApplicationField = () => {
             'items-center',
             'font-light',
             'text-center',
+            'hover:cursor-pointer',
           )}
         >
           <input
-            onChange={() => setIsChecked(!isChecked)}
+            onChange={() => setFormState((prev) => ({ ...prev, isChecked: !prev.isChecked }))}
             className={clsx('md:w-4', 'md:h-4', 'md:mr-3', 'w-[10px]', 'h-[10px]', 'mr-1')}
             type="checkbox"
             name="agreement"
-            checked={isChecked}
+            checked={formState.isChecked}
           />
           Я согласен(а) с обработкой моих персональных данных
         </label>
         <Button
           onClick={(e) => {
             e.preventDefault();
+            onApply();
           }}
           disabled={disabled}
           className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}

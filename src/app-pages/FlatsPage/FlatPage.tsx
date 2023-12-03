@@ -42,6 +42,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     agents,
     detailedDescription,
     video,
+    id,
   } = flat;
 
   const { roominess, floor, maxFloor, constructionYear, totalArea, livingArea, kitchenArea } =
@@ -68,7 +69,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
             price={+price!}
           />
         }
-        agentForm={<AgentForm agentData={agents} />}
+        agentForm={<AgentForm productId={id} type="flats" agentData={agents} />}
         characteristics={<Characteristics characteristics={getFlatCharacteristics(flat)} />}
         detailedDescription={<DescriptionField description={detailedDescription} />}
         locationField={<LocationField location={location} />}

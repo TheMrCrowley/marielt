@@ -6,11 +6,11 @@ import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 
 interface ProductPageContentProps {
-  productHeader: React.ReactNode | React.ReactElement;
-  characteristics: React.ReactElement | React.ReactNode;
-  note: React.ReactElement | React.ReactNode;
-  locationField: React.ReactNode | React.ReactElement;
-  similarObjectsField: React.ReactNode | React.ReactElement;
+  productHeader?: React.ReactNode | React.ReactElement;
+  characteristics?: React.ReactElement | React.ReactNode;
+  note?: React.ReactElement | React.ReactNode;
+  locationField?: React.ReactNode | React.ReactElement;
+  similarObjectsField?: React.ReactNode | React.ReactElement;
   creditCalculator?: React.ReactNode | React.ReactElement;
   agentForm?: React.ReactNode | React.ReactElement;
   detailedDescription?: React.ReactNode | React.ReactElement;

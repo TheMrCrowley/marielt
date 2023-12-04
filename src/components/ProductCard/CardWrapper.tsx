@@ -10,11 +10,12 @@ import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 
 interface CardWrapperProps extends PropsWithChildren {
-  address: string;
-  title?: string;
-  imgUrl?: string;
+  address?: string;
   placeholderUrl?: string;
   to: string;
+  imgUrl?: string;
+  title?: string;
+  wrapperClassName?: string;
 }
 
 const CardWrapper = ({
@@ -24,9 +25,10 @@ const CardWrapper = ({
   address,
   children,
   placeholderUrl,
+  wrapperClassName,
 }: CardWrapperProps) => {
   return (
-    <div className={clsx('bg-[#262626]', 'grid', 'w-full', 'h-full')}>
+    <div className={clsx('bg-[#262626]', 'grid', 'w-full', 'h-full', wrapperClassName)}>
       <Link href={to} target="_blank" rel="noopener noreferrer">
         <Image
           className={clsx('object-cover', 'w-full', 'h-[165px]')}

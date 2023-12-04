@@ -6,7 +6,7 @@ import PaybackFilter from '@/src/components/CommercialFilters/PaybackFilter';
 import ProfitabilityFilter from '@/src/components/CommercialFilters/ProfitabilityFilter';
 import PropertyTypeFilter from '@/src/components/CommercialFilters/PropertyTypeFilter';
 import SeparateEntrance from '@/src/components/CommercialFilters/SeparateEntrance';
-import VatToggleFilter from '@/src/components/CommercialFilters/VatToggleFilter';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';

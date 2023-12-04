@@ -14,9 +14,12 @@ import {
   formatToDefaultMapItem,
   formatToDetailedFlat,
 } from '@/src/helpers/formatters';
-import { getPaginationQuery } from '@/src/helpers/getPaginationQuery';
-import { getQueryArray } from '@/src/helpers/getQueryArray';
-import { getSortQuery } from '@/src/helpers/getSortQuery';
+import {
+  getDefaultFlatListPopulateQuery,
+  getPaginationQuery,
+  getQueryArray,
+  getSortQuery,
+} from '@/src/helpers/queryHelpers';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
@@ -25,6 +28,7 @@ import { DefaultFlatItem, DetailedFlatItem, FlatStrapiResponse } from '@/src/typ
 import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { getDefaultMapPopulateQuery, concatQueries } from './../helpers/queryHelpers';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (
@@ -183,39 +187,6 @@ const getFlatsStrapiQueryParamsByFilters = (
   return { query };
 };
 
-const getDefaultFlatListPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
-        },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['floor', 'living_area', 'floors_number', 'total_area'],
-        },
-        location: '*',
-      },
-    },
-    { encodeValuesOnly: true },
-  );
-};
-
-const getDefaultFlatMapPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        location: '*',
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    },
-  );
-};
-
 export const getFlatsForList = async (
   searchParams: Record<string, string | string[]>,
 ): Promise<{
@@ -232,13 +203,13 @@ export const getFlatsForList = async (
       usd,
     },
   );
-  const paginationQuery = getPaginationQuery('list', searchParams.page as string);
 
-  const populateQuery = getDefaultFlatListPopulateQuery();
-
-  const sortQuery = getSortQuery(searchParams.sort as string);
-
-  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}&${sortQuery}`;
+  const url = `${process.env.API_BASE_URL}/apart-items${concatQueries([
+    query,
+    getPaginationQuery('list', searchParams.page as string),
+    getDefaultFlatListPopulateQuery(),
+    getSortQuery(searchParams.sort as string),
+  ])}`;
 
   const response = await fetch(url, {
     next: {
@@ -272,10 +243,12 @@ export const getFlatsForMap = async (
       usd,
     },
   );
-  const paginationQuery = getPaginationQuery('map');
-  const populateQuery = getDefaultFlatMapPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${paginationQuery}&${populateQuery}`;
+  const url = `${process.env.API_BASE_URL}/apart-items${concatQueries([
+    getPaginationQuery('map'),
+    getDefaultMapPopulateQuery(),
+    query,
+  ])}`;
 
   const response = await fetch(url, {
     next: {
@@ -305,10 +278,12 @@ export const getFlatsByIds = async (ids: string[]) => {
     },
     { encodeValuesOnly: true },
   );
-  const paginationQuery = getPaginationQuery('map');
-  const populateQuery = getDefaultFlatListPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/apart-items?${paginationQuery}&${populateQuery}&${idsQuery}`;
+  const url = `${process.env.API_BASE_URL}/apart-items${concatQueries([
+    idsQuery,
+    getPaginationQuery('map'),
+    getDefaultFlatListPopulateQuery(),
+  ])}`;
 
   const response = await fetch(url, {
     next: {
@@ -430,9 +405,9 @@ const getSimilarByPrice = async ({
     },
   );
 
-  const url = `${
-    process.env.API_BASE_URL
-  }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
+  const populateQuery = getDefaultFlatListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/apart-items?${query}&${populateQuery}`;
 
   const response = await fetch(url, {
     next: {

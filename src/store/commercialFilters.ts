@@ -36,7 +36,7 @@ export type CommercialFiltersType = BaseFilters<
     isFirstFloor: boolean;
     isLastFloor: boolean;
     isGroundFloor: boolean;
-    vat: boolean;
+    vat: string;
     separateEntrance: boolean;
     commercialLocation: string[];
     separateRoomsFrom: string;
@@ -91,7 +91,7 @@ const initialCommercialFilters: CommercialFiltersType['filters'] = {
   profitabilityTo: '',
   paybackFrom: '',
   paybackTo: '',
-  vat: false,
+  vat: '',
   separateEntrance: false,
   commercialLocation: [],
   separateRoomsFrom: '',
@@ -202,7 +202,7 @@ const filtersNameMap: Record<
   ceilingHeightFrom: (value) => `Высота потолков от: ${value}`,
   ceilingHeightTo: (value) => `Высота потолков до: ${value}`,
   gas: () => 'Газ',
-  vat: () => 'НДС',
+  vat: (value) => value as string,
   commercialLocation: (value) =>
     `Расположение: ${commercialLocationQueryMap[value as CommercialLocationValues]}`,
   isFirstFloor: () => 'Первый этаж',

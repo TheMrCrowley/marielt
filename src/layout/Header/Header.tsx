@@ -19,8 +19,7 @@ const Header = async () => {
         className={clsx(
           'px-5',
           'flex',
-          'sm:justify-center',
-          'justify-between',
+          isMobileDevice ? 'justify-between' : 'justify-center',
           'items-center',
           'xl:h-36',
           'lg:h-28',

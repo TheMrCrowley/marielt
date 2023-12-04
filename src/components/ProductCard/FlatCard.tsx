@@ -13,9 +13,10 @@ import CardWrapper from './CardWrapper';
 
 interface FlatCardProps {
   flatItem: DefaultFlatItem;
+  wrapperClassName?: string;
 }
 
-const FlatCard = ({ flatItem }: FlatCardProps) => {
+const FlatCard = ({ flatItem, wrapperClassName }: FlatCardProps) => {
   const {
     image,
     name,
@@ -35,6 +36,7 @@ const FlatCard = ({ flatItem }: FlatCardProps) => {
       imgUrl={image?.url}
       placeholderUrl={image?.placeholderUrl}
       title={name}
+      wrapperClassName={wrapperClassName}
     >
       <CardFloor floor={floor} maxFloor={maxFloor} />
       <CardArea

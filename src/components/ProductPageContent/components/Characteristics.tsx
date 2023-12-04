@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import React from 'react';
 
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
@@ -12,7 +12,11 @@ interface CharacteristicsProps {
   characteristics: CharacteristicItem[];
 }
 
-const Characteristics: FC<CharacteristicsProps> = ({ characteristics }) => {
+const Characteristics = ({ characteristics }: CharacteristicsProps) => {
+  if (!characteristics.length) {
+    return null;
+  }
+
   return (
     <div className={clsx('flex', 'flex-col', 'xl:w-[35%]', 'w-full')}>
       <Title fontSize={32} className={clsx('bg-[#262626]', 'py-6', 'px-5')}>

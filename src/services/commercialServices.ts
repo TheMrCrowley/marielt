@@ -6,15 +6,21 @@ import {
   commercialWallMaterialQueryMap,
 } from '@/src/enums/CommercialFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDefaultCommercial } from '@/src/helpers/formatters';
-import { getQueryArray } from '@/src/helpers/getQueryArray';
+import { formatToCommercialMapItem, formatToDefaultCommercial } from '@/src/helpers/formatters';
+import { concatQueries, getPaginationQuery, getQueryArray } from '@/src/helpers/queryHelpers';
+import {
+  getDefaultCommercialListPopulateQuery,
+  getDefaultMapPopulateQuery,
+} from '@/src/helpers/queryHelpers';
 import { CommercialFiltersType } from '@/src/store/commercialFilters';
 import { CurrencyState } from '@/src/store/currency';
 import { CommercialStrapiResponse } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { StrapiFindResponse } from '@/src/types/StrapiTypes';
+import { DefaultMapItem } from '@/src/types/Product';
+import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { formatToDetailedCommercialItem } from './../helpers/formatters';
 import { getCurrencies } from './currencyServices';
 
 const getCommercialStrapiQueryParamsByFilters = (
@@ -421,6 +427,9 @@ const getCommercialStrapiQueryParamsByFilters = (
           },
         ],
         parameters: {
+          vat: {
+            $eq: vat,
+          },
           $or: [
             {
               floor: {
@@ -506,15 +515,7 @@ const getCommercialStrapiQueryParamsByFilters = (
             $gte: paybackFrom,
             $lte: paybackTo,
           },
-          vat: {
-            $eq: vat,
-          },
         },
-      },
-      populate: ['parameters.premises_area', 'price_total', 'price_meter'],
-      pagination: {
-        pageSize: 6,
-        page: filters.page || 1,
       },
     },
     {
@@ -525,7 +526,9 @@ const getCommercialStrapiQueryParamsByFilters = (
   return { query };
 };
 
-export const getCommercialItems = async (searchParams: Record<string, string | string[]>) => {
+export const getCommercialItemsForList = async (
+  searchParams: Record<string, string | string[]>,
+) => {
   const { eur, rub, usd } = await getCurrencies();
   const { query } = getCommercialStrapiQueryParamsByFilters(
     searchParams,
@@ -536,8 +539,10 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
       usd,
     },
   );
+  const paginationQuery = getPaginationQuery('list', searchParams.page as string);
+  const populateQuery = getDefaultCommercialListPopulateQuery();
 
-  const url = `${process.env.API_BASE_URL}/comm-items?${query}`;
+  const url = `${process.env.API_BASE_URL}/comm-items?${query}&${paginationQuery}&${populateQuery}`;
 
   const response = await fetch(url, {
     cache: 'no-cache',
@@ -551,6 +556,54 @@ export const getCommercialItems = async (searchParams: Record<string, string | s
   return {
     commercial: formatToDefaultCommercial(data),
     pagination,
+  };
+};
+
+export const getCommercialItemsForMap = async (
+  searchParams: Record<string, string | string[]>,
+): Promise<{
+  commercial: DefaultMapItem[];
+}> => {
+  const { eur, rub, usd } = await getCurrencies();
+  const { query } = getCommercialStrapiQueryParamsByFilters(
+    searchParams,
+    (searchParams.currency as AvailableCurrencies) || 'USD',
+    {
+      rub,
+      eur,
+      usd,
+    },
+  );
+
+  const url = `${process.env.API_BASE_URL}/comm-items${concatQueries([
+    getPaginationQuery('map'),
+    getDefaultMapPopulateQuery(),
+    query,
+    qs.stringify(
+      {
+        populate: {
+          price_total: {
+            populate: '*',
+          },
+          price_meter: {
+            populate: '*',
+          },
+        },
+      },
+      { encodeValuesOnly: true },
+    ),
+  ])}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+
+  return {
+    commercial: formatToCommercialMapItem(data),
   };
 };
 
@@ -572,4 +625,104 @@ export const getCommercialSearchResults = async (value: string): Promise<SearchR
   const searchResults = (await response.json()) as SearchResults;
 
   return searchResults;
+};
+
+export const getCommercialByIds = async (ids: string[]) => {
+  if (!ids.length) {
+    return;
+  }
+
+  const idsQuery = qs.stringify(
+    {
+      filters: {
+        id: {
+          $in: ids,
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `${process.env.API_BASE_URL}/comm-items${concatQueries([
+    idsQuery,
+    getPaginationQuery('map'),
+    getDefaultCommercialListPopulateQuery(),
+  ])}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+
+  return formatToDefaultCommercial(data);
+};
+
+export const getCommercialById = async (id: string) => {
+  const query = qs.stringify(
+    {
+      populate: {
+        price_total: {
+          populate: '*',
+        },
+        business: {
+          populate: '*',
+        },
+        price_meter: {
+          populate: '*',
+        },
+        additional_info: {
+          populate: '*',
+        },
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        agents: {
+          populate: {
+            fields: ['full_name', 'phone1', 'phone2', 'branch', 'position'],
+          },
+        },
+        region: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        district: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        microdistrict: {
+          populate: {
+            fields: ['name'],
+          },
+        },
+        parameters: {
+          populate: '*',
+        },
+        comm_categories: {
+          fields: ['name', 'category'],
+        },
+        direction: {
+          fields: ['name'],
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+  const url = `${process.env.API_BASE_URL}/comm-items/${id}?${query}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
+
+  return formatToDetailedCommercialItem(data);
 };

@@ -1,3 +1,4 @@
+import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { QueryMapType, OptionType } from '@/src/types/Filters';
 export enum TransactionTypeValues {
   Business = 'business',
@@ -108,4 +109,91 @@ export const commercialWallMaterialQueryMap: QueryMapType<CommercialWallMaterial
   [CommercialWallMaterialValues.Monolith]: 'монолитный',
   [CommercialWallMaterialValues.Brick]: 'кирпичный',
   [CommercialWallMaterialValues.Block]: 'блочный',
+};
+
+export const commercialCharacteristicsMap: Partial<
+  Record<
+    keyof DetailedCommercialItem['parameters'],
+    (value?: string | boolean) => { name: string; value: string }
+  >
+> = {
+  profitability: (value) => ({ name: 'доходность', value: `${value}%` }),
+  payback: (value) => ({ name: 'окупаемость(лет)', value: value as string }),
+  vat: (value) => ({ name: 'НДС', value: value as string }),
+  plotSize: (value) => ({
+    name: 'Площадь участка',
+    value: `${value} сот.`,
+  }),
+  isGroundFloor: () => ({
+    name: 'Цокольный этаж',
+    value: 'Есть',
+  }),
+  ceilingHeight: (value) => ({
+    name: 'Высота потолков',
+    value: `${value} м`,
+  }),
+  wallMaterial: (value) => ({
+    name: 'Материал стен',
+    value: value as string,
+  }),
+  constructionYear: (value) => ({
+    name: 'Год постройки',
+    value: value as string,
+  }),
+  finishing: () => ({
+    name: 'Состояние дома',
+    value: 'Есть',
+  }),
+  equipment: () => ({
+    name: 'Оборудование',
+    value: 'Есть',
+  }),
+  daylight: () => ({
+    name: 'Естественное освещение',
+    value: 'Есть',
+  }),
+  electricity: () => ({
+    name: 'Электроснабжение',
+    value: 'Есть',
+  }),
+  heating: () => ({
+    name: 'Отопление',
+    value: 'Есть',
+  }),
+  gas: () => ({
+    name: 'Газоснабжение',
+    value: 'Есть',
+  }),
+  water: () => ({
+    name: 'Вода',
+    value: 'Есть',
+  }),
+  bathroom: () => ({
+    name: 'Санузел',
+    value: 'Есть',
+  }),
+  ventilation: () => ({
+    name: 'Вентиляция',
+    value: 'Есть',
+  }),
+  sewerage: () => ({
+    name: 'Канализация',
+    value: 'Есть',
+  }),
+  furniture: () => ({
+    name: 'Мебель',
+    value: 'Есть',
+  }),
+  location: (value) => ({
+    name: 'Расположение',
+    value: value as string,
+  }),
+  separateEntrance: () => ({
+    name: 'Отдельный вход',
+    value: 'Есть',
+  }),
+  ramp: () => ({
+    name: 'Погрузка/разгрузка/рампа',
+    value: 'Есть',
+  }),
 };

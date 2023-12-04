@@ -17,9 +17,7 @@ import {
   formatToDetailedHousesAndLots,
 } from '@/src/helpers/formatters';
 import { formatToDefaultMapItem } from '@/src/helpers/formatters';
-import { getPaginationQuery } from '@/src/helpers/getPaginationQuery';
-import { getQueryArray } from '@/src/helpers/getQueryArray';
-import { getSortQuery } from '@/src/helpers/getSortQuery';
+import { getPaginationQuery, getQueryArray, getSortQuery } from '@/src/helpers/queryHelpers';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
@@ -27,6 +25,7 @@ import { SearchResults } from '@/src/types/Filters';
 import { DetailedHousesAndLotsItem, HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { getDefaultMapPopulateQuery } from './../helpers/queryHelpers';
 import { getCurrencies } from './currencyServices';
 
 const getHousesAndLotsStrapiQuery = (
@@ -171,7 +170,7 @@ const getHousesAndLotsStrapiQuery = (
   return { query };
 };
 
-const getDefaultHouseListPopulateQuery = () => {
+export const getDefaultHouseListPopulateQuery = () => {
   return qs.stringify(
     {
       populate: {
@@ -188,19 +187,6 @@ const getDefaultHouseListPopulateQuery = () => {
       },
     },
     { encodeValuesOnly: true },
-  );
-};
-
-const getDefaultHouseMapPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        location: '*',
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    },
   );
 };
 
@@ -255,7 +241,7 @@ export const getHousesAndLotsForMap = async (searchParams: Record<string, string
 
   const paginationQuery = getPaginationQuery('map');
 
-  const populateQuery = getDefaultHouseMapPopulateQuery();
+  const populateQuery = getDefaultMapPopulateQuery();
 
   const url = `${process.env.API_BASE_URL}/house-items?${query}&${paginationQuery}&${populateQuery}`;
 

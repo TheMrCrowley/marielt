@@ -9,12 +9,12 @@ import { AvailableCurrencies } from '@/src/types/Currency';
 import CardFloor from './CardFloor';
 
 interface CommercialAreaProps {
-  totalArea: {
+  totalArea?: {
     minArea?: string;
     maxArea?: string;
   };
-  totalPrice: boolean;
-  pricePerMeter: {
+  totalPrice?: boolean;
+  pricePerMeter?: {
     from?: string;
     to?: string;
   };
@@ -25,7 +25,7 @@ interface CommercialAreaProps {
 }
 
 const CommercialArea = ({
-  totalArea: { maxArea, minArea },
+  totalArea,
   plotSize,
   floor,
   maxFloor,
@@ -35,20 +35,20 @@ const CommercialArea = ({
 }: CommercialAreaProps) => {
   const { selectedCurrency, rates } = useCurrency();
 
-  if (!maxArea && !minArea && !plotSize) {
+  if (!totalArea?.maxArea && !totalArea?.minArea && !plotSize) {
     return null;
   }
 
   const renderTotalArea = () => {
-    if (!minArea) {
+    if (!totalArea?.minArea) {
       return null;
     }
 
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {minArea}
-          {maxArea && `-${maxArea}`}
+          {totalArea.minArea}
+          {totalArea.maxArea && `-${totalArea.maxArea}`}
           <span className={clsx('text-xs', 'opacity-50')}>м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>площадь</p>
@@ -57,7 +57,7 @@ const CommercialArea = ({
   };
 
   const renderPlotSize = () => {
-    if (minArea || !plotSize) {
+    if (totalArea?.minArea || !plotSize) {
       return null;
     }
 
@@ -73,7 +73,7 @@ const CommercialArea = ({
   };
 
   const renderPricePerMeter = () => {
-    if (!pricePerMeter.from || !totalPrice) {
+    if (!pricePerMeter?.from || !totalPrice) {
       return null;
     }
 

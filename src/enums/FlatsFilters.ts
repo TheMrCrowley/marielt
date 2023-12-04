@@ -213,24 +213,27 @@ export const ceilingHeightValues = [
 ];
 
 export const flatCharacteristicsMap: Partial<
-  Record<keyof DetailedFlatItem['parameters'], (value: string) => { name: string; value: string }>
+  Record<
+    keyof DetailedFlatItem['parameters'],
+    (value?: string | boolean) => { name: string; value: string }
+  >
 > = {
-  houseType: (value) => ({ name: 'Тип дома', value }),
-  separateRooms: (value) => ({ name: 'Раздельных комнат', value }),
-  shareInApartment: (value) => ({ name: 'Доля в квартире', value }),
-  livingArea: (value) => ({ name: 'Площадь жилая', value }),
-  kitchenArea: (value) => ({ name: 'Площадь кухни', value }),
-  totalArea: (value) => ({ name: 'Площадь общая', value }),
-  floorType: (value) => ({ name: 'Вид этажа', value }),
-  balconyArea: (value) => ({ name: 'Площадь балконов (лоджий, террас)', value }),
-  snbArea: (value) => ({ name: 'Площадь по СНБ', value }),
-  bathroom: (value) => ({ name: 'Санузел', value }),
-  flooring: (value) => ({ name: 'Полы', value }),
-  balcony: (value) => ({ name: 'Балкон', value }),
-  telephone: (value) => ({ name: 'Телефон', value }),
-  layout: (value) => ({ name: 'Планировка', value }),
-  finishing: (value) => ({ name: 'Ремонт', value }),
-  majorRenovationYear: (value) => ({ name: 'Год капитального ремонта', value }),
-  ceilingHeight: (value) => ({ name: 'Высота потолков', value }),
-  levelNumber: (value) => ({ name: 'Число уровней', value }),
+  houseType: (value) => ({ name: 'Тип дома', value: value as string }),
+  separateRooms: (value) => ({ name: 'Раздельных комнат', value: value as string }),
+  shareInApartment: (value) => ({ name: 'Доля в квартире', value: value as string }),
+  livingArea: (value) => ({ name: 'Площадь жилая', value: value as string }),
+  kitchenArea: (value) => ({ name: 'Площадь кухни', value: value as string }),
+  totalArea: (value) => ({ name: 'Площадь общая', value: value as string }),
+  floorType: (value) => ({ name: 'Вид этажа', value: value as string }),
+  balconyArea: (value) => ({ name: 'Площадь балконов (лоджий, террас)', value: value as string }),
+  snbArea: (value) => ({ name: 'Площадь по СНБ', value: value as string }),
+  bathroom: (value) => ({ name: 'Санузел', value: value as string }),
+  flooring: (value) => ({ name: 'Полы', value: value as string }),
+  balcony: (value) => ({ name: 'Балкон', value: value as string }),
+  telephone: (value) => ({ name: 'Телефон', value: value as string }),
+  layout: (value) => ({ name: 'Планировка', value: value as string }),
+  finishing: (value) => ({ name: 'Ремонт', value: value as string }),
+  majorRenovationYear: (value) => ({ name: 'Год капитального ремонта', value: value as string }),
+  ceilingHeight: (value) => ({ name: 'Высота потолков', value: value as string }),
+  levelNumber: (value) => ({ name: 'Число уровней', value: value as string }),
 };

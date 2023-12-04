@@ -5,32 +5,33 @@ import {
   formatToDefaultFlat,
   formatToDefaultHouseAndLotsItem,
 } from '@/src/helpers/formatters';
+import {
+  getDefaultFlatListPopulateQuery,
+  getDefaultCommercialListPopulateQuery,
+} from '@/src/helpers/queryHelpers';
 import { CommercialStrapiResponse, DefaultCommercialItem } from '@/src/types/Commercial';
 import { DefaultFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem, HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
+import { getDefaultHouseListPopulateQuery } from './housesAndLotsServices';
+
 const actualQuery = qs.stringify({
   filters: {
     home_page: true,
   },
-  populate: {
-    image: {
-      fields: ['width', 'height', 'url', 'placeholder'],
-    },
-    house_number: {
-      fields: ['number'],
-    },
-    parameters: {
-      fields: ['floor', 'living_area', 'floors_number', 'total_area'],
-    },
-    location: '*',
-  },
 });
 
 const getActualFlats = async (): Promise<DefaultFlatItem[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/apart-items?${actualQuery}`);
+  const populateQuery = getDefaultFlatListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/apart-items?${actualQuery}&${populateQuery}`;
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
 
@@ -38,7 +39,15 @@ const getActualFlats = async (): Promise<DefaultFlatItem[]> => {
 };
 
 const getActualCommercial = async (): Promise<DefaultCommercialItem[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/comm-items?${actualQuery}`);
+  const populateQuery = getDefaultCommercialListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/comm-items?${actualQuery}&${populateQuery}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
@@ -46,7 +55,14 @@ const getActualCommercial = async (): Promise<DefaultCommercialItem[]> => {
 };
 
 const getActualHousesAndLots = async (): Promise<DefaultHousesAndLotsItem[]> => {
-  const response = await fetch(`${process.env.API_BASE_URL}/house-items?${actualQuery}`);
+  const populateQuery = getDefaultHouseListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/house-items?${actualQuery}&${populateQuery}`;
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 

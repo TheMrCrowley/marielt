@@ -11,9 +11,10 @@ import CardWrapper from './CardWrapper';
 
 interface HousesAndLotsCardProps {
   housesAndLotsItem: DefaultHousesAndLotsItem;
+  wrapperClassName?: string;
 }
 
-const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
+const HousesAndLotsCard = ({ housesAndLotsItem, wrapperClassName }: HousesAndLotsCardProps) => {
   const {
     address,
     id,
@@ -28,6 +29,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem }: HousesAndLotsCardProps) => {
 
   return (
     <CardWrapper
+      wrapperClassName={wrapperClassName}
       address={address}
       to={`/houses-and-lots/${id}`}
       imgUrl={image?.url}

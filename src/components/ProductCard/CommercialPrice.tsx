@@ -9,63 +9,65 @@ import { useCurrency } from '@/src/store/currency';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
 interface CommercialPriceProps {
-  totalPrice: {
+  totalPrice?: {
     from?: string;
     to?: string;
   };
-  pricePerMeter: {
+  pricePerMeter?: {
     from?: string;
     to?: string;
   };
   initialCurrency: AvailableCurrencies;
 }
 
-const CommercialPrice = ({
-  initialCurrency,
-  pricePerMeter: { from: pricePerMeterFrom, to: pricePerMeterTo },
-  totalPrice: { from, to },
-}: CommercialPriceProps) => {
+const CommercialPrice = ({ initialCurrency, pricePerMeter, totalPrice }: CommercialPriceProps) => {
   const { selectedCurrency, rates } = useCurrency();
 
-  if (!pricePerMeterFrom && !pricePerMeterTo && !from && !to) {
+  if (!pricePerMeter?.from && !pricePerMeter?.to && !totalPrice?.from && !totalPrice?.to) {
     return null;
   }
 
   const renderTotalPrice = () => {
-    if (!from) {
+    if (!totalPrice?.from) {
       return null;
     }
 
     return (
       <div className={clsx('flex', 'justify-between', 'items-center')}>
         <Typography fontWeight="medium">
-          {from && to && 'от'}{' '}
-          {getPriceByCurrencyMonetary(+from, initialCurrency, selectedCurrency, rates)}
+          {totalPrice.from && totalPrice.to && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+totalPrice.from, initialCurrency, selectedCurrency, rates)}
         </Typography>
         <Typography className={'opacity-50'}>
-          {from && to && 'от'} {getPriceByCurrencyMonetary(+from, initialCurrency, 'BYN', rates)}
+          {totalPrice.from && totalPrice.to && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+totalPrice.from, initialCurrency, 'BYN', rates)}
         </Typography>
       </div>
     );
   };
 
   const renderPricePerMeter = () => {
-    if (!pricePerMeterFrom) {
+    if (!pricePerMeter?.from) {
       return null;
     }
 
     return (
       <div className={clsx('flex', 'justify-between', 'items-center')}>
         <Typography fontWeight="medium">
-          {pricePerMeterFrom && pricePerMeterTo && 'от'}{' '}
-          {getPriceByCurrencyMonetary(+pricePerMeterFrom, initialCurrency, selectedCurrency, rates)}{' '}
+          {pricePerMeter.from && pricePerMeter.to && 'от'}{' '}
+          {getPriceByCurrencyMonetary(
+            +pricePerMeter.from,
+            initialCurrency,
+            selectedCurrency,
+            rates,
+          )}{' '}
           <Typography fontSize={16} fontWeight="light" className="inline">
             за м²
           </Typography>
         </Typography>
         <Typography className={'opacity-50'}>
-          {pricePerMeterFrom && pricePerMeterTo && 'от'}{' '}
-          {getPriceByCurrencyMonetary(+pricePerMeterFrom, initialCurrency, 'BYN', rates)}
+          {pricePerMeter.from && pricePerMeter.to && 'от'}{' '}
+          {getPriceByCurrencyMonetary(+pricePerMeter.from, initialCurrency, 'BYN', rates)}
         </Typography>
       </div>
     );

@@ -34,10 +34,6 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
     }
   }, [breakpoint]);
 
-  if (breakpoint >= WindowWidth.SM) {
-    return null;
-  }
-
   return (
     <>
       <button
@@ -55,6 +51,10 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
           <div
             className={clsx(
               'fixed',
+              'xl:top-36',
+              'lg:top-28',
+              'md:top-20',
+
               'top-16',
               'left-0',
               'right-0',

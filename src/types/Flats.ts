@@ -48,7 +48,6 @@ export type DetailedFlatItem = {
     majorRenovationYear?: string;
     levelNumber?: string;
   };
-
   detailedDescription?: string;
   additionalInfo: Array<{ name: string }>;
   note?: string;

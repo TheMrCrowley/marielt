@@ -20,7 +20,8 @@ import { District, MicroDistrict } from '@/src/types/Location';
 import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
-import { getSmallAddress, getFullAddress } from './addressHelpers';
+import { DetailedCommercialItem } from './../types/Commercial';
+import { getFullAddress } from './addressHelpers';
 
 export const formatToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
@@ -61,6 +62,16 @@ export const formatToDefaultMapItem = (
   items.map(({ attributes, id }) => ({
     id,
     price: attributes.price,
+    initialCurrency: attributes.currency || 'USD',
+    location: attributes.location?.coordinates,
+  }));
+
+export const formatToCommercialMapItem = (
+  items: StrapiFindResponse<CommercialStrapiResponse>['data'],
+): DefaultMapItem[] =>
+  items.map(({ attributes, id }) => ({
+    id,
+    price: attributes.price_total?.from || attributes.price_meter?.from,
     initialCurrency: attributes.currency || 'USD',
     location: attributes.location?.coordinates,
   }));
@@ -130,47 +141,140 @@ export const formatToDetailedFlat = ({
 export const formatToDefaultCommercial = (
   commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
 ): DefaultCommercialItem[] =>
-  commercial.map(
-    ({
-      attributes: {
-        locality,
-        house_number,
-        street,
-        currency,
-        comm_tran,
-        parameters,
-        price_total,
-        price_meter,
-      },
-      id,
-    }) => ({
-      address: getSmallAddress({
-        locality,
-        houseNumber: house_number?.number,
-        street,
-      }),
-      id,
-      initialCurrency: currency || 'USD',
-      transactionType: comm_tran?.data?.attributes?.uid,
-      parameters: {
-        totalArea: {
-          maxArea: parameters.premises_area?.max_area,
-          minArea: parameters.premises_area?.min_area,
-        },
-        plotSize: parameters.plot_size,
-        floor: parameters.floor,
-        maxFloor: parameters.floors_number,
-        pricePerMeter: {
-          from: price_meter?.from,
-          to: price_meter?.to,
-        },
-        totalPrice: {
-          from: price_total?.from,
-          to: price_total?.to,
-        },
-      },
+  commercial.map(({ attributes, id }) => ({
+    name: attributes.name,
+    address: getFullAddress({
+      region: attributes.region?.data.attributes.name,
+      districtRb: attributes.district_rb,
+      locality: attributes.locality,
+      district: attributes.district?.data.attributes.name,
+      street: attributes.street,
+      houseNumber: attributes.house_number?.number,
     }),
-  );
+    id,
+    initialCurrency: attributes.currency || 'USD',
+    transactionType: attributes.comm_tran?.data?.attributes?.uid!,
+    image: Array.isArray(attributes.image?.data)
+      ? {
+          height: attributes.image!.data[0].attributes.height,
+          width: attributes.image!.data[0].attributes.width,
+          url: attributes.image!.data[0].attributes.url,
+          placeholderUrl: attributes.image!.data[0].attributes.placeholder,
+        }
+      : undefined,
+    parameters: {
+      plotSize: attributes.parameters?.plot_size,
+      floor: attributes.parameters?.floor,
+      maxFloor: attributes.parameters?.floors_number,
+    },
+    totalArea: {
+      maxArea: attributes.parameters?.premises_area?.max_area,
+      minArea: attributes.parameters?.premises_area?.min_area,
+    },
+    pricePerMeter: {
+      from: attributes.price_meter?.from,
+      to: attributes.price_meter?.to,
+    },
+    totalPrice: {
+      from: attributes.price_total?.from,
+      to: attributes.price_total?.to,
+    },
+  }));
+
+export const formatToDetailedCommercialItem = ({
+  attributes,
+  id,
+}: StrapiFindOneResponse<CommercialStrapiResponse>['data']): DetailedCommercialItem => ({
+  location: attributes.location?.coordinates,
+  agents: {
+    fullName: attributes?.agents?.data[0].attributes.full_name!,
+    phone1: attributes?.agents?.data[0].attributes.phone1!,
+    branch: attributes?.agents?.data[0].attributes.branch,
+    phone2: attributes?.agents?.data[0].attributes.phone2,
+    position: attributes?.agents?.data[0].attributes.position,
+  },
+  address: getFullAddress({
+    region: attributes.region?.data.attributes.name,
+    districtRb: attributes.district_rb,
+    locality: attributes.locality,
+    district: attributes.district?.data?.attributes.name,
+    street: attributes.street,
+    houseNumber: attributes.house_number?.number,
+  }),
+  id,
+  initialCurrency: attributes.currency || 'USD',
+  transactionType: attributes.comm_tran?.data?.attributes?.uid!,
+  images: Array.isArray(attributes.image?.data)
+    ? attributes.image!.data.map(({ attributes: imageAttributes }) => ({
+        height: imageAttributes.height,
+        width: imageAttributes.width,
+        url: imageAttributes.url,
+        placeholderUrl: imageAttributes.placeholder,
+      }))
+    : [],
+  parameters: {
+    plotSize: attributes.parameters?.plot_size,
+    floor: attributes.parameters?.floor,
+    maxFloor: attributes.parameters?.floors_number,
+    bathroom: attributes.parameters?.bathroom,
+    ceilingHeight: attributes.parameters?.ceiling_height,
+    constructionYear: attributes.parameters?.construction_year,
+    daylight: attributes.parameters?.daylight,
+    electricity: attributes.parameters?.electricity,
+    equipment: attributes.parameters?.equipment,
+    finishing: attributes.parameters?.finishing,
+    furniture: attributes.parameters?.furniture,
+    gas: attributes.parameters?.gas,
+    heating: attributes.parameters?.heating,
+    isGroundFloor: attributes.parameters?.is_ground_floor,
+    location: attributes.parameters?.location,
+    ramp: attributes.parameters?.ramp,
+    separateEntrance: attributes.parameters?.separate_entrance,
+    sewerage: attributes.parameters?.sewerage,
+    ventilation: attributes.parameters?.ventilation,
+    wallMaterial: attributes.parameters?.wall_material,
+    water: attributes.parameters?.water,
+    payback: attributes?.business?.payback,
+    profitability: attributes?.business?.profitability,
+    rentAmountMonth: attributes?.business?.rent_amount_month,
+    rentAmountYear: attributes?.business?.rent_amount_year,
+  },
+  pricePerMeter: {
+    from: attributes.price_meter?.from,
+    to: attributes.price_meter?.to,
+  },
+  totalPrice: {
+    from: attributes.price_total?.from,
+    to: attributes.price_total?.to,
+  },
+  premisesArea: attributes.parameters?.premises_area && {
+    min: attributes.parameters.premises_area.min_area,
+    max: attributes.parameters.premises_area.max_area,
+  },
+  separateRooms: attributes.parameters?.separate_rooms && {
+    from: attributes.parameters.separate_rooms.from,
+    to: attributes.parameters.separate_rooms.to,
+  },
+  distance: attributes.distance,
+  direction: attributes.direction?.data?.attributes.name,
+  rootType: Array.isArray(attributes.comm_categories?.data)
+    ? attributes.comm_categories?.data.filter((item) => !item?.attributes.category)[0]?.attributes
+        .name
+    : undefined,
+  type: Array.isArray(attributes.comm_categories?.data)
+    ? attributes.comm_categories?.data.filter((item) => item?.attributes.category)[0]?.attributes
+        .name
+    : undefined,
+  totalArea: {
+    maxArea: attributes.parameters?.premises_area?.max_area,
+    minArea: attributes.parameters?.premises_area?.min_area,
+  },
+  additionalInfo: attributes.additional_info,
+  name: attributes.name,
+  note: attributes.note,
+  detailedDescription: attributes.detailed_description,
+  video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
+});
 
 export const formatToDefaultHouseAndLotsItem = (
   housesAndLots: StrapiFindResponse<HousesAndLotsStrapiResponse>['data'],
@@ -414,9 +518,13 @@ export const formatResponseToSearchResult = (
   };
 };
 
-export function formatItemToCharacteristics<T extends DetailedFlatItem | DetailedHousesAndLotsItem>(
+export function formatItemToCharacteristics<
+  T extends DetailedFlatItem | DetailedHousesAndLotsItem | DetailedCommercialItem,
+>(
   item: T,
-  map: Partial<Record<keyof T['parameters'], (value: string) => { name: string; value: string }>>,
+  map: Partial<
+    Record<keyof T['parameters'], (value?: string | boolean) => { name: string; value: string }>
+  >,
 ) {
   const result: Array<{ name: string; value: string }> = [];
 
@@ -427,7 +535,7 @@ export function formatItemToCharacteristics<T extends DetailedFlatItem | Detaile
     }
   });
 
-  item.additionalInfo.forEach(({ name }) => {
+  item.additionalInfo?.forEach(({ name }) => {
     result.push({ name, value: 'Да' });
   });
 

@@ -10,37 +10,41 @@ import CommercialPrice from './CommercialPrice';
 
 interface CommercialCardProps {
   commercialItem: DefaultCommercialItem;
+  wrapperClassName?: string;
 }
 
-const CommercialCard = ({ commercialItem }: CommercialCardProps) => {
+const CommercialCard = ({ commercialItem, wrapperClassName }: CommercialCardProps) => {
   const {
-    img,
+    image,
     name,
     address,
     id,
     initialCurrency,
-
-    parameters: { totalArea, plotSize, floor, maxFloor, pricePerMeter, totalPrice },
+    parameters,
+    totalArea,
+    pricePerMeter,
+    totalPrice,
   } = commercialItem;
 
   return (
     <CardWrapper
       address={address}
-      to={`https://marielt.site/admin/content-manager/collectionType/api::commercial-property-item.commercial-property-item/${id}`}
-      imgUrl={img}
+      to={`/commercial/${id}`}
+      imgUrl={image?.url}
       title={name}
+      wrapperClassName={wrapperClassName}
     >
       <CommercialArea
         totalArea={totalArea}
-        floor={floor}
-        maxFloor={maxFloor}
-        plotSize={plotSize}
-        initialCurrency={initialCurrency}
+        floor={parameters?.floor}
+        maxFloor={parameters?.maxFloor}
+        plotSize={parameters?.plotSize}
+        initialCurrency={initialCurrency || 'USD'}
         pricePerMeter={pricePerMeter}
-        totalPrice={!!totalPrice.from}
+        totalPrice={!!totalPrice?.from}
       />
       <CommercialPrice
-        initialCurrency={initialCurrency}
+        initialCurrency={initialCurrency || 'USD'}
         pricePerMeter={pricePerMeter}
         totalPrice={totalPrice}
       />

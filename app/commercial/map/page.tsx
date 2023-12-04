@@ -1,8 +1,8 @@
 import React from 'react';
 
 import CommercialFilters from '@/src/app-pages/CommercialPage/CommercialFilters';
-import CommercialList from '@/src/app-pages/CommercialPage/CommercialList';
-import { getCommercialItemsForList } from '@/src/services/commercialServices';
+import CommercialMap from '@/src/app-pages/CommercialPage/CommercialMap';
+import { getCommercialItemsForMap } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
 
 type CommercialProps = {
@@ -10,15 +10,15 @@ type CommercialProps = {
 };
 
 const Commercial = async ({ searchParams }: CommercialProps) => {
-  const [data, { commercial, pagination }] = await Promise.all([
+  const [data, { commercial }] = await Promise.all([
     getCommercialFiltersData(),
-    getCommercialItemsForList(searchParams),
+    getCommercialItemsForMap(searchParams),
   ]);
 
   return (
     <>
       <CommercialFilters data={data} />
-      <CommercialList commercial={commercial} pagination={pagination} />
+      <CommercialMap productIds={searchParams.productIds || []} commercial={commercial} />
     </>
   );
 };

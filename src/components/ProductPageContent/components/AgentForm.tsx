@@ -16,12 +16,16 @@ import { WindowWidth } from '@/src/enums/Width';
 import { removeDigits } from '@/src/helpers/removeDigits';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { sendAgentApplication } from '@/src/services/applicationServices';
+import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { DetailedFlatItem } from '@/src/types/Flats';
 import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
 
 interface AgentFormProps {
-  agentData: DetailedFlatItem['agents'] | DetailedHousesAndLotsItem['agent'];
+  agentData?:
+    | DetailedFlatItem['agents']
+    | DetailedHousesAndLotsItem['agent']
+    | DetailedCommercialItem['agents'];
   type: ProductType;
   productId: string;
 }
@@ -43,6 +47,10 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
     phone: string | undefined;
     isChecked: boolean;
   }>(defaultFormState);
+
+  if (!agentData) {
+    return null;
+  }
 
   const { fullName, phone1, position } = agentData;
 

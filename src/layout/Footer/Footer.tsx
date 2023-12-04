@@ -5,11 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import FacebookIcon from '@/public/facebook-icon.svg';
 import RatingImg from '@/public/footer_rating.png';
 import InstagramIcon from '@/public/instagram.svg';
 import Logo from '@/public/logo.svg';
+import OkIcon from '@/public/ok-icon.svg';
 import WeOnRealtImg from '@/public/realt.png';
-import TelegramIcon from '@/public/telegram.svg';
+import VkIcon from '@/public/vk-icon.svg';
 import ContactItem from '@/src/components/common/ContactItem';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
@@ -82,15 +84,28 @@ const Footer = () => {
             </ul>
             <div className={clsx('flex', 'gap-6', 'items-center')}>
               <a
-                href="https://www.instagram.com/marielt_an/"
+                href="https://instagram.com/marielt_an?igshid=NzZlODBkYWE4Ng=="
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image src={InstagramIcon} alt="instagram" />
               </a>
-              {/* TODO add link to telegram */}
-              <a href="" target="_blank" rel="noopener noreferrer">
-                <Image src={TelegramIcon} alt="telegram" />
+              <a href="https://vk.com/club223330939" target="_blank" rel="noopener noreferrer">
+                <Image src={VkIcon} alt="instagram" />
+              </a>
+              <a
+                href="https://ok.ru/group/70000004512862"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={OkIcon} alt="instagram" />
+              </a>
+              <a
+                href="https://www.facebook.com/marielt.agency"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={FacebookIcon} alt="instagram" />
               </a>
             </div>
           </div>

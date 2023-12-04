@@ -48,7 +48,6 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
     selectedFilters: Partial<typeof filters>,
     searchFilters?: Partial<typeof filters>,
   ) => {
-    console.log(searchParams.get('sort') as SortValues);
     router.push(
       pathname +
         '?' +

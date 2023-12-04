@@ -34,3 +34,32 @@ export interface SearchResults {
   district_rb: string[];
   region: string[];
 }
+
+export interface DistrictResponse {
+  name: string;
+  microdistricts: {
+    data: Array<{
+      id: string;
+      attributes: {
+        name: string;
+      };
+    }>;
+  };
+}
+
+export interface MicroDistrictResponse {
+  name: string;
+  district: {
+    data: {
+      id: string;
+      attributes: {
+        name: string;
+      };
+    };
+  };
+}
+
+export interface DirectionResponse {
+  name: string;
+  id: number;
+}

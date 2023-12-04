@@ -7,17 +7,16 @@ import {
   formatToHousesAndLotsCategories,
   formatToMicroDistrict,
 } from '@/src/helpers/formatters';
-import { CommercialCategory, CommercialTransaction } from '@/src/types/Commercial';
-import { District, MicroDistrict } from '@/src/types/Location';
 import {
+  CommercialCategory,
   CommercialCategoryResponse,
+  CommercialTransaction,
   CommercialTransactionResponse,
-  DirectionResponse,
-  DistrictResponse,
-  HousesAndLotsCategoryResponse,
-  MicroDistrictResponse,
-  StrapiFindResponse,
-} from '@/src/types/StrapiTypes';
+} from '@/src/types/Commercial';
+import { DistrictResponse, MicroDistrictResponse, DirectionResponse } from '@/src/types/Filters';
+import { HousesAndLotsCategoryResponse } from '@/src/types/HousesAndLots';
+import { District, MicroDistrict } from '@/src/types/Location';
+import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 const getDistricts = async (): Promise<District[]> => {
   const query = qs.stringify(

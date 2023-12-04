@@ -14,7 +14,6 @@ const Commercial = async ({ searchParams }: CommercialProps) => {
     getCommercialItems(searchParams),
   ]);
 
-  console.log('Commercial was found: ', commercial.length);
   return <CommercialPage data={data} commercial={commercial} pagination={pagination} />;
 };
 

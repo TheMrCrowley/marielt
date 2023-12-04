@@ -2,8 +2,7 @@ import qs from 'qs';
 
 import { AppRoutes } from '@/src/enums/AppRoutes';
 import { HomePageItemResponse } from '@/src/types/StrapiTypes';
-
-import { StrapiFindOneResponse } from './../types/StrapiTypes';
+import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 export const getNavigationItems = async (): Promise<
   Array<{

@@ -5,16 +5,11 @@ import {
   formatToDefaultFlat,
   formatToDefaultHouseAndLotsItem,
 } from '@/src/helpers/formatters';
-import { DefaultCommercialItem } from '@/src/types/Commercial';
-import { DefaultFlatItem } from '@/src/types/Flats';
-import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
+import { CommercialStrapiResponse, DefaultCommercialItem } from '@/src/types/Commercial';
+import { DefaultFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
+import { DefaultHousesAndLotsItem, HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
-import {
-  CommercialStrapiResponse,
-  FlatStrapiResponse,
-  HousesAndLotsStrapiResponse,
-  StrapiFindResponse,
-} from '@/src/types/StrapiTypes';
+import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 const actualQuery = qs.stringify({
   filters: {

@@ -10,9 +10,10 @@ import { formatToDefaultCommercial } from '@/src/helpers/formatters';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
 import { CommercialFiltersType } from '@/src/store/commercialFilters';
 import { CurrencyState } from '@/src/store/currency';
+import { CommercialStrapiResponse } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { CommercialStrapiResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import { getCurrencies } from './currencyServices';
 

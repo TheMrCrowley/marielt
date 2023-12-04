@@ -7,6 +7,12 @@ export enum AppRoutes {
   Dubai = '/dubai',
 }
 
+export enum AppChildRoutes {
+  Agent = '/careers/agent',
+  Realtor = '/careers/realtor',
+  Sales = '/careers/sales',
+}
+
 export const navigationMap: Record<keyof typeof AppRoutes, string> = {
   Flats: 'Квартиры',
   Dubai: 'Marielt DUBAI',

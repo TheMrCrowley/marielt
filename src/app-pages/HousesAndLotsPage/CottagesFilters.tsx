@@ -68,7 +68,6 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
     );
     applyFilters(filtersToApply);
   };
-  console.log(housesAndLotasCategories, housesAndLotsRootCategory);
 
   return (
     <>

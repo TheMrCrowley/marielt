@@ -4,14 +4,27 @@ import Link from 'next/link';
 import React from 'react';
 
 import ArrowRight from '@/public/arrow-right.svg';
-import { HomePageItem } from '@/src/types/HomePage';
+import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
 
-interface LinkButtonProps {
-  type: HomePageItem['type'];
-  to: HomePageItem['to'];
+export interface LinkButtonProps {
+  type: 'product' | 'opportunity' | 'vacancy';
+  to: AppRoutes | AppChildRoutes;
   buttonClassName?: string;
   linkClassName?: string;
 }
+
+const getTextByType = (type: LinkButtonProps['type']) => {
+  switch (type) {
+    case 'product':
+      return 'Перейти в каталог';
+    case 'opportunity':
+      return 'Перейти в раздел';
+    case 'vacancy':
+      return 'Узнать больше';
+    default:
+      return null as never;
+  }
+};
 
 const LinkButton = ({ type, to, buttonClassName, linkClassName }: LinkButtonProps) => {
   return (
@@ -44,7 +57,7 @@ const LinkButton = ({ type, to, buttonClassName, linkClassName }: LinkButtonProp
           buttonClassName,
         )}
       >
-        {type === 'product' ? 'Перейти в каталог' : 'Перейти в раздел'}{' '}
+        {getTextByType(type)}
         <Image src={ArrowRight} alt="arrow-right" />
       </button>
     </Link>

@@ -14,22 +14,32 @@ interface GetCurrencyResponse {
 }
 
 export const getCurrencyByType = async (type: keyof typeof CurrencyId) => {
-  const response = await fetch(`https://api.nbrb.by/exrates/rates/${CurrencyId[type]}`, {});
+  const response = await fetch(`https://api.nbrb.by/exrates/rates/${CurrencyId[type]}`, {
+    cache: 'no-cache',
+  });
   const data = (await response.json()) as GetCurrencyResponse;
 
   return data.Cur_OfficialRate / data.Cur_Scale;
 };
 
 export const getCurrencies = async () => {
-  const [usd, eur, rub] = await Promise.all([
-    getCurrencyByType('USD'),
-    getCurrencyByType('EUR'),
-    getCurrencyByType('RUB'),
-  ]);
+  try {
+    const [usd, eur, rub] = await Promise.all([
+      getCurrencyByType('USD'),
+      getCurrencyByType('EUR'),
+      getCurrencyByType('RUB'),
+    ]);
 
-  return {
-    usd,
-    eur,
-    rub,
-  };
+    return {
+      usd,
+      eur,
+      rub,
+    };
+  } catch {
+    return {
+      usd: 3.12,
+      eur: 3.4204,
+      rub: 3.5015 / 100,
+    };
+  }
 };

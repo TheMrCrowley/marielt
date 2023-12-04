@@ -9,7 +9,6 @@ export const formatFiltersToSearchParams = <T extends Record<string, string | st
   currency: AvailableCurrencies,
   sort: SortValues,
 ) => {
-  console.log(new URLSearchParams(location.search).get('sort'));
   const searchParams = new URLSearchParams();
 
   Object.entries(filters).forEach(([key, value]) => {

@@ -19,12 +19,11 @@ import {
   electricityFilterTagsMap,
   gasSupplyQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
+import { houseLevelQueryMap } from '@/src/enums/HousesAndLotsFilters';
 import { parseFiltersStateToTags } from '@/src/helpers/parseFiltersStateToTags';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
 import { HousesAndLotsCategory } from '@/src/types/HousesAndLots';
-
-import { houseLevelQueryMap } from './../enums/HousesAndLotsFilters';
 
 export type HousesAndLotsFiltersType = BaseFilters<
   {

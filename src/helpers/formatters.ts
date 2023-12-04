@@ -1,30 +1,24 @@
 import {
   CommercialCategory,
+  CommercialCategoryResponse,
+  CommercialStrapiResponse,
   CommercialTransaction,
+  CommercialTransactionResponse,
   DefaultCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
-import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import { DistrictResponse, MicroDistrictResponse, SearchResults } from '@/src/types/Filters';
+import { DefaultFlatItem, DetailedFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
 import {
   DefaultHousesAndLotsItem,
   DetailedHousesAndLotsItem,
   HousesAndLotsCategory,
+  HousesAndLotsCategoryResponse,
+  HousesAndLotsStrapiResponse,
 } from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
 import { DefaultMapItem } from '@/src/types/Product';
-import {
-  CommercialCategoryResponse,
-  CommercialStrapiResponse,
-  CommercialTransactionResponse,
-  DistrictResponse,
-  FlatStrapiResponse,
-  HousesAndLotsCategoryResponse,
-  HousesAndLotsStrapiResponse,
-  MicroDistrictResponse,
-  StrapiFindOneResponse,
-  StrapiFindResponse,
-} from '@/src/types/StrapiTypes';
+import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 import { getSmallAddress, getFullAddress } from './addressHelpers';
 

@@ -10,27 +10,23 @@ import {
   wallMaterialQueryMap,
   sewerageQueryMap,
 } from '@/src/enums/HousesAndLotsFilters';
+import { lotsWaterQueryMap } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import {
   formatToDefaultHouseAndLotsItem,
   formatToDetailedHousesAndLots,
 } from '@/src/helpers/formatters';
+import { formatToDefaultMapItem } from '@/src/helpers/formatters';
+import { getPaginationQuery } from '@/src/helpers/getPaginationQuery';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
+import { getSortQuery } from '@/src/helpers/getSortQuery';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
-import {
-  HousesAndLotsStrapiResponse,
-  StrapiFindOneResponse,
-  StrapiFindResponse,
-} from '@/src/types/StrapiTypes';
+import { DetailedHousesAndLotsItem, HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
+import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { lotsWaterQueryMap } from './../enums/HousesAndLotsFilters';
-import { formatToDefaultMapItem } from './../helpers/formatters';
-import { getPaginationQuery } from './../helpers/getPaginationQuery';
-import { getSortQuery } from './../helpers/getSortQuery';
 import { getCurrencies } from './currencyServices';
 
 const getHousesAndLotsStrapiQuery = (

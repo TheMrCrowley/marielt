@@ -15,8 +15,6 @@ const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
     getHousesAndLotsForList(searchParams),
   ]);
 
-  console.log('Found houses and Lots: ', housesAndLots.length);
-
   return (
     <>
       <HousesAndLotsFilters data={data} />

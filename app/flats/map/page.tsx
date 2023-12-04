@@ -15,7 +15,6 @@ const Flats = async ({ searchParams }: FlatsProps) => {
     getFlatsForMap(searchParams),
   ]);
 
-  console.log('Map view flats:', flats.length);
   return (
     <>
       <FlatsFilters data={data} />

@@ -16,19 +16,15 @@ import {
 } from '@/src/helpers/formatters';
 import { getPaginationQuery } from '@/src/helpers/getPaginationQuery';
 import { getQueryArray } from '@/src/helpers/getQueryArray';
+import { getSortQuery } from '@/src/helpers/getSortQuery';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
+import { DefaultFlatItem, DetailedFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
 import { DefaultMapItem } from '@/src/types/Product';
-import {
-  FlatStrapiResponse,
-  StrapiFindOneResponse,
-  StrapiFindResponse,
-} from '@/src/types/StrapiTypes';
+import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { getSortQuery } from './../helpers/getSortQuery';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (

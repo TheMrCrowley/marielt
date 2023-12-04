@@ -1,7 +1,5 @@
-import CommercialProductPage from '@/src/app-pages/CommercialPage/CommercialProductPage';
-
 const page = () => {
-  return <div>{/* <CommercialProductPage /> */}</div>;
+  return <div></div>;
 };
 
 export default page;

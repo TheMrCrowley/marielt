@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ProductSlider from '@/src/components/Swiper/ProductSlider';
 import CheckboxGroup from '@/src/components/common/CheckboxGroup/CheckboxGroup';
 import Title from '@/src/components/common/Title/Title';
+import { DefaultCommercialItem } from '@/src/types/Commercial';
 import { DefaultFlatItem } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
@@ -16,7 +17,7 @@ const SimilarProducts = ({
   type: ProductType;
   similarProducts: Array<{
     label: string;
-    data: DefaultFlatItem[] | DefaultHousesAndLotsItem[];
+    data: DefaultFlatItem[] | DefaultHousesAndLotsItem[] | DefaultCommercialItem[];
   }>;
 }) => {
   const [checkedValue, setCheckedValue] = useState<string>(

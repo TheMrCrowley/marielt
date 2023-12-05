@@ -366,10 +366,13 @@ export const getHousesAndLotsSearchResults = async (value: string): Promise<Sear
 const getSimilarByPrice = async ({
   price,
   id,
+  rootType,
+  type,
 }: {
-  price?: string;
-  roominess?: string;
   id: string;
+  price?: string;
+  rootType?: string;
+  type?: string;
 }) => {
   const query = qs.stringify(
     {
@@ -382,6 +385,11 @@ const getSimilarByPrice = async ({
             : {
                 $eq: price,
               }),
+        },
+        house_categories: {
+          name: {
+            $in: rootType && type ? [type] : rootType ? [rootType] : [],
+          },
         },
         id: {
           $ne: id,
@@ -412,10 +420,14 @@ const getSimilarByLocation = async ({
   latitude,
   longitude,
   id,
+  rootType,
+  type,
 }: {
+  id: string;
   latitude?: number;
   longitude?: number;
-  id: string;
+  rootType?: string;
+  type?: string;
 }) => {
   const query = qs.stringify(
     {
@@ -423,6 +435,11 @@ const getSimilarByLocation = async ({
         coordinates: {
           latitude: { $between: [(latitude || 0) - 0.1, (latitude || 0) + 0.1] },
           longitude: { $between: [(longitude || 0) - 0.1, (longitude || 0) + 0.1] },
+        },
+        house_categories: {
+          name: {
+            $in: rootType && type ? [type] : rootType ? [rootType] : [],
+          },
         },
         id: {
           $ne: id,
@@ -450,16 +467,20 @@ const getSimilarByLocation = async ({
 };
 
 export const getSimilarHouseItems = async (flat: DetailedHousesAndLotsItem) => {
-  const { price, id, location } = flat;
+  const { price, id, location, rootType, type } = flat;
   const [similarByPrice, similarByLocation] = await Promise.all([
     getSimilarByPrice({
       price: price,
       id,
+      rootType,
+      type,
     }),
     getSimilarByLocation({
       latitude: location?.lat,
       longitude: location?.lng,
       id,
+      rootType,
+      type,
     }),
   ]);
 

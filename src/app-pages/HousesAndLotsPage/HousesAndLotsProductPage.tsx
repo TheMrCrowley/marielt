@@ -38,7 +38,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     video,
     location,
     address,
-    houseCategories,
+    rootType,
     name,
     direction,
     id,
@@ -72,7 +72,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
           <HousesAndLotsPageHeader
             address={address}
             initialCurrency={initialCurrency}
-            category={houseCategories.name}
+            category={rootType}
             constructionYear={constructionYear}
             livingArea={livingArea}
             plotSize={plotSize}

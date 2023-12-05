@@ -21,6 +21,7 @@ import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import { formatToDetailedCommercialItem } from './../helpers/formatters';
+import { DetailedCommercialItem } from './../types/Commercial';
 import { getCurrencies } from './currencyServices';
 
 const getCommercialStrapiQueryParamsByFilters = (
@@ -725,4 +726,148 @@ export const getCommercialById = async (id: string) => {
   const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
 
   return formatToDetailedCommercialItem(data);
+};
+
+const getSimilarByPrice = async ({
+  priceMeterFrom,
+  priceTotalFrom,
+  rootType,
+  type,
+  id,
+}: {
+  priceTotalFrom?: string;
+  priceMeterFrom?: string;
+  rootType?: string;
+  type?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        price_total: priceTotalFrom && {
+          from: {
+            $between: [
+              +priceTotalFrom - +priceTotalFrom * 0.2,
+              +priceTotalFrom + +priceTotalFrom * 0.2,
+            ],
+          },
+        },
+        price_meter:
+          !priceTotalFrom && priceMeterFrom
+            ? {
+                from: {
+                  $between: [
+                    +priceMeterFrom - +priceMeterFrom * 0.2,
+                    +priceMeterFrom + +priceMeterFrom * 0.2,
+                  ],
+                },
+              }
+            : undefined,
+        comm_categories: {
+          name: {
+            $in: rootType && type ? [type] : rootType ? [rootType] : [],
+          },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const populateQuery = getDefaultCommercialListPopulateQuery();
+
+  const url = `${process.env.API_BASE_URL}/comm-items?${query}&${populateQuery}`;
+
+  console.log(url);
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+
+  return formatToDefaultCommercial(data);
+};
+
+const getSimilarByLocation = async ({
+  latitude,
+  longitude,
+  rootType,
+  type,
+  id,
+}: {
+  latitude?: number;
+  longitude?: number;
+  rootType?: string;
+  type?: string;
+  id: string;
+}) => {
+  const query = qs.stringify(
+    {
+      filters: {
+        coordinates: {
+          latitude: { $between: [(latitude || 0) - 0.008, (latitude || 0) + 0.008] },
+          longitude: { $between: [(longitude || 0) - 0.008, (longitude || 0) + 0.008] },
+        },
+        comm_categories: {
+          name: {
+            $in: rootType && type ? [type] : rootType ? [rootType] : [],
+          },
+        },
+        id: {
+          $ne: id,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${
+    process.env.API_BASE_URL
+  }/comm-items?${query}&${getDefaultCommercialListPopulateQuery()}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+
+  return formatToDefaultCommercial(data);
+};
+
+export const getCommercialSimilar = async (item: DetailedCommercialItem) => {
+  const [similarByPrice, similarByLocation] = await Promise.all([
+    getSimilarByPrice({
+      priceMeterFrom: item.pricePerMeter?.from,
+      priceTotalFrom: item.totalPrice?.from,
+      id: item.id!,
+      rootType: item.rootType,
+      type: item.type,
+    }),
+    getSimilarByLocation({
+      id: item.id!,
+      rootType: item.rootType,
+      type: item.type,
+      latitude: item.location?.lat,
+      longitude: item.location?.lng,
+    }),
+  ]);
+
+  return [
+    { label: 'По цене', data: similarByPrice },
+    {
+      label: 'По расположению',
+      data: similarByLocation,
+    },
+  ];
 };

@@ -5,19 +5,22 @@ import LocationIcon from '@/public/card-map-pin.svg';
 import DirectionIcon from '@/public/direction.svg';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
+import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import CommercialPriceField from './CommercialPriceField';
 import { ProductHeader } from './components';
 
 interface CommercialPageHeaderProps {
   address?: string;
   title?: string;
   initialCurrency: AvailableCurrencies;
-  price?: number;
   rootType?: string;
   type?: string;
   direction?: string;
   distance?: string;
+  priceTotal?: DetailedCommercialItem['totalPrice'];
+  priceMeter?: DetailedCommercialItem['pricePerMeter'];
 }
 
 const CommercialPageHeader = ({
@@ -27,9 +30,13 @@ const CommercialPageHeader = ({
   type,
   direction,
   distance,
+  initialCurrency,
+  priceMeter,
+  priceTotal,
 }: CommercialPageHeaderProps) => {
   return (
     <ProductHeader
+      descriptionClassName="!basis-1/2"
       description={
         <>
           <Title variant="h2" fontSize={24} fontWeight={'medium'}>
@@ -82,7 +89,14 @@ const CommercialPageHeader = ({
           </div>
         </>
       }
-      // price={<PriceField totalArea={totalArea} initialCurrency={initialCurrency} price={+price!} />}
+      priceClassName="!basis-1/2"
+      price={
+        <CommercialPriceField
+          initialCurrency={initialCurrency}
+          priceMeter={priceMeter}
+          totalPrice={priceTotal}
+        />
+      }
     />
   );
 };

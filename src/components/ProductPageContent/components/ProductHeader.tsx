@@ -7,9 +7,17 @@ interface Props {
   description?: React.ReactNode | React.ReactElement;
   price?: React.ReactNode | React.ReactElement;
   area?: React.ReactNode | React.ReactElement;
+  descriptionClassName?: string;
+  priceClassName?: string;
 }
 
-const ProductHeader: FC<Props> = ({ area, description, price }) => {
+const ProductHeader: FC<Props> = ({
+  area,
+  description,
+  price,
+  descriptionClassName,
+  priceClassName,
+}) => {
   return (
     <div className={clsx('bg-[#262626]', 'flex', 'lg:flex-row', 'flex-col')}>
       <div
@@ -24,6 +32,7 @@ const ProductHeader: FC<Props> = ({ area, description, price }) => {
           'border-r',
           'border-[#ffffff1a]',
           'basis-1/3',
+          descriptionClassName,
         )}
       >
         {description}
@@ -43,6 +52,7 @@ const ProductHeader: FC<Props> = ({ area, description, price }) => {
           'border-[#ffffff1a]',
           'flex-auto',
           'basis-1/3',
+          priceClassName,
         )}
       >
         <Title variant="h2" fontSize={24} fontWeight={'medium'}>

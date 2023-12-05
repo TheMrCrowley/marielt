@@ -63,7 +63,7 @@ const CommercialArea = ({
 
     return (
       <Typography fontSize={14} fontWeight="light" className="flex gap-x-1">
-        Площадь участка:{' '}
+        Площадь участка: {/* // TODO fix this */}
         <Typography fontSize={14} fontWeight="medium">
           {plotSize}
         </Typography>{' '}

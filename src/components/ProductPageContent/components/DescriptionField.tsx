@@ -34,10 +34,10 @@ const DescriptionField = ({ description }: { description?: string }) => {
       <Title className={clsx('pb-3')} fontSize={32}>
         Описание
       </Title>
-      <Typography fontSize={16} fontWeight="light" className={clsx('leading-6')}>
+      <section className={'text-white'}>
         {/* {JSON.stringify(description, null, 2)} */}
         <Markdown>{description}</Markdown>
-      </Typography>
+      </section>
       <Image
         alt="comma"
         src={ImageComma}

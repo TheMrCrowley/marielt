@@ -69,11 +69,8 @@ export type DetailedHousesAndLotsItem = {
     lng: number;
     lat: number;
   };
-  category?: string;
-  houseCategories: {
-    category?: string;
-    name?: string;
-  };
+  rootType?: string;
+  type?: string;
   direction: string;
 } & DefaultHousesAndLotsItem;
 
@@ -151,7 +148,7 @@ export interface HousesAndLotsStrapiResponse {
     };
   };
   house_categories: StrapiFindResponse<{
-    category: string;
+    category?: string;
     name: string;
   }>;
   direction: StrapiFindOneResponse<{ name: string }>;

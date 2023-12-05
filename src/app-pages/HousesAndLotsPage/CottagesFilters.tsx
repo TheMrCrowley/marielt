@@ -76,8 +76,7 @@ const CottagesFilters = ({ applyFilters }: CottagesFiltersProps) => {
           isMulti={true}
           items={housesAndLotasCategories
             .filter(
-              (item) =>
-                item.belongTo?.toLocaleLowerCase() === housesAndLotsRootCategory.toLowerCase(),
+              (item) => item.belongTo?.toLowerCase() === housesAndLotsRootCategory?.toLowerCase(),
             )
             .map((item) => ({
               label: item.categoryName,

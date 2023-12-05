@@ -239,14 +239,20 @@ export const formatToDetailedCommercialItem = ({
     rentAmountMonth: attributes?.business?.rent_amount_month,
     rentAmountYear: attributes?.business?.rent_amount_year,
   },
-  pricePerMeter: {
-    from: attributes.price_meter?.from,
-    to: attributes.price_meter?.to,
-  },
-  totalPrice: {
-    from: attributes.price_total?.from,
-    to: attributes.price_total?.to,
-  },
+  pricePerMeter:
+    attributes.price_meter?.from || attributes.price_meter?.to
+      ? {
+          from: attributes.price_meter?.from,
+          to: attributes.price_meter?.to,
+        }
+      : undefined,
+  totalPrice:
+    attributes.price_total?.from || attributes.price_total?.to
+      ? {
+          from: attributes.price_total?.from,
+          to: attributes.price_total?.to,
+        }
+      : undefined,
   premisesArea: attributes.parameters?.premises_area && {
     min: attributes.parameters.premises_area.min_area,
     max: attributes.parameters.premises_area.max_area,
@@ -378,10 +384,12 @@ export const formatToDetailedHousesAndLots = ({
     phone2: attributes.agents.data[0].attributes.phone2,
     position: attributes.agents.data[0].attributes.position,
   },
-  houseCategories: {
-    category: attributes.house_categories.data[0].attributes.category,
-    name: attributes.house_categories.data[0].attributes.name,
-  },
+  rootType:
+    attributes.house_categories?.data &&
+    attributes.house_categories.data.find((item) => !item.attributes.category)?.attributes.name,
+  type:
+    attributes.house_categories?.data &&
+    attributes.house_categories.data.find((item) => !!item.attributes.category)?.attributes.name,
   direction: attributes.direction?.data?.attributes.name,
   location: attributes.location?.coordinates,
   images: Array.isArray(attributes?.image?.data)
@@ -493,19 +501,19 @@ export const formatResponseToSearchResult = (
     const district = item?.attributes.district_rb;
     const locality = item?.attributes.locality;
 
-    if (street && street.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+    if (street && street.toLowerCase().includes(value.toLowerCase())) {
       streets.add(street);
     }
 
-    if (region && region.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+    if (region && region.toLowerCase().includes(value.toLowerCase())) {
       regions.add(region);
     }
 
-    if (district && district.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+    if (district && district.toLowerCase().includes(value.toLowerCase())) {
       districts.add(district);
     }
 
-    if (locality && locality.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+    if (locality && locality.toLowerCase().includes(value.toLowerCase())) {
       localities.add(locality);
     }
   });
@@ -535,16 +543,19 @@ export function formatItemToCharacteristics<
     }
   });
 
-  item.additionalInfo?.forEach(({ name }) => {
-    result.push({ name, value: 'Да' });
-  });
+  item.additionalInfo
+    ?.filter((info) => !!info.name)
+    .forEach(({ name }) => {
+      result.push({ name, value: 'Да' });
+    });
 
   const keySet = new Set<string>();
+
   return result.filter(({ name }) => {
-    if (keySet.has(name.toLocaleLowerCase())) {
+    if (keySet.has(name.toLowerCase())) {
       return false;
     }
-    keySet.add(name.toLocaleLowerCase());
+    keySet.add(name.toLowerCase());
     return true;
   });
 }

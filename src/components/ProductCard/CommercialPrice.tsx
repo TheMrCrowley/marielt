@@ -61,9 +61,7 @@ const CommercialPrice = ({ initialCurrency, pricePerMeter, totalPrice }: Commerc
             selectedCurrency,
             rates,
           )}{' '}
-          <Typography fontSize={16} fontWeight="light" className="inline">
-            за м²
-          </Typography>
+          <span className="font-light md:text-base text-sm">за м²</span>
         </Typography>
         <Typography className={'opacity-50'}>
           {pricePerMeter.from && pricePerMeter.to && 'от'}{' '}

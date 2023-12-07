@@ -483,6 +483,14 @@ export const formatToCommercialCategory = (
     })),
   }));
 
+//TODO add to many places
+const normalizeAddressItem = (item: string) =>
+  item
+    .split(' ')
+    .filter(Boolean)
+    .map((l) => l.trim())
+    .join(' ');
+
 export const formatResponseToSearchResult = (
   data:
     | StrapiFindResponse<FlatStrapiResponse>['data']
@@ -502,19 +510,19 @@ export const formatResponseToSearchResult = (
     const locality = item?.attributes.locality;
 
     if (street && street.toLowerCase().includes(value.toLowerCase())) {
-      streets.add(street);
+      streets.add(normalizeAddressItem(street));
     }
 
     if (region && region.toLowerCase().includes(value.toLowerCase())) {
-      regions.add(region);
+      regions.add(normalizeAddressItem(region));
     }
 
     if (district && district.toLowerCase().includes(value.toLowerCase())) {
-      districts.add(district);
+      districts.add(normalizeAddressItem(district));
     }
 
     if (locality && locality.toLowerCase().includes(value.toLowerCase())) {
-      localities.add(locality);
+      localities.add(normalizeAddressItem(locality));
     }
   });
 

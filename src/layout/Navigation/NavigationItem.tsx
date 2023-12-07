@@ -15,23 +15,24 @@ export interface NavItem {
 interface NavigationItemProps {
   navItem: NavItem;
   onClick?: () => void;
+  className?: string;
 }
 
-const NavigationItem = ({ navItem, onClick }: NavigationItemProps) => {
+const NavigationItem = ({ navItem, onClick, className }: NavigationItemProps) => {
   const { href, title } = navItem;
   const pathname = usePathname();
 
   return (
-    <li className={clsx('text-center', 'lg:text-xl', 'text-base')}>
+    <li className={clsx('text-center', 'lg:text-xl', 'text-base', className)}>
       <Link
         className={clsx(
+          'w-full',
           'relative',
           'lg:min-h-[100px]',
           'min-h-[60px]',
           'flex',
           'justify-center',
           'items-center',
-
           'transition-all',
           'after:block',
           'after:absolute',

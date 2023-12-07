@@ -11,6 +11,7 @@ import {
   NoteField,
 } from '@/src/components/ProductPageContent/components';
 import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
+import ProductViewsHandler from '@/src/components/ProductViewsHandler';
 import { ProductPageSlider } from '@/src/components/Swiper';
 import { flatCharacteristicsMap, getRoominessByStrapiValue } from '@/src/enums/FlatsFilters';
 import { formatItemToCharacteristics } from '@/src/helpers/formatters';
@@ -85,6 +86,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
         similarObjectsField={<SimilarProducts type="flats" similarProducts={similarFlats} />}
       />
       <ApplicationField />
+      <ProductViewsHandler type="flats" id={id} />
     </>
   );
 };

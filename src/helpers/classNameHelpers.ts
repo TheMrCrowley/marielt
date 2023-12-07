@@ -1,4 +1,4 @@
-export type FontSizeType = 48 | 40 | 36 | 32 | 24 | 20 | 16 | 14 | 12;
+export type FontSizeType = 128 | 48 | 40 | 36 | 32 | 24 | 20 | 16 | 14 | 12;
 export type FontWeightType = 'medium' | 'normal' | 'light';
 
 export const getFontWeightClassName = (fontWeight: FontWeightType): string => {
@@ -16,6 +16,8 @@ export const getFontWeightClassName = (fontWeight: FontWeightType): string => {
 
 export const getFontSizeClassName = (fontSize: FontSizeType): string => {
   switch (fontSize) {
+    case 128:
+      return 'md:text-9xl text-5xl';
     case 48:
       return 'xl:text-5xl lg:text-[40px] md:text-4xl sm:text-[32px] text-2xl';
     case 40:

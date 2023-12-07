@@ -62,13 +62,12 @@ const CommercialArea = ({
     }
 
     return (
-      <Typography fontSize={14} fontWeight="light" className="flex gap-x-1">
-        Площадь участка: {/* // TODO fix this */}
+      <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {plotSize}
-        </Typography>{' '}
-        <span className={clsx('opacity-50')}>сот.</span>
-      </Typography>
+          {plotSize} <span className={clsx('opacity-50')}>сот.</span>
+        </Typography>
+        <p className={clsx('text-white', 'text-xs', 'font-light')}>участок</p>
+      </div>
     );
   };
 

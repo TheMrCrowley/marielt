@@ -56,6 +56,7 @@ module.exports = {
     'sm:text-base',
     'sm:text-sm',
     'basis-1/5',
+    'text-9xl',
   ],
   theme: {
     extend: {

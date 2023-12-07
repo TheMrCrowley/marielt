@@ -1,22 +1,10 @@
+import { getUrlByType } from '@/src/helpers/apiHelpers';
 import { formatResponseToSearchResult } from '@/src/helpers/formatters';
 import { getSearchFieldQuery } from '@/src/services/filtersDataServices';
 import { SearchResults } from '@/src/types/Filters';
 import { FlatStrapiResponse } from '@/src/types/Flats';
 import { ProductType } from '@/src/types/Product';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
-
-const getUrlByType = (type: ProductType): string => {
-  switch (type) {
-    case 'flats':
-      return `${process.env.API_BASE_URL}/apart-items`;
-    case 'commercial':
-      return `${process.env.API_BASE_URL}/comm-items`;
-    case 'houses-and-lots':
-      return `${process.env.API_BASE_URL}/house-items`;
-    default:
-      return null as never;
-  }
-};
 
 export const getFlatsSearchResults = async (
   value: string,

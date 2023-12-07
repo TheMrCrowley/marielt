@@ -19,7 +19,10 @@ const DubaiPage = () => {
           'items-center',
           'w-full',
           'bg-[url(/dubai-bg.png)]',
+          'bg-center',
+          'bg-cover',
           'md:h-[740px]',
+          'h-[500px]',
         )}
       >
         <div
@@ -41,7 +44,12 @@ const DubaiPage = () => {
             src={Logo}
             className={clsx('lg:w-[220px]', 'md:w-[200px]', 'sm:w-[180px]', 'w-[120px]')}
           />
-          <h1 className={clsx('text-white', 'text-9xl', 'tracking-[64px]')}>DUBAI</h1>
+          <Title
+            fontSize={128}
+            className="md:tracking-[64px] md:indent-16 tracking-[32px] indent-8"
+          >
+            DUBAI
+          </Title>
         </div>
       </section>
       <section
@@ -114,7 +122,7 @@ const DubaiPage = () => {
             )}
           >
             <Image src={InstagramIcon} alt="instagram" width={40} height={40} />
-            <Typography color="text-[#A3A3A3]">Telegram</Typography>
+            <Typography color="text-[#A3A3A3]">Instagram</Typography>
           </a>
         </section>
         <Typography fontWeight="light">

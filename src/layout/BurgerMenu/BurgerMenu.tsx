@@ -98,6 +98,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
                         href: navItem.to,
                       }}
                       key={navItem.title}
+                      className="w-full"
                     />
                   </div>
                 ))}

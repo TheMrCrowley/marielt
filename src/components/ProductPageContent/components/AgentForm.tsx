@@ -16,6 +16,7 @@ import { WindowWidth } from '@/src/enums/Width';
 import { removeDigits } from '@/src/helpers/removeDigits';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { sendAgentApplication } from '@/src/services/applicationServices';
+import { handleContactsViews } from '@/src/services/localStorageServices';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { DetailedFlatItem } from '@/src/types/Flats';
 import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
@@ -36,6 +37,10 @@ const defaultFormState = {
   phone: '',
 };
 
+const getPhone = (phone: string, isVisible: boolean) => {
+  return isVisible ? phone : phone.substring(0, phone.length - 9) + 'XXXXXXXXX';
+};
+
 const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
   const breakpoint = useWindowSize();
 
@@ -52,7 +57,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
     return null;
   }
 
-  const { fullName, phone1, position } = agentData;
+  const { fullName, phone1, phone2, position } = agentData;
 
   const disabled = !(
     formState.isChecked &&
@@ -74,6 +79,12 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
       });
       setFormState(defaultFormState);
     }
+  };
+
+  const handleShowContacts = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsPhoneVisible(true);
+    await handleContactsViews(type, productId);
   };
 
   const renderAgentForm = () => {
@@ -134,34 +145,35 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
             'items-center',
             'p-6',
             'w-full',
+            'gap-4',
           )}
         >
-          <div className={clsx('flex')}>
-            <Image alt="phone" src={PhoneIcon} />
-            <Typography fontSize={14} fontWeight="medium" color="#000000">
-              {isPhoneVisible ? phone1 : phone1.substring(0, phone1.length - 9) + 'XXXXXXXXX'}
-            </Typography>
-          </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsPhoneVisible(true);
-            }}
-            className={clsx('text-black', 'underline', 'text-sm', 'opacity-50', 'mb-6')}
-          >
-            Показать контакты
-          </button>
-
-          <label
-            className={clsx(
-              'w-full',
-              'text-base',
-              'border-b',
-              'border-black',
-              'text-black',
-              'mb-12',
+          <div className={clsx('flex', 'flex-col')}>
+            <div className="flex gap-2">
+              <Image alt="phone" src={PhoneIcon} />
+              <Typography fontSize={14} fontWeight="medium" color="#000000">
+                {getPhone(phone1, isPhoneVisible)}
+              </Typography>
+            </div>
+            {phone2 && (
+              <div className="flex gap-2">
+                <Image alt="phone" src={PhoneIcon} />
+                <Typography fontSize={14} fontWeight="medium" color="#000000">
+                  {getPhone(phone2, isPhoneVisible)}
+                </Typography>
+              </div>
             )}
-          >
+          </div>
+          {!isPhoneVisible && (
+            <button
+              onClick={handleShowContacts}
+              className={clsx('text-black', 'underline', 'text-sm', 'opacity-50')}
+            >
+              Показать контакты
+            </button>
+          )}
+
+          <label className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black')}>
             <input
               placeholder="Имя"
               className={clsx('placeholder:text-[#3434347f]')}
@@ -171,16 +183,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
               }
             />
           </label>
-          <label
-            className={clsx(
-              'w-full',
-              'text-base',
-              'border-b',
-              'border-black',
-              'text-black',
-              'mb-12',
-            )}
-          >
+          <label className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black')}>
             <PhoneInput
               value={formState.phone}
               onChange={(value) => setFormState((prev) => ({ ...prev, phone: value }))}
@@ -200,7 +203,6 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
               'items-center',
               'font-light',
               'text-center',
-              'mb-5',
               'gap-4',
               'hover:cursor-pointer',
             )}

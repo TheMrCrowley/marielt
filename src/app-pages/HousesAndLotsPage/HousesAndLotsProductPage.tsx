@@ -12,6 +12,7 @@ import {
   NoteField,
 } from '@/src/components/ProductPageContent/components';
 import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
+import ProductViewsHandler from '@/src/components/ProductViewsHandler';
 import ProductPageSlider from '@/src/components/Swiper/ProductPageSlider';
 import { houseCharacteristicsMap } from '@/src/enums/HousesAndLotsFilters';
 import { formatItemToCharacteristics } from '@/src/helpers/formatters';
@@ -85,6 +86,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
         }
       />
       <ApplicationField />
+      <ProductViewsHandler type="houses-and-lots" id={id} />
     </>
   );
 };

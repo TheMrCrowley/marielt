@@ -4,6 +4,7 @@ import React from 'react';
 import ProductPageContent from '@/src/components/ProductPageContent';
 import CommercialPageHeader from '@/src/components/ProductPageContent/CommercialPageHeader';
 import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
+import ProductViewsHandler from '@/src/components/ProductViewsHandler';
 import { commercialCharacteristicsMap } from '@/src/enums/CommercialFilters';
 import { formatItemToCharacteristics } from '@/src/helpers/formatters';
 import { getCommercialSimilar } from '@/src/services/commercialServices';
@@ -83,7 +84,11 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
       <ProductPageContent
         agentForm={
           commercial.agents && (
-            <AgentForm agentData={commercial.agents} productId={commercial.id!} type="commercial" />
+            <AgentForm
+              agentData={{ ...commercial.agents, phone1: '+375293808585', phone2: '+375333808585' }}
+              productId={commercial.id!}
+              type="commercial"
+            />
           )
         }
         locationField={commercial.location && <LocationField location={commercial.location} />}
@@ -110,6 +115,7 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
         }
       />
       <ApplicationField />
+      <ProductViewsHandler type="commercial" id={commercial.id!} />
     </>
   );
 };

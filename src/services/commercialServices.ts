@@ -782,8 +782,6 @@ const getSimilarByPrice = async ({
 
   const url = `${process.env.API_BASE_URL}/comm-items?${query}&${populateQuery}`;
 
-  console.log(url);
-
   const response = await fetch(url, {
     next: {
       revalidate: 60,

@@ -5,7 +5,6 @@ import Markdown from 'react-markdown';
 import ImageCommaRev from '@/public/comma-reverse.svg';
 import ImageComma from '@/public/comma.svg';
 import Title from '@/src/components/common/Title/Title';
-import Typography from '@/src/components/common/Typography/Typography';
 
 const DescriptionField = ({ description }: { description?: string }) => {
   if (!description) {
@@ -35,7 +34,6 @@ const DescriptionField = ({ description }: { description?: string }) => {
         Описание
       </Title>
       <section className={'text-white'}>
-        {/* {JSON.stringify(description, null, 2)} */}
         <Markdown>{description}</Markdown>
       </section>
       <Image

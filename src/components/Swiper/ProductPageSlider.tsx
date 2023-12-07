@@ -27,7 +27,7 @@ const ProductPageSlider = ({
 }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-  const [currentRealIndex, setCurrentRealIndex] = useState<number>(0);
+  const [currentRealIndex, setCurrentRealIndex] = useState<number>(1);
   const breakpoint = useWindowSize();
 
   const nextClassName = `next-${type}-main-slider-button`;

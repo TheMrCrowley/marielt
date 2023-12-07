@@ -6,9 +6,12 @@ import { AgentPageData } from '@/src/types/CareersTypes';
 
 import AdvantageSection from './components/AdvantageSection';
 import CareerPerspectiveSection from './components/CareerPerspectiveSection';
+import CourseSection from './components/CourseSection';
+import InternSection from './components/InternSection';
 import MainPointSection from './components/MainPointSection';
 import PerspectiveJobSection from './components/PerspectiveJobSection';
 import PerspectiveSection from './components/PerspectiveSection';
+import QuestionSection from './components/QuestionSection';
 import WelcomeSection from './components/WelcomeSection';
 
 const AgentVideo = dynamic(() => import('./components/AgentVideoSection'));
@@ -33,6 +36,9 @@ const AgentPage = ({ data }: AgentPageProps) => {
       {media.length && <AgentPageSlider media={media} />}
       <PerspectiveSection />
       <CareerPerspectiveSection />
+      <CourseSection courseVideo={courseVideo} />
+      <InternSection />
+      <QuestionSection />
     </section>
   );
 };

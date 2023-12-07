@@ -7,15 +7,12 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import CrossIcon from '@/public/plus.svg';
 import WithDisabledScroll from '@/src/components/common/WithDisabledScroll';
 import { WindowWidth } from '@/src/enums/Width';
+import { getVideoId } from '@/src/helpers/videoHelpers';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { ProductType } from '@/src/types/Product';
 import { StrapiVideo } from '@/src/types/VideoLink';
 
 import SliderButton from './SliderButton';
-
-const getVideoId = (url: string) => {
-  return url.split('=')[1];
-};
 
 interface FullScreenSliderProps {
   closeModal: () => void;

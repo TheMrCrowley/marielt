@@ -15,7 +15,9 @@ import {
   formatToDetailedFlat,
 } from '@/src/helpers/formatters';
 import {
+  concatQueries,
   getDefaultFlatListPopulateQuery,
+  getDefaultMapPopulateQuery,
   getPaginationQuery,
   getQueryArray,
   getSortQuery,
@@ -28,7 +30,6 @@ import { DefaultFlatItem, DetailedFlatItem, FlatStrapiResponse } from '@/src/typ
 import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { getDefaultMapPopulateQuery, concatQueries } from './../helpers/queryHelpers';
 import { getCurrencies } from './currencyServices';
 
 const getFlatsStrapiQueryParamsByFilters = (

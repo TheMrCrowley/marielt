@@ -5,6 +5,7 @@ import {
   CommercialTransaction,
   CommercialTransactionResponse,
   DefaultCommercialItem,
+  DetailedCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { DistrictResponse, MicroDistrictResponse, SearchResults } from '@/src/types/Filters';
@@ -20,7 +21,6 @@ import { District, MicroDistrict } from '@/src/types/Location';
 import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
-import { DetailedCommercialItem } from './../types/Commercial';
 import { getFullAddress } from './addressHelpers';
 
 export const formatToDefaultFlat = (

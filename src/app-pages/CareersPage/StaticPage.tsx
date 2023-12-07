@@ -8,6 +8,7 @@ interface StaticPageProps {
   title: string;
   description: string;
 }
+
 const StaticPage = ({ description, imageUrl, title }: StaticPageProps) => {
   return (
     <div className={clsx('flex', 'flex-col', 'w-full', 'justify-center', 'items-center')}>

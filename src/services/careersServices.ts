@@ -1,7 +1,11 @@
 import qs from 'qs';
 
 import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
-import { CareersPageItemResponse } from '@/src/types/CareersTypes';
+import {
+  AgentPageData,
+  AgentPageDataResponse,
+  CareersPageItemResponse,
+} from '@/src/types/CareersTypes';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 export const getCareers = async () => {
@@ -41,4 +45,41 @@ export const getCareers = async () => {
       placeholder: item.image.data.attributes.placeholder,
     },
   }));
+};
+
+export const getAgentPageData = async (): Promise<AgentPageData> => {
+  const qeury = qs.stringify(
+    {
+      populate: {
+        carousel: {
+          fields: ['width', 'height', 'url', 'placeholder', 'provider_metadata'],
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `${process.env.API_BASE_URL}/agent-page?${qeury}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<AgentPageDataResponse>;
+
+  return {
+    agentVideo: data.attributes.video_link ? JSON.parse(data.attributes.video_link) : undefined,
+    courseVideo: data.attributes.course_link ? JSON.parse(data.attributes.course_link) : undefined,
+    media: Array.isArray(data.attributes.carousel.data)
+      ? data.attributes.carousel.data.map((item) => ({
+          height: item.attributes.height,
+          placeholder: item.attributes.placeholder,
+          type: item.attributes.provider_metadata.resource_type,
+          url: item.attributes.url,
+          width: item.attributes.width,
+        }))
+      : [],
+  };
 };

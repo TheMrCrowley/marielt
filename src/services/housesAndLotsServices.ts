@@ -17,7 +17,12 @@ import {
   formatToDetailedHousesAndLots,
 } from '@/src/helpers/formatters';
 import { formatToDefaultMapItem } from '@/src/helpers/formatters';
-import { getPaginationQuery, getQueryArray, getSortQuery } from '@/src/helpers/queryHelpers';
+import {
+  getDefaultMapPopulateQuery,
+  getPaginationQuery,
+  getQueryArray,
+  getSortQuery,
+} from '@/src/helpers/queryHelpers';
 import { CurrencyState } from '@/src/store/currency';
 import { HousesAndLotsFiltersType } from '@/src/store/housesAndLotsFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
@@ -25,7 +30,6 @@ import { SearchResults } from '@/src/types/Filters';
 import { DetailedHousesAndLotsItem, HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { getDefaultMapPopulateQuery } from './../helpers/queryHelpers';
 import { getCurrencies } from './currencyServices';
 
 const getHousesAndLotsStrapiQuery = (

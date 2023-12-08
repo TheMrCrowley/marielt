@@ -82,7 +82,7 @@ interface Format {
 
 interface ProviderMetadata {
   public_id: string;
-  resource_type: string;
+  resource_type: 'image' | 'video';
 }
 
 export interface CreditStrapiResponse {

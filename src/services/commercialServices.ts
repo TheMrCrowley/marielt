@@ -6,7 +6,11 @@ import {
   commercialWallMaterialQueryMap,
 } from '@/src/enums/CommercialFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToCommercialMapItem, formatToDefaultCommercial } from '@/src/helpers/formatters';
+import {
+  formatToCommercialMapItem,
+  formatToDefaultCommercial,
+  formatToDetailedCommercialItem,
+} from '@/src/helpers/formatters';
 import { concatQueries, getPaginationQuery, getQueryArray } from '@/src/helpers/queryHelpers';
 import {
   getDefaultCommercialListPopulateQuery,
@@ -14,14 +18,12 @@ import {
 } from '@/src/helpers/queryHelpers';
 import { CommercialFiltersType } from '@/src/store/commercialFilters';
 import { CurrencyState } from '@/src/store/currency';
-import { CommercialStrapiResponse } from '@/src/types/Commercial';
+import { CommercialStrapiResponse, DetailedCommercialItem } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { SearchResults } from '@/src/types/Filters';
 import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { formatToDetailedCommercialItem } from './../helpers/formatters';
-import { DetailedCommercialItem } from './../types/Commercial';
 import { getCurrencies } from './currencyServices';
 
 const getCommercialStrapiQueryParamsByFilters = (

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import CommercialFilters from '@/src/app-pages/CommercialPage/CommercialFilters';
 import CommercialList from '@/src/app-pages/CommercialPage/CommercialList';
 import ApplicationField from '@/src/components/ApplicationField';
+import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForList } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
 
@@ -18,9 +19,11 @@ const Commercial = async ({ searchParams }: CommercialProps) => {
 
   return (
     <>
-      <CommercialFilters data={data} />
-      <CommercialList commercial={commercial} pagination={pagination} />
-      <ApplicationField />
+      <Suspense fallback={<Loader />}>
+        <CommercialFilters data={data} />
+        <CommercialList commercial={commercial} pagination={pagination} />
+        <ApplicationField />
+      </Suspense>
     </>
   );
 };

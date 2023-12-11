@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import CommercialFilters from '@/src/app-pages/CommercialPage/CommercialFilters';
 import CommercialMap from '@/src/app-pages/CommercialPage/CommercialMap';
+import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForMap } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
 
@@ -17,8 +18,10 @@ const Commercial = async ({ searchParams }: CommercialProps) => {
 
   return (
     <>
-      <CommercialFilters data={data} />
-      <CommercialMap productIds={searchParams.productIds || []} commercial={commercial} />
+      <Suspense fallback={<Loader />}>
+        <CommercialFilters data={data} />
+        <CommercialMap productIds={searchParams.productIds || []} commercial={commercial} />
+      </Suspense>
     </>
   );
 };

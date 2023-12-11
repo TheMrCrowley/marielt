@@ -58,7 +58,7 @@ export type DetailedFlatItem = {
     placeholderUrl: string;
   }>;
   video?: StrapiVideo;
-  agents: {
+  agents?: {
     fullName: string;
     phone1: string;
     phone2?: string;
@@ -139,7 +139,7 @@ export interface FlatStrapiResponse {
       lng: number;
     };
   };
-  agents: StrapiFindResponse<{
+  agents?: StrapiFindResponse<{
     full_name: string;
     phone1: string;
     phone2?: string;

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import HousesAndLotsFilters from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsFilters';
 import HousesAndLotsList from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsList';
 import ApplicationField from '@/src/components/ApplicationField';
+import Loader from '@/src/components/common/Loader';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
 import { getHousesAndLotsForList } from '@/src/services/housesAndLotsServices';
 
@@ -18,9 +19,11 @@ const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
 
   return (
     <>
-      <HousesAndLotsFilters data={data} />
-      <HousesAndLotsList housesAndLots={housesAndLots} pagination={pagination} />
-      <ApplicationField />
+      <Suspense fallback={<Loader />}>
+        <HousesAndLotsFilters data={data} />
+        <HousesAndLotsList housesAndLots={housesAndLots} pagination={pagination} />
+        <ApplicationField />
+      </Suspense>
     </>
   );
 };

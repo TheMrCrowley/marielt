@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -172,48 +172,50 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
         Показать контакты
       </Button>
       {isOpen && (
-        <motion.div
-          initial={{
-            position: 'fixed',
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 30,
-            bottom: 0,
-            left: 0,
-            y: '-100%',
-            opacity: '0',
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-          }}
-        >
-          <button
-            className={clsx(
-              'flex',
-              'justify-center',
-              'items-center',
-              'absolute',
-              'md:top-4',
-              'md:right-4',
-              'top-4',
-              'right-4',
-              'z-20',
-            )}
-            onClick={() => {
-              setIsOpen(false);
+        <LazyMotion features={domAnimation}>
+          <m.div
+            initial={{
+              position: 'fixed',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 30,
+              bottom: 0,
+              left: 0,
+              y: '-100%',
+              opacity: '0',
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
             }}
           >
-            <Image
-              src={CrossIcon}
-              alt="close-icon"
-              className={clsx('md:w-8', 'md:h-8', 'w-5', 'h-5')}
-            />
-          </button>
-          {renderAgentForm()}
-        </motion.div>
+            <button
+              className={clsx(
+                'flex',
+                'justify-center',
+                'items-center',
+                'absolute',
+                'md:top-4',
+                'md:right-4',
+                'top-4',
+                'right-4',
+                'z-20',
+              )}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <Image
+                src={CrossIcon}
+                alt="close-icon"
+                className={clsx('md:w-8', 'md:h-8', 'w-5', 'h-5')}
+              />
+            </button>
+            {renderAgentForm()}
+          </m.div>
+        </LazyMotion>
       )}
     </>
   );

@@ -62,7 +62,6 @@ const ProductPageContent = ({
           {renderMobileLocationField()}
           {creditCalculator}
         </div>
-        {/* TODO move to component */}
         {agentForm}
       </div>
 

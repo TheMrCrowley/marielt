@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import React, { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
@@ -79,45 +79,47 @@ const DefaultFiltersWrapper = ({
 
   const renderFilters = () =>
     isMobile || isMapView ? (
-      <motion.div initial={false} animate={isOpen ? 'open' : 'closed'}>
-        {renderFiltersHeader()}
-        <motion.div
-          variants={{
-            open: {
-              overflow: 'visible',
+      <LazyMotion features={domAnimation}>
+        <m.div initial={false} animate={isOpen ? 'open' : 'closed'}>
+          {renderFiltersHeader()}
+          <m.div
+            variants={{
+              open: {
+                overflow: 'visible',
 
-              transition: {
-                type: 'spring',
-                bounce: 0,
-                duration: 0.7,
-                delayChildren: 1,
-                staggerChildren: 0.05,
+                transition: {
+                  type: 'spring',
+                  bounce: 0,
+                  duration: 0.7,
+                  delayChildren: 1,
+                  staggerChildren: 0.05,
+                },
+                height: 'min-content',
               },
-              height: 'min-content',
-            },
-            closed: {
-              overflow: 'hidden',
-              transition: {
-                type: 'spring',
-                bounce: 0,
-                duration: 0.7,
-                delayChildren: 1,
-                staggerChildren: 0.05,
+              closed: {
+                overflow: 'hidden',
+                transition: {
+                  type: 'spring',
+                  bounce: 0,
+                  duration: 0.7,
+                  delayChildren: 1,
+                  staggerChildren: 0.05,
+                },
+                height: 0,
               },
-              height: 0,
-            },
-          }}
-          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        >
-          <button
-            onClick={openModal}
-            className={clsx('text-[#B1B1B1]', 'underline', 'md:text-xl', 'text-base')}
+            }}
+            style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
           >
-            Расширенный фильтр
-          </button>
-          <div className={clsx('flex', 'flex-col', 'gap-8')}>{children}</div>
-        </motion.div>
-      </motion.div>
+            <button
+              onClick={openModal}
+              className={clsx('text-[#B1B1B1]', 'underline', 'md:text-xl', 'text-base')}
+            >
+              Расширенный фильтр
+            </button>
+            <div className={clsx('flex', 'flex-col', 'gap-8')}>{children}</div>
+          </m.div>
+        </m.div>
+      </LazyMotion>
     ) : (
       <>
         {renderFiltersHeader()}

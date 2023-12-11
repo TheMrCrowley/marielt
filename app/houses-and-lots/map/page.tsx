@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import HousesAndLotsFilters from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsFilters';
 import HousesMap from '@/src/app-pages/HousesAndLotsPage/HousesMap';
+import Loader from '@/src/components/common/Loader';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
 import { getHousesAndLotsForMap } from '@/src/services/housesAndLotsServices';
 
@@ -17,8 +18,10 @@ const HouseMap = async ({ searchParams }: HouseProps) => {
 
   return (
     <>
-      <HousesAndLotsFilters data={data} />
-      <HousesMap houses={houses} productIds={searchParams.productIds} />
+      <Suspense fallback={<Loader />}>
+        <HousesAndLotsFilters data={data} />
+        <HousesMap houses={houses} productIds={searchParams.productIds} />
+      </Suspense>
     </>
   );
 };

@@ -411,9 +411,7 @@ const getSimilarByPrice = async ({
   const url = `${process.env.API_BASE_URL}/apart-items?${query}&${populateQuery}`;
 
   const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
+    cache: 'no-cache',
   });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
@@ -459,9 +457,7 @@ const getSimilarByLocation = async ({
   }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
 
   const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
+    cache: 'no-cache',
   });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
@@ -508,9 +504,7 @@ const getSimilarByLayout = async ({
   }/apart-items?${query}&${getDefaultFlatListPopulateQuery()}`;
 
   const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
+    cache: 'no-cache',
   });
 
   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import FlatsFilters from '@/src/app-pages/FlatsPage/FlatsFilters';
 import FlatsMap from '@/src/app-pages/FlatsPage/FlatsMap';
+import Loader from '@/src/components/common/Loader';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
 import { getFlatsForMap } from '@/src/services/flatsServices';
 
@@ -17,8 +18,10 @@ const Flats = async ({ searchParams }: FlatsProps) => {
 
   return (
     <>
-      <FlatsFilters data={data} />
-      <FlatsMap productIds={searchParams.productIds || []} flats={flats} />
+      <Suspense fallback={<Loader />}>
+        <FlatsFilters data={data} />
+        <FlatsMap productIds={searchParams.productIds || []} flats={flats} />
+      </Suspense>
     </>
   );
 };

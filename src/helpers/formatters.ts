@@ -81,10 +81,10 @@ export const formatToDetailedFlat = ({
   id,
 }: StrapiFindOneResponse<FlatStrapiResponse>['data']): DetailedFlatItem => ({
   address: getFullAddress({
-    region: attributes.region?.data.attributes.name,
+    region: attributes.region?.data?.attributes.name,
     districtRb: attributes.district_rb,
     locality: attributes.locality,
-    district: attributes.district?.data.attributes.name,
+    district: attributes.district?.data?.attributes.name,
     street: attributes.street,
     houseNumber: attributes.house_number?.number,
   }),
@@ -120,21 +120,25 @@ export const formatToDetailedFlat = ({
   note: attributes.note,
   location: attributes.location?.coordinates,
   detailedDescription: attributes.detailed_description,
-  images: Array.isArray(attributes.image.data)
-    ? attributes.image.data.map((item) => ({
-        height: item.attributes.height as number,
-        placeholderUrl: item.attributes.placeholder as string,
-        url: item.attributes.url as string,
-        width: item.attributes.width as number,
-      }))
-    : [],
-  agents: {
-    fullName: attributes.agents.data[0].attributes.full_name,
-    phone1: attributes.agents.data[0].attributes.phone1,
-    branch: attributes.agents.data[0].attributes.branch,
-    phone2: attributes.agents.data[0].attributes.phone2,
-    position: attributes.agents.data[0].attributes.position,
-  },
+  images:
+    attributes.image.data && attributes.image.data.length
+      ? attributes.image.data.map((item) => ({
+          height: item.attributes.height as number,
+          placeholderUrl: item.attributes.placeholder as string,
+          url: item.attributes.url as string,
+          width: item.attributes.width as number,
+        }))
+      : [],
+  agents:
+    attributes.agents?.data && attributes.agents.data.length
+      ? {
+          fullName: attributes.agents.data[0].attributes.full_name,
+          phone1: attributes.agents.data[0].attributes.phone1,
+          branch: attributes.agents.data[0].attributes.branch,
+          phone2: attributes.agents.data[0].attributes.phone2,
+          position: attributes.agents.data[0].attributes.position,
+        }
+      : undefined,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
 

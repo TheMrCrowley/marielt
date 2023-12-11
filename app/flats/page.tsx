@@ -2,6 +2,7 @@ import React from 'react';
 
 import FlatsFilters from '@/src/app-pages/FlatsPage/FlatsFilters';
 import FlatsList from '@/src/app-pages/FlatsPage/FlatsList';
+import ApplicationField from '@/src/components/ApplicationField';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
 import { getFlatsForList } from '@/src/services/flatsServices';
 
@@ -18,7 +19,8 @@ const Flats = async ({ searchParams }: FlatsProps) => {
   return (
     <>
       <FlatsFilters data={data} />
-      <FlatsList flats={flats} pagination={pagination!} />
+      <FlatsList flats={flats} pagination={pagination} />
+      <ApplicationField />
     </>
   );
 };

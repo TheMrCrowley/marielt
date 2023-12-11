@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import { StaticImageData } from 'next/image';
 
+import BackButton from '@/src/components/common/BackButton';
 import Typography from '@/src/components/common/Typography/Typography';
+import { AppRoutes } from '@/src/enums/AppRoutes';
 
 interface StaticPageProps {
   imageUrl: StaticImageData;
@@ -23,11 +25,16 @@ const StaticPage = ({ description, imageUrl, title }: StaticPageProps) => {
           'items-center',
           'md:min-h-[750px]',
           'min-h-[500px]',
+          'relative',
         )}
         style={{
           backgroundImage: `url(${imageUrl.src})`,
         }}
       >
+        <BackButton
+          to={AppRoutes.Careers}
+          className="absolute z-10 sm:left-4 sm:top-4 top-0 left-3"
+        />
         <div className={clsx('max-w-7xl', 'w-full', 'flex', 'items-center', 'px-5')}>
           <div className={clsx('max-w-2xl', 'flex', 'gap-8', 'flex-col')}>
             <Typography fontSize={48}>{title}</Typography>

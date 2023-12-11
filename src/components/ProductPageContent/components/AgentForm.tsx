@@ -4,16 +4,14 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-number-input/input';
 
 import AgentPlaceholder from '@/public/agentPlaceholder.png';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import CrossIcon from '@/public/plus.svg';
 import Button from '@/src/components/common/Button';
+import CustomerForm from '@/src/components/common/CustomerForm';
 import Typography from '@/src/components/common/Typography';
 import { WindowWidth } from '@/src/enums/Width';
-import { removeDigits } from '@/src/helpers/removeDigits';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { sendAgentApplication } from '@/src/services/applicationServices';
 import { handleContactsViews } from '@/src/services/localStorageServices';
@@ -31,12 +29,6 @@ interface AgentFormProps {
   productId: string;
 }
 
-const defaultFormState = {
-  isChecked: false,
-  name: '',
-  phone: '',
-};
-
 const getPhone = (phone: string, isVisible: boolean) => {
   return isVisible ? phone : phone.substring(0, phone.length - 9) + 'XXXXXXXXX';
 };
@@ -47,44 +39,25 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPhoneVisible, setIsPhoneVisible] = useState<boolean>(false);
 
-  const [formState, setFormState] = useState<{
-    name: string;
-    phone: string | undefined;
-    isChecked: boolean;
-  }>(defaultFormState);
-
   if (!agentData) {
     return null;
   }
 
   const { fullName, phone1, phone2, position } = agentData;
 
-  const disabled = !(
-    formState.isChecked &&
-    isValidPhoneNumber(formState.phone || '', 'BY') &&
-    formState.name.length
-  );
-
-  const onApply = async () => {
-    if (
-      formState.isChecked &&
-      isValidPhoneNumber(formState.phone || '', 'BY') &&
-      formState.name.length
-    ) {
-      await sendAgentApplication({
-        id: productId,
-        name: formState.name,
-        phone: formState.phone as string,
-        type,
-      });
-      setFormState(defaultFormState);
-    }
-  };
-
   const handleShowContacts = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsPhoneVisible(true);
     await handleContactsViews(type, productId);
+  };
+
+  const handleApply = async ({ name, phone }: { name: string; phone: string }) => {
+    await sendAgentApplication({
+      id: productId,
+      name: name,
+      phone: phone as string,
+      type,
+    });
   };
 
   const renderAgentForm = () => {
@@ -136,7 +109,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
             className={clsx('block', 'absolute', 'right-0', 'bottom-0', 'z-10')}
           />
         </div>
-        <form
+        <div
           className={clsx(
             'bg-secondary',
             'flex',
@@ -144,6 +117,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
             'justify-center',
             'items-center',
             'p-6',
+            'pb-0',
             'w-full',
             'gap-4',
           )}
@@ -172,68 +146,8 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
               Показать контакты
             </button>
           )}
-
-          <label className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black')}>
-            <input
-              placeholder="Имя"
-              className={clsx('placeholder:text-[#3434347f]')}
-              value={formState.name}
-              onChange={(e) =>
-                setFormState((prev) => ({ ...prev, name: removeDigits(e.target.value) }))
-              }
-            />
-          </label>
-          <label className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black')}>
-            <PhoneInput
-              value={formState.phone}
-              onChange={(value) => setFormState((prev) => ({ ...prev, phone: value }))}
-              country="BY"
-              smartCaret
-              withCountryCallingCode
-              international
-              useNationalFormatForDefaultCountryValue
-            />
-          </label>
-          <label
-            className={clsx(
-              'text-black',
-              'text-sm',
-              'flex',
-              'justify-center',
-              'items-center',
-              'font-light',
-              'text-center',
-              'gap-4',
-              'hover:cursor-pointer',
-            )}
-          >
-            <input
-              onChange={() => setFormState((prev) => ({ ...prev, isChecked: !prev.isChecked }))}
-              className={clsx('w-4', 'h-4', 'bg-transparent', 'outline-none', 'border-none')}
-              type="checkbox"
-              name="agreement"
-              checked={formState.isChecked}
-            />
-            Я согласен(а) с обработкой моих персональных данных
-          </label>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onApply();
-            }}
-            disabled={disabled}
-            className={clsx(
-              'disabled:pointer-events-none',
-              'bg-[#262626]',
-              'text-white',
-              'w-full',
-              'py-3',
-              'disabled:opacity-50',
-            )}
-          >
-            Оставить заявку
-          </button>
-        </form>
+        </div>
+        <CustomerForm onApply={handleApply} />
       </div>
     );
   };

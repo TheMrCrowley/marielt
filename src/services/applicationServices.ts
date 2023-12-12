@@ -36,3 +36,22 @@ export const sendAgentApplication = ({
     body: JSON.stringify({ type, name, phone, id }),
   });
 };
+
+export const sendTrainingApplication = ({
+  name,
+  phone,
+  id,
+}: {
+  name: string;
+  phone: string;
+  id: string;
+}) => {
+  fetch('/api/application/training', {
+    method: 'POST',
+    body: JSON.stringify({
+      name,
+      phone,
+      id,
+    }),
+  });
+};

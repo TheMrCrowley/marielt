@@ -3,10 +3,10 @@ import React from 'react';
 
 import { HomePageData } from '@/src/types/HomePage';
 
-import LeaveApplicationSection from './LeaveApplicationSection';
-import OpportunityPreview from './OpportunityPreview';
-import ProductPreview from './ProductPreview';
-import WelcomeSection from './WelcomeSection';
+import LeaveApplicationSection from './components/LeaveApplicationSection';
+import OpportunityPreview from './components/OpportunityPreview';
+import ProductPreview from './components/ProductPreview';
+import WelcomeSection from './components/WelcomeSection';
 
 type HomePageProps = {
   data: HomePageData;

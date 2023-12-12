@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 import LocationIcon from '@/public/card-map-pin.svg';
 import DirectionIcon from '@/public/direction.svg';
-import HouseIcon from '@/public/house-icon.svg';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 import { AvailableCurrencies } from '@/src/types/Currency';

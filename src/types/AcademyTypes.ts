@@ -1,4 +1,4 @@
-import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
+import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 export interface TrainingStrapiResponse {
   title: string;
@@ -8,6 +8,7 @@ export interface TrainingStrapiResponse {
 }
 
 export interface Training {
+  id: string;
   title: string;
   description?: string;
   content?: string;
@@ -25,6 +26,7 @@ export interface TeacherStrapiResponse {
   description1?: string;
   description2?: string;
   photo: StrapiFindOneResponse<StrapiImage>;
+  trainings: StrapiFindResponse<TrainingStrapiResponse>;
 }
 
 export interface Teacher {
@@ -38,4 +40,5 @@ export interface Teacher {
     placeholder: string;
     url: string;
   };
+  trainings: Array<Partial<Training>>;
 }

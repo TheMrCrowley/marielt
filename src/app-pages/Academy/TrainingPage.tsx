@@ -59,7 +59,7 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
               width={image.width}
               height={image.height}
               className="w-full object-cover"
-              alt=""
+              alt="training-image"
             />
           </div>
         )}

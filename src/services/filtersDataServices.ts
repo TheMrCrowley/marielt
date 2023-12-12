@@ -15,7 +15,7 @@ import {
 } from '@/src/types/Commercial';
 import { DistrictResponse, MicroDistrictResponse, DirectionResponse } from '@/src/types/Filters';
 import { HousesAndLotsCategoryResponse } from '@/src/types/HousesAndLots';
-import { District, MicroDistrict } from '@/src/types/Location';
+import { District, Metro, MicroDistrict } from '@/src/types/Location';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 const getDistricts = async (): Promise<District[]> => {
@@ -24,7 +24,7 @@ const getDistricts = async (): Promise<District[]> => {
       pagination: {
         limit: -1,
       },
-      populate: 'microdistricts',
+      populate: ['metros', 'microdistricts'],
     },
     {
       encodeValuesOnly: true,
@@ -66,13 +66,44 @@ const getMicroDistricts = async (): Promise<MicroDistrict[]> => {
   return formatToMicroDistrict(data);
 };
 
-const getMetro = async () => {
-  const metroResponse = await fetch(`${process.env.API_BASE_URL}/metros`, {
+const getMetro = async (): Promise<Metro[]> => {
+  const query = qs.stringify(
+    {
+      pagination: {
+        limit: -1,
+      },
+      populate: 'districts',
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );
+
+  const url = `${process.env.API_BASE_URL}/metros?${query}`;
+  const metroResponse = await fetch(url, {
     // cache: 'no-cache'
   });
-  const { data } = (await metroResponse.json()) as StrapiFindResponse<{ name: string }>;
 
-  return data.map((district) => district.attributes.name);
+  const { data } = (await metroResponse.json()) as StrapiFindResponse<{
+    name: string;
+    districts: {
+      data: Array<{
+        id: string;
+        attributes: {
+          name: string;
+        };
+      }>;
+    };
+  }>;
+
+  return data.map((metro) => ({
+    metroName: metro.attributes.name,
+    metroId: metro.id,
+    districts: metro.attributes.districts.data.map((item) => ({
+      districtId: item.id,
+      districtName: item.attributes.name,
+    })),
+  }));
 };
 
 export const getFlatsFiltersData = async () => {

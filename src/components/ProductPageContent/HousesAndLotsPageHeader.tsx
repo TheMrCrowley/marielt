@@ -23,6 +23,7 @@ interface HousesAndLotsPageHeaderProps {
   category?: string;
   direction?: string;
   distance?: string;
+  childCategory?: string;
 }
 
 const HousesAndLotsPageHeader = ({
@@ -36,6 +37,7 @@ const HousesAndLotsPageHeader = ({
   title,
   category,
   direction,
+  childCategory,
   distance,
 }: HousesAndLotsPageHeaderProps) => {
   const renderAreas = () => (
@@ -100,7 +102,7 @@ const HousesAndLotsPageHeader = ({
               className={clsx(
                 'flex',
                 'justify-start',
-                'mt-4',
+                'items-end',
                 'lg:flex-row',
                 'flex-col',
                 'flex-wrap',
@@ -108,9 +110,19 @@ const HousesAndLotsPageHeader = ({
               )}
             >
               {category && (
-                <div className={clsx('flex', 'gap-1.5')}>
-                  <Image alt="house" src={HouseIcon} />
-                  <Typography fontSize={16}>{category}</Typography>
+                <div>
+                  <Typography fontSize={14} color="text-[#B1B1B1]">
+                    Тип
+                  </Typography>
+                  <Typography fontSize={14}>{category}</Typography>
+                </div>
+              )}
+              {childCategory && (
+                <div>
+                  <Typography fontSize={14} color="text-[#B1B1B1]">
+                    Вид
+                  </Typography>
+                  <Typography fontSize={14}>{childCategory}</Typography>
                 </div>
               )}
               {constructionYear && (

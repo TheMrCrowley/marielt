@@ -5,6 +5,10 @@ export interface District {
     microdistrictId: string;
     microdistrictName: string;
   }>;
+  metros: Array<{
+    metroId: string;
+    metroName: string;
+  }>;
 }
 
 export interface MicroDistrict {
@@ -14,4 +18,13 @@ export interface MicroDistrict {
     districtId: string;
     districtName: string;
   };
+}
+
+export interface Metro {
+  metroId: string;
+  metroName: string;
+  districts: Array<{
+    districtId: string;
+    districtName: string;
+  }>;
 }

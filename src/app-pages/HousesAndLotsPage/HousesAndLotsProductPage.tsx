@@ -43,6 +43,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     name,
     direction,
     id,
+    type,
     distance,
   } = item;
 
@@ -78,6 +79,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
             livingArea={livingArea}
             plotSize={plotSize}
             totalArea={totalArea}
+            childCategory={type}
             price={+price!}
             title={name}
             direction={direction}

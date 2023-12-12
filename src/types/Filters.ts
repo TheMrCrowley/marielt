@@ -45,6 +45,14 @@ export interface DistrictResponse {
       };
     }>;
   };
+  metros: {
+    data: Array<{
+      id: string;
+      attributes: {
+        name: string;
+      };
+    }>;
+  };
 }
 
 export interface MicroDistrictResponse {

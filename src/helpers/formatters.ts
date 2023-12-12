@@ -434,6 +434,10 @@ export const formatToDistrict = (data: StrapiFindResponse<DistrictResponse>['dat
       microdistrictId: microdistrict.id,
       microdistrictName: microdistrict.attributes.name,
     })),
+    metros: district.attributes.metros.data.map((metro) => ({
+      metroId: metro.id,
+      metroName: metro.attributes.name,
+    })),
   }));
 
 export const formatToMicroDistrict = (

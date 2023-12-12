@@ -17,7 +17,7 @@ import {
 import { parseFiltersStateToTags } from '@/src/helpers/parseFiltersStateToTags';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { BaseFilters } from '@/src/types/Filters';
-import { District, MicroDistrict } from '@/src/types/Location';
+import { District, Metro, MicroDistrict } from '@/src/types/Location';
 
 export type FlatsFiltersType = BaseFilters<
   {
@@ -61,7 +61,7 @@ export type FlatsFiltersType = BaseFilters<
   {
     district: District[];
     microDistrict: MicroDistrict[];
-    metro: string[];
+    metro: Metro[];
   }
 >;
 

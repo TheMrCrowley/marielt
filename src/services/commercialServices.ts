@@ -871,3 +871,25 @@ export const getCommercialSimilar = async (item: DetailedCommercialItem) => {
     },
   ];
 };
+
+export const getCommSeoFields = async (id: string) => {
+  const url = `${process.env.API_BASE_URL}/comm-items/${id}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
+
+  return {
+    seo: {
+      title: data.attributes.name || 'Static House Title',
+      description:
+        data.attributes.note && data.attributes.detailed_description
+          ? data.attributes.note + ' ' + data.attributes.detailed_description
+          : 'Static House Description',
+    },
+  };
+};

@@ -550,3 +550,25 @@ export const getSimilarFlatsItems = async (flat: DetailedFlatItem) => {
     },
   ];
 };
+
+export const getFlatSeoFields = async (id: string) => {
+  const url = `${process.env.API_BASE_URL}/apart-items/${id}`;
+
+  const response = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  const { data } = (await response.json()) as StrapiFindOneResponse<FlatStrapiResponse>;
+
+  return {
+    seo: {
+      title: data.attributes.name || 'Static Apart Title',
+      description:
+        data.attributes.note && data.attributes.detailed_description
+          ? data.attributes.note + ' ' + data.attributes.detailed_description
+          : 'Static Apart Description',
+    },
+  };
+};

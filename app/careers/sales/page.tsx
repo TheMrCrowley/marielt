@@ -1,7 +1,13 @@
+import { Metadata } from 'next';
 import React from 'react';
 
 import SalesImage from '@/public/sales-bg.jpg';
 import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
+
+export const metadata: Metadata = {
+  title: 'Static Sales Title',
+  description: 'Static Sales Description',
+};
 
 const page = () => {
   return (

@@ -1,14 +1,14 @@
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-import ProductSlider from '@/src/components/Swiper/ProductSlider';
 import Title from '@/src/components/common/Title';
 import { getActualProductsByType } from '@/src/services/actualProductsServices';
 import { ProductType } from '@/src/types/Product';
 
-interface ProductSliderWrapperProps {
+type ProductSliderWrapperProps = {
   type: ProductType;
-}
+};
 
 const getTitleByType = (type: ProductType) => {
   switch (type) {
@@ -28,6 +28,8 @@ const ProductSliderWrapper = async ({ type }: ProductSliderWrapperProps) => {
   if (!actualData.length) {
     return null;
   }
+
+  const ProductSlider = dynamic(() => import('@/src/components/Swiper/ProductSlider'));
 
   return (
     <>

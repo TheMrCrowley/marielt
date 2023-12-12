@@ -1,7 +1,13 @@
+import { Metadata } from 'next';
 import React from 'react';
 
 import RealtorImage from '@/public/realtor-bg.jpg';
 import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
+
+export const metadata: Metadata = {
+  title: 'Static Realtor Title',
+  description: 'Static Realtor Description',
+};
 
 const page = () => {
   return (

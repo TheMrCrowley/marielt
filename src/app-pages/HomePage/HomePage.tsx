@@ -1,16 +1,19 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { getHomePageData } from '@/src/services/homePageServices';
+import { HomePageData } from '@/src/types/HomePage';
 
 import LeaveApplicationSection from './LeaveApplicationSection';
 import OpportunityPreview from './OpportunityPreview';
 import ProductPreview from './ProductPreview';
 import WelcomeSection from './WelcomeSection';
 
-const HomePage = async () => {
-  const { opportunities, products, welcomeSection } = await getHomePageData();
+type HomePageProps = {
+  data: HomePageData;
+};
 
+const HomePage = ({ data }: HomePageProps) => {
+  const { opportunities, products, welcomeSection } = data;
   return (
     <>
       <WelcomeSection data={welcomeSection} />

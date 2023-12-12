@@ -2,6 +2,8 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React from 'react';
 
 import PrevIcon from '@/public/chevron-left.svg';
@@ -10,48 +12,59 @@ import NextIcon from '@/public/chevron-right.svg';
 interface PaginationProps {
   totalPages: number;
   currentPage: number;
-  onChange: (page: number) => void;
 }
 
 const PAGE_RANGE = 5;
 
 const PaginationButton = ({
   isActive,
+  to,
   page,
-  onClick,
 }: {
   isActive: boolean;
+  to: string;
   page: number;
-  onClick: (page: number) => void;
 }) => {
   return (
-    <button
-      className={clsx(
-        'text-xl',
-        'border-b',
-        'border-solid',
-        'py-3',
-        'px-4',
-        'justify-center',
-        'items-center',
-        'border-[#B1B1B1]',
-        !isActive && 'text-[#B1B1B1]',
-        isActive && 'border-secondary',
-        isActive && 'bg-secondary',
-        isActive && 'text-[#262626]',
-      )}
-      onClick={() => onClick(page)}
-      disabled={isActive}
-    >
-      {page}
-    </button>
+    <Link href={to} prefetch>
+      <button
+        className={clsx(
+          'text-xl',
+          'border-b',
+          'border-solid',
+          'py-3',
+          'px-4',
+          'justify-center',
+          'items-center',
+          'border-[#B1B1B1]',
+          !isActive && 'text-[#B1B1B1]',
+          isActive && 'border-secondary',
+          isActive && 'bg-secondary',
+          isActive && 'text-[#262626]',
+        )}
+        disabled={isActive}
+      >
+        {page}
+      </button>
+    </Link>
   );
 };
 
-const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
+const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) {
     return null;
   }
+
+  const url = (page: number) => {
+    const currentSearchParams = new URLSearchParams(searchParams);
+
+    currentSearchParams.set('page', page.toString());
+
+    return pathname + '?' + currentSearchParams.toString();
+  };
 
   const renderPages = () => {
     const isEdge =
@@ -73,7 +86,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
             <PaginationButton
               isActive={isActive}
               page={i}
-              onClick={onChange}
+              to={url(i)}
               key={`pagination-page-${i}`}
             />,
           );
@@ -94,7 +107,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
             <PaginationButton
               isActive={isActive}
               page={i}
-              onClick={onChange}
+              to={url(i)}
               key={`pagination-page-${i}`}
             />,
           );
@@ -113,12 +126,7 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
       const isActive = currentPage === i;
 
       pages.push(
-        <PaginationButton
-          isActive={isActive}
-          page={i}
-          onClick={onChange}
-          key={`pagination-page-${i}`}
-        />,
+        <PaginationButton isActive={isActive} page={i} to={url(i)} key={`pagination-page-${i}`} />,
       );
     }
 
@@ -127,49 +135,52 @@ const Pagination = ({ currentPage, onChange, totalPages }: PaginationProps) => {
 
   return (
     <div className={clsx('flex', 'max-w-lg', 'justify-between', 'gap-x-2')}>
-      <button
-        className={clsx(
-          'flex',
-          'gap-x-4',
-          'justify-center',
-          'items-center',
-          'text-xl',
-          'border-b',
-          'border-solid',
-          'py-3',
-          'px-4',
-          'border-secondary',
-          'text-white',
-          'disabled:opacity-50',
-        )}
-        onClick={() => onChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        <Image src={PrevIcon} alt="next-icon" />
-        Назад
-      </button>
+      <Link href={url(currentPage - 1)} prefetch>
+        <button
+          className={clsx(
+            'flex',
+            'gap-x-4',
+            'justify-center',
+            'items-center',
+            'text-xl',
+            'border-b',
+            'border-solid',
+            'py-3',
+            'px-4',
+            'border-secondary',
+            'text-white',
+            'disabled:opacity-50',
+          )}
+          disabled={currentPage === 1}
+        >
+          <Image src={PrevIcon} alt="next-icon" />
+          Назад
+        </button>
+      </Link>
+
       {renderPages()}
-      <button
-        className={clsx(
-          'flex',
-          'gap-x-4',
-          'justify-center',
-          'items-center',
-          'text-xl',
-          'border-b',
-          'border-solid',
-          'py-3',
-          'px-4',
-          'border-secondary',
-          'text-white',
-          'disabled:opacity-50',
-        )}
-        onClick={() => onChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        Вперед
-        <Image src={NextIcon} alt="next-icon" />
-      </button>
+      <Link href={url(currentPage + 1)} prefetch>
+        <button
+          className={clsx(
+            'flex',
+            'gap-x-4',
+            'justify-center',
+            'items-center',
+            'text-xl',
+            'border-b',
+            'border-solid',
+            'py-3',
+            'px-4',
+            'border-secondary',
+            'text-white',
+            'disabled:opacity-50',
+          )}
+          disabled={currentPage === totalPages}
+        >
+          Вперед
+          <Image src={NextIcon} alt="next-icon" />
+        </button>
+      </Link>
     </div>
   );
 };

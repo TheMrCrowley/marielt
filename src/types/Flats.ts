@@ -92,6 +92,10 @@ export interface FlatStrapiResponse {
     layout?: string;
     level_number?: string;
   };
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
   additional_info?: Array<{ name: string }>;
   note: string;
   village_council?: string;
@@ -109,7 +113,6 @@ export interface FlatStrapiResponse {
       };
     };
   };
-  coordinates: string;
   locality: string;
   street?: string;
   district_rb?: string;

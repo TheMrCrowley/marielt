@@ -63,7 +63,12 @@ export const formatToDefaultMapItem = (
     id,
     price: attributes.price,
     initialCurrency: attributes.currency || 'USD',
-    location: attributes.location?.coordinates,
+    location: attributes.coordinates
+      ? {
+          lat: attributes.coordinates.latitude,
+          lng: attributes.coordinates.longitude,
+        }
+      : undefined,
   }));
 
 export const formatToCommercialMapItem = (
@@ -73,7 +78,12 @@ export const formatToCommercialMapItem = (
     id,
     price: attributes.price_total?.from || attributes.price_meter?.from,
     initialCurrency: attributes.currency || 'USD',
-    location: attributes.location?.coordinates,
+    location: attributes.coordinates
+      ? {
+          lat: attributes.coordinates.latitude,
+          lng: attributes.coordinates.longitude,
+        }
+      : undefined,
   }));
 
 export const formatToDetailedFlat = ({

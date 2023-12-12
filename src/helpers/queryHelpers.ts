@@ -92,7 +92,7 @@ export const getDefaultMapPopulateQuery = () => {
   return qs.stringify(
     {
       populate: {
-        location: '*',
+        coordinates: '*',
       },
     },
     {

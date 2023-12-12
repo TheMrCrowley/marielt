@@ -17,12 +17,10 @@ const Flats = async ({ searchParams }: FlatsProps) => {
   ]);
 
   return (
-    <>
-      <Suspense fallback={<Loader />}>
-        <FlatsFilters data={data} />
-        <FlatsMap productIds={searchParams.productIds || []} flats={flats} />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loader />}>
+      <FlatsFilters data={data} />
+      <FlatsMap productIds={searchParams.productIds || []} flats={flats} />
+    </Suspense>
   );
 };
 

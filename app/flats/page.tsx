@@ -31,13 +31,11 @@ const Flats = async ({ searchParams }: FlatsProps) => {
   ]);
 
   return (
-    <>
-      <Suspense fallback={<Loader />}>
-        <FlatsFilters data={data} />
-        <FlatsList flats={flats} pagination={pagination} />
-        <ApplicationField />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loader />}>
+      <FlatsFilters data={data} />
+      <FlatsList flats={flats} pagination={pagination} />
+      <ApplicationField />
+    </Suspense>
   );
 };
 

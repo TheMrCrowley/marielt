@@ -2,7 +2,8 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { PropsWithChildren } from 'react';
 
 import MapIcon from '@/public/map.png';
@@ -19,25 +20,13 @@ const ProductListWrapper = ({
   pagination: { page, pageCount },
   children,
 }: ProductListWrapperProps) => {
-  const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handlePageChange = (to: number) => {
-    const currentSearchParams = new URLSearchParams(window.location.search);
+  const getMapUrl = () => {
+    const currentSearchParams = new URLSearchParams(searchParams);
 
-    currentSearchParams.set('page', to.toString());
-
-    router.push(pathname + '?' + currentSearchParams.toString(), {
-      scroll: true,
-    });
-  };
-
-  const handleViewChange = () => {
-    const currentSearchParams = new URLSearchParams(window.location.search);
-
-    router.push(pathname + '/map' + '?' + currentSearchParams.toString(), {
-      scroll: true,
-    });
+    return pathname + '/map' + '?' + currentSearchParams.toString();
   };
 
   return (
@@ -56,23 +45,24 @@ const ProductListWrapper = ({
     >
       <div className={clsx('w-full', 'flex', 'items-center', 'justify-end', 'gap-8')}>
         <SortSelect />
-        <button
-          className={clsx(
-            'flex',
-            'justify-center',
-            'items-center',
-            'w-max',
-            'gap-4',
-            'text-[#B1B1B1]',
-            'underline',
-            'hover:cursor-pointer',
-            'transition-all',
-          )}
-          onClick={handleViewChange}
-        >
-          <Image src={MapIcon} alt="map-icon" />
-          На карте
-        </button>
+        <Link href={getMapUrl()} prefetch>
+          <button
+            className={clsx(
+              'flex',
+              'justify-center',
+              'items-center',
+              'w-max',
+              'gap-4',
+              'text-[#B1B1B1]',
+              'underline',
+              'hover:cursor-pointer',
+              'transition-all',
+            )}
+          >
+            <Image src={MapIcon} alt="map-icon" />
+            На карте
+          </button>
+        </Link>
       </div>
       <div
         className={clsx('grid', 'w-full', 'gap-8')}
@@ -83,7 +73,7 @@ const ProductListWrapper = ({
       >
         {children}
       </div>
-      <Pagination currentPage={page} totalPages={pageCount} onChange={handlePageChange} />
+      <Pagination currentPage={page} totalPages={pageCount} />
     </section>
   );
 };

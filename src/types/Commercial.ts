@@ -253,6 +253,10 @@ export type CommercialStrapiResponse = Partial<{
   };
   detailed_description: string;
   video_link: string;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
 
   // comm_group
   // metro

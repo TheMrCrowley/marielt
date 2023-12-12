@@ -98,7 +98,10 @@ export interface HousesAndLotsStrapiResponse {
     number: string;
     building: string;
   };
-  coordinates: string;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
   parameters: {
     plot_size?: string;
     level_number?: string;

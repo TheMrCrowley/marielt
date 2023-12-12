@@ -99,6 +99,7 @@ export const getTeacherById = async (id: string): Promise<Teacher> => {
   const { data } = (await response.json()) as StrapiFindOneResponse<TeacherStrapiResponse>;
 
   return {
+    id: data.id,
     name: data.attributes.name,
     position: data.attributes.position,
     description1: data.attributes.description1,
@@ -120,11 +121,21 @@ export const getTeacherById = async (id: string): Promise<Teacher> => {
   };
 };
 
-export const getAllTeachers = async () => {
+export const getAllTeachers = async (): Promise<Teacher[]> => {
   const query = qs.stringify(
     {
       pagination: {
         limit: -1,
+      },
+      populate: {
+        photo: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        trainings: {
+          populate: {
+            fields: ['name', 'description', 'content'],
+          },
+        },
       },
     },
     {
@@ -142,5 +153,25 @@ export const getAllTeachers = async () => {
 
   const { data } = (await response.json()) as StrapiFindResponse<TeacherStrapiResponse>;
 
-  return data.map((item) => ({ id: item.id }));
+  return data.map((item) => ({
+    id: item.id,
+    name: item.attributes.name,
+    position: item.attributes.position,
+    trainings: item.attributes.trainings.data.map((t) => ({
+      title: t.attributes.title,
+      description: t.attributes.description,
+      content: t.attributes.content,
+      id: t.id,
+    })),
+    description1: item.attributes.description1,
+    description2: item.attributes.description2,
+    photo: item.attributes.photo?.data
+      ? {
+          height: item.attributes.photo.data.attributes.height,
+          width: item.attributes.photo.data.attributes.width,
+          placeholder: item.attributes.photo.data.attributes.placeholder,
+          url: item.attributes.photo.data.attributes.url,
+        }
+      : undefined,
+  }));
 };

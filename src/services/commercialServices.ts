@@ -711,6 +711,9 @@ export const getCommercialById = async (id: string) => {
         direction: {
           fields: ['name'],
         },
+        coordinates: {
+          populate: '*',
+        },
       },
     },
     {

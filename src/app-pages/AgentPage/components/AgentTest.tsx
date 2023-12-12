@@ -209,7 +209,7 @@ const AgentTestContent = ({ onClose }: { onClose: () => void }) => {
               </Typography>
               <Typography fontSize={24} fontWeight="light" className="text-center">
                 Ознакомьтесь с обучением в{' '}
-                <Link href={AppRoutes.Academy} className="text-secondary">
+                <Link href={AppRoutes.Academy} className="text-secondary" prefetch>
                   Академии Мариэлт
                 </Link>
               </Typography>

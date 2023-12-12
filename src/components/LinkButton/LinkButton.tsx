@@ -8,7 +8,7 @@ import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
 
 export interface LinkButtonProps {
   type: 'product' | 'opportunity' | 'vacancy';
-  to: AppRoutes | AppChildRoutes;
+  to: AppRoutes | AppChildRoutes | string;
   buttonClassName?: string;
   linkClassName?: string;
 }
@@ -28,7 +28,7 @@ const getTextByType = (type: LinkButtonProps['type']) => {
 
 const LinkButton = ({ type, to, buttonClassName, linkClassName }: LinkButtonProps) => {
   return (
-    <Link href={`${to}`} className={linkClassName}>
+    <Link href={`${to}`} className={linkClassName} prefetch>
       <button
         className={clsx(
           //TODO think how to improve this

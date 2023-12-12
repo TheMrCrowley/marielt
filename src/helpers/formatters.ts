@@ -128,7 +128,9 @@ export const formatToDetailedFlat = ({
   },
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
-  location: attributes.location?.coordinates,
+  location: attributes.coordinates
+    ? { lat: attributes.coordinates.latitude, lng: attributes.coordinates.longitude }
+    : undefined,
   detailedDescription: attributes.detailed_description,
   images:
     attributes.image.data && attributes.image.data.length
@@ -199,7 +201,12 @@ export const formatToDetailedCommercialItem = ({
   attributes,
   id,
 }: StrapiFindOneResponse<CommercialStrapiResponse>['data']): DetailedCommercialItem => ({
-  location: attributes.location?.coordinates,
+  location: attributes.coordinates
+    ? {
+        lat: attributes.coordinates.latitude,
+        lng: attributes.coordinates.longitude,
+      }
+    : undefined,
   agents: {
     fullName: attributes?.agents?.data[0].attributes.full_name!,
     phone1: attributes?.agents?.data[0].attributes.phone1!,
@@ -405,7 +412,12 @@ export const formatToDetailedHousesAndLots = ({
     attributes.house_categories?.data &&
     attributes.house_categories.data.find((item) => !!item.attributes.category)?.attributes.name,
   direction: attributes.direction?.data?.attributes.name,
-  location: attributes.location?.coordinates,
+  location: attributes.coordinates
+    ? {
+        lat: attributes.coordinates.latitude,
+        lng: attributes.coordinates.longitude,
+      }
+    : undefined,
   images: Array.isArray(attributes?.image?.data)
     ? attributes!.image!.data.map((item) => ({
         height: item.attributes.height as number,

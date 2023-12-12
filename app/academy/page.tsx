@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import React from 'react';
 
+import AcademyPage from '@/src/app-pages/Academy/AcademyPage';
 import { getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Academy = () => {
-  return <div>Academy</div>;
+  return <AcademyPage />;
 };
 
 export default Academy;

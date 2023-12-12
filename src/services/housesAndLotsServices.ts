@@ -303,6 +303,9 @@ export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAn
             fields: ['name'],
           },
         },
+        coordinates: {
+          populate: '*',
+        },
         house_number: {
           populate: '*',
         },

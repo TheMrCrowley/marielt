@@ -37,7 +37,7 @@ export const sendAgentApplication = ({
   });
 };
 
-export const sendTrainingApplication = ({
+export const sendTrainingApplication = async ({
   name,
   phone,
   id,
@@ -46,12 +46,22 @@ export const sendTrainingApplication = ({
   phone: string;
   id: string;
 }) => {
-  fetch('/api/application/training', {
+  await fetch('/api/application/training', {
     method: 'POST',
     body: JSON.stringify({
       name,
       phone,
       id,
+    }),
+  });
+};
+
+export const sendLeaderApplication = async ({ name, phone }: { name: string; phone: string }) => {
+  await fetch('/api/application/leader', {
+    method: 'POST',
+    body: JSON.stringify({
+      name,
+      phone,
     }),
   });
 };

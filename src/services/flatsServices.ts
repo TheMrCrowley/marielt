@@ -350,6 +350,9 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
         parameters: {
           populate: '*',
         },
+        coordinates: {
+          populate: '*',
+        },
       },
     },
     {

@@ -59,6 +59,7 @@ export enum CommercialLocationValues {
   BusinessCenter = 'business-center',
   ShoppingMall = 'shopping-mall',
   DetachedBuilding = 'detached-building',
+  Underground = 'underground',
 }
 
 export const commercialLocationOptions: OptionType<CommercialLocationValues> = [
@@ -66,6 +67,7 @@ export const commercialLocationOptions: OptionType<CommercialLocationValues> = [
   { value: CommercialLocationValues.BusinessCenter, label: 'В бизнес-центре' },
   { value: CommercialLocationValues.ShoppingMall, label: 'В торговом центре' },
   { value: CommercialLocationValues.DetachedBuilding, label: 'Отдельно стоящее здание' },
+  { value: CommercialLocationValues.Underground, label: 'В подземном переходе' },
 ];
 
 export const commercialLocationQueryMap: QueryMapType<CommercialLocationValues> = {
@@ -73,6 +75,7 @@ export const commercialLocationQueryMap: QueryMapType<CommercialLocationValues> 
   [CommercialLocationValues.BusinessCenter]: 'в бизнес центре',
   [CommercialLocationValues.ShoppingMall]: 'в торговом центре',
   [CommercialLocationValues.DetachedBuilding]: 'отдельно стоящее здание',
+  [CommercialLocationValues.Underground]: 'в подземном переходе',
 };
 
 export enum CommercialFinishingValues {

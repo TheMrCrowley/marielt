@@ -43,6 +43,18 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
     );
   }, [searchParams]);
 
+  useEffect(() => {
+    router.prefetch(
+      pathname +
+        '?' +
+        formatFiltersToSearchParams(
+          { ...filters },
+          selectedCurrency,
+          searchParams.get('sort') as SortValues,
+        ),
+    );
+  }, [filters]);
+
   const applyFilters = (searchFilters?: Partial<typeof filters>) => {
     router.push(
       pathname +

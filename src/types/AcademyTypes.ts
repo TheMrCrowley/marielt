@@ -30,6 +30,7 @@ export interface TeacherStrapiResponse {
 }
 
 export interface Teacher {
+  id: string;
   name: string;
   position: string;
   description1?: string;

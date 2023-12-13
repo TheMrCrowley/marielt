@@ -11,8 +11,8 @@ import {
 import { useCurrency } from '@/src/store/currency';
 import { FlatsFiltersType, useFlatsFilter } from '@/src/store/flatsFilters';
 
-import DefaultFilters from './DefaultFilters';
-import ExpandedFilters from './ExpandedFilters';
+import DefaultFilters from './components/DefaultFilters';
+import ExpandedFilters from './components/ExpandedFilters';
 
 interface FlatsFiltersProps {
   data: FlatsFiltersType['data'];
@@ -20,8 +20,8 @@ interface FlatsFiltersProps {
 
 const FlatsFilters = ({ data }: FlatsFiltersProps) => {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const pathname = usePathname();
+
   const { setData, isExpandedOpen, setIsExpandedOpen, updateFilters, filters, updateTags } =
     useFlatsFilter();
   const { selectedCurrency } = useCurrency();
@@ -43,29 +43,16 @@ const FlatsFilters = ({ data }: FlatsFiltersProps) => {
     );
   }, [searchParams]);
 
-  useEffect(() => {
-    router.prefetch(
+  const applyFilters = (searchFilters?: Partial<typeof filters>): string => {
+    return (
       pathname +
-        '?' +
-        formatFiltersToSearchParams(
-          { ...filters },
-          selectedCurrency,
-          searchParams.get('sort') as SortValues,
-        ),
+      '?' +
+      formatFiltersToSearchParams(
+        { ...filters, ...searchFilters },
+        selectedCurrency,
+        searchParams.get('sort') as SortValues,
+      )
     );
-  }, [filters]);
-
-  const applyFilters = (searchFilters?: Partial<typeof filters>) => {
-    router.push(
-      pathname +
-        '?' +
-        formatFiltersToSearchParams(
-          { ...filters, ...searchFilters },
-          selectedCurrency,
-          searchParams.get('sort') as SortValues,
-        ),
-    );
-    router.refresh();
   };
 
   return (

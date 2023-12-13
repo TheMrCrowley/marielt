@@ -244,7 +244,12 @@ export const getSearchFieldQuery = (value: string) => {
           },
         ],
       },
-      populate: '*',
+      populate: {
+        fields: ['locality', 'street', 'district_rb'],
+        region: {
+          populate: 'name',
+        },
+      },
       pagination: {
         limit: -1,
       },

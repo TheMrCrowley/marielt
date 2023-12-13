@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import Link from 'next/link';
 import React from 'react';
 
 import ExpandedAreaFilter from '@/src/components/FlatsFilters/ExpandedAreaFilter';
@@ -17,7 +18,7 @@ import { useFlatsFilter } from '@/src/store/flatsFilters';
 interface ExpandedFiltersProps {
   isModalOpen: boolean;
   closeModal: () => void;
-  applyFilters: () => void;
+  applyFilters: () => string;
 }
 
 const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedFiltersProps) => {
@@ -50,15 +51,15 @@ const ExpandedFilters = ({ closeModal, isModalOpen, applyFilters }: ExpandedFilt
           isChecked={parking}
         />
       </div>
-      <Button
-        className={clsx('mt-auto', 'self-center')}
-        onClick={() => {
-          applyFilters();
-          closeModal();
-        }}
-      >
-        Применить
-      </Button>
+      <Link href={applyFilters()} prefetch className={clsx('mt-auto', 'self-center')}>
+        <Button
+          onClick={() => {
+            closeModal();
+          }}
+        >
+          Применить
+        </Button>
+      </Link>
     </ExpandedFiltersWrapper>
   );
 };

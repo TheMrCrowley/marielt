@@ -252,7 +252,7 @@ export const useFlatsFilter = create<FlatsFiltersType>((set, get) => ({
       filters: initialFlatsFilters,
       tags: tagsDefaultState,
     });
-    cb(get().filters);
+    cb(initialFlatsFilters);
   },
   setData: (data) => set({ data }),
   isExpandedOpen: false,

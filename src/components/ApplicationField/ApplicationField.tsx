@@ -2,8 +2,6 @@
 
 import clsx from 'clsx';
 import { useState } from 'react';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-number-input/input';
 
 import Button from '@/src/components/common/Button/Button';
 import CheckboxGroup from '@/src/components/common/CheckboxGroup/CheckboxGroup';
@@ -11,6 +9,7 @@ import Select from '@/src/components/common/Select';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography/Typography';
 import { ApplicationFormType, applicationFormOptions } from '@/src/enums/ApplicationForm';
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
 import { sendGenericApplication } from '@/src/services/applicationServices';
 
@@ -21,18 +20,20 @@ const defaultFormState = {
   phoneValue: '',
 };
 
+const PHONE_NUMBER_LENGTH = 9;
+
 const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) => {
   const [formState, setFormState] = useState<{
     isChecked: boolean;
     checkedValue: string;
     nameValue: string;
-    phoneValue: string | undefined;
+    phoneValue: string;
   }>(defaultFormState);
 
   const disabled = !(
     formState.isChecked &&
     formState.checkedValue &&
-    isValidPhoneNumber(formState.phoneValue || '', 'BY') &&
+    formState.phoneValue.length === PHONE_NUMBER_LENGTH &&
     formState.nameValue.length
   );
 
@@ -98,19 +99,21 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
               'border-b',
               'border-secondary',
               'text-white',
+              'flex',
+              'items-end',
+              'gap-1',
             )}
           >
-            <PhoneInput
+            +375
+            <input
               value={formState.phoneValue}
-              onChange={(value) => setFormState((prev) => ({ ...prev, phoneValue: value }))}
-              country="BY"
-              smartCaret
-              withCountryCallingCode
-              international
-              useNationalFormatForDefaultCountryValue
-              style={{
-                width: '100%',
-              }}
+              onChange={(e) =>
+                setFormState((prev) => ({
+                  ...prev,
+                  phoneValue: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
+                }))
+              }
+              className="w-full"
             />
           </label>
           <Select
@@ -177,7 +180,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
       <Typography fontSize={48} className={clsx('lg:text-5xl', 'text-xl', 'text-center')}>
         Оставьте заявку и мы ответим на все ваши вопросы
       </Typography>
-      <div className={clsx('flex', 'gap-8', 'flex-wrap')}>
+      <div className={clsx('flex', 'gap-8', 'flex-wrap', 'justify-center')}>
         <label
           className={clsx(
             'lg:text-2xl',
@@ -209,19 +212,21 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
             'border-b',
             'border-secondary',
             'text-white',
+            'flex',
+            'items-end',
+            'gap-1',
           )}
         >
-          <PhoneInput
+          +375
+          <input
             value={formState.phoneValue}
-            onChange={(value) => setFormState((prev) => ({ ...prev, phoneValue: value }))}
-            country="BY"
-            smartCaret
-            withCountryCallingCode
-            international
-            useNationalFormatForDefaultCountryValue
-            style={{
-              width: '100%',
-            }}
+            onChange={(e) =>
+              setFormState((prev) => ({
+                ...prev,
+                phoneValue: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
+              }))
+            }
+            className="w-full"
           />
         </label>
       </div>

@@ -2,9 +2,8 @@
 
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-number-input/input';
 
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
 
 const defaultFormState = {
@@ -13,6 +12,8 @@ const defaultFormState = {
   phone: '',
 };
 
+const PHONE_NUMBER_LENGTH = 9;
+
 interface CustomerFormProps {
   onApply: (data: { name: string; phone: string }) => Promise<void>;
 }
@@ -20,20 +21,20 @@ interface CustomerFormProps {
 const CustomerForm = ({ onApply }: CustomerFormProps) => {
   const [formState, setFormState] = useState<{
     name: string;
-    phone: string | undefined;
+    phone: string;
     isChecked: boolean;
   }>(defaultFormState);
 
   const disabled = !(
     formState.isChecked &&
-    isValidPhoneNumber(formState.phone || '', 'BY') &&
+    formState.phone.length === PHONE_NUMBER_LENGTH &&
     formState.name.length
   );
 
   const handleApply = async () => {
     if (
       formState.isChecked &&
-      isValidPhoneNumber(formState.phone || '', 'BY') &&
+      formState.phone.length === PHONE_NUMBER_LENGTH &&
       formState.name.length
     ) {
       await onApply({ name: formState.name, phone: formState.phone as string });
@@ -64,15 +65,28 @@ const CustomerForm = ({ onApply }: CustomerFormProps) => {
           }
         />
       </label>
-      <label className={clsx('w-full', 'text-base', 'border-b', 'border-black', 'text-black')}>
-        <PhoneInput
+      <label
+        className={clsx(
+          'w-full',
+          'text-base',
+          'border-b',
+          'border-black',
+          'text-black',
+          'flex',
+          'item-end',
+          'gap-1',
+        )}
+      >
+        +375
+        <input
           value={formState.phone}
-          onChange={(value) => setFormState((prev) => ({ ...prev, phone: value }))}
-          country="BY"
-          smartCaret
-          withCountryCallingCode
-          international
-          useNationalFormatForDefaultCountryValue
+          onChange={(e) =>
+            setFormState((prev) => ({
+              ...prev,
+              phoneValue: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
+            }))
+          }
+          className="w-full"
         />
       </label>
       <label

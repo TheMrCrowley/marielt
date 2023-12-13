@@ -1,6 +1,8 @@
 import { ApplicationFormType } from '@/src/enums/ApplicationForm';
 import { ProductType } from '@/src/types/Product';
 
+const PHONE_NUMBER_CODE = '+375';
+
 export const sendGenericApplication = ({
   name,
   phone,
@@ -14,7 +16,7 @@ export const sendGenericApplication = ({
     method: 'POST',
     body: JSON.stringify({
       name,
-      phone,
+      phone: PHONE_NUMBER_CODE + phone,
       type,
     }),
   });
@@ -33,7 +35,7 @@ export const sendAgentApplication = ({
 }) => {
   fetch('/api/application/agent', {
     method: 'POST',
-    body: JSON.stringify({ type, name, phone, id }),
+    body: JSON.stringify({ type, name, phone: PHONE_NUMBER_CODE + phone, id }),
   });
 };
 
@@ -50,7 +52,7 @@ export const sendTrainingApplication = async ({
     method: 'POST',
     body: JSON.stringify({
       name,
-      phone,
+      phone: PHONE_NUMBER_CODE + phone,
       id,
     }),
   });
@@ -61,7 +63,7 @@ export const sendLeaderApplication = async ({ name, phone }: { name: string; pho
     method: 'POST',
     body: JSON.stringify({
       name,
-      phone,
+      phone: PHONE_NUMBER_CODE + phone,
     }),
   });
 };

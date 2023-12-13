@@ -141,6 +141,7 @@ const Footer = () => {
               href="https://realt.by/agencies/rating/"
               target="_blank"
               rel="noopener noreferrer"
+              prefetch
             >
               <Image src={RatingImg} alt="rating-realt" />
             </Link>
@@ -148,6 +149,7 @@ const Footer = () => {
               href="https://realt.by/agencies/gruppa-kompanii-mariehlt/"
               target="_blank"
               rel="noopener noreferrer"
+              prefetch
             >
               <Image src={WeOnRealtImg} alt="we-on-realt" />
             </Link>

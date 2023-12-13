@@ -32,7 +32,7 @@ const CourseSection = ({ courseVideo }: CourseSectionProps) => {
           <Typography fontSize={24} fontWeight="light" color="text-[#343434]">
             А чтобы нашим стажерам было проще стать профессионалами мы создали уникальные условия
             для входа в профессию на базе{' '}
-            <Link href={AppRoutes.Academy}>
+            <Link href={AppRoutes.Academy} prefetch>
               <b>Академии Мариэлт</b>
             </Link>
           </Typography>

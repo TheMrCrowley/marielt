@@ -25,6 +25,7 @@ const NavigationItem = ({ navItem, onClick, className }: NavigationItemProps) =>
   return (
     <li className={clsx('text-center', 'lg:text-xl', 'text-base', className)}>
       <Link
+        prefetch
         className={clsx(
           'w-full',
           'relative',

@@ -114,7 +114,7 @@ const getFlatsStrapiQueryParamsByFilters = (
         },
         parameters: {
           is_last_floor: {
-            $eq: isLastFloor ? isLastFloor : isNotFirstFloor ? !isNotLastFloor : undefined,
+            $eq: isLastFloor ? isLastFloor : isNotLastFloor ? !isNotLastFloor : undefined,
           },
           construction_year: {
             $gte: constructionYearFrom,

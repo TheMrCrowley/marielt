@@ -29,7 +29,7 @@ const CardWrapper = ({
 }: CardWrapperProps) => {
   return (
     <div className={clsx('bg-[#262626]', 'grid', 'w-full', 'h-full', wrapperClassName)}>
-      <Link href={to} target="_blank" rel="noopener noreferrer">
+      <Link href={to} target="_blank" rel="noopener noreferrer" prefetch>
         <Image
           className={clsx('object-cover', 'w-full', 'h-[165px]')}
           src={imgUrl || ImagePlaceholder}
@@ -79,7 +79,7 @@ const CardWrapper = ({
         <div className={clsx('flex-auto', 'flex', 'flex-col', 'gap-4', 'mt-auto', 'justify-end')}>
           {children}
         </div>
-        <Link href={to} target="_blank" rel="noopener noreferrer">
+        <Link href={to} target="_blank" rel="noopener noreferrer" prefetch>
           <Button buttonType="bordered" className="w-full">
             Подробнее
           </Button>

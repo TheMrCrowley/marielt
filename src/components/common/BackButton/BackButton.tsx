@@ -25,6 +25,7 @@ const BackButton = ({ to, className }: BackButtonProps) => {
         'hover:cursor-pointer',
         className,
       )}
+      prefetch
     >
       <Image src={ArrowIcon} alt="arrow-back" />
       <Typography fontWeight="medium" color="text-[#B1B1B1]">

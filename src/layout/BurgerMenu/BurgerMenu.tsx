@@ -77,7 +77,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
             role="dialog"
           >
             <nav className={clsx('flex', 'w-full')}>
-              <ul className={clsx('max-w-6xl', 'w-full', 'flex', 'flex-col')}>
+              <ul className={clsx('w-full', 'flex', 'flex-col')}>
                 {navigationItems.map((navItem) => (
                   <div
                     key={navItem.title}

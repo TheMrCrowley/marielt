@@ -2,11 +2,10 @@
 
 import clsx from 'clsx';
 import { useState } from 'react';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-number-input/input';
 
 import Button from '@/src/components/common/Button/Button';
 import Typography from '@/src/components/common/Typography/Typography';
+import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
 import { sendTrainingApplication } from '@/src/services/applicationServices';
 
@@ -15,17 +14,18 @@ const defaultFormState = {
   nameValue: '',
   phoneValue: '',
 };
+const PHONE_NUMBER_LENGTH = 9;
 
 const TrainingForm = ({ id }: { id: string }) => {
   const [formState, setFormState] = useState<{
     isChecked: boolean;
     nameValue: string;
-    phoneValue: string | undefined;
+    phoneValue: string;
   }>(defaultFormState);
 
   const disabled = !(
     formState.isChecked &&
-    isValidPhoneNumber(formState.phoneValue || '', 'BY') &&
+    formState.phoneValue.length === PHONE_NUMBER_LENGTH &&
     formState.nameValue.length
   );
 
@@ -42,6 +42,7 @@ const TrainingForm = ({ id }: { id: string }) => {
 
   return (
     <form
+      id="application"
       className={clsx(
         'bg-[#343434]',
         'w-full',
@@ -63,7 +64,7 @@ const TrainingForm = ({ id }: { id: string }) => {
       <Typography fontSize={24} fontWeight="light" className="text-center">
         Оставьте заявку и наши специалисты перезвонят вам для подтверждения
       </Typography>
-      <div className={clsx('flex', 'gap-8', 'flex-wrap')}>
+      <div className={clsx('flex', 'gap-8', 'flex-wrap', 'justify-center')}>
         <label
           className={clsx(
             'lg:text-2xl',
@@ -95,19 +96,21 @@ const TrainingForm = ({ id }: { id: string }) => {
             'border-b',
             'border-secondary',
             'text-white',
+            'flex',
+            'items-end',
+            'gap-1',
           )}
         >
-          <PhoneInput
+          +375
+          <input
             value={formState.phoneValue}
-            onChange={(value) => setFormState((prev) => ({ ...prev, phoneValue: value }))}
-            country="BY"
-            smartCaret
-            withCountryCallingCode
-            international
-            useNationalFormatForDefaultCountryValue
-            style={{
-              width: '100%',
-            }}
+            onChange={(e) =>
+              setFormState((prev) => ({
+                ...prev,
+                phoneValue: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
+              }))
+            }
+            className="w-full"
           />
         </label>
       </div>

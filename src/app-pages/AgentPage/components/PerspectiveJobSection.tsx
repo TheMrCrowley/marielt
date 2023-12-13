@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import CalendarIcon from '@/public/CalendarDate.svg';
@@ -9,6 +10,7 @@ import MortarboardIcon from '@/public/Mortarboard.svg';
 import PlanetIcon from '@/public/planet.svg';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
+import { AppRoutes } from '@/src/enums/AppRoutes';
 
 const PerspectiveJobSection = () => {
   return (
@@ -106,7 +108,10 @@ const PerspectiveJobSection = () => {
               <Typography fontSize={20} fontWeight="light">
                 Мечта о работе на мировом рынке недвижимости может стать реальностью. Некоторые
                 агенты переносят свой опыт на международную арену, что предоставляет возможность
-                путешествовать и работать с разнообразными клиентами - MARIELT REAL ESTATE DUBAI
+                путешествовать и работать с разнообразными клиентами -{' '}
+                <Link href={AppRoutes.Dubai} prefetch className="underline text-secondary">
+                  MARIELT REAL ESTATE DUBAI
+                </Link>{' '}
                 ждет вас!
               </Typography>
             </div>

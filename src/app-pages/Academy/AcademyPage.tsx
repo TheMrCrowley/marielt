@@ -204,10 +204,7 @@ const AcademyPage = () => {
               </div>
             </div>
           </div>
-          <div
-            className="flex w-full justify-between items-center md:flex-row flex-col"
-            id="additional"
-          >
+          <div className="flex w-full justify-between items-center md:flex-row flex-col">
             <div className="flex flex-col gap-8 max-w-2xl w-full">
               <Typography fontSize={24} fontWeight="medium" className="max-w-2xl">
                 После базового курса стажер попадает в коллектив, в котором с ним работают опытный
@@ -256,7 +253,7 @@ const AcademyPage = () => {
             </div>
             <Image src={Intern} alt="intern-diagram" className="md:max-w-lg" />
           </div>
-          <div className="w-full flex gap-4 md:flex-row flex-col">
+          <div className="w-full flex gap-4 md:flex-row flex-col" id="additional">
             <div className="max-w-xl w-full flex flex-col gap-4">
               <Typography fontSize={32} className="p-8 bg-[#343434]">
                 Регулярные утренние тренинги за пределами базового курса по самым разным темам:

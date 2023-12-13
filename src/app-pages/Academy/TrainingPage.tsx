@@ -2,15 +2,16 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
 import Markdown from 'react-markdown';
 
-import TrainingForm from '@/src/components/TriningForm/TriningForm';
-import BackButton from '@/src/components/common/BackButton';
+import ArrowDown from '@/public/arrow-down.svg';
+import ArrowIcon from '@/public/arrow-left.svg';
+import TrainingForm from '@/src/components/TrainingForm/TrainingForm';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
-import { AppRoutes } from '@/src/enums/AppRoutes';
 import { Training } from '@/src/types/AcademyTypes';
 
 type TrainingPageProps = {
@@ -19,6 +20,7 @@ type TrainingPageProps = {
 };
 
 const TrainingPage = ({ training, id }: TrainingPageProps) => {
+  const router = useRouter();
   const { image, description, content, title } = training;
 
   if (!description && !content) {
@@ -48,7 +50,22 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
             'items-start',
           )}
         >
-          <BackButton to={AppRoutes.Academy} />
+          <button
+            className={clsx(
+              'flex',
+              'gap-4',
+              'justify-center',
+              'items-center',
+              'p-2',
+              'hover:cursor-pointer',
+            )}
+            onClick={() => router.back()}
+          >
+            <Image src={ArrowIcon} alt="arrow-back" />
+            <Typography fontWeight="medium" color="text-[#B1B1B1]">
+              Назад
+            </Typography>
+          </button>
         </div>
         {image && (
           <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
@@ -85,6 +102,18 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
             </Markdown>
           </div>
         )}
+        <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
+          <Link
+            href="#application"
+            className="hover:cursor-pointer flex justify-center items-center py-2 px-8 bg-secondary gap-4 self-start"
+          >
+            <Typography fontWeight="medium" color="text-black">
+              Оставить заявку
+            </Typography>
+            <Image src={ArrowDown} alt="leave-application-button" />
+          </Link>
+        </div>
+
         {content && (
           <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
             <Markdown

@@ -1,5 +1,6 @@
 import qs from 'qs';
 
+import { SortValues } from '@/src/enums/SortOptions';
 import {
   Teacher,
   TeacherStrapiResponse,
@@ -127,6 +128,7 @@ export const getAllTeachers = async (): Promise<Teacher[]> => {
       pagination: {
         limit: -1,
       },
+      sort: SortValues.DateAsc,
       populate: {
         photo: {
           fields: ['width', 'height', 'url', 'placeholder'],

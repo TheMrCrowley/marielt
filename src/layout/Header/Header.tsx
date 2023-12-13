@@ -43,7 +43,7 @@ const Header = async () => {
           'w-full',
         )}
       >
-        <Link href="/">
+        <Link href="/" prefetch>
           <Image
             alt="logo"
             src={Logo}

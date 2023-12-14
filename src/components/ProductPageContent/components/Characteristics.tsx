@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import Title from '@/src/components/common/Title/Title';
 import Typography from '@/src/components/common/Typography/Typography';
@@ -8,11 +8,15 @@ interface CharacteristicItem {
   name: string;
   value: string;
 }
-interface CharacteristicsProps {
-  characteristics: CharacteristicItem[];
-}
 
-const Characteristics = ({ characteristics }: CharacteristicsProps) => {
+type CharacteristicsProps = {
+  characteristics: CharacteristicItem[];
+};
+
+const Characteristics = ({
+  characteristics,
+  children,
+}: PropsWithChildren<CharacteristicsProps>) => {
   if (!characteristics.length) {
     return null;
   }
@@ -48,6 +52,7 @@ const Characteristics = ({ characteristics }: CharacteristicsProps) => {
           </Typography>
         </div>
       ))}
+      {children}
     </div>
   );
 };

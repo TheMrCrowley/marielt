@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import React from 'react';
 
 import ProductPageContent from '@/src/components/ProductPageContent';
 import CommercialPageHeader from '@/src/components/ProductPageContent/CommercialPageHeader';
 import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
 import ProductViewsHandler from '@/src/components/ProductViewsHandler';
-import { commercialCharacteristicsMap } from '@/src/enums/CommercialFilters';
-import { formatItemToCharacteristics } from '@/src/helpers/formatters';
+import { getCommercialCharacteristics } from '@/src/helpers/characteristics';
 import { getCommercialSimilar } from '@/src/services/commercialServices';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
 
@@ -38,41 +38,6 @@ interface CommercialPageProps {
   commercial: DetailedCommercialItem;
 }
 
-const getCommercialCharacteristics = (commercial: DetailedCommercialItem) => {
-  const characteristics = [];
-  if (commercial.premisesArea?.max || commercial.premisesArea?.min) {
-    characteristics.push({
-      name: 'Площадь помещений',
-      value: commercial.premisesArea.max
-        ? `${commercial.premisesArea.min}-${commercial.premisesArea.max} м²`
-        : `${commercial.premisesArea.min} м²`,
-    });
-  }
-
-  if (commercial.separateRooms?.from || commercial.separateRooms?.to) {
-    characteristics.push({
-      name: 'Раздельных помещений',
-      value: commercial.separateRooms.to
-        ? `${commercial.separateRooms.from}-${commercial.separateRooms.to}`
-        : `${commercial.separateRooms.from}`,
-    });
-  }
-
-  if (commercial.parameters.floor || commercial.parameters.maxFloor) {
-    characteristics.push({
-      name: commercial.parameters.maxFloor ? 'Этаж/этажность' : 'Этаж',
-      value: commercial.parameters.maxFloor
-        ? `${commercial.parameters.floor}/${commercial.parameters.maxFloor}`
-        : `${commercial.parameters.floor}`,
-    });
-  }
-
-  return [
-    ...characteristics,
-    ...formatItemToCharacteristics(commercial, commercialCharacteristicsMap),
-  ];
-};
-
 const CommercialPage = async ({ commercial }: CommercialPageProps) => {
   const similarProducts = await getCommercialSimilar(commercial);
 
@@ -93,7 +58,16 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
         }
         locationField={commercial.location && <LocationField location={commercial.location} />}
         characteristics={
-          <Characteristics characteristics={getCommercialCharacteristics(commercial)} />
+          <Characteristics characteristics={getCommercialCharacteristics(commercial)}>
+            <Link
+              target="_blank"
+              prefetch
+              href={`/commercial/${commercial.id}/pdf`}
+              className="w-full p-4 flex justify-center items-center text-primary bg-secondary hover:cursor-pointer"
+            >
+              PDF
+            </Link>
+          </Characteristics>
         }
         detailedDescription={<DescriptionField description={commercial.detailedDescription} />}
         note={<NoteField note={commercial.note} />}

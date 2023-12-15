@@ -708,6 +708,9 @@ export const getCommercialById = async (id: string) => {
         comm_categories: {
           fields: ['name', 'category'],
         },
+        comm_tran: {
+          fields: ['name', 'uid'],
+        },
         direction: {
           fields: ['name'],
         },

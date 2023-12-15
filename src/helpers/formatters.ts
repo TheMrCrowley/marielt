@@ -1,3 +1,4 @@
+import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
 import {
   CommercialCategory,
   CommercialCategoryResponse,
@@ -224,7 +225,7 @@ export const formatToDetailedCommercialItem = ({
   }),
   id,
   initialCurrency: attributes.currency || 'USD',
-  transactionType: attributes.comm_tran?.data?.attributes?.uid!,
+  transactionType: attributes.comm_tran?.data?.attributes?.name! as TransactionTypeValues,
   images: Array.isArray(attributes.image?.data)
     ? attributes.image!.data.map(({ attributes: imageAttributes }) => ({
         height: imageAttributes.height,

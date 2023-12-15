@@ -61,7 +61,7 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
           <Characteristics characteristics={getCommercialCharacteristics(commercial)}>
             <Link
               target="_blank"
-              prefetch
+              prefetch={false}
               href={`/commercial/${commercial.id}/pdf`}
               className="w-full p-4 flex justify-center items-center text-primary bg-secondary hover:cursor-pointer"
             >

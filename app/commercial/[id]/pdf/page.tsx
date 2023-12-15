@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CommercialPDF from '@/src/components/CommercialPDF';
+import PDF from '@/src/components/CommercialPDF/PDF';
 import { getCommercialById } from '@/src/services/commercialServices';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const PdfExport = async ({ params: { id } }: Props) => {
   const item = await getCommercialById(id);
 
-  return <CommercialPDF item={item} />;
+  return <PDF commercialItem={item} />;
 };
 
 export default PdfExport;

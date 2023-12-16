@@ -2,14 +2,21 @@ import { Metadata } from 'next';
 
 import CareersPage from '@/src/app-pages/CareersPage';
 import { getCareers } from '@/src/services/careersServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('careersPage');
+  const canonical = canonicalUrlMap.careersPage();
+
+  const title = seo?.title || 'Вакансии';
+  const description = seo?.description || 'Static Careers Description';
 
   return {
-    title: seo?.title || 'Careers Static Title',
-    description: seo?.description || 'Static Careers Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

@@ -3,20 +3,23 @@ import React from 'react';
 
 import SalesImage from '@/public/sales-bg.jpg';
 import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
+import { canonicalUrlMap } from '@/src/services/seoServices';
+
+const title = 'Кто такой - Руководитель отдела продаж?';
+
+const description =
+  'Риэлтор - надежный гид в мире недвижимости. Он приносит множество преимуществ как при продаже, так и при покупке квартиры.';
 
 export const metadata: Metadata = {
-  title: 'Static Sales Title',
-  description: 'Static Sales Description',
+  title,
+  description,
+  alternates: {
+    canonical: canonicalUrlMap.salesPage(),
+  },
 };
 
 const page = () => {
-  return (
-    <StaticPage
-      description="Риэлтор - надежный гид в мире недвижимости. Он приносит множество преимуществ как при продаже, так и при покупке квартиры."
-      title="Кто такой - Руководитель отдела продаж?"
-      imageUrl={SalesImage}
-    />
-  );
+  return <StaticPage description={description} title={title} imageUrl={SalesImage} />;
 };
 
 export default page;

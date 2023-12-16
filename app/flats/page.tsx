@@ -7,7 +7,7 @@ import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
 import { getFlatsForList } from '@/src/services/flatsServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 type FlatsProps = {
   searchParams: Record<string, string | string[]>;
@@ -17,10 +17,17 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('apartPage');
+  const canonical = canonicalUrlMap.apartPage();
+
+  const title = seo?.title || 'Жилая Недвижимость';
+  const description = seo?.description || 'Описание Жилой Недвижимости';
 
   return {
-    title: seo?.title || 'Flats Static Title',
-    description: seo?.description || 'Static Flats Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

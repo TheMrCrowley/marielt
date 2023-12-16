@@ -1,5 +1,7 @@
 import qs from 'qs';
 
+import Logo from '@/public/opengraph-image.jpg';
+import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 interface SeoFieldsResponse {
@@ -19,6 +21,49 @@ const seoUrlMap = {
   dubaiPage: (query: string) => `${process.env.API_BASE_URL}/dubai-page?${query}`,
   academyPage: (query: string) => `${process.env.API_BASE_URL}/academy-page?${query}`,
 };
+
+export const canonicalUrlMap = {
+  homePage: () => `${process.env.CANONICAL_URL}`,
+  apartPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Flats}`,
+  apartPageId: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Flats}/${id}`,
+  apartPageMap: () => `${process.env.CANONICAL_URL}${AppRoutes.Flats}/map`,
+  careersPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Careers}`,
+  salesPage: () => `${process.env.CANONICAL_URL}${AppChildRoutes.Sales}`,
+  realtorPage: () => `${process.env.CANONICAL_URL}${AppChildRoutes.Realtor}`,
+  agentPage: () => `${process.env.CANONICAL_URL}${AppChildRoutes.Agent}`,
+  housePage: () => `${process.env.CANONICAL_URL}${AppRoutes.HousesAndLots}`,
+  housePageId: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.HousesAndLots}/${id}`,
+  housePageMap: () => `${process.env.CANONICAL_URL}${AppRoutes.HousesAndLots}/map`,
+  commPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Commercial}`,
+  commPageId: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Commercial}/${id}`,
+  commPageMap: () => `${process.env.CANONICAL_URL}${AppRoutes.Commercial}/map`,
+  dubaiPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Dubai}`,
+  academyPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Academy}`,
+  teacherPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/teacher/${id}`,
+  trainingPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/training/${id}`,
+};
+
+export const getOpenGraphField = (
+  title: string,
+  description: string,
+  media?: string,
+  alt?: string,
+) => ({
+  title,
+  description,
+  url: `${process.env.CANONICAL_URL}`,
+  siteName: `${process.env.OPENGRAPH_SITE_NAME}`,
+  images: [
+    {
+      url: media || Logo.src,
+      width: 'auto',
+      height: 'auto',
+      alt: alt || 'logo',
+    },
+  ],
+  locale: 'ru_RU',
+  type: 'website',
+});
 
 const populateQuery = qs.stringify(
   {

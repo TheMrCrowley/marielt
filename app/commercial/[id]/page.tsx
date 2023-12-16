@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import CommercialPage from '@/src/app-pages/CommercialPage/CommercialPage';
 import { getCommSeoFields, getCommercialById } from '@/src/services/commercialServices';
+import { canonicalUrlMap } from '@/src/services/seoServices';
 
 type Props = {
   params: {
@@ -11,10 +12,17 @@ type Props = {
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
   const { seo } = await getCommSeoFields(id);
+  const canonical = canonicalUrlMap.commPageId(id);
+
+  const title = seo.title;
+  const description = seo.description;
 
   return {
-    title: seo.title,
-    description: seo.description,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

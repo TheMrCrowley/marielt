@@ -1,14 +1,13 @@
 import { Document, Page, View, Text, Image, Font } from '@react-pdf/renderer';
 import React from 'react';
 
+import Logo from '@/public/logo.jpg';
 import {
   getCommercialCharacteristics,
   getCommercialPriceValues,
 } from '@/src/helpers/characteristics';
 import { CurrencyState } from '@/src/store/currency';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
-
-import Logo from './logo.jpg';
 
 const CommercialPDFDocument = ({
   commercialItem,

@@ -555,7 +555,18 @@ export const getSimilarFlatsItems = async (flat: DetailedFlatItem) => {
 };
 
 export const getFlatSeoFields = async (id: string) => {
-  const url = `${process.env.API_BASE_URL}/apart-items/${id}`;
+  const populateQuery = qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+
+  const url = `${process.env.API_BASE_URL}/apart-items/${id}?${populateQuery}`;
 
   const response = await fetch(url, {
     next: {
@@ -568,10 +579,10 @@ export const getFlatSeoFields = async (id: string) => {
   return {
     seo: {
       title: data.attributes.name || 'Static Apart Title',
-      description:
-        data.attributes.note && data.attributes.detailed_description
-          ? data.attributes.note + ' ' + data.attributes.detailed_description
-          : 'Static Apart Description',
+      description: '' + data.attributes.detailed_description || '' + data.attributes.note || '',
     },
+    image: data.attributes.image?.data?.length
+      ? data.attributes.image.data[0].attributes.url
+      : undefined,
   };
 };

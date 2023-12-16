@@ -2,14 +2,21 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import AcademyPage from '@/src/app-pages/Academy/AcademyPage';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('academyPage');
+  const canonical = canonicalUrlMap.academyPage();
+
+  const title = seo?.title || 'Академия Мариэлт';
+  const description = seo?.description || 'Описание Страницы Академии Мариэлт';
 
   return {
-    title: seo?.title || 'Academy Static Title',
-    description: seo?.description || 'Static Academy Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

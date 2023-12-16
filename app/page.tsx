@@ -2,14 +2,32 @@ import { Metadata } from 'next';
 
 import HomePage from '@/src/app-pages/HomePage';
 import { getHomePageData } from '@/src/services/homePageServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('homePage');
+  const canonical = canonicalUrlMap.homePage();
+
+  const title = seo.title || 'Marielt';
+  const description = seo.description || '';
 
   return {
-    title: seo?.title || 'Home Static Titles',
-    description: seo?.description || 'Static Home Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      images: [
+        {
+          width: 'auto',
+          height: 'auto',
+          href: './opengraph-image.jpg',
+          url: './opengraph-image.jpg',
+          type: 'image/jpeg',
+        },
+      ],
+    },
   };
 }
 

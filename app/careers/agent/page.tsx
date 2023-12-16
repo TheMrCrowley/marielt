@@ -3,14 +3,18 @@ import React from 'react';
 
 import AgentPage from '@/src/app-pages/AgentPage';
 import { getAgentPageData } from '@/src/services/careersServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('agentPage');
+  const canonical = canonicalUrlMap.agentPage();
 
   return {
     title: seo.title,
     description: seo.description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

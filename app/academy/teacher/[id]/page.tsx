@@ -3,6 +3,7 @@ import React from 'react';
 
 import TeacherPage from '@/src/app-pages/Academy/TeacherPage';
 import { getAllTeachers, getTeacherById } from '@/src/services/academyServices';
+import { canonicalUrlMap } from '@/src/services/seoServices';
 
 type Props = {
   params: {
@@ -12,10 +13,14 @@ type Props = {
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
   const { name, description1 } = await getTeacherById(id);
+  const canonical = canonicalUrlMap.teacherPage(id);
 
   return {
     title: name,
     description: description1,
+    alternates: {
+      canonical,
+    },
   };
 }
 

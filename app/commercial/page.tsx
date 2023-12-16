@@ -7,7 +7,7 @@ import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForList } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 type CommercialProps = {
   searchParams: Record<string, string | string[]>;
@@ -15,10 +15,17 @@ type CommercialProps = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('commPage');
+  const canonical = canonicalUrlMap.commPage();
+
+  const title = seo?.title || 'Коммерческая Недвижимость';
+  const description = seo?.description || 'Описание Коммерческой Недвижимости';
 
   return {
-    title: seo?.title || 'Commercial Static Title',
-    description: seo?.description || 'Static Commercial Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

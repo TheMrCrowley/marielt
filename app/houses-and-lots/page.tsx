@@ -7,7 +7,7 @@ import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
 import { getHousesAndLotsForList } from '@/src/services/housesAndLotsServices';
-import { getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 type HousesAndLotsProps = {
   searchParams: Record<string, string | string[]>;
@@ -15,10 +15,17 @@ type HousesAndLotsProps = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('housePage');
+  const canonical = canonicalUrlMap.housePage();
+
+  const title = seo?.title || 'Загородная Недвижимость';
+  const description = seo?.description || 'Static Houses and Lots Description';
 
   return {
-    title: seo?.title || 'Houses and Lots Static Title',
-    description: seo?.description || 'Static Houses and Lots Description',
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
   };
 }
 

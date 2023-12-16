@@ -501,7 +501,17 @@ export const getSimilarHouseItems = async (flat: DetailedHousesAndLotsItem) => {
 };
 
 export const getHouseSeoFields = async (id: string) => {
-  const url = `${process.env.API_BASE_URL}/house-items/${id}`;
+  const populateQuery = qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+  const url = `${process.env.API_BASE_URL}/house-items/${id}?${populateQuery}`;
 
   const response = await fetch(url, {
     next: {
@@ -514,10 +524,8 @@ export const getHouseSeoFields = async (id: string) => {
   return {
     seo: {
       title: data.attributes.name || 'Static House Title',
-      description:
-        data.attributes.note && data.attributes.detailed_description
-          ? data.attributes.note + ' ' + data.attributes.detailed_description
-          : 'Static House Description',
+      description: '' + data.attributes.detailed_description || '' + data.attributes.note || '',
     },
+    image: data.attributes.image?.data ? data.attributes.image.data[0].attributes.url : undefined,
   };
 };

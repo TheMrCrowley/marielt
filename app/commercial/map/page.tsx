@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import React, { Suspense } from 'react';
 
 import CommercialFilters from '@/src/app-pages/CommercialPage/CommercialFilters';
@@ -5,10 +6,27 @@ import CommercialMap from '@/src/app-pages/CommercialPage/CommercialMap';
 import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForMap } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
+import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
 
 type CommercialProps = {
   searchParams: Record<string, string | string[]>;
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getSeoFields('commPage');
+  const canonical = canonicalUrlMap.commPageMap();
+
+  const title = seo.title ? seo.title + ' на Карте' : 'Коммерческая недвижимость на карте';
+  const description = seo.description || 'Описание Коммерческой Недвижимости на Карте';
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+  };
+}
 
 const Commercial = async ({ searchParams }: CommercialProps) => {
   const [data, { commercial }] = await Promise.all([

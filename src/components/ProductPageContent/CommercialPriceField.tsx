@@ -5,7 +5,6 @@ import React from 'react';
 
 import Typography from '@/src/components/common/Typography';
 import { getCommercialPriceValues } from '@/src/helpers/characteristics';
-import { getPriceByCurrencyMonetary } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { Navigation, Keyboard, Thumbs } from 'swiper/modules';
+import 'swiper/css/zoom';
+import { Navigation, Keyboard, Thumbs, Zoom } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import CrossIcon from '@/public/plus.svg';
@@ -84,10 +85,14 @@ const FullScreenSlider = ({
             onSlideChange={(swiper) => {
               setCurrentRealIndex(swiper.realIndex);
             }}
+            zoom={{
+              maxRatio: 3,
+              minRatio: 1,
+            }}
             initialSlide={initialSlide}
             wrapperClass={clsx('w-full', 'relative', 'mb-8')}
             slidesPerView={1}
-            modules={[Navigation, Keyboard, Thumbs]}
+            modules={[Navigation, Keyboard, Thumbs, Zoom]}
             thumbs={{
               swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
             }}
@@ -121,10 +126,11 @@ const FullScreenSlider = ({
             )}
             {images.map(({ url, height, width, placeholderUrl }) => (
               <SwiperSlide
-                className={clsx('!w-full')}
+                className={clsx('!w-full', 'swiper-zoom-container')}
                 style={{
                   height: '70vh',
                 }}
+                zoom
                 key={`full-screen-product-page-swiper-slide-${url}`}
               >
                 <Image

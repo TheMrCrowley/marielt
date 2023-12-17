@@ -21,6 +21,8 @@ const seoUrlMap = {
   dubaiPage: (query: string) => `${process.env.API_BASE_URL}/dubai-page?${query}`,
   academyPage: (query: string) => `${process.env.API_BASE_URL}/academy-page?${query}`,
   aboutPage: (query: string) => `${process.env.API_BASE_URL}/about-page?${query}`,
+  docPage: (query: string) => `${process.env.API_BASE_URL}/doc-page?${query}`,
+  teamPage: (query: string) => `${process.env.API_BASE_URL}/team-page?${query}`,
 };
 
 export const canonicalUrlMap = {

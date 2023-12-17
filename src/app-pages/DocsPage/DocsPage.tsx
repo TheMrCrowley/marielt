@@ -1,11 +1,8 @@
 import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
 import BackButton from '@/src/components/common/BackButton';
 import Title from '@/src/components/common/Title';
-import Typography from '@/src/components/common/Typography';
 import { AppRoutes } from '@/src/enums/AppRoutes';
 
 import DocLinkList, { DocLinkListProps } from './DocLinkList';

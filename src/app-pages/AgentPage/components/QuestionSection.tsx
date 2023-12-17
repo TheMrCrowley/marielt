@@ -14,8 +14,8 @@ const QuestionSection = () => {
       <div className="max-w-7xl w-full flex flex-col gap-8 py-8">
         <Title fontSize={48}>Остались вопросы или сомнения?</Title>
         <Typography fontSize={24} fontWeight="light">
-          Оставьте заявку. Мы с удовольствием ответим на все ваши вопросы и поможем погргузится в
-          мир недвижемости
+          Оставьте заявку. Мы с удовольствием ответим на все ваши вопросы и поможем погрузиться в
+          мир недвижимости
         </Typography>
         <Button
           fontSize={20}

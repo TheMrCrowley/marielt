@@ -44,6 +44,19 @@ const CommercialFilters = ({ data }: CommercialFilterProps) => {
     );
   }, [searchParams]);
 
+  useEffect(() => {
+    const url =
+      pathname +
+      '?' +
+      formatFiltersToSearchParams(
+        filters,
+        selectedCurrency,
+        searchParams.get('sort') as SortValues,
+      );
+
+    router.prefetch(url);
+  }, [filters]);
+
   const applyFilters = (
     selectedFilters: Partial<typeof filters>,
     searchFilters?: Partial<typeof filters>,

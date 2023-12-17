@@ -25,7 +25,6 @@ const NavigationItem = ({ navItem, onClick, className }: NavigationItemProps) =>
   return (
     <li className={clsx('text-center', 'lg:text-xl', 'text-base', className)}>
       <Link
-        prefetch
         className={clsx(
           'w-full',
           'relative',
@@ -48,8 +47,7 @@ const NavigationItem = ({ navItem, onClick, className }: NavigationItemProps) =>
           pathname.includes(href) ? 'after:w-full' : 'after:w-0',
         )}
         href={href}
-        //TODO Remove comment
-        // target="_blank"
+        target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => {
           e.stopPropagation();

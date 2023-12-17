@@ -82,4 +82,3 @@ const TeachersSections = async () => {
 };
 
 export default TeachersSections;
-// after after:w-full after:h-full after:border-secondary after:border-2 after:absolute after:left-6 after:bottom-4

@@ -20,6 +20,7 @@ const seoUrlMap = {
   commPage: (query: string) => `${process.env.API_BASE_URL}/comm-page?${query}`,
   dubaiPage: (query: string) => `${process.env.API_BASE_URL}/dubai-page?${query}`,
   academyPage: (query: string) => `${process.env.API_BASE_URL}/academy-page?${query}`,
+  aboutPage: (query: string) => `${process.env.API_BASE_URL}/about-page?${query}`,
 };
 
 export const canonicalUrlMap = {
@@ -42,6 +43,7 @@ export const canonicalUrlMap = {
   teacherPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/teacher/${id}`,
   trainingPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/training/${id}`,
   docsPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Docs}`,
+  aboutPage: () => `${process.env.CANONICAL_URL}${AppRoutes.About}`,
 };
 
 export const getOpenGraphField = (

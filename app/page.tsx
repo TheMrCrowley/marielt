@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = seo.description || '';
 
   return {
+    metadataBase: new URL(process.env.CANONICAL_URL as string),
     title,
     description,
     alternates: {

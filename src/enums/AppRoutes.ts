@@ -5,6 +5,9 @@ export enum AppRoutes {
   Academy = '/academy',
   Careers = '/careers',
   Dubai = '/dubai',
+  About = '/about',
+  Docs = '/docs',
+  Team = '/team',
 }
 
 export enum AppChildRoutes {

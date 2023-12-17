@@ -41,6 +41,7 @@ export const canonicalUrlMap = {
   academyPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Academy}`,
   teacherPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/teacher/${id}`,
   trainingPage: (id: string) => `${process.env.CANONICAL_URL}${AppRoutes.Academy}/training/${id}`,
+  docsPage: () => `${process.env.CANONICAL_URL}${AppRoutes.Docs}`,
 };
 
 export const getOpenGraphField = (

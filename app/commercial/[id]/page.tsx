@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import CommercialPage from '@/src/app-pages/CommercialPage/CommercialPage';
 import { getCommSeoFields, getCommercialById } from '@/src/services/commercialServices';
-import { canonicalUrlMap } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {
   params: {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
-  const { seo } = await getCommSeoFields(id);
+  const { seo, image } = await getCommSeoFields(id);
   const canonical = canonicalUrlMap.commPageId(id);
 
   const title = seo.title;
@@ -23,6 +23,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description, image),
   };
 }
 

@@ -6,7 +6,7 @@ import CommercialMap from '@/src/app-pages/CommercialPage/CommercialMap';
 import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForMap } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
-import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type CommercialProps = {
   searchParams: Record<string, string | string[]>;
@@ -25,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

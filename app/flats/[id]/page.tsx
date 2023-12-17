@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import FlatPage from '@/src/app-pages/FlatsPage/FlatPage';
 import { getFlatById, getFlatSeoFields } from '@/src/services/flatsServices';
-import { canonicalUrlMap } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 import { FlatStrapiResponse } from '@/src/types/Flats';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
@@ -22,6 +22,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(seo.title, seo.description, image),
   };
 }
 

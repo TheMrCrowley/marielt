@@ -7,7 +7,7 @@ import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
 import { getFlatsForList } from '@/src/services/flatsServices';
-import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type FlatsProps = {
   searchParams: Record<string, string | string[]>;
@@ -28,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

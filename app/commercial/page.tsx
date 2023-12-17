@@ -7,7 +7,7 @@ import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
 import { getCommercialItemsForList } from '@/src/services/commercialServices';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
-import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type CommercialProps = {
   searchParams: Record<string, string | string[]>;
@@ -26,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

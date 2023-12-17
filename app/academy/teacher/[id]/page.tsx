@@ -3,7 +3,7 @@ import React from 'react';
 
 import TeacherPage from '@/src/app-pages/Academy/TeacherPage';
 import { getAllTeachers, getTeacherById } from '@/src/services/academyServices';
-import { canonicalUrlMap } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {
   params: {
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
-  const { name, description1 } = await getTeacherById(id);
+  const { name, description1, photo } = await getTeacherById(id);
   const canonical = canonicalUrlMap.teacherPage(id);
 
   return {
@@ -21,6 +21,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(name, description1, photo?.url),
   };
 }
 

@@ -6,7 +6,7 @@ import HousesMap from '@/src/app-pages/HousesAndLotsPage/HousesMap';
 import Loader from '@/src/components/common/Loader';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
 import { getHousesAndLotsForMap } from '@/src/services/housesAndLotsServices';
-import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type HouseProps = {
   searchParams: Record<string, string | string[]>;
@@ -18,12 +18,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title = seo.title ? seo.title + ' на Карте' : 'Загородная Недвижимость на Карте';
 
+  const description = seo?.description || 'Static Houses and Lots Description';
+
   return {
     title,
-    description: seo?.description || 'Static Houses and Lots Description',
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import CareersPage from '@/src/app-pages/CareersPage';
 import { getCareers } from '@/src/services/careersServices';
-import { canonicalUrlMap, getSeoFields } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('careersPage');
@@ -17,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical,
     },
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

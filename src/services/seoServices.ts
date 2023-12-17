@@ -45,7 +45,7 @@ export const canonicalUrlMap = {
 
 export const getOpenGraphField = (
   title: string,
-  description: string,
+  description = '',
   media?: string,
   alt?: string,
 ) => ({

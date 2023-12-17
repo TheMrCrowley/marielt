@@ -3,7 +3,7 @@ import React from 'react';
 
 import SalesImage from '@/public/sales-bg.jpg';
 import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
-import { canonicalUrlMap } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 const title = 'Кто такой - Руководитель отдела продаж?';
 
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: canonicalUrlMap.salesPage(),
   },
+  openGraph: getOpenGraphField(title, description),
 };
 
 const page = () => {

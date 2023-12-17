@@ -3,7 +3,7 @@ import React from 'react';
 
 import RealtorImage from '@/public/realtor-bg.jpg';
 import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
-import { canonicalUrlMap } from '@/src/services/seoServices';
+import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 const title = 'Кто такой - Риэлтор?';
 const description =
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: canonicalUrlMap.realtorPage(),
   },
+  openGraph: getOpenGraphField(title, description),
 };
 
 const page = () => {

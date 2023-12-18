@@ -1,13 +1,12 @@
 import { Metadata } from 'next';
 import React from 'react';
 
-import RealtorImage from '@/public/realtor-bg.jpg';
-import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
+import RealtorPage from '@/src/app-pages/CareersPage/RealtorPage';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
-const title = 'Кто такой - Риэлтор?';
+const title = 'Риэлтор';
 const description =
-  'Риэлтор - надежный гид в мире недвижимости. Он приносит множество преимуществ как при продаже, так и при покупке квартиры.';
+  'Риэлтор - это юрист который занимается юридическим сопровождением сделок с недвижимостью. Узнайте подробнее как им можно стать в нашей компании. ';
 
 export const metadata: Metadata = {
   title,
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-  return <StaticPage description={description} title={title} imageUrl={RealtorImage} />;
+  return <RealtorPage title={title} description={description} />;
 };
 
 export default page;

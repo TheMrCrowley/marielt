@@ -89,6 +89,9 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
           <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
             <Markdown
               components={{
+                strong: ({ children }) => {
+                  return <strong className="font-medium">{children}</strong>;
+                },
                 p: ({ children }) => {
                   return (
                     <Typography fontWeight="light" fontSize={20}>
@@ -96,6 +99,13 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
                     </Typography>
                   );
                 },
+                li: ({ children }) => (
+                  <li className="list-disc text-secondary ml-6">
+                    <Typography fontSize={20} fontWeight="light">
+                      {children}
+                    </Typography>
+                  </li>
+                ),
               }}
             >
               {description}
@@ -118,9 +128,12 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
           <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
             <Markdown
               components={{
+                strong: ({ children }) => {
+                  return <strong className="font-medium">{children}</strong>;
+                },
                 p: ({ children }) => (
                   <div className="w-full p-4 bg-[#343434]">
-                    <Typography fontSize={24} fontWeight="medium">
+                    <Typography fontSize={20} fontWeight="light">
                       {children}
                     </Typography>
                   </div>

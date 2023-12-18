@@ -28,13 +28,13 @@ const LeaveApplicationSection = () => {
         )}
       >
         <Title fontSize={48} className="text-center" variant="h2">
-          Оставьте заявку и мы ответим на все ваши вопросы
+          Оставьте заявку, и мы ответим на все ваши вопросы
         </Title>
         <Button
           fontSize={20}
           fontWeight="medium"
           buttonType="filled"
-          endIcon={<Image src={ArrowUp} alt="arrpw-up" />}
+          endIcon={<Image src={ArrowUp} alt="arrow-up" />}
           onClick={() => {
             window.scrollTo({
               behavior: 'smooth',

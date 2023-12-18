@@ -87,6 +87,13 @@ const TeacherPage = ({ teacher, id }: TeacherPageProps) => {
                       {children}
                     </Typography>
                   ),
+                  li: ({ children }) => (
+                    <li className="list-disc text-secondary ml-6">
+                      <Typography fontSize={20} fontWeight="light">
+                        {children}
+                      </Typography>
+                    </li>
+                  ),
                 }}
                 className="my-auto"
               >
@@ -96,7 +103,7 @@ const TeacherPage = ({ teacher, id }: TeacherPageProps) => {
           </div>
         </div>
       </div>
-      {trainings.length && (
+      {!!trainings.length && (
         <div
           className={clsx(
             'max-w-[1620px]',

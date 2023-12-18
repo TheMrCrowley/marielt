@@ -29,7 +29,7 @@ const constituentDocuments: DocLinkListProps = {
 };
 
 const realtorCertificationCertificate: DocLinkListProps = {
-  title: 'Свидетельство об аттестации риэлтора',
+  title: 'Свидетельство об аттестации риэлтера',
   items: [
     {
       href: '/shirochina-2.pdf',
@@ -42,7 +42,7 @@ const realtorCertificationCertificate: DocLinkListProps = {
       title: 'Мороз Константину Владимировичу',
     },
     {
-      href: '/savekviev-1.pdf',
+      href: '/savelieva-1.pdf',
       icon: 'private',
       title: 'Савельевой Ирине Сергеевне',
     },

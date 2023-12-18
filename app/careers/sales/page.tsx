@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 import React from 'react';
 
-import SalesImage from '@/public/sales-bg.jpg';
-import StaticPage from '@/src/app-pages/CareersPage/StaticPage';
+import SalesPage from '@/src/app-pages/CareersPage/SalesPage';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
-const title = 'Кто такой - Руководитель отдела продаж?';
+const title = 'Руководитель отдела продаж';
 
 const description =
-  'Риэлтор - надежный гид в мире недвижимости. Он приносит множество преимуществ как при продаже, так и при покупке квартиры.';
+  'Это джедай продаж и менеджмента. По крайней мере у нас в команде только такие) Узнайте как вы можете стать руководителем в нашей компании, какие знания и навыки вам необходимо иметь и как их можно получить! ';
 
 export const metadata: Metadata = {
   title,
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-  return <StaticPage description={description} title={title} imageUrl={SalesImage} />;
+  return <SalesPage description={description} title={title} />;
 };
 
 export default page;

@@ -19,6 +19,12 @@ export interface CareersPageItemResponse {
 export interface AgentPageData {
   agentVideo?: StrapiVideo;
   courseVideo?: StrapiVideo;
+  courseImage: {
+    width: number;
+    height: number;
+    url: string;
+    placeholder: string;
+  };
   media: Array<{
     width: number;
     height: number;
@@ -31,5 +37,6 @@ export interface AgentPageData {
 export interface AgentPageDataResponse {
   video_link?: string;
   course_link?: string;
+  course_media: StrapiFindOneResponse<StrapiImage>;
   carousel: StrapiFindResponse<StrapiImage>;
 }

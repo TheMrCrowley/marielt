@@ -11,6 +11,9 @@ export const getTeamPageMembers = async (): Promise<{ members: TeamItem[] }> => 
           fields: ['width', 'height', 'url', 'placeholder'],
         },
       },
+      sort: {
+        id: 'asc',
+      },
     },
     {
       encodeValuesOnly: true,

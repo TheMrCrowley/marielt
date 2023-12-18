@@ -62,7 +62,7 @@ const TrainingForm = ({ id }: { id: string }) => {
         Записаться на тренинг
       </Typography>
       <Typography fontSize={24} fontWeight="light" className="text-center">
-        Оставьте заявку и наши специалисты перезвонят вам для подтверждения
+        Оставьте заявку, и наши специалисты перезвонят вам для подтверждения
       </Typography>
       <div className={clsx('flex', 'gap-8', 'flex-wrap', 'justify-center')}>
         <label

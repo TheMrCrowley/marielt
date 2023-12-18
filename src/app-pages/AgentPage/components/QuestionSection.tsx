@@ -21,7 +21,7 @@ const QuestionSection = () => {
           fontSize={20}
           fontWeight="medium"
           buttonType="filled"
-          endIcon={<Image src={ArrowUp} alt="arrpw-up" />}
+          endIcon={<Image src={ArrowUp} alt="arrow-up" />}
           className="w-max"
           onClick={() => {
             window.scrollTo({

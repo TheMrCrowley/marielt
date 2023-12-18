@@ -178,7 +178,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
       )}
     >
       <Typography fontSize={48} className={clsx('lg:text-5xl', 'text-xl', 'text-center')}>
-        Оставьте заявку и мы ответим на все ваши вопросы
+        Оставьте заявку, и мы ответим на все ваши вопросы
       </Typography>
       <div className={clsx('flex', 'gap-8', 'flex-wrap', 'justify-center')}>
         <label

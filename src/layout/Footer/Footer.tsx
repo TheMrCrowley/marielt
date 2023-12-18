@@ -15,6 +15,7 @@ import VkIcon from '@/public/vk-icon.svg';
 import ContactItem from '@/src/components/common/ContactItem';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
+import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
 import { useViewType } from '@/src/hooks/useViewType';
 
 const Footer = () => {
@@ -62,14 +63,11 @@ const Footer = () => {
             />
             <div className={clsx('flex', 'flex-col', 'gap-6', 'opacity-50')}>
               <Typography fontSize={16}>
-                Lorem ipsum dolor sit amet consectetur. Semper lacinia laoreet magna imperdiet eu
-              </Typography>
-              <Typography fontSize={16}>
-                nullam et aliquet magnis. Nulla pellentesque cras suspendisse felis purus nunc nisl
-                placerat.
-              </Typography>
-              <Typography fontSize={16}>
-                Aenean tempus morbi et ipsum. Sed dictum a sagittis orci
+                Юридические{' '}
+                <Link href={AppRoutes.Docs} className="underline text-secondary">
+                  документы
+                </Link>
+                , на основании которых работает компания
               </Typography>
             </div>
           </div>
@@ -114,10 +112,10 @@ const Footer = () => {
               Адрес
             </Title>
             <ul className={clsx('flex', 'flex-col', 'gap-4')}>
-              <ContactItem type="address">
-                ул. Кальварийская 42, оф. 72 ст. м .Молодёжная
-              </ContactItem>
-              <ContactItem type="clock">Время работы: с 9:00 до 21:00</ContactItem>
+              <ContactItem type="address">ул. Кальварийская 42, оф. 68 ст.м.Молодёжная</ContactItem>
+              <Typography>Время работы:</Typography>
+              <ContactItem type="clock">пн - пт с 9:00 до 21:00</ContactItem>
+              <ContactItem type="clock">сб - вс с 9.00 до 15.00</ContactItem>
             </ul>
           </div>
         </div>
@@ -127,7 +125,7 @@ const Footer = () => {
         <div
           className={clsx(
             'flex',
-            'py-8',
+            'py-4',
             'w-full',
             'justify-between',
             'items-center',
@@ -135,7 +133,11 @@ const Footer = () => {
             'flex-wrap',
           )}
         >
-          <Typography fontSize={16}>© 2019 «ГРУППА КОМПАНИЙ Мариэлт»</Typography>
+          <div className="flex flex-col gap-2">
+            <Typography fontSize={16}>© 2017 «Группа Компаний Мариэлт»</Typography>
+            <Typography fontSize={16}>УНП: 193601325</Typography>
+            <Typography fontSize={16}>Лицензия: 02240/431, МЮ РБ</Typography>
+          </div>
           <div className={clsx('flex', 'justify-center', 'gap-2')}>
             <Link
               href="https://realt.by/agencies/rating/"

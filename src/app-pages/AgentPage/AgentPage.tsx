@@ -24,7 +24,7 @@ interface AgentPageProps {
 }
 
 const AgentPage = ({ data }: AgentPageProps) => {
-  const { media, agentVideo, courseVideo } = data;
+  const { media, agentVideo, courseVideo, courseImage } = data;
 
   return (
     <section className={clsx('w-full', 'flex', 'flex-col', 'sm:gap-8', 'gap-4')}>
@@ -36,7 +36,7 @@ const AgentPage = ({ data }: AgentPageProps) => {
       {media.length && <AgentPageSlider media={media} />}
       <PerspectiveSection />
       <CareerPerspectiveSection />
-      <CourseSection courseVideo={courseVideo} />
+      <CourseSection courseVideo={courseVideo} courseImage={courseImage} />
       <InternSection />
       <QuestionSection />
     </section>

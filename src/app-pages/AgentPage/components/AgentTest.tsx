@@ -179,7 +179,7 @@ const AgentTestContent = ({ onClose }: { onClose: () => void }) => {
 
     return (
       <>
-        <Title fontSize={48}>Рузультат</Title>
+        <Title fontSize={48}>Результат</Title>
         <div className="flex-auto w-full flex flex-col gap-8 justify-center items-center h-full">
           <Typography
             fontSize={128}

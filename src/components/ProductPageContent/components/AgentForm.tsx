@@ -65,7 +65,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
       <div
         className={clsx(
           'flex',
-          'min-[1440px]:max-w-[337px]',
+          'min-[1440px]:max-w-xs',
           'min-[1440px]:flex-col',
           'sm:flex-row',
           'flex-col',
@@ -73,29 +73,14 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
         )}
       >
         <div
-          className={clsx(
-            'bg-[#262626]',
-            'flex',
-            'justify-between',
-            'items-end',
-            'p-4',
-            'relative',
-            'before:block',
-            'before:absolute',
-            'before:w-2/5',
-            'before:h-4/5',
-            'before:border-4',
-            'before:border-secondary',
-            'before:bottom-4',
-            'before:right-8',
-            'before:z-10',
-          )}
+          className={clsx('bg-[#262626]', 'flex', 'justify-between', 'items-end', 'p-4')}
           style={{
-            minHeight: AgentPlaceholder.height + 24,
             minWidth: AgentPlaceholder.width + 32,
           }}
         >
-          <div className={clsx('flex', 'flex-col', 'gap-4', 'relative', 'z-20')}>
+          <div className={clsx('flex', 'flex-col', 'gap-4', 'w-full')}>
+            <Image alt="agent" src={AgentPlaceholder} className={'m-auto'} />
+
             <Typography fontSize={12} color="text-[#B1B1B1]">
               {position || 'Агент по недвижимости'}
             </Typography>
@@ -103,51 +88,47 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
               {fullName}
             </Typography>
           </div>
-          <Image
-            alt="agent"
-            src={AgentPlaceholder}
-            className={clsx('block', 'absolute', 'right-0', 'bottom-0', 'z-10')}
-          />
         </div>
-        <div
-          className={clsx(
-            'bg-secondary',
-            'flex',
-            'flex-col',
-            'justify-center',
-            'items-center',
-            'p-6',
-            'pb-0',
-            'w-full',
-            'gap-4',
-          )}
-        >
-          <div className={clsx('flex', 'flex-col')}>
-            <div className="flex gap-2">
-              <Image alt="phone" src={PhoneIcon} />
-              <Typography fontSize={14} fontWeight="medium" color="#000000">
-                {getPhone(phone1, isPhoneVisible)}
-              </Typography>
-            </div>
-            {phone2 && (
+        <div className="w-full grid">
+          <div
+            className={clsx(
+              'bg-secondary',
+              'flex',
+              'flex-col',
+              'justify-center',
+              'items-center',
+              'p-6',
+              'w-full',
+              'gap-4',
+            )}
+          >
+            <div className={clsx('flex', 'flex-col')}>
               <div className="flex gap-2">
                 <Image alt="phone" src={PhoneIcon} />
                 <Typography fontSize={14} fontWeight="medium" color="#000000">
-                  {getPhone(phone2, isPhoneVisible)}
+                  {getPhone(phone1, isPhoneVisible)}
                 </Typography>
               </div>
+              {phone2 && (
+                <div className="flex gap-2">
+                  <Image alt="phone" src={PhoneIcon} />
+                  <Typography fontSize={14} fontWeight="medium" color="#000000">
+                    {getPhone(phone2, isPhoneVisible)}
+                  </Typography>
+                </div>
+              )}
+            </div>
+            {!isPhoneVisible && (
+              <button
+                onClick={handleShowContacts}
+                className={clsx('text-black', 'underline', 'text-sm', 'opacity-50')}
+              >
+                Показать контакты
+              </button>
             )}
           </div>
-          {!isPhoneVisible && (
-            <button
-              onClick={handleShowContacts}
-              className={clsx('text-black', 'underline', 'text-sm', 'opacity-50')}
-            >
-              Показать контакты
-            </button>
-          )}
+          <CustomerForm onApply={handleApply} />
         </div>
-        <CustomerForm onApply={handleApply} />
       </div>
     );
   };

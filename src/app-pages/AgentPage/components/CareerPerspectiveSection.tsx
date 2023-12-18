@@ -20,7 +20,7 @@ const CareerPerspectiveSection = () => {
             Риэлтор
           </Typography>
           <Typography fontSize={24} fontWeight="light">
-            Юрист который сопровождает все документы по проверке и продаже недвижимости.
+            Юрист, который сопровождает все документы по проверке и продаже недвижимости.
           </Typography>
           <LinkButton linkClassName="mt-auto" type="vacancy" to={AppChildRoutes.Realtor} />
         </div>
@@ -29,7 +29,7 @@ const CareerPerspectiveSection = () => {
             Руководитель отдела продаж
           </Typography>
           <Typography fontSize={24} fontWeight="light">
-            Менеджер который помогает стажерам освоится в професии Агента. 
+            Менеджер, который помогает стажерам освоится в профессии Агента. 
           </Typography>
           <LinkButton linkClassName="mt-auto" type="vacancy" to={AppChildRoutes.Sales} />
         </div>

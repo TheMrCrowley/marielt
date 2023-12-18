@@ -14,9 +14,16 @@ import { StrapiVideo } from '@/src/types/VideoLink';
 
 interface CourseSectionProps {
   courseVideo?: StrapiVideo;
+  courseImage: {
+    width: number;
+    height: number;
+    url: string;
+    placeholder: string;
+  };
 }
 
-const CourseSection = ({ courseVideo }: CourseSectionProps) => {
+const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {
+  console.log(courseVideo);
   return (
     <>
       <section className="w-full flex justify-center items-center p-6 bg-no-repeat bg-[url(/question-bh.png)] bg-center bg-cover bg-secondary">
@@ -30,8 +37,8 @@ const CourseSection = ({ courseVideo }: CourseSectionProps) => {
             научиться продавать себя и свои личные качества.
           </Typography>
           <Typography fontSize={24} fontWeight="light" color="text-[#343434]">
-            А чтобы нашим стажерам было проще стать профессионалами мы создали уникальные условия
-            для входа в профессию на базе{' '}
+            А чтобы нашим стажерам было проще стать профессионалами, мы создали уникальные условия
+            для входа в профессию на базе.{' '}
             <Link href={AppRoutes.Academy} prefetch>
               <b>Академии Мариэлт</b>
             </Link>
@@ -66,7 +73,7 @@ const CourseSection = ({ courseVideo }: CourseSectionProps) => {
           </div>
         </div>
         <div className="max-w-7xl w-full flex bg-[#343434] sm:flex-row flex-col">
-          <div className="flex-auto flex flex-col lg:gap-12 sm:gap-8 gap-4 md:w-6/12 w-full sm:p-[4%] px-5 py-8">
+          <div className="flex-auto flex flex-col lg:gap-12 sm:gap-8 gap-4 md:w-6/12 w-full sm:p-[4%] px-5 py-8 justify-between">
             <Typography fontSize={24} fontWeight="light">
               Со стажерами работают профессиональные бизнес-тренеры с большим опытом в продажах,
               психологии и недвижимости.{' '}
@@ -83,6 +90,17 @@ const CourseSection = ({ courseVideo }: CourseSectionProps) => {
                   courseVideo.title
                 }" class="md:max-w-3xl sm:max-w-lg w-full aspect-video"/>`,
               }}
+            />
+          )}
+          {!courseVideo && (
+            <Image
+              className="object-cover md:w-1/2 w-full"
+              src={courseImage.url}
+              width={courseImage.width}
+              height={courseImage.height}
+              placeholder="blur"
+              blurDataURL={courseImage.placeholder}
+              alt=""
             />
           )}
         </div>

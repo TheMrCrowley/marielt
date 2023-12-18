@@ -18,7 +18,6 @@ const TeamPage = ({ description, members }: TeamPageProps) => {
   const management = members.filter((member) => member.management);
   const rest = members.filter((member) => !member.management);
 
-  console.log(members);
   return (
     <section className="flex flex-col gap-8 w-full justify-center items-center">
       <section
@@ -44,7 +43,7 @@ const TeamPage = ({ description, members }: TeamPageProps) => {
         />
         <div className={clsx('max-w-7xl', 'w-full', 'flex', 'items-center', 'px-5')}>
           <Title fontSize={48} className="max-w-4xl">
-            Наши лидеры совместно с командой, воплощают ваши мечты о недвижимости в реальность
+            Наши лидеры совместно с командой воплощают ваши мечты о недвижимости в реальность
           </Title>
         </div>
       </section>
@@ -54,6 +53,13 @@ const TeamPage = ({ description, members }: TeamPageProps) => {
         <Markdown
           components={{
             p: ({ children }) => <Typography fontWeight="light">{children}</Typography>,
+            li: ({ children }) => (
+              <li className="list-disc text-secondary ml-6">
+                <Typography fontSize={20} fontWeight="light">
+                  {children}
+                </Typography>
+              </li>
+            ),
           }}
         >
           {description}
@@ -84,7 +90,7 @@ const TeamPage = ({ description, members }: TeamPageProps) => {
               id: member.id,
               name: member.name,
               position: member.position,
-              description: member.position,
+              description: member.description,
               photo: member.photo,
             }}
             withoutLink

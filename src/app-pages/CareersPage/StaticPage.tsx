@@ -1,17 +1,23 @@
 import clsx from 'clsx';
 import { StaticImageData } from 'next/image';
+import { PropsWithChildren } from 'react';
 
 import BackButton from '@/src/components/common/BackButton';
 import Typography from '@/src/components/common/Typography/Typography';
 import { AppRoutes } from '@/src/enums/AppRoutes';
 
-interface StaticPageProps {
+type StaticPageProps = {
   imageUrl: StaticImageData;
   title: string;
   description: string;
-}
+};
 
-const StaticPage = ({ description, imageUrl, title }: StaticPageProps) => {
+const StaticPage = ({
+  description,
+  imageUrl,
+  title,
+  children,
+}: PropsWithChildren<StaticPageProps>) => {
   return (
     <div className={clsx('flex', 'flex-col', 'w-full', 'justify-center', 'items-center')}>
       <div
@@ -45,18 +51,7 @@ const StaticPage = ({ description, imageUrl, title }: StaticPageProps) => {
         </div>
       </div>
       <div className={clsx('max-w-7xl', 'w-full', 'flex', 'items-center', 'py-12', 'px-4')}>
-        <div className={clsx('max-w-5xl', 'flex', 'gap-8', 'flex-col')}>
-          <Typography fontSize={48}>Lorem ipsum dolor sit amet consectetur.</Typography>
-          <Typography fontWeight="light" fontSize={20}>
-            Lorem ipsum dolor sit amet consectetur. Consectetur vestibulum consequat morbi leo at.
-            Nullam fusce fringilla nisi amet id viverra sit. Massa elementum risus nec sit aliquet.
-            Eu feugiat metus facilisi quisque.
-          </Typography>
-          <Typography fontWeight="light" fontSize={20}>
-            Lorem ipsum dolor sit amet consectetur. Amet ultrices ut amet vitae augue nibh tortor.
-            Malesuada pretium egestas nec nunc mauris a feugiat.
-          </Typography>
-        </div>
+        <div className={clsx('max-w-5xl', 'flex', 'gap-8', 'flex-col')}>{children}</div>
       </div>
     </div>
   );

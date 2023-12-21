@@ -23,7 +23,6 @@ interface CourseSectionProps {
 }
 
 const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {
-  console.log(courseVideo);
   return (
     <>
       <section className="w-full flex justify-center items-center p-6 bg-no-repeat bg-[url(/question-bh.png)] bg-center bg-cover bg-secondary">

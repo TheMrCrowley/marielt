@@ -129,7 +129,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
                 <Image src={WeOnRealtImg} alt="we-on-realt" />
               </div>
               <Typography fontSize={14} className="opacity-50">
-                © 2019 «ГРУППА КОМПАНИЙ Мариэлт»
+                © {new Date().getFullYear()} «ГРУППА КОМПАНИЙ Мариэлт»
               </Typography>
             </div>
           </div>

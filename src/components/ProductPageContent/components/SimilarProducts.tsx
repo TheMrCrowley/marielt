@@ -10,6 +10,17 @@ import { DefaultFlatItem } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
 
+const getTitleByType = (type: ProductType) => {
+  switch (type) {
+    case 'flats':
+      return 'Похожие квартиры';
+    case 'commercial':
+      return 'Похожая коммерческая недвижимость';
+    case 'houses-and-lots':
+      return 'Похожие дома и участки';
+  }
+};
+
 const SimilarProducts = ({
   similarProducts,
   type,
@@ -45,7 +56,7 @@ const SimilarProducts = ({
           'mb-8',
         )}
       >
-        <Title fontSize={32}>Похожие квартиры</Title>
+        <Title fontSize={32}>{getTitleByType(type)}</Title>
         <CheckboxGroup
           isMulti={false}
           items={dataToRender.map((item) => ({ label: item.label, value: item.label }))}

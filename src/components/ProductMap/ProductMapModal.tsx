@@ -18,7 +18,7 @@ const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps)
     return (
       <LazyMotion features={domAnimation}>
         <m.div
-          className={clsx('absolute', 'w-min', 'h-full', 'bg-[#3D3D3D]', 'z-20')}
+          className={clsx('absolute', 'w-min', 'h-full', 'bg-[#3D3D3D]', 'z-20', 'min-w-[360px]')}
           initial={false}
           animate={isOpen ? 'open' : 'closed'}
           variants={{
@@ -117,7 +117,7 @@ const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps)
             className={clsx(
               'absolute',
               'w-full',
-              'h-[50vh]',
+              'h-[70dvh]',
               'bg-[#3D3D3D]',
               'scrollbar-thin',
               'scrollbar-thumb-primary',

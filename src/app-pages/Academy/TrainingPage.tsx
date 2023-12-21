@@ -68,7 +68,19 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
           </button>
         </div>
         {image && (
-          <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-4')}>
+          <div
+            className={clsx(
+              'max-w-7xl',
+              'max-h-96',
+              'w-full',
+              'flex',
+              'flex-col',
+              'justify-center',
+              'items-center',
+              'gap-4',
+              'overflow-hidden',
+            )}
+          >
             <Image
               src={image.url}
               placeholder="blur"

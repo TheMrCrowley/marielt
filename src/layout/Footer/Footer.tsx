@@ -15,7 +15,7 @@ import VkIcon from '@/public/vk-icon.svg';
 import ContactItem from '@/src/components/common/ContactItem';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
-import { AppChildRoutes, AppRoutes } from '@/src/enums/AppRoutes';
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import { useViewType } from '@/src/hooks/useViewType';
 
 const Footer = () => {
@@ -134,7 +134,9 @@ const Footer = () => {
           )}
         >
           <div className="flex flex-col gap-2">
-            <Typography fontSize={16}>© 2017 «Группа Компаний Мариэлт»</Typography>
+            <Typography fontSize={16}>
+              © {new Date().getFullYear()} «Группа Компаний Мариэлт»
+            </Typography>
             <Typography fontSize={16}>УНП: 193601325</Typography>
             <Typography fontSize={16}>Лицензия: 02240/431, МЮ РБ</Typography>
           </div>

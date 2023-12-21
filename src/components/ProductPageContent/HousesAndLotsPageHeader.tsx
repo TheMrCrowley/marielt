@@ -101,7 +101,7 @@ const HousesAndLotsPageHeader = ({
               className={clsx(
                 'flex',
                 'justify-start',
-                'items-end',
+                'lg:items-end',
                 'lg:flex-row',
                 'flex-col',
                 'flex-wrap',

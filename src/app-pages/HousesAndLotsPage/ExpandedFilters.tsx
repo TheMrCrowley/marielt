@@ -32,7 +32,6 @@ const TypeChanger = () => {
     [housesAndLotasCategories],
   );
 
-  // TODO think to not rerender page while modal is open, but after apply
   return (
     <div className={clsx('flex', 'items-center', 'md:gap-4', 'gap-2', 'max-w-max', 'flex-wrap')}>
       {dataToRender.map(({ uid, categoryName }) => (

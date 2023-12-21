@@ -58,20 +58,7 @@ const DubaiPage = () => {
         <Title variant="h2" fontSize={48}>
           Marielt DUBAI
         </Title>
-        <Typography fontWeight="light">
-          Lorem ipsum dolor sit amet consectetur. Libero id scelerisque condimentum nisi. Id diam
-          quisque lacus malesuada sed viverra nulla quis scelerisque. Vel purus dictum nisi tempor
-          sagittis duis fermentum id lobortis. Tempus lorem quis sagittis venenatis tristique lectus
-          tincidunt eu. Eget sed lorem ac sit maecenas id. Ultricies feugiat enim rhoncus arcu nulla
-          nunc accumsan venenatis.
-        </Typography>
-        <Typography fontWeight="light">
-          Adipiscing sed neque vel sed lorem nibh. Parturient sit lorem cras nascetur aliquam odio
-          gravida. Turpis sagittis a consequat ullamcorper. Ipsum convallis id diam vestibulum odio
-          scelerisque iaculis. Eget sit lectus libero aenean ultrices eleifend tristique morbi arcu.
-          Eget aliquam quam eu pellentesque feugiat pharetra. Nibh quis adipiscing euismod cursus
-          amet dapibus facilisis. Laoreet neque vitae cursus tellus.
-        </Typography>
+        <Typography fontWeight="light">Находится в разработке</Typography>
         <section
           className={clsx('grid', 'w-full', 'gap-8', 'justify-center')}
           style={{ gridTemplateColumns: 'repeat(auto-fit, 330px)' }}
@@ -125,13 +112,6 @@ const DubaiPage = () => {
             <Typography color="text-[#A3A3A3]">Instagram</Typography>
           </a>
         </section>
-        <Typography fontWeight="light">
-          Lorem ipsum dolor sit amet consectetur. Libero id scelerisque condimentum nisi. Id diam
-          quisque lacus malesuada sed viverra nulla quis scelerisque. Vel purus dictum nisi tempor
-          sagittis duis fermentum id lobortis. Tempus lorem quis sagittis venenatis tristique lectus
-          tincidunt eu. Eget sed lorem ac sit maecenas id. Ultricies feugiat enim rhoncus arcu nulla
-          nunc accumsan venenatis.
-        </Typography>
       </section>
     </section>
   );

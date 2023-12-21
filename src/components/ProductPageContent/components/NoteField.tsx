@@ -13,7 +13,7 @@ const NoteField = ({ note }: { note?: string }) => {
       className={clsx(
         'flex',
         'flex-col',
-        'bg-[#262626]',
+        'bg-primary-bold',
         'px-5',
         'xl:px-24',
         'lg:px-12',

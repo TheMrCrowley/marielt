@@ -55,7 +55,7 @@ const ExpandedFiltersWrapper = ({ closeModal, isModalOpen, children }: ExpandedF
         <div
           className={clsx(
             'flex',
-            'bg-[#262626]',
+            'bg-primary-bold',
             'md:max-w-[1620px]',
             'w-full',
             'relative',

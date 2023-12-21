@@ -43,13 +43,11 @@ const LinkButton = ({ type, to, buttonClassName, linkClassName }: LinkButtonProp
           'pl-6',
           'border-b',
           'border-solid',
-          // TODO add colors to TAILWIND
-          'border-[#E3C496]',
-          'text-[#E3C496]',
+          'border-secondary',
+          'text-secondary',
           'font-medium',
           'lg:text-xl',
           'text-base',
-          //TODO add transition to TAILWIND
           'transition-colors',
           'duration-300',
           'ease-in-out',

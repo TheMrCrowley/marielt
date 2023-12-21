@@ -43,7 +43,7 @@ const TeacherPage = ({ teacher, id }: TeacherPageProps) => {
         <BackButton to={AppRoutes.Academy} />
       </div>
       <div className={clsx('max-w-[1620px]', 'w-full', 'flex', 'justify-start', 'items-start')}>
-        <div className="sm:p-8 p-4 bg-[#343434] w-full flex md:flex-row flex-col gap-4 justify-between">
+        <div className="sm:p-8 p-4 bg-primary-medium w-full flex md:flex-row flex-col gap-4 justify-between">
           {photo && (
             <Image
               src={photo.url}
@@ -57,10 +57,10 @@ const TeacherPage = ({ teacher, id }: TeacherPageProps) => {
           )}
           <div className="flex flex-col gap-4 flex-auto ">
             <div className="bg-secondary p-4">
-              <Typography fontSize={36} fontWeight="medium" color="text-[#343434]">
+              <Typography fontSize={36} fontWeight="medium" color="text-primary-medium">
                 {name}
               </Typography>
-              <Typography fontSize={20} fontWeight="light" color="text-[#343434]">
+              <Typography fontSize={20} fontWeight="light" color="text-primary-medium">
                 {position}
               </Typography>
             </div>

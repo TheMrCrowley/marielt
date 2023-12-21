@@ -50,7 +50,7 @@ const CreditCalculator = ({
   }
 
   return (
-    <div className={clsx('flex', 'flex-col', 'bg-[#262626]')}>
+    <div className={clsx('flex', 'flex-col', 'bg-primary-bold')}>
       <Title
         variant="h2"
         fontSize={24}
@@ -171,7 +171,7 @@ const CreditCalculator = ({
               'items-center',
               'gap-y-2',
               'gap-x-5',
-              'bg-[#3D3D3D]',
+              'bg-primary-light',
               'sm:px-5',
               'px-2',
               'py-7',

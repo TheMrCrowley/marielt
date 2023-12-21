@@ -29,7 +29,7 @@ const AcademyPage = () => {
         <Typography
           fontSize={48}
           fontWeight="medium"
-          color="text-[#343434]"
+          color="text-primary-medium"
           className="p-4 bg-secondary text-center md:mb-12 mb-0"
         >
           Постоянное развитие - залог лидерства
@@ -86,7 +86,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   01
                 </Typography>
@@ -98,7 +98,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   02
                 </Typography>
@@ -110,7 +110,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   03
                 </Typography>
@@ -122,7 +122,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   04
                 </Typography>
@@ -134,7 +134,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   05
                 </Typography>
@@ -146,7 +146,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   06
                 </Typography>
@@ -158,7 +158,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   07
                 </Typography>
@@ -170,7 +170,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   08
                 </Typography>
@@ -182,7 +182,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   09
                 </Typography>
@@ -194,7 +194,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   10
                 </Typography>
@@ -214,7 +214,7 @@ const AcademyPage = () => {
                 <Typography
                   fontSize={24}
                   fontWeight="medium"
-                  color="text-secondary p-4 bg-[#343434] w-max"
+                  color="text-secondary p-4 bg-primary-medium w-max"
                 >
                   Куратор
                 </Typography>
@@ -227,7 +227,7 @@ const AcademyPage = () => {
                 <Typography
                   fontSize={24}
                   fontWeight="medium"
-                  color="text-secondary p-4 bg-[#343434] w-max"
+                  color="text-secondary p-4 bg-primary-medium w-max"
                 >
                   Коуч
                 </Typography>
@@ -241,7 +241,7 @@ const AcademyPage = () => {
                 <Typography
                   fontSize={24}
                   fontWeight="medium"
-                  color="text-secondary p-4 bg-[#343434] w-max"
+                  color="text-secondary p-4 bg-primary-medium w-max"
                 >
                   Риэлтор
                 </Typography>
@@ -255,14 +255,14 @@ const AcademyPage = () => {
           </div>
           <div className="w-full flex gap-4 md:flex-row flex-col" id="additional">
             <div className="max-w-xl w-full flex flex-col gap-4">
-              <Typography fontSize={32} className="p-8 bg-[#343434]">
+              <Typography fontSize={32} className="p-8 bg-primary-medium">
                 Регулярные утренние тренинги за пределами базового курса по самым разным темам:
               </Typography>
               <div className="flex items-center gap-4">
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   01
                 </Typography>
@@ -274,7 +274,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   02
                 </Typography>
@@ -286,7 +286,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   03
                 </Typography>
@@ -298,7 +298,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   04
                 </Typography>
@@ -310,7 +310,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   05
                 </Typography>
@@ -322,7 +322,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   06
                 </Typography>
@@ -334,7 +334,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   07
                 </Typography>
@@ -346,7 +346,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   08
                 </Typography>
@@ -358,7 +358,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   ...
                 </Typography>
@@ -368,14 +368,14 @@ const AcademyPage = () => {
               </div>
             </div>
             <div className="max-w-xl w-full flex flex-col gap-4">
-              <Typography fontSize={32} className="p-8 bg-[#343434]">
+              <Typography fontSize={32} className="p-8 bg-primary-medium">
                 Продвинутые тренинги по желанию:
               </Typography>
               <div className="flex items-center gap-4">
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   01
                 </Typography>
@@ -387,7 +387,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   02
                 </Typography>
@@ -399,7 +399,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   03
                 </Typography>
@@ -411,7 +411,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   04
                 </Typography>
@@ -423,7 +423,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   05
                 </Typography>
@@ -435,7 +435,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   06
                 </Typography>
@@ -447,7 +447,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   07
                 </Typography>
@@ -459,7 +459,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   08
                 </Typography>
@@ -471,7 +471,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   09
                 </Typography>
@@ -483,7 +483,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   10
                 </Typography>
@@ -507,7 +507,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   01
                 </Typography>
@@ -519,7 +519,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   02
                 </Typography>
@@ -531,7 +531,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   03
                 </Typography>
@@ -543,7 +543,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   04
                 </Typography>
@@ -555,7 +555,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   05
                 </Typography>
@@ -567,7 +567,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   06
                 </Typography>
@@ -579,7 +579,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   07
                 </Typography>
@@ -591,7 +591,7 @@ const AcademyPage = () => {
                 <Typography
                   fontWeight="medium"
                   color="text-secondary"
-                  className="flex justify-end items-center bg-[#343434] py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
                 >
                   08
                 </Typography>

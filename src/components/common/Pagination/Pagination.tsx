@@ -40,7 +40,7 @@ const PaginationButton = ({
           !isActive && 'text-[#B1B1B1]',
           isActive && 'border-secondary',
           isActive && 'bg-secondary',
-          isActive && 'text-[#262626]',
+          isActive && 'text-primary-bold',
         )}
         disabled={isActive}
       >

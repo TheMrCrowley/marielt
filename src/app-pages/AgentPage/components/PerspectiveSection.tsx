@@ -12,19 +12,19 @@ const PerspectiveSection = () => {
       <div className="flex sm:flex-row flex-col gap-8 max-w-7xl w-full">
         <div className="flex-auto grid min-w-max gap-4">
           <Typography color="text-[#B1B1B1]">Рынок недвижимости РБ в цифрах</Typography>
-          <div className="flex justify-between md:p-8 p-4 bg-[#343434] w-full gap-8">
+          <div className="flex justify-between md:p-8 p-4 bg-primary-medium w-full gap-8">
             <Typography color="text-secondary">40 500 сделок</Typography>
             <Typography color="text-[#B1B1B1]">2020 г</Typography>
           </div>
-          <div className="flex justify-between md:p-8 p-4 bg-[#343434] w-full gap-8">
+          <div className="flex justify-between md:p-8 p-4 bg-primary-medium w-full gap-8">
             <Typography color="text-secondary">50 000 сделок</Typography>
             <Typography color="text-[#B1B1B1]">2021 г</Typography>
           </div>
-          <div className="flex justify-between md:p-8 p-4 bg-[#343434] w-full gap-8">
+          <div className="flex justify-between md:p-8 p-4 bg-primary-medium w-full gap-8">
             <Typography color="text-secondary">55 000 сделок</Typography>
             <Typography color="text-[#B1B1B1]">2022 г</Typography>
           </div>
-          <div className="flex justify-between md:p-8 p-4 bg-[#343434] w-full gap-8">
+          <div className="flex justify-between md:p-8 p-4 bg-primary-medium w-full gap-8">
             <Typography color="text-secondary">67 000 сделок</Typography>
             <Typography color="text-[#B1B1B1]">2023 г</Typography>
           </div>

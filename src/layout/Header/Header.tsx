@@ -28,7 +28,7 @@ const Header = async () => {
           'bg-contain',
           'sm:bg-[url(/header-background.png)]',
           'bg-[url(/header_bg_mob.png)]',
-          'bg-[#3D3D3D]',
+          'bg-primary-light',
           'sm:bg-bottom',
           'bg-right',
           'bg-no-repeat',

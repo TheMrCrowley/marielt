@@ -67,7 +67,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
               'flex',
               'flex-col',
               'gap-5',
-              'bg-[#3D3D3D]',
+              'bg-primary-light',
               'backdrop-blur-sm',
               'overflow-y-auto',
               'scrollbar-thin',

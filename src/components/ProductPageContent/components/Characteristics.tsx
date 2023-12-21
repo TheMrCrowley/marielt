@@ -23,7 +23,7 @@ const Characteristics = ({
 
   return (
     <div className={clsx('flex', 'flex-col', 'xl:w-[35%]', 'w-full', 'min-w-fit')}>
-      <Title fontSize={32} className={clsx('bg-[#262626]', 'py-6', 'px-5')}>
+      <Title fontSize={32} className={clsx('bg-primary-bold', 'py-6', 'px-5')}>
         Характеристики
       </Title>
       {characteristics.map(({ name, value }, i) => (
@@ -37,7 +37,7 @@ const Characteristics = ({
             'py-2',
             'px-4',
             'gap-4',
-            i % 2 ? 'bg-[#262626]' : 'bg-primary',
+            i % 2 ? 'bg-primary-bold' : 'bg-primary',
           )}
         >
           <Typography fontWeight="light" className="capitalize">

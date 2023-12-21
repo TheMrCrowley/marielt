@@ -84,7 +84,7 @@ const DubaiPage = () => {
               'flex',
               'justify-center',
               'items-center',
-              'bg-[#343434]',
+              'bg-primary-medium',
               'gap-4',
               'p-4',
             )}
@@ -100,7 +100,7 @@ const DubaiPage = () => {
               'flex',
               'justify-center',
               'items-center',
-              'bg-[#343434]',
+              'bg-primary-medium',
               'gap-4',
               'p-4',
             )}
@@ -116,7 +116,7 @@ const DubaiPage = () => {
               'flex',
               'justify-center',
               'items-center',
-              'bg-[#343434]',
+              'bg-primary-medium',
               'gap-4',
               'p-4',
             )}

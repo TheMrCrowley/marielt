@@ -119,7 +119,7 @@ const CustomerForm = ({ onApply }: CustomerFormProps) => {
         disabled={disabled}
         className={clsx(
           'disabled:pointer-events-none',
-          'bg-[#262626]',
+          'bg-primary-bold',
           'text-white',
           'w-full',
           'py-3',

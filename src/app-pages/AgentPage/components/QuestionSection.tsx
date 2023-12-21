@@ -10,7 +10,7 @@ import Typography from '@/src/components/common/Typography';
 
 const QuestionSection = () => {
   return (
-    <section className="w-full flex flex-col justify-center items-center p-6 bg-[#343434] bg-[url(/question-section-bg.png)] bg-no-repeat bg-contain bg-right">
+    <section className="w-full flex flex-col justify-center items-center p-6 bg-primary-medium bg-[url(/question-section-bg.png)] bg-no-repeat bg-contain bg-right">
       <div className="max-w-7xl w-full flex flex-col gap-8 py-8">
         <Title fontSize={48}>Остались вопросы или сомнения?</Title>
         <Typography fontSize={24} fontWeight="light">

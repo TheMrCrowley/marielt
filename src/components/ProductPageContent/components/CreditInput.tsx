@@ -24,7 +24,6 @@ const CreditInput: FC<CreditInputProps> = ({
   return (
     <InputWrapper label={labelText}>
       <div className={clsx('relative')}>
-        {/*TODO: add validation*/}
         <input
           value={value}
           onChange={(e) => onChange(formatToNumber(e.target.value))}

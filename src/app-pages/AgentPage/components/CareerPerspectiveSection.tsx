@@ -15,7 +15,7 @@ const CareerPerspectiveSection = () => {
         </Typography>
       </div>
       <div className="grid md:grid-cols-2 gap-4 max-w-7xl w-full">
-        <div className="p-8 flex flex-col bg-[#343434] sm:gap-8 gap-4">
+        <div className="p-8 flex flex-col bg-primary-medium sm:gap-8 gap-4">
           <Typography fontSize={36} fontWeight="medium" color="text-secondary">
             Риэлтор
           </Typography>
@@ -24,7 +24,7 @@ const CareerPerspectiveSection = () => {
           </Typography>
           <LinkButton linkClassName="mt-auto" type="vacancy" to={AppChildRoutes.Realtor} />
         </div>
-        <div className="p-8 flex flex-col bg-[#343434] sm:gap-8 gap-4">
+        <div className="p-8 flex flex-col bg-primary-medium sm:gap-8 gap-4">
           <Typography fontSize={36} fontWeight="medium" color="text-secondary">
             Руководитель отдела продаж
           </Typography>

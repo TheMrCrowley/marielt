@@ -144,7 +144,7 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
                   return <strong className="font-medium">{children}</strong>;
                 },
                 p: ({ children }) => (
-                  <div className="w-full p-4 bg-[#343434]">
+                  <div className="w-full p-4 bg-primary-medium">
                     <Typography fontSize={20} fontWeight="light">
                       {children}
                     </Typography>

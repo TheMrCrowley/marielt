@@ -22,7 +22,7 @@ const Navigation = ({ navigationItems }: NavigationProps) => {
         'flex',
         'justify-center',
         'items-center',
-        'bg-[#3d3d3d]',
+        'bg-primary-light',
         'sticky',
         'top-0',
         'z-50',

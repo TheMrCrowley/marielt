@@ -30,7 +30,7 @@ const LocationField = ({ location }: LocationFieldProps) => {
       className={clsx(
         'flex',
         'flex-col',
-        'bg-[#262626]',
+        'bg-primary-bold',
         'sm:p-5',
         'pt-5',
         'px-[10px]',

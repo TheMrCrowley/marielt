@@ -44,7 +44,7 @@ const TrainingForm = ({ id }: { id: string }) => {
     <form
       id="application"
       className={clsx(
-        'bg-[#343434]',
+        'bg-primary-medium',
         'w-full',
         'flex',
         'flex-col',

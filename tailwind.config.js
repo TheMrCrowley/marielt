@@ -8,9 +8,6 @@ module.exports = {
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  //   xl:
-  // lg:
-  // sm:
   safelist: [
     'font-medium',
     'font-normal',
@@ -62,6 +59,9 @@ module.exports = {
     extend: {
       colors: {
         primary: '#2c2c2c',
+        'primary-light': '#3D3D3D',
+        'primary-bold': '#262626',
+        'primary-medium': '#343434',
         secondary: '#e3c496',
       },
 

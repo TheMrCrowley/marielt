@@ -43,7 +43,7 @@ const LeaderForm = () => {
   return (
     <form
       className={clsx(
-        'bg-[#343434]',
+        'bg-primary-medium',
         'w-full',
         'flex',
         'flex-col',

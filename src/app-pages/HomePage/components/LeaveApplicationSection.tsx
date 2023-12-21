@@ -10,7 +10,7 @@ import Title from '@/src/components/common/Title';
 
 const LeaveApplicationSection = () => {
   return (
-    <section className={clsx('w-full', 'bg-[#343434]')}>
+    <section className={clsx('w-full', 'bg-primary-medium')}>
       <div
         className={clsx(
           'flex',

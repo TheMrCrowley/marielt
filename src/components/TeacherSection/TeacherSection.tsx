@@ -20,7 +20,7 @@ type TeacherSectionProps = {
 const TeacherSection = ({ item, withoutLink = false }: TeacherSectionProps) => {
   const { id, name, position, description, photo } = item;
   return (
-    <div className="w-full bg-[#343434] flex gap-8 md:flex-row flex-col p-4">
+    <div className="w-full bg-primary-medium flex gap-8 md:flex-row flex-col p-4">
       <div className="max-w-[220px] w-full md:mx-0 mx-auto relative flex-auto">
         <Image
           src={photo?.url || AgentPlaceholder.src}

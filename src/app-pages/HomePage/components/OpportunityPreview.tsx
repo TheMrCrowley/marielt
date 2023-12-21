@@ -15,7 +15,7 @@ const OpportunityPreview = ({ opportunity }: OpportunityPreviewProps) => {
   const { description, image, title, to, type } = opportunity;
 
   return (
-    <section className={clsx('lg:py-20', 'sm:py-16', 'py-7', 'w-full', 'even:bg-[#343434]')}>
+    <section className={clsx('lg:py-20', 'sm:py-16', 'py-7', 'w-full', 'even:bg-primary-medium')}>
       <div
         className={clsx('container', 'flex', 'flex-col', 'md:flex-row', 'gap-7', 'justify-between')}
       >

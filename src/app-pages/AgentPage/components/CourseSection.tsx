@@ -27,15 +27,15 @@ const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {
     <>
       <section className="w-full flex justify-center items-center p-6 bg-no-repeat bg-[url(/question-bh.png)] bg-center bg-cover bg-secondary">
         <div className="max-w-7xl w-full flex flex-col gap-4 py-8">
-          <Title fontSize={48} className="!text-[#343434]">
+          <Title fontSize={48} className="!text-primary-medium">
             Точно ли у меня получится?
           </Title>
-          <Typography fontSize={24} fontWeight="light" color="text-[#343434]">
+          <Typography fontSize={24} fontWeight="light" color="text-primary-medium">
             Самое сложное в работе агента - это первые несколько месяцев. Да,  нужно выучить много
             новой информации, научиться планировать свое время, набрать свою базу объектов,
             научиться продавать себя и свои личные качества.
           </Typography>
-          <Typography fontSize={24} fontWeight="light" color="text-[#343434]">
+          <Typography fontSize={24} fontWeight="light" color="text-primary-medium">
             А чтобы нашим стажерам было проще стать профессионалами, мы создали уникальные условия
             для входа в профессию на базе.{' '}
             <Link href={AppRoutes.Academy} prefetch>
@@ -71,7 +71,7 @@ const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {
             </div>
           </div>
         </div>
-        <div className="max-w-7xl w-full flex bg-[#343434] sm:flex-row flex-col">
+        <div className="max-w-7xl w-full flex bg-primary-medium sm:flex-row flex-col">
           <div className="flex-auto flex flex-col lg:gap-12 sm:gap-8 gap-4 md:w-6/12 w-full sm:p-[4%] px-5 py-8 justify-between">
             <Typography fontSize={24} fontWeight="light">
               Со стажерами работают профессиональные бизнес-тренеры с большим опытом в продажах,

@@ -131,7 +131,7 @@ const DefaultFiltersWrapper = ({
     <div
       className={clsx(
         'w-full',
-        'bg-[#262626]',
+        'bg-primary-bold',
         'md:py-8',
         'py-5',
         'flex',

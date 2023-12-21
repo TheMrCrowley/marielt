@@ -163,7 +163,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
   return (
     <form
       className={clsx(
-        'bg-[#343434]',
+        'bg-primary-medium',
         'w-full',
         'flex',
         'flex-col',

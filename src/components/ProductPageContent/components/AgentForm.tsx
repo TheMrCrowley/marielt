@@ -73,7 +73,7 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
         )}
       >
         <div
-          className={clsx('bg-[#262626]', 'flex', 'justify-between', 'items-end', 'p-4')}
+          className={clsx('bg-primary-bold', 'flex', 'justify-between', 'items-end', 'p-4')}
           style={{
             minWidth: AgentPlaceholder.width + 32,
           }}

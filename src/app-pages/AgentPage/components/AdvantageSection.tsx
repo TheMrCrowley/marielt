@@ -29,7 +29,16 @@ const AdvantageSection = () => {
       </div>
       <div className={clsx('flex', 'flex-col', 'gap-10', 'max-w-7xl', 'w-full')}>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Забота о сотрудниках
@@ -41,7 +50,16 @@ const AdvantageSection = () => {
           </Typography>
         </div>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Поддержка
@@ -55,7 +73,16 @@ const AdvantageSection = () => {
           </Typography>
         </div>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Инструменты
@@ -67,7 +94,16 @@ const AdvantageSection = () => {
           </Typography>
         </div>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Конкурсы и подарки
@@ -79,7 +115,16 @@ const AdvantageSection = () => {
           </Typography>
         </div>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Корпоративная жизнь
@@ -91,7 +136,16 @@ const AdvantageSection = () => {
           </Typography>
         </div>
         <div className="flex flex-col gap-2 md:max-w-4xl max-w-full">
-          <div className={clsx('flex', 'gap-4', 'items-center', 'p-4', 'bg-[#343434]', 'md:w-1/2')}>
+          <div
+            className={clsx(
+              'flex',
+              'gap-4',
+              'items-center',
+              'p-4',
+              'bg-primary-medium',
+              'md:w-1/2',
+            )}
+          >
             <Image alt="plus-icon" src={AgentPlusIcon} />
             <Typography color="text-secondary" fontSize={24} fontWeight="medium">
               Клубы по интересам

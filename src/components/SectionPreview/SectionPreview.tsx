@@ -96,7 +96,7 @@ const SectionPreview = ({ sectionData, children }: PropsWithChildren<SectionPrev
             variant === 'primary' ? 'flex-col-reverse' : 'flex-col',
             'justify-between',
             // TODO add colors to TAILWIND
-            'bg-[#343434]',
+            'bg-primary-medium',
             'mb-4',
           )}
         >

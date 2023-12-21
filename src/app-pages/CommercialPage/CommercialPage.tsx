@@ -65,7 +65,7 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
               href={`/commercial/${commercial.id}/pdf`}
               className="w-full p-4 flex justify-center items-center text-primary bg-secondary hover:cursor-pointer"
             >
-              PDF
+              Скачать мини-презентацию
             </Link>
           </Characteristics>
         }

@@ -51,7 +51,7 @@ const CommercialPriceField = ({
         <Typography
           fontSize={24}
           fontWeight="medium"
-          color="text-[#343434]"
+          color="text-primary-medium"
           className={clsx(
             'bg-secondary',
             'lg:px-6',

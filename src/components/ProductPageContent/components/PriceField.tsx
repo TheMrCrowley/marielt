@@ -22,7 +22,7 @@ const PriceField: FC<PriceFieldProps> = ({ price, initialCurrency, totalArea }) 
         <Typography
           fontSize={24}
           fontWeight="medium"
-          color="text-[#343434]"
+          color="text-primary-medium"
           className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
         >
           Договорная
@@ -46,7 +46,7 @@ const PriceField: FC<PriceFieldProps> = ({ price, initialCurrency, totalArea }) 
           <Typography
             fontSize={24}
             fontWeight="medium"
-            color="text-[#343434]"
+            color="text-primary-medium"
             className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
           >
             {getPriceByCurrencyMonetary(price, initialCurrency, initialCurrency, rates)}
@@ -77,7 +77,7 @@ const PriceField: FC<PriceFieldProps> = ({ price, initialCurrency, totalArea }) 
         <Typography
           fontSize={24}
           fontWeight="medium"
-          color="text-[#343434]"
+          color="text-primary-medium"
           className={clsx('bg-secondary', 'lg:px-6', 'lg:py-3', 'px-4', 'py-2', 'w-max')}
         >
           {getPriceByCurrencyMonetary(price, initialCurrency, initialCurrency, rates)}

@@ -19,7 +19,7 @@ const ProductHeader: FC<Props> = ({
   priceClassName,
 }) => {
   return (
-    <div className={clsx('bg-[#262626]', 'flex', 'lg:flex-row', 'flex-col')}>
+    <div className={clsx('bg-primary-bold', 'flex', 'lg:flex-row', 'flex-col')}>
       <div
         className={clsx(
           'flex',

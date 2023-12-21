@@ -5,10 +5,10 @@ import {
   commercialLocationQueryMap,
   commercialWallMaterialQueryMap,
 } from '@/src/enums/CommercialFilters';
+import { formatToDefaultCommercial } from '@/src/helpers/commercialHelpers';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import {
   formatToCommercialMapItem,
-  formatToDefaultCommercial,
   formatToDetailedCommercialItem,
 } from '@/src/helpers/formatters';
 import { concatQueries, getPaginationQuery, getQueryArray } from '@/src/helpers/queryHelpers';

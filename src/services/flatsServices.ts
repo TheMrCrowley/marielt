@@ -9,11 +9,8 @@ import {
   saleTermQueryMap,
 } from '@/src/enums/FlatsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import {
-  formatToDefaultFlat,
-  formatToDefaultMapItem,
-  formatToDetailedFlat,
-} from '@/src/helpers/formatters';
+import { formatToDefaultFlat } from '@/src/helpers/flatsHelpers';
+import { formatToDefaultMapItem, formatToDetailedFlat } from '@/src/helpers/formatters';
 import {
   concatQueries,
   getDefaultFlatListPopulateQuery,

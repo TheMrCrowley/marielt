@@ -15,8 +15,6 @@ import { DefaultFlatItem } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { ProductType } from '@/src/types/Product';
 
-import styles from './ProductSlider.module.css';
-
 interface ProductSliderProps {
   products: DefaultFlatItem[] | DefaultCommercialItem[] | DefaultHousesAndLotsItem[];
   type: ProductType;
@@ -61,7 +59,7 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
   return (
     <div className={clsx('flex', 'p-0', 'relative')}>
       <Swiper
-        wrapperClass={clsx(styles.swiperWrapper)}
+        wrapperClass={clsx('max-w-[1630px]', 'w-full', 'p-0', 'm-0')}
         className="!m-0"
         spaceBetween={25}
         slidesPerView="auto"

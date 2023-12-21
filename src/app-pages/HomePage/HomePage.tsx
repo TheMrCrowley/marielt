@@ -14,6 +14,7 @@ type HomePageProps = {
 
 const HomePage = ({ data }: HomePageProps) => {
   const { opportunities, products, welcomeSection } = data;
+
   return (
     <>
       <WelcomeSection data={welcomeSection} />

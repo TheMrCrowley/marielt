@@ -3,6 +3,8 @@ import qs from 'qs';
 import { SortValues } from '@/src/enums/SortOptions';
 import { ViewType } from '@/src/types/ViewType';
 
+export const IMAGE_FIELDS_TO_POPULATE = ['width', 'height', 'url', 'placeholder'];
+
 export const getSortQuery = (sort: string) => {
   return qs.stringify(
     {
@@ -102,3 +104,31 @@ export const getDefaultMapPopulateQuery = () => {
 };
 
 export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
+
+export const getUrlWithQueries = (url: string, query: string | string[]): string => {
+  if (Array.isArray(query)) {
+    return `${url}${concatQueries(query)}`;
+  }
+
+  return `${url}?${query}`;
+};
+
+export const getDefaultHouseListPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        house_number: {
+          fields: ['number'],
+        },
+        parameters: {
+          fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],
+        },
+        location: '*',
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};

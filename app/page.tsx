@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import HomePage from '@/src/app-pages/HomePage';
-import { getHomePageData } from '@/src/services/homePageServices';
+import { getHomePageData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {

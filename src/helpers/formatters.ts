@@ -25,37 +25,6 @@ import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTyp
 import { getFullAddress } from './addressHelpers';
 import { formatToPageImages } from './formatToPageImages';
 
-export const formatToDefaultFlat = (
-  flats: StrapiFindResponse<FlatStrapiResponse>['data'],
-): DefaultFlatItem[] =>
-  flats.map(({ attributes, id }) => ({
-    address: getFullAddress({
-      street: attributes.street,
-      houseNumber: attributes.house_number?.number,
-      locality: attributes.locality,
-      region: attributes.region?.data.attributes.name,
-    }),
-    id,
-    price: attributes.price,
-    name: attributes.name,
-    image: Array.isArray(attributes?.image?.data)
-      ? {
-          height: attributes.image.data[0].attributes.height,
-          width: attributes.image.data[0].attributes.width,
-          url: attributes.image.data[0].attributes.url,
-          placeholderUrl: attributes.image.data[0].attributes.placeholder,
-        }
-      : undefined,
-    initialCurrency: attributes.currency || 'USD',
-    parameters: {
-      floor: attributes.parameters.floor,
-      livingArea: attributes.parameters.living_area,
-      maxFloor: attributes.parameters.floors_number,
-      totalArea: attributes.parameters.total_area,
-    },
-    location: attributes.location?.coordinates,
-  }));
-
 export const formatToDefaultMapItem = (
   items:
     | StrapiFindResponse<FlatStrapiResponse>['data']
@@ -147,49 +116,6 @@ export const formatToDetailedFlat = ({
       : undefined,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
-
-export const formatToDefaultCommercial = (
-  commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
-): DefaultCommercialItem[] =>
-  commercial.map(({ attributes, id }) => ({
-    name: attributes.name,
-    address: getFullAddress({
-      region: attributes.region?.data.attributes.name,
-      districtRb: attributes.district_rb,
-      locality: attributes.locality,
-      district: attributes.district?.data.attributes.name,
-      street: attributes.street,
-      houseNumber: attributes.house_number?.number,
-    }),
-    id,
-    initialCurrency: attributes.currency || 'USD',
-    transactionType: attributes.comm_tran?.data?.attributes?.uid!,
-    image: Array.isArray(attributes.image?.data)
-      ? {
-          height: attributes.image!.data[0].attributes.height,
-          width: attributes.image!.data[0].attributes.width,
-          url: attributes.image!.data[0].attributes.url,
-          placeholderUrl: attributes.image!.data[0].attributes.placeholder,
-        }
-      : undefined,
-    parameters: {
-      plotSize: attributes.parameters?.plot_size,
-      floor: attributes.parameters?.floor,
-      maxFloor: attributes.parameters?.floors_number,
-    },
-    totalArea: {
-      maxArea: attributes.parameters?.premises_area?.max_area,
-      minArea: attributes.parameters?.premises_area?.min_area,
-    },
-    pricePerMeter: {
-      from: attributes.price_meter?.from,
-      to: attributes.price_meter?.to,
-    },
-    totalPrice: {
-      from: attributes.price_total?.from,
-      to: attributes.price_total?.to,
-    },
-  }));
 
 export const formatToDetailedCommercialItem = ({
   attributes,
@@ -292,56 +218,6 @@ export const formatToDetailedCommercialItem = ({
   detailedDescription: attributes.detailed_description,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
-
-export const formatToDefaultHouseAndLotsItem = (
-  housesAndLots: StrapiFindResponse<HousesAndLotsStrapiResponse>['data'],
-): DefaultHousesAndLotsItem[] =>
-  housesAndLots.map(
-    ({
-      attributes: {
-        name,
-        price,
-        locality,
-        street,
-        house_number,
-        currency,
-        parameters,
-        image,
-        village_council,
-        district_rb,
-        region,
-      },
-      id,
-    }) => ({
-      id,
-      address: getFullAddress({
-        street: street,
-        houseNumber: house_number?.number,
-        locality,
-        village: village_council,
-        districtRb: district_rb,
-        region: region?.data.attributes.name,
-      }),
-      initialCurrency: currency || 'USD',
-      image:
-        image && Array.isArray(image.data)
-          ? {
-              height: image.data[0].attributes.height,
-              width: image.data[0].attributes.width,
-              url: image.data[0].attributes.url,
-              placeholderUrl: image.data[0].attributes.placeholder,
-            }
-          : undefined,
-      name,
-      price,
-      parameters: {
-        plotSize: parameters.plot_size,
-        kitchenArea: parameters.kitchen_area,
-        livingArea: parameters.living_area,
-        totalArea: parameters.total_area,
-      },
-    }),
-  );
 
 export const formatToDetailedHousesAndLots = ({
   attributes,

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 import Title from '@/src/components/common/Title';
-import { getActualProductsByType } from '@/src/services/actualProductsServices';
+import { getActualProductsByType } from '@/src/services';
 import { ProductType } from '@/src/types/Product';
 
 type ProductSliderWrapperProps = {

@@ -105,12 +105,8 @@ export const getDefaultMapPopulateQuery = () => {
 
 export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
 
-export const getUrlWithQueries = (url: string, query: string | string[]): string => {
-  if (Array.isArray(query)) {
-    return `${url}${concatQueries(query)}`;
-  }
-
-  return `${url}?${query}`;
+export const getUrlWithQueries = (url: string, ...query: string[]): string => {
+  return `${url}${concatQueries(query)}`;
 };
 
 export const getDefaultHouseListPopulateQuery = () => {

@@ -12,11 +12,9 @@ import {
 } from '@/src/enums/HousesAndLotsFilters';
 import { lotsWaterQueryMap } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import {
-  formatToDefaultHouseAndLotsItem,
-  formatToDetailedHousesAndLots,
-} from '@/src/helpers/formatters';
+import { formatToDetailedHousesAndLots } from '@/src/helpers/formatters';
 import { formatToDefaultMapItem } from '@/src/helpers/formatters';
+import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/housesHelpers';
 import {
   getDefaultMapPopulateQuery,
   getPaginationQuery,

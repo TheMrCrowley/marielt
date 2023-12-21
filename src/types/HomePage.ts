@@ -1,5 +1,33 @@
 import { AppRoutes } from '@/src/enums/AppRoutes';
 
+import { StrapiFindOneResponse } from './StrapiTypes';
+
+export interface HomePageItemResponse {
+  text_1: string;
+  text_2: string;
+  background: boolean;
+  banner: StrapiFindOneResponse<{
+    width: number;
+    height: number;
+    url: string;
+    placeholder: string;
+  }>;
+  section: Array<{
+    title: string;
+    description: string;
+    variant: 'primary' | 'secondary';
+    to: AppRoutes;
+    navigation_title: string;
+    type: 'product' | 'opportunity';
+    image: StrapiFindOneResponse<{
+      width: number;
+      height: number;
+      url: string;
+      placeholder: string;
+    }>;
+  }>;
+}
+
 export interface HomePageItem {
   title: string;
   description: string;

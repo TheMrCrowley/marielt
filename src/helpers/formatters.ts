@@ -359,7 +359,7 @@ export const formatToDetailedHousesAndLots = ({
   id,
 }: StrapiFindOneResponse<HousesAndLotsStrapiResponse>['data']): DetailedHousesAndLotsItem => ({
   address: getFullAddress({
-    region: attributes.region?.data.attributes.name,
+    region: attributes.region?.data?.attributes.name,
     districtRb: attributes.district_rb,
     village: attributes.village_council,
     locality: attributes.locality,
@@ -399,13 +399,16 @@ export const formatToDetailedHousesAndLots = ({
   additionalInfo: attributes.additional_info?.map((item) => ({ name: item.name })) || [],
   note: attributes.note,
   detailedDescription: attributes.detailed_description,
-  agent: {
-    fullName: attributes.agents.data[0].attributes.full_name,
-    phone1: attributes.agents.data[0].attributes.phone1,
-    branch: attributes.agents.data[0].attributes.branch,
-    phone2: attributes.agents.data[0].attributes.phone2,
-    position: attributes.agents.data[0].attributes.position,
-  },
+  agents:
+    attributes.agents?.data && attributes.agents.data.length
+      ? {
+          fullName: attributes.agents.data[0].attributes.full_name,
+          phone1: attributes.agents.data[0].attributes.phone1,
+          branch: attributes.agents.data[0].attributes.branch,
+          phone2: attributes.agents.data[0].attributes.phone2,
+          position: attributes.agents.data[0].attributes.position,
+        }
+      : undefined,
   rootType:
     attributes.house_categories?.data &&
     attributes.house_categories.data.find((item) => !item.attributes.category)?.attributes.name,

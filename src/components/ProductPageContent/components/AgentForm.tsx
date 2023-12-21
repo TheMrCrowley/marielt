@@ -23,7 +23,7 @@ import { ProductType } from '@/src/types/Product';
 interface AgentFormProps {
   agentData?:
     | DetailedFlatItem['agents']
-    | DetailedHousesAndLotsItem['agent']
+    | DetailedHousesAndLotsItem['agents']
     | DetailedCommercialItem['agents'];
   type: ProductType;
   productId: string;

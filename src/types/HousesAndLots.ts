@@ -56,7 +56,7 @@ export type DetailedHousesAndLotsItem = {
     placeholderUrl: string;
   }>;
   distance?: string;
-  agent: {
+  agents?: {
     fullName: string;
     phone1: string;
     phone2?: string;

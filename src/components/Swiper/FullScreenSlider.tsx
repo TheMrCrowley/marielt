@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import 'swiper/css/zoom';
-import { Navigation, Keyboard, Thumbs, Zoom } from 'swiper/modules';
+import { Navigation, Keyboard, Thumbs, Zoom, Lazy } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import CrossIcon from '@/public/plus.svg';
@@ -138,12 +138,15 @@ const FullScreenSlider = ({
                 }}
                 zoom
                 key={`full-screen-product-page-swiper-slide-${url}`}
+                lazy
+                onLoad={() => {}}
               >
                 <Image
                   src={url}
                   alt=""
                   width={width}
                   height={height}
+                  loading="lazy"
                   className={clsx('object-contain', 'w-full', 'h-full')}
                   placeholder="blur"
                   blurDataURL={placeholderUrl}
@@ -212,10 +215,13 @@ const FullScreenSlider = ({
                   height: '15vh',
                 }}
                 key={`full-screen-product-page-thumb-swiper-slide-${url}`}
+                lazy
+                onLoad={() => {}}
               >
                 <Image
                   src={url}
                   alt=""
+                  loading="lazy"
                   width={width}
                   height={height}
                   className={clsx(

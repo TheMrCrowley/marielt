@@ -716,7 +716,7 @@ export const getCommercialById = async (id: string) => {
           populate: '*',
         },
         image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
+          fields: ['width', 'height', 'url', 'placeholder', 'formats'],
         },
         agents: {
           populate: {

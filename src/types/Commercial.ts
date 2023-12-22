@@ -99,6 +99,7 @@ export type DetailedCommercialItem = {
     height: number;
     url: string;
     placeholderUrl: string;
+    thumb: { url: string; width: number; height: number; placeholderUrl: string };
   }>;
   detailedDescription?: string;
   additionalInfo?: Array<{ name: string }>;

@@ -17,7 +17,13 @@ import SliderButton from './SliderButton';
 
 interface FullScreenSliderProps {
   closeModal: () => void;
-  images: Array<{ url: string; width: number; height: number; placeholderUrl: string }>;
+  images: Array<{
+    width: number;
+    height: number;
+    url: string;
+    placeholderUrl: string;
+    thumb: { url: string; width: number; height: number; placeholderUrl: string };
+  }>;
   type: ProductType;
   initialSlide: number;
   video?: StrapiVideo;
@@ -200,7 +206,7 @@ const FullScreenSlider = ({
                 />
               </SwiperSlide>
             )}
-            {images.map(({ url, height, width, placeholderUrl }, i) => (
+            {images.map(({ thumb: { height, placeholderUrl, url, width } }, i) => (
               <SwiperSlide
                 style={{
                   height: '15vh',

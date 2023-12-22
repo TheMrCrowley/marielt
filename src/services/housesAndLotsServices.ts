@@ -326,7 +326,7 @@ export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAn
           populate: '*',
         },
         image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
+          fields: ['width', 'height', 'url', 'placeholder', 'formats'],
         },
       },
     },

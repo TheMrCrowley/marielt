@@ -327,7 +327,7 @@ export const getFlatById = async (id: string): Promise<DetailedFlatItem> => {
           populate: '*',
         },
         image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
+          fields: ['width', 'height', 'url', 'placeholder', 'formats'],
         },
         agents: {
           populate: '*',

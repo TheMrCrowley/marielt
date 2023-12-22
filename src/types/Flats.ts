@@ -56,6 +56,7 @@ export type DetailedFlatItem = {
     height: number;
     url: string;
     placeholderUrl: string;
+    thumb: { url: string; width: number; height: number; placeholderUrl: string };
   }>;
   video?: StrapiVideo;
   agents?: {
@@ -130,11 +131,7 @@ export interface FlatStrapiResponse {
   currency?: AvailableCurrencies;
   price?: string;
   name?: string;
-  image: {
-    data: Array<{
-      attributes: StrapiImage;
-    }>;
-  };
+  image: StrapiFindResponse<StrapiImage>;
   detailed_description?: string;
   location?: {
     coordinates: {

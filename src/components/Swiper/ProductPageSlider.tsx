@@ -22,7 +22,13 @@ const ProductPageSlider = ({
   video,
 }: {
   video?: StrapiVideo;
-  images: Array<{ url: string; width: number; height: number; placeholderUrl: string }>;
+  images: Array<{
+    width: number;
+    height: number;
+    url: string;
+    placeholderUrl: string;
+    thumb: { url: string; width: number; height: number; placeholderUrl: string };
+  }>;
   type: ProductType;
 }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -258,7 +264,7 @@ const ProductPageSlider = ({
             />
           </SwiperSlide>
         )}
-        {images.map(({ url, height, width, placeholderUrl }, i) => (
+        {images.map(({ thumb: { height, placeholderUrl, url, width } }, i) => (
           <SwiperSlide
             style={{
               height: getThumbSlideHeight(),

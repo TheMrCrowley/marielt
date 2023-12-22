@@ -54,6 +54,7 @@ export type DetailedHousesAndLotsItem = {
     height: number;
     url: string;
     placeholderUrl: string;
+    thumb: { url: string; width: number; height: number; placeholderUrl: string };
   }>;
   distance?: string;
   agents?: {

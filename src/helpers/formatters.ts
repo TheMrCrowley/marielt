@@ -23,6 +23,7 @@ import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 import { getFullAddress } from './addressHelpers';
+import { formatToPageImages } from './formatToPageImages';
 
 export const formatToDefaultFlat = (
   flats: StrapiFindResponse<FlatStrapiResponse>['data'],
@@ -133,15 +134,7 @@ export const formatToDetailedFlat = ({
     ? { lat: attributes.coordinates.latitude, lng: attributes.coordinates.longitude }
     : undefined,
   detailedDescription: attributes.detailed_description,
-  images:
-    attributes.image.data && attributes.image.data.length
-      ? attributes.image.data.map((item) => ({
-          height: item.attributes.height as number,
-          placeholderUrl: item.attributes.placeholder as string,
-          url: item.attributes.url as string,
-          width: item.attributes.width as number,
-        }))
-      : [],
+  images: formatToPageImages(attributes.image.data),
   agents:
     attributes.agents?.data && attributes.agents.data.length
       ? {
@@ -229,16 +222,7 @@ export const formatToDetailedCommercialItem = ({
   id,
   initialCurrency: attributes.currency || 'USD',
   transactionType: attributes.comm_tran?.data?.attributes?.name! as TransactionTypeValues,
-  images: Array.isArray(attributes.image?.data)
-    ? attributes
-        .image!.data.filter((item) => !item.attributes.url.includes('.html'))
-        .map(({ attributes: imageAttributes }) => ({
-          height: imageAttributes.height,
-          width: imageAttributes.width,
-          url: imageAttributes.url,
-          placeholderUrl: imageAttributes.placeholder,
-        }))
-    : [],
+  images: formatToPageImages(attributes.image?.data),
   parameters: {
     plotSize: attributes.parameters?.plot_size,
     floor: attributes.parameters?.floor,
@@ -427,14 +411,7 @@ export const formatToDetailedHousesAndLots = ({
         lng: attributes.coordinates.longitude,
       }
     : undefined,
-  images: Array.isArray(attributes?.image?.data)
-    ? attributes!.image!.data.map((item) => ({
-        height: item.attributes.height as number,
-        placeholderUrl: item.attributes.placeholder as string,
-        url: item.attributes.url as string,
-        width: item.attributes.width as number,
-      }))
-    : [],
+  images: formatToPageImages(attributes.image?.data),
   distance: attributes.distance,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });

@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical,
     },
-    openGraph: getOpenGraphField(title, description, './opengraph-image.jpg'),
+    openGraph: getOpenGraphField(title, description),
   };
 }
 

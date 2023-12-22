@@ -235,7 +235,6 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
 
                   router.push(pathname + '?' + `productIds=${targetSingleItem.id}`);
                 } else {
-                  console.log('here');
                   const geometrySet = new Set<number>();
                   (objectManagerRef.current.clusters as ymaps.ObjectManager['clusters'])
                     .getById(id)

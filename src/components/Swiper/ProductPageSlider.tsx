@@ -134,6 +134,8 @@ const ProductPageSlider = ({
                   alt=""
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
+                  loading="eager"
+                  priority
                   className={clsx(
                     'relative',
                     'object-cover',
@@ -166,6 +168,8 @@ const ProductPageSlider = ({
                   alt="product-page-slide"
                   width={width}
                   height={height}
+                  loading="eager"
+                  priority
                   className={clsx(
                     'object-contain',
                     'w-full',
@@ -232,6 +236,8 @@ const ProductPageSlider = ({
             <Image
               src={video.thumbnail}
               alt=""
+              loading="eager"
+              priority
               width={video.rawData.thumbnail_width}
               height={video.rawData.thumbnail_height}
               className={clsx(
@@ -259,6 +265,8 @@ const ProductPageSlider = ({
             <Image
               src={url}
               alt=""
+              loading="eager"
+              priority
               width={width}
               height={height}
               className={clsx(

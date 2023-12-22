@@ -178,6 +178,7 @@ const ProductPageSlider = ({
                   width={width}
                   height={height}
                   loading="lazy"
+                  unoptimized
                   className={clsx(
                     'object-contain',
                     'w-full',
@@ -277,6 +278,7 @@ const ProductPageSlider = ({
               src={url}
               alt=""
               loading="lazy"
+              unoptimized
               width={width}
               height={height}
               className={clsx(

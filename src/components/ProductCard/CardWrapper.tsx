@@ -37,6 +37,8 @@ const CardWrapper = ({
           blurDataURL={placeholderUrl || ImagePlaceholder.blurDataURL}
           width={330}
           height={160}
+          loading="lazy"
+          unoptimized
           alt="product-card"
         />
       </Link>

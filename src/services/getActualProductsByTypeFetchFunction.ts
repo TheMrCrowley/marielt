@@ -27,7 +27,7 @@ const getActualHousesAndLots =
     return formatToDefaultHouseAndLotsItem(data);
   };
 
-export const getActualProductsByTypeFetchFunction =
+const getActualProductsByTypeFetchFunction =
   (api: AbstractActualProductsApi) =>
   async (
     type: ProductType,
@@ -43,3 +43,5 @@ export const getActualProductsByTypeFetchFunction =
         return null as never;
     }
   };
+
+export default getActualProductsByTypeFetchFunction;

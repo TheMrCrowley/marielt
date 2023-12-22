@@ -1,12 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import SectionPreview, {
-  SectionPreviewProps,
-} from '@/src/components/SectionPreview/SectionPreview';
+import SectionPreview from '@/src/components/SectionPreview/SectionPreview';
+import { AboutPageData } from '@/src/types/AboutPageTypes';
 
 interface AboutPageProps {
-  aboutData: Array<Omit<SectionPreviewProps['sectionData'], 'type'>>;
+  aboutData: AboutPageData[];
 }
 
 const AboutPage = ({ aboutData }: AboutPageProps) => {

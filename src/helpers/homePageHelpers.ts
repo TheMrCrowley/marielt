@@ -1,4 +1,5 @@
-import { HomePageData, HomePageItem, HomePageItemResponse } from '@/src/types/HomePage';
+import { HomePageItemResponse } from '@/src/api/HomePageApi';
+import { HomePageData, HomePageItem } from '@/src/types/HomePage';
 
 const convertToHomePageItem = (
   data: HomePageItemResponse['section'],

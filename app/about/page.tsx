@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import AboutPage from '@/src/app-pages/AboutPage/AboutPage';
-import { getAbout } from '@/src/services/aboutServices';
+import { getAboutPageData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const About = async () => {
-  const data = await getAbout();
+  const data = await getAboutPageData();
   return <AboutPage aboutData={data} />;
 };
 

@@ -1,16 +1,12 @@
 import qs from 'qs';
 
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 import { fetchWrapper } from '@/src/services/baseServices';
-import { HomePageItemResponse } from '@/src/types/HomePage';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
-
-export abstract class AbstractHomePageApi {
-  abstract getHomePageData(): Promise<StrapiFindOneResponse<HomePageItemResponse>>;
-}
 
 export default class HomePageApi extends BaseApi implements AbstractHomePageApi {
   private readonly homePageUrl: string;
@@ -49,4 +45,34 @@ export default class HomePageApi extends BaseApi implements AbstractHomePageApi 
 
     return response;
   }
+}
+
+export abstract class AbstractHomePageApi {
+  abstract getHomePageData(): Promise<StrapiFindOneResponse<HomePageItemResponse>>;
+}
+
+export interface HomePageItemResponse {
+  text_1: string;
+  text_2: string;
+  background: boolean;
+  banner: StrapiFindOneResponse<{
+    width: number;
+    height: number;
+    url: string;
+    placeholder: string;
+  }>;
+  section: Array<{
+    title: string;
+    description: string;
+    variant: 'primary' | 'secondary';
+    to: AppRoutes;
+    navigation_title: string;
+    type: 'product' | 'opportunity';
+    image: StrapiFindOneResponse<{
+      width: number;
+      height: number;
+      url: string;
+      placeholder: string;
+    }>;
+  }>;
 }

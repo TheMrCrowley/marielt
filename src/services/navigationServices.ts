@@ -1,7 +1,7 @@
 import qs from 'qs';
 
+import { HomePageItemResponse } from '@/src/api/HomePageApi';
 import { AppRoutes } from '@/src/enums/AppRoutes';
-import { HomePageItemResponse } from '@/src/types/StrapiTypes';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 export const getNavigationItems = async (): Promise<

@@ -64,6 +64,8 @@ const SectionPreview = ({ sectionData, children }: PropsWithChildren<SectionPrev
               placeholder="blur"
               blurDataURL={image.placeholder}
               alt=""
+              loading="lazy"
+              unoptimized
             />
           </>
         );
@@ -78,6 +80,8 @@ const SectionPreview = ({ sectionData, children }: PropsWithChildren<SectionPrev
               placeholder="blur"
               blurDataURL={image.placeholder}
               alt=""
+              loading="lazy"
+              unoptimized
             />
             {renderDescription()}
           </>

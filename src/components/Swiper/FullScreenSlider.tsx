@@ -198,6 +198,7 @@ const FullScreenSlider = ({
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
                   loading="lazy"
+                  unoptimized
                   className={clsx(
                     'object-cover',
                     'w-full',

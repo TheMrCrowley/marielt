@@ -34,6 +34,8 @@ const OpportunityPreview = ({ opportunity }: OpportunityPreviewProps) => {
           width={image.width}
           height={image.height}
           alt=""
+          unoptimized
+          loading="lazy"
         />
       </div>
     </section>

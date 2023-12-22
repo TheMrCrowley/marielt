@@ -98,6 +98,8 @@ const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {
               width={courseImage.width}
               height={courseImage.height}
               placeholder="blur"
+              loading="lazy"
+              unoptimized
               blurDataURL={courseImage.placeholder}
               alt=""
             />

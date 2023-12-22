@@ -31,6 +31,7 @@ const TeacherSection = ({ item, withoutLink = false }: TeacherSectionProps) => {
           blurDataURL={photo?.placeholder || AgentPlaceholder.blurDataURL}
           className="w-full"
           unoptimized
+          loading="lazy"
         />
       </div>
       <div className="flex flex-col gap-4">

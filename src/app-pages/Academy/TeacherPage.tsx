@@ -48,6 +48,8 @@ const TeacherPage = ({ teacher, id }: TeacherPageProps) => {
             <Image
               src={photo.url}
               placeholder="blur"
+              loading="lazy"
+              unoptimized
               blurDataURL={photo.placeholder}
               width={photo.width}
               height={photo.height}

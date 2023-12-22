@@ -126,6 +126,8 @@ const ProductPageSlider = ({
             style={{
               height: getSlideHeight(),
             }}
+            lazy
+            onLoad={() => {}}
           >
             {({ isActive }) => {
               return (
@@ -134,8 +136,7 @@ const ProductPageSlider = ({
                   alt=""
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
-                  loading="eager"
-                  priority
+                  loading="lazy"
                   className={clsx(
                     'relative',
                     'object-cover',
@@ -160,6 +161,8 @@ const ProductPageSlider = ({
               height: getSlideHeight(),
             }}
             key={`product-page-swiper-slide-${url}`}
+            lazy
+            onLoad={() => {}}
           >
             {({ isActive }) => {
               return (
@@ -168,8 +171,7 @@ const ProductPageSlider = ({
                   alt="product-page-slide"
                   width={width}
                   height={height}
-                  loading="eager"
-                  priority
+                  loading="lazy"
                   className={clsx(
                     'object-contain',
                     'w-full',
@@ -232,12 +234,13 @@ const ProductPageSlider = ({
             style={{
               height: getThumbSlideHeight(),
             }}
+            lazy
+            onLoad={() => {}}
           >
             <Image
               src={video.thumbnail}
               alt=""
-              loading="eager"
-              priority
+              loading="lazy"
               width={video.rawData.thumbnail_width}
               height={video.rawData.thumbnail_height}
               className={clsx(
@@ -261,12 +264,13 @@ const ProductPageSlider = ({
               height: getThumbSlideHeight(),
             }}
             key={`product-page-thumb-swiper-slide-${url}`}
+            lazy
+            onLoad={() => {}}
           >
             <Image
               src={url}
               alt=""
-              loading="eager"
-              priority
+              loading="lazy"
               width={width}
               height={height}
               className={clsx(

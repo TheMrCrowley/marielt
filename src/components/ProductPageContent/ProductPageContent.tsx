@@ -47,7 +47,7 @@ const ProductPageContent = ({
           'mb-8',
         )}
       >
-        <div className={clsx('flex', 'flex-col', 'gap-8', 'w-[calc(100% - 340px)]')}>
+        <div className={clsx('flex', 'flex-col', 'gap-8', 'w-full')}>
           {productHeader}
 
           <div className={clsx('flex', 'gap-8', 'xl:flex-row', 'flex-col')}>

@@ -83,7 +83,7 @@ const CustomerForm = ({ onApply }: CustomerFormProps) => {
           onChange={(e) =>
             setFormState((prev) => ({
               ...prev,
-              phoneValue: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
+              phone: formatToNumber(e.target.value, PHONE_NUMBER_LENGTH),
             }))
           }
           className="w-full"

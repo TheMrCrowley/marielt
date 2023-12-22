@@ -3,7 +3,7 @@ import React from 'react';
 
 import TeacherSection from '@/src/components/TeacherSection';
 import Typography from '@/src/components/common/Typography';
-import { getAllTeachers } from '@/src/services/academyServices';
+import { getAllTeachers } from '@/src/services';
 
 const TeachersSections = async () => {
   const teachers = await getAllTeachers();

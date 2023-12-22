@@ -29,17 +29,17 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
   };
 }
 
-export async function generateStaticParams() {
-  const response = await fetch(`${process.env.API_BASE_URL}/comm-items?pagination[limit]=-1`);
+// export async function generateStaticParams() {
+//   const response = await fetch(`${process.env.API_BASE_URL}/comm-items?pagination[limit]=-1`);
 
-  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+//   const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return data.map((item) => ({
-    id: item.id.toString(),
-  }));
-}
+//   return data.map((item) => ({
+//     id: item.id.toString(),
+//   }));
+// }
 
-export const dynamicParams = true;
+// export const dynamicParams = true;
 
 const Commercial = async ({ params: { id } }: Props) => {
   const commercialItem = await getCommercialById(id);

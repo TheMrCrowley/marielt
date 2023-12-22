@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import TrainingPage from '@/src/app-pages/Academy/TrainingPage';
-import { getAllTrainings, getTrainingById } from '@/src/services/academyServices';
+import { getTrainingById } from '@/src/services';
+import { getAllTrainings } from '@/src/services/academyServices';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {

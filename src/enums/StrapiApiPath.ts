@@ -3,4 +3,7 @@ export enum StrapiApiPath {
   ApartItems = '/apart-items',
   HouseItems = '/house-items',
   CommercialItems = '/comm-items',
+  Teachers = '/teachers',
+  Trainings = '/trainings',
+  AboutPage = '/about-page',
 }

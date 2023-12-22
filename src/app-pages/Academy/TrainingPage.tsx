@@ -12,7 +12,7 @@ import ArrowIcon from '@/public/arrow-left.svg';
 import TrainingForm from '@/src/components/TrainingForm/TrainingForm';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
-import { Training } from '@/src/types/AcademyTypes';
+import { Training } from '@/src/types/TrainingType';
 
 type TrainingPageProps = {
   id: string;

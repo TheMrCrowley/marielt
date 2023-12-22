@@ -8,7 +8,7 @@ import ArrowIcon from '@/public/arrow-right.svg';
 import BackButton from '@/src/components/common/BackButton';
 import Typography from '@/src/components/common/Typography';
 import { AppRoutes } from '@/src/enums/AppRoutes';
-import { Teacher } from '@/src/types/AcademyTypes';
+import { Teacher } from '@/src/types/TeacherType';
 
 type TeacherPageProps = {
   id: string;

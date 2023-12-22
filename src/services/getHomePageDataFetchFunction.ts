@@ -2,7 +2,7 @@ import { AbstractHomePageApi } from '@/src/api/HomePageApi';
 import { convertToHomePageData } from '@/src/helpers/homePageHelpers';
 import { HomePageData } from '@/src/types/HomePage';
 
-export const getHomePageDataFetchFunction =
+const getHomePageDataFetchFunction =
   (api: AbstractHomePageApi) => async (): Promise<HomePageData> => {
     const { data } = await api.getHomePageData();
 
@@ -10,3 +10,5 @@ export const getHomePageDataFetchFunction =
 
     return homePageData;
   };
+
+export default getHomePageDataFetchFunction;

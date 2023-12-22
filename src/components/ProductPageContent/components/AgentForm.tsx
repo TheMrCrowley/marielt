@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import AgentPlaceholder from '@/public/agentPlaceholder.png';
+import AgentPlaceholder from '@/public/agentPlaceholder.jpg';
 import PhoneIcon from '@/public/phoneIcon.svg';
 import CrossIcon from '@/public/plus.svg';
 import Button from '@/src/components/common/Button';

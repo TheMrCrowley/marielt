@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import Markdown from 'react-markdown';
 
-import AgentPlaceholder from '@/public/agentPlaceholder.png';
+import AgentPlaceholder from '@/public/agentPlaceholder.jpg';
 import LinkButton from '@/src/components/LinkButton';
 import Typography from '@/src/components/common/Typography';
 

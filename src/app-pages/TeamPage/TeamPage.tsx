@@ -34,7 +34,7 @@ const TeamPage = ({ description, members }: TeamPageProps) => {
           'items-center',
           'min-h-[500px]',
           'gap-8',
-          'bg-[url(/team-bg.png)]',
+          'bg-[url(/team-bg.jpg)]',
         )}
       >
         <BackButton

@@ -12,7 +12,7 @@ export const getTeamPageMembers = async (): Promise<{ members: TeamItem[] }> => 
         },
       },
       sort: {
-        id: 'asc',
+        order: 'asc',
       },
     },
     {

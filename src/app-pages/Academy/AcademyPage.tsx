@@ -25,7 +25,7 @@ const AcademyPage = () => {
           <Typography fontSize={16}>Преподаватели</Typography>
         </a>
       </section>
-      <section className="flex flex-col gap-8 justify-center items-center bg-[url(/academy-bg.png)] w-full md:py-24  py-12 px-6">
+      <section className="flex flex-col gap-8 justify-center items-center bg-[url(/academy-bg.jpg)] w-full md:py-24  py-12 px-6">
         <Typography
           fontSize={48}
           fontWeight="medium"
@@ -73,7 +73,7 @@ const AcademyPage = () => {
       >
         <div className={clsx('max-w-7xl', 'w-full', 'flex', 'flex-col', 'gap-12')}>
           <div className="w-full flex flex-col gap-4" id="basic">
-            <div className="bg-[url(/prof-grow-bg.png)] p-8 w-full flex flex-col gap-8">
+            <div className="bg-[url(/prof-grow-bg.jpg)] p-8 w-full flex flex-col gap-8">
               <Typography fontSize={32} fontWeight="medium">
                 С чего начинается рост профессионализма
               </Typography>
@@ -494,7 +494,7 @@ const AcademyPage = () => {
             </div>
           </div>
           <div className="w-full flex flex-col gap-4" id="prof">
-            <div className="bg-[url(/mega-agent-bg.png)] p-8 w-full flex flex-col gap-8">
+            <div className="bg-[url(/mega-agent-bg.jpg)] p-8 w-full flex flex-col gap-8">
               <Typography fontSize={32} fontWeight="medium">
                 Мы обучаем агентов из других агентств
               </Typography>

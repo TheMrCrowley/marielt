@@ -18,7 +18,7 @@ const DubaiPage = () => {
           'justify-center',
           'items-center',
           'w-full',
-          'bg-[url(/dubai-bg.png)]',
+          'bg-[url(/dubai-bg.jpg)]',
           'bg-center',
           'bg-cover',
           'md:h-[740px]',

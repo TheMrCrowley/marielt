@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 
 import CardMapPinIcon from '@/public/card-map-pin.svg';
-import ImagePlaceholder from '@/public/card-placeholder.png';
+import ImagePlaceholder from '@/public/card-placeholder.jpg';
 import Button from '@/src/components/common/Button';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';

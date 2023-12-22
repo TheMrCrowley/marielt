@@ -547,19 +547,28 @@ export const getCommercialItemsForList = async (
 
   const url = `${process.env.API_BASE_URL}/comm-items?${query}&${paginationQuery}&${populateQuery}`;
 
-  const response = await fetch(url, {
-    cache: 'no-cache',
-  });
+  try {
+    const response = await fetch(url, {
+      cache: 'no-cache',
+    });
 
-  const {
-    data,
-    meta: { pagination },
-  } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+    const {
+      data,
+      meta: { pagination },
+    } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return {
-    commercial: formatToDefaultCommercial(data),
-    pagination,
-  };
+    return {
+      commercial: formatToDefaultCommercial(data),
+      pagination,
+    };
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getCommercialItemsForList failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 export const getCommercialItemsForMap = async (
@@ -597,17 +606,26 @@ export const getCommercialItemsForMap = async (
     ),
   ])}`;
 
-  const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
 
-  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+    const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return {
-    commercial: formatToCommercialMapItem(data),
-  };
+    return {
+      commercial: formatToCommercialMapItem(data),
+    };
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getCommercialItemsForMap failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 export const getCommercialSearchResults = async (value: string): Promise<SearchResults> => {
@@ -621,13 +639,22 @@ export const getCommercialSearchResults = async (value: string): Promise<SearchR
 
   const url = `/api/search?${query}`;
 
-  const response = await fetch(url, {
-    cache: 'no-cache',
-  });
+  try {
+    const response = await fetch(url, {
+      cache: 'no-cache',
+    });
 
-  const searchResults = (await response.json()) as SearchResults;
+    const searchResults = (await response.json()) as SearchResults;
 
-  return searchResults;
+    return searchResults;
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getCommercialSearchResults failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 export const getCommercialByIds = async (ids: string[]) => {
@@ -652,15 +679,24 @@ export const getCommercialByIds = async (ids: string[]) => {
     getDefaultCommercialListPopulateQuery(),
   ])}`;
 
-  const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
 
-  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+    const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return formatToDefaultCommercial(data);
+    return formatToDefaultCommercial(data);
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getCommercialByIds failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 export const getCommercialById = async (id: string) => {
@@ -725,15 +761,24 @@ export const getCommercialById = async (id: string) => {
   );
   const url = `${process.env.API_BASE_URL}/comm-items/${id}?${query}`;
 
-  const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
 
-  const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
+    const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
 
-  return formatToDetailedCommercialItem(data);
+    return formatToDetailedCommercialItem(data);
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getCommercialById failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 const getSimilarByPrice = async ({
@@ -790,15 +835,24 @@ const getSimilarByPrice = async ({
 
   const url = `${process.env.API_BASE_URL}/comm-items?${query}&${populateQuery}`;
 
-  const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
 
-  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+    const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return formatToDefaultCommercial(data);
+    return formatToDefaultCommercial(data);
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getSimilarByPrice failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 const getSimilarByLocation = async ({
@@ -840,15 +894,24 @@ const getSimilarByLocation = async ({
     process.env.API_BASE_URL
   }/comm-items?${query}&${getDefaultCommercialListPopulateQuery()}`;
 
-  const response = await fetch(url, {
-    next: {
-      revalidate: 60,
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
 
-  const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
+    const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-  return formatToDefaultCommercial(data);
+    return formatToDefaultCommercial(data);
+  } catch (e) {
+    console.log(
+      `${new Date().toLocaleString()}: getSimilarByLocation failed for ${url} with reason: ${
+        (e as Error).message
+      }`,
+    );
+    throw e;
+  }
 };
 
 export const getCommercialSimilar = async (item: DetailedCommercialItem) => {

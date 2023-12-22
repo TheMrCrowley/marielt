@@ -235,6 +235,7 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
 
                   router.push(pathname + '?' + `productIds=${targetSingleItem.id}`);
                 } else {
+                  console.log('here');
                   const geometrySet = new Set<number>();
                   (objectManagerRef.current.clusters as ymaps.ObjectManager['clusters'])
                     .getById(id)
@@ -242,7 +243,8 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
                       geometrySet.add(feature.geometry.coordinates[0]);
                       geometrySet.add(feature.geometry.coordinates[1]);
                     });
-                  const isFiniteCluster = geometrySet.size === 2;
+
+                  const isFiniteCluster = geometrySet.size >= 2;
 
                   if (isFiniteCluster) {
                     const productSearchParams = new URLSearchParams();

@@ -230,12 +230,14 @@ export const formatToDetailedCommercialItem = ({
   initialCurrency: attributes.currency || 'USD',
   transactionType: attributes.comm_tran?.data?.attributes?.name! as TransactionTypeValues,
   images: Array.isArray(attributes.image?.data)
-    ? attributes.image!.data.map(({ attributes: imageAttributes }) => ({
-        height: imageAttributes.height,
-        width: imageAttributes.width,
-        url: imageAttributes.url,
-        placeholderUrl: imageAttributes.placeholder,
-      }))
+    ? attributes
+        .image!.data.filter((item) => !item.attributes.url.includes('.html'))
+        .map(({ attributes: imageAttributes }) => ({
+          height: imageAttributes.height,
+          width: imageAttributes.width,
+          url: imageAttributes.url,
+          placeholderUrl: imageAttributes.placeholder,
+        }))
     : [],
   parameters: {
     plotSize: attributes.parameters?.plot_size,

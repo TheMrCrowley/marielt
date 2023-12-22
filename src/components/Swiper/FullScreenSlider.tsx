@@ -189,12 +189,15 @@ const FullScreenSlider = ({
                 style={{
                   height: '15vh',
                 }}
+                lazy
+                onLoad={() => {}}
               >
                 <Image
                   src={video.thumbnail}
                   alt=""
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
+                  loading="lazy"
                   className={clsx(
                     'object-cover',
                     'w-full',

@@ -16,12 +16,16 @@ const AgentPageSlider = ({ media }: AgentPageSliderProps) => {
     if (item.type === 'image') {
       return (
         <SwiperSlide
+          lazy
+          onLoad={() => {}}
           className="!w-max lg:!h-72 md:!h-60 xs:!h-48 !h-40"
           key={`agent-page-slider-slide-${item.type}-${item.url}`}
         >
           <Image
             src={item.url}
             placeholder="blur"
+            loading="lazy"
+            unoptimized
             blurDataURL={item.placeholder!}
             width={item.width}
             height={item.height}

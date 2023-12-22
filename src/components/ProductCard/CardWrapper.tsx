@@ -28,7 +28,7 @@ const CardWrapper = ({
   wrapperClassName,
 }: CardWrapperProps) => {
   return (
-    <div className={clsx('bg-primary-bold', 'grid', 'w-full', 'h-max', wrapperClassName)}>
+    <div className={clsx('bg-primary-bold', 'grid', 'w-full', 'h-full', wrapperClassName)}>
       <Link href={to} target="_blank" rel="noopener noreferrer">
         <Image
           className={clsx('object-cover', 'w-full', 'h-[165px]')}

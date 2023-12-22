@@ -135,7 +135,7 @@ const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
 
   return (
     <div className={clsx('flex', 'max-w-lg', 'justify-between', 'gap-x-2')}>
-      <Link href={url(currentPage - 1)} prefetch={currentPage - 1 > 0}>
+      <Link href={url(currentPage - 1)} prefetch={currentPage - 1 !== 0}>
         <button
           className={clsx(
             'flex',
@@ -159,7 +159,7 @@ const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
       </Link>
 
       {renderPages()}
-      <Link href={url(currentPage + 1)} prefetch>
+      <Link href={url(currentPage + 1)} prefetch={currentPage + 1 !== totalPages}>
         <button
           className={clsx(
             'flex',

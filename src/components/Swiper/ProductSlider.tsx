@@ -59,7 +59,7 @@ const ProductSlider = ({ products, type }: ProductSliderProps) => {
   };
 
   return (
-    <div className={clsx('flex', 'md:p-0', 'px-4', 'relative')}>
+    <div className={clsx('flex', 'p-0', 'relative')}>
       <Swiper
         wrapperClass={clsx(styles.swiperWrapper)}
         className="!m-0"

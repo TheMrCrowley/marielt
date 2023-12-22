@@ -130,6 +130,7 @@ const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps)
               'scrollbar-thumb-primary',
               'scrollbar-track-secondary',
               'overflow-y-auto',
+              'flex',
             )}
             initial={{
               y: '100%',

@@ -39,7 +39,7 @@ const ProductMapList = async ({ ids, type }: { type: ProductType; ids: string[] 
           <FlatCard
             flatItem={product as DefaultFlatItem}
             key={`map-flats-product-card-${type}-${product.id}`}
-            wrapperClassName="!min-w-[330px]"
+            // wrapperClassName="!min-w-[330px]"
           />
         ));
       case 'houses-and-lots':
@@ -47,7 +47,7 @@ const ProductMapList = async ({ ids, type }: { type: ProductType; ids: string[] 
           <HousesAndLotsCard
             housesAndLotsItem={product as DefaultHousesAndLotsItem}
             key={`map-house-product-card-${type}-${product.id}`}
-            wrapperClassName="!min-w-[330px]"
+            // wrapperClassName="!min-w-[330px]"
           />
         ));
       case 'commercial':
@@ -55,7 +55,7 @@ const ProductMapList = async ({ ids, type }: { type: ProductType; ids: string[] 
           <CommercialCard
             commercialItem={product as DefaultCommercialItem}
             key={`map-house-product-card-${type}-${product.id}`}
-            wrapperClassName="!min-w-[330px]"
+            // wrapperClassName="!min-w-[330px]"
           />
         ));
       default:
@@ -68,11 +68,12 @@ const ProductMapList = async ({ ids, type }: { type: ProductType; ids: string[] 
       className={clsx(
         'flex',
         'flex-col',
-        'justify-center',
+        'justify-start',
         'items-center',
         'gap-6',
         'overflow-y-auto',
         'p-4',
+        'w-full',
       )}
     >
       {renderProductsByType()}

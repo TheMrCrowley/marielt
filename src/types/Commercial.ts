@@ -104,7 +104,7 @@ export type DetailedCommercialItem = {
   additionalInfo?: Array<{ name: string }>;
   note?: string;
   video: StrapiVideo;
-  agents: {
+  agents?: {
     fullName: string;
     phone1: string;
     phone2?: string;

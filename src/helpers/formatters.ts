@@ -208,13 +208,16 @@ export const formatToDetailedCommercialItem = ({
         lng: attributes.coordinates.longitude,
       }
     : undefined,
-  agents: {
-    fullName: attributes?.agents?.data[0].attributes.full_name!,
-    phone1: attributes?.agents?.data[0].attributes.phone1!,
-    branch: attributes?.agents?.data[0].attributes.branch,
-    phone2: attributes?.agents?.data[0].attributes.phone2,
-    position: attributes?.agents?.data[0].attributes.position,
-  },
+  agents:
+    attributes.agents?.data && attributes.agents.data.length
+      ? {
+          fullName: attributes.agents.data[0].attributes.full_name,
+          phone1: attributes.agents.data[0].attributes.phone1,
+          branch: attributes.agents.data[0].attributes.branch,
+          phone2: attributes.agents.data[0].attributes.phone2,
+          position: attributes.agents.data[0].attributes.position,
+        }
+      : undefined,
   address: getFullAddress({
     region: attributes.region?.data.attributes.name,
     districtRb: attributes.district_rb,

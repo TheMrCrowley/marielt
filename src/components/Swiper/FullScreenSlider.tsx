@@ -141,7 +141,7 @@ const FullScreenSlider = ({
                 lazy
                 onLoad={() => {}}
               >
-                <img
+                <Image
                   src={url}
                   alt=""
                   width={width}
@@ -149,7 +149,7 @@ const FullScreenSlider = ({
                   loading="lazy"
                   className={clsx('object-contain', 'w-full', 'h-full')}
                   placeholder="blur"
-                  // blurDataURL={placeholderUrl}
+                  blurDataURL={placeholderUrl}
                 />
               </SwiperSlide>
             ))}
@@ -218,7 +218,7 @@ const FullScreenSlider = ({
                 lazy
                 onLoad={() => {}}
               >
-                <img
+                <Image
                   src={url}
                   alt=""
                   loading="lazy"
@@ -237,7 +237,7 @@ const FullScreenSlider = ({
                       : 'border-transparent',
                   )}
                   placeholder="blur"
-                  // blurDataURL={placeholderUrl}
+                  blurDataURL={placeholderUrl}
                 />
               </SwiperSlide>
             ))}

@@ -172,7 +172,7 @@ const ProductPageSlider = ({
           >
             {({ isActive }) => {
               return (
-                <img
+                <Image
                   src={url}
                   alt="product-page-slide"
                   width={width}
@@ -196,7 +196,7 @@ const ProductPageSlider = ({
                     backgroundSize: 'cover',
                   }}
                   placeholder="blur"
-                  // blurDataURL={placeholderUrl}
+                  blurDataURL={placeholderUrl}
                 />
               );
             }}
@@ -273,7 +273,7 @@ const ProductPageSlider = ({
             lazy
             onLoad={() => {}}
           >
-            <img
+            <Image
               src={url}
               alt=""
               loading="lazy"
@@ -294,7 +294,7 @@ const ProductPageSlider = ({
                   : 'border-transparent',
               )}
               placeholder="blur"
-              // blurDataURL={placeholderUrl}
+              blurDataURL={placeholderUrl}
             />
           </SwiperSlide>
         ))}

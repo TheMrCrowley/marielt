@@ -58,6 +58,9 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
       phone: phone as string,
       type,
     });
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
   const renderAgentForm = () => {

@@ -81,11 +81,6 @@ const realtorCertificationCertificate: DocLinkListProps = {
       icon: 'private',
       title: 'Новик Светлана Игоревна',
     },
-    {
-      href: '/popinan.pdf',
-      icon: 'private',
-      title: 'Попиначенко Андрею Викторовичу',
-    },
   ],
 };
 

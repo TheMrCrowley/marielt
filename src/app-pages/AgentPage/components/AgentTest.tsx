@@ -31,6 +31,8 @@ const testQuestions: Array<{
   { question: 'Любите ли вы помогать людям?', answer: null },
 ];
 
+const TEST_MIN_PERCENT = 0.7;
+
 const TestCheckbox = ({
   currentAnswer,
   onNoClick,
@@ -175,7 +177,7 @@ const AgentTestContent = ({ onClose }: { onClose: () => void }) => {
   const renderResults = () => {
     const yesAnswers = questions.filter((question) => question.answer === 'Да').length;
 
-    const isPassed = yesAnswers > 0 && questions.length / yesAnswers >= 0.6;
+    const isPassed = yesAnswers > 0 && questions.length / yesAnswers >= TEST_MIN_PERCENT;
 
     return (
       <>
@@ -187,10 +189,10 @@ const AgentTestContent = ({ onClose }: { onClose: () => void }) => {
             color="text-secondary"
             className="text-center"
           >
-            60%
+            70%
           </Typography>
           <Typography fontSize={24} color="text-[#B1B1B1]" className="text-center">
-            Вы на 60% соответствуете требованиям стать агентом
+            Вы на 70% соответствуете требованиям стать агентом
           </Typography>
           {isPassed ? (
             <>

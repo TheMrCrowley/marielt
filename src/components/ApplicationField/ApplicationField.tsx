@@ -69,7 +69,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
         <Typography className="text-center">
           Наши специалисты ответят на все ваши вопросы
         </Typography>
-        <form className={clsx('mt-auto', 'flex', 'flex-col', 'gap-10', 'w-full', 'md:max-w-xs')}>
+        <form className={clsx('flex', 'flex-col', 'gap-10', 'w-full', 'md:max-w-xs')}>
           <label
             className={clsx(
               'lg:text-2xl',

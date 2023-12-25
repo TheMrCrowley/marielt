@@ -1,9 +1,9 @@
 import qs from 'qs';
 
+import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
+import { getUrlWithQueries, IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
-import { StrapiApiPath } from './../enums/StrapiApiPath';
-import { getUrlWithQueries, IMAGE_FIELDS_TO_POPULATE } from './../helpers/queryHelpers';
 import BaseApi from './BaseApi';
 
 const API_NAME = 'CareersPageApi';

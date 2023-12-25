@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
+import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
 
@@ -55,11 +55,6 @@ export interface AboutPageItemResponse {
     description: string;
     variant: 'primary';
     to: string;
-    image: StrapiFindOneResponse<{
-      width: number;
-      height: number;
-      url: string;
-      placeholder: string;
-    }>;
+    image: StrapiFindOneResponse<StrapiImage>;
   }>;
 }

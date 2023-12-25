@@ -5,7 +5,7 @@ import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
-import { formatToPageImages } from './formatToPageImages';
+import { formatToItemImage, formatToPageImages } from './formatToPageImages';
 import { IMAGE_FIELDS_TO_POPULATE } from './queryHelpers';
 
 export const convertToDefaultFlatItem = (
@@ -21,14 +21,7 @@ export const convertToDefaultFlatItem = (
     id,
     price: attributes.price,
     name: attributes.name,
-    image: Array.isArray(attributes?.image?.data)
-      ? {
-          height: attributes.image.data[0].attributes.height,
-          width: attributes.image.data[0].attributes.width,
-          url: attributes.image.data[0].attributes.url,
-          placeholderUrl: attributes.image.data[0].attributes.placeholder,
-        }
-      : undefined,
+    image: formatToItemImage(attributes.image.data),
     initialCurrency: attributes.currency || 'USD',
     parameters: {
       floor: attributes.parameters.floor,

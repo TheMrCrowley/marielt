@@ -10,16 +10,12 @@ import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 import { AppRoutes } from '@/src/enums/AppRoutes';
 import { getVideoId } from '@/src/helpers/videoHelpers';
+import { ImageType } from '@/src/types/ImageType';
 import { StrapiVideo } from '@/src/types/VideoLink';
 
 interface CourseSectionProps {
   courseVideo?: StrapiVideo;
-  courseImage: {
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string;
-  };
+  courseImage: ImageType;
 }
 
 const CourseSection = ({ courseVideo, courseImage }: CourseSectionProps) => {

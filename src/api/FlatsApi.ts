@@ -18,6 +18,7 @@ import {
   getUrlWithQueries,
 } from '@/src/helpers/queryHelpers';
 import { IMAGE_FIELDS_WITH_FORMATS } from '@/src/helpers/queryHelpers';
+import { getDefaultMapPopulateQuery } from '@/src/helpers/queryHelpers';
 import { getCurrencies } from '@/src/services/currencyServices';
 import { CurrencyState } from '@/src/store/currency';
 import { FlatsFiltersType } from '@/src/store/flatsFilters';
@@ -25,7 +26,6 @@ import { AvailableCurrencies } from '@/src/types/Currency';
 import { DetailedFlatItem } from '@/src/types/Flats';
 import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
-import { getDefaultMapPopulateQuery } from './../helpers/queryHelpers';
 import BaseApi from './BaseApi';
 
 const API_NAME = 'FlatsApi';

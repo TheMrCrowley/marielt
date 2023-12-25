@@ -30,7 +30,7 @@ const OpportunityPreview = ({ opportunity }: OpportunityPreviewProps) => {
         </div>
         <Image
           className="object-cover"
-          src={image.src}
+          src={image.url}
           width={image.width}
           height={image.height}
           alt=""

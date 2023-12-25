@@ -10,6 +10,8 @@ export const IMAGE_FIELDS_TO_POPULATE_WITH_META = [
   'provider_metadata',
 ];
 
+export const IMAGE_FIELDS_WITH_FORMATS = [...IMAGE_FIELDS_TO_POPULATE, 'formats'];
+
 export const getSortQuery = (sort: string) => {
   return qs.stringify(
     {
@@ -42,26 +44,6 @@ export const getPaginationQuery = (type: ViewType, page?: string) => {
       limit: -1,
     },
   });
-};
-
-export const getDefaultFlatListPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
-        },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['floor', 'living_area', 'floors_number', 'total_area'],
-        },
-        location: '*',
-      },
-    },
-    { encodeValuesOnly: true },
-  );
 };
 
 export const getDefaultCommercialListPopulateQuery = () => {

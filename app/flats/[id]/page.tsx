@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 
 import FlatPage from '@/src/app-pages/FlatsPage/FlatPage';
-import { getFlatById, getFlatSeoFields } from '@/src/services/flatsServices';
+import { getFlatById } from '@/src/services';
+import { getFlatSeoFields } from '@/src/services/flatsServices';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {

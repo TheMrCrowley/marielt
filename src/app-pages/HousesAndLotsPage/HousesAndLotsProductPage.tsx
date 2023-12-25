@@ -16,7 +16,7 @@ import ProductViewsHandler from '@/src/components/ProductViewsHandler';
 import ProductPageSlider from '@/src/components/Swiper/ProductPageSlider';
 import { houseCharacteristicsMap } from '@/src/enums/HousesAndLotsFilters';
 import { formatItemToCharacteristics } from '@/src/helpers/formatters';
-import { getInterestRate } from '@/src/services/creditsService';
+import { getInterestRate } from '@/src/services';
 import { getSimilarHouseItems } from '@/src/services/housesAndLotsServices';
 import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 

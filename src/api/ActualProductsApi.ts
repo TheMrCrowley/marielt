@@ -1,18 +1,18 @@
 import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
+import { getDefaultFlatListPopulateQuery } from '@/src/helpers/flatsHelpers';
 import {
   getUrlWithQueries,
-  getDefaultFlatListPopulateQuery,
   getDefaultHouseListPopulateQuery,
   getDefaultCommercialListPopulateQuery,
 } from '@/src/helpers/queryHelpers';
 import { CommercialStrapiResponse } from '@/src/types/Commercial';
-import { FlatStrapiResponse } from '@/src/types/Flats';
 import { HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
+import { FlatStrapiResponse } from './FlatsApi';
 
 const API_NAME = 'ActualProductsApi';
 

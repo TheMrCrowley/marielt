@@ -1,4 +1,4 @@
-import { TeamStrapiResponse } from '@/src/api/TeamPageApi';
+import { TeamStrapiResponse } from '@/src/api/TeamMembersApi';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 import { TeamItem } from '@/src/types/TeamTypes';
 

@@ -1,18 +1,9 @@
 import { AbstractTeamPageApi } from '@/src/api/TeamPageApi';
-import { convertToTeamPageItem } from '@/src/helpers/teamPageHelpers';
-import { TeamItem } from '@/src/types/TeamTypes';
 
-const getTeamPageDataFetchFunction =
-  (api: AbstractTeamPageApi) => async (): Promise<{ members: TeamItem[]; description: string }> => {
-    const [description, members] = await Promise.all([
-      api.getTeamPageDescription(),
-      api.getTeamPageMembers(),
-    ]);
+const getTeamPageDataFetchFunction = (api: AbstractTeamPageApi) => async (): Promise<string> => {
+  const description = await api.getTeamPageDescription();
 
-    return {
-      description,
-      members: convertToTeamPageItem(members.data),
-    };
-  };
+  return description;
+};
 
 export default getTeamPageDataFetchFunction;

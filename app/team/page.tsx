@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import TeamPage from '@/src/app-pages/TeamPage';
-import { getTeamPageData } from '@/src/services';
+import { getTeamMembers, getTeamPageData } from '@/src/services';
 import { getSeoFields, canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Team = async () => {
-  const { description, members } = await getTeamPageData();
+  const [description, members] = await Promise.all([getTeamPageData(), getTeamMembers()]);
 
   return <TeamPage description={description} members={members} />;
 };

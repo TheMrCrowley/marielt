@@ -12,7 +12,7 @@ export const convertToCareersPageDateItem = (
     variant: 'primary',
     to: (AppRoutes.Careers + item.to) as AppChildRoutes,
     image: {
-      src: item.image.data.attributes.url,
+      url: item.image.data.attributes.url,
       width: item.image.data.attributes.width,
       height: item.image.data.attributes.height,
       placeholder: item.image.data.attributes.placeholder,

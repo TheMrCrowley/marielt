@@ -9,6 +9,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import { WindowWidth } from '@/src/enums/Width';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
+import { ImageTypeWithThumb } from '@/src/types/ImageType';
 import { ProductType } from '@/src/types/Product';
 import { StrapiVideo } from '@/src/types/VideoLink';
 
@@ -22,13 +23,7 @@ const ProductPageSlider = ({
   video,
 }: {
   video?: StrapiVideo;
-  images: Array<{
-    width: number;
-    height: number;
-    url: string;
-    placeholderUrl: string;
-    thumb: { url: string; width: number; height: number; placeholderUrl: string };
-  }>;
+  images: Array<ImageTypeWithThumb>;
   type: ProductType;
 }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -161,7 +156,7 @@ const ProductPageSlider = ({
             }}
           </SwiperSlide>
         )}
-        {images.map(({ url, height, width, placeholderUrl }) => (
+        {images.map(({ url, height, width, placeholder }) => (
           <SwiperSlide
             className={clsx('lg:!w-1/3', 'md:!w-2/3', '!w-4/5')}
             style={{
@@ -192,13 +187,13 @@ const ProductPageSlider = ({
                     isActive ? 'opacity-100' : 'opacity-50',
                   )}
                   style={{
-                    backgroundImage: `url(${placeholderUrl})`,
+                    backgroundImage: `url(${placeholder})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                   }}
                   placeholder="blur"
-                  blurDataURL={placeholderUrl}
+                  blurDataURL={placeholder}
                 />
               );
             }}

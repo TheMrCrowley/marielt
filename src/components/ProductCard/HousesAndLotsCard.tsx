@@ -33,7 +33,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem, wrapperClassName }: HousesAndLot
       address={address}
       to={`/houses-and-lots/${id}`}
       imgUrl={image?.url}
-      placeholderUrl={image?.placeholderUrl}
+      placeholderUrl={image?.placeholder}
       title={name}
     >
       <CardArea plotSize={plotSize} totalArea={totalArea} />

@@ -1,15 +1,25 @@
+import { ImageType, ImageTypeWithThumb } from '@/src/types/ImageType';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 import { StrapiImage } from '@/src/types/StrapiTypes';
 
+export const formatToItemImage = (
+  data?: StrapiFindResponse<StrapiImage>['data'],
+): ImageType | undefined => {
+  if (!data || !Array.isArray(data)) {
+    return;
+  }
+
+  return {
+    height: data[0].attributes.height,
+    width: data[0].attributes.width,
+    url: data[0].attributes.url,
+    placeholder: data[0].attributes.placeholder,
+  };
+};
+
 export const formatToPageImages = (
   data?: StrapiFindResponse<StrapiImage>['data'],
-): Array<{
-  url: string;
-  width: number;
-  height: number;
-  placeholderUrl: string;
-  thumb: { url: string; width: number; height: number; placeholderUrl: string };
-}> => {
+): Array<ImageTypeWithThumb> => {
   if (!data || !Array.isArray(data)) {
     return [];
   }
@@ -20,7 +30,7 @@ export const formatToPageImages = (
       url: item.attributes.url,
       height: item.attributes.height,
       width: item.attributes.width,
-      placeholderUrl: item.attributes.placeholder,
+      placeholder: item.attributes.placeholder,
       thumb: {
         url: item.attributes.formats.thumbnail.url,
         height: item.attributes.formats.thumbnail.height,

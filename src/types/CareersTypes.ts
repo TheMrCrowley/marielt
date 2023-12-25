@@ -6,19 +6,12 @@ import { StrapiVideo } from './VideoLink';
 export interface AgentPageData {
   agentVideo?: StrapiVideo;
   courseVideo?: StrapiVideo;
-  courseImage: {
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string;
-  };
-  media: Array<{
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string | null;
-    type: 'image' | 'video';
-  }>;
+  courseImage: ImageType;
+  media: Array<
+    {
+      type: 'image' | 'video';
+    } & ImageType
+  >;
 }
 
 export type CareersPageItem = {

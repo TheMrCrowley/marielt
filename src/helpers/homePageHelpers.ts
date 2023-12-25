@@ -16,7 +16,7 @@ const convertToHomePageItem = (
         to: cur.to,
         type: cur.type,
         image: {
-          src: cur.image.data.attributes.url,
+          url: cur.image.data.attributes.url,
           width: cur.image.data.attributes.width,
           height: cur.image.data.attributes.height,
           placeholder: cur.image.data.attributes.placeholder,

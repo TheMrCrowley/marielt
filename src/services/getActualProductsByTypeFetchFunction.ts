@@ -1,7 +1,7 @@
 import { AbstractActualProductsApi } from '@/src/api/ActualProductsApi';
-import { formatToDefaultCommercial } from '@/src/helpers/commercialHelpers';
+import { convertToDefaultCommercialItem } from '@/src/helpers/commercialHelpers';
 import { convertToDefaultFlatItem } from '@/src/helpers/flatsHelpers';
-import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/housesHelpers';
+import { convertToDefaultHouseItem } from '@/src/helpers/housesHelpers';
 import { DefaultCommercialItem } from '@/src/types/Commercial';
 import { DefaultFlatItem } from '@/src/types/Flats';
 import { DefaultHousesAndLotsItem } from '@/src/types/HousesAndLots';
@@ -17,14 +17,14 @@ const getActualCommercial =
   (api: AbstractActualProductsApi) => async (): Promise<DefaultCommercialItem[]> => {
     const { data } = await api.getActualCommercial();
 
-    return formatToDefaultCommercial(data);
+    return convertToDefaultCommercialItem(data);
   };
 
 const getActualHousesAndLots =
   (api: AbstractActualProductsApi) => async (): Promise<DefaultHousesAndLotsItem[]> => {
     const { data } = await api.getActualHouses();
 
-    return formatToDefaultHouseAndLotsItem(data);
+    return convertToDefaultHouseItem(data);
   };
 
 const getActualProductsByTypeFetchFunction =

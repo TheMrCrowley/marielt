@@ -3,7 +3,7 @@ import qs from 'qs';
 import { AppRoutes } from '@/src/enums/AppRoutes';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
+import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
 
@@ -56,12 +56,7 @@ export interface HomePageItemResponse {
   text_1: string;
   text_2: string;
   background: boolean;
-  banner: StrapiFindOneResponse<{
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string;
-  }>;
+  banner: StrapiFindOneResponse<StrapiImage>;
   section: Array<{
     title: string;
     description: string;
@@ -69,11 +64,6 @@ export interface HomePageItemResponse {
     to: AppRoutes;
     navigation_title: string;
     type: 'product' | 'opportunity';
-    image: StrapiFindOneResponse<{
-      width: number;
-      height: number;
-      url: string;
-      placeholder: string;
-    }>;
+    image: StrapiFindOneResponse<StrapiImage>;
   }>;
 }

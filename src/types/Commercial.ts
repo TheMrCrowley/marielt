@@ -4,6 +4,7 @@ import {
 } from '@/src/enums/CommercialFilters';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import { ImageType, ImageTypeWithThumb } from './ImageType';
 import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from './StrapiTypes';
 import { StrapiVideo } from './VideoLink';
 
@@ -12,12 +13,7 @@ export type DefaultCommercialItem = Partial<{
   id: string;
   price: string;
   name: string;
-  image: {
-    width: number;
-    height: number;
-    url: string;
-    placeholderUrl: string;
-  };
+  image: ImageType;
   location?: {
     lng: number;
     lat: number;
@@ -94,13 +90,7 @@ export type DetailedCommercialItem = {
     from: string;
     to: string;
   };
-  images: Array<{
-    width: number;
-    height: number;
-    url: string;
-    placeholderUrl: string;
-    thumb: { url: string; width: number; height: number; placeholderUrl: string };
-  }>;
+  images: Array<ImageTypeWithThumb>;
   detailedDescription?: string;
   additionalInfo?: Array<{ name: string }>;
   note?: string;

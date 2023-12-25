@@ -1,5 +1,6 @@
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import { ImageType, ImageTypeWithThumb } from './ImageType';
 import { StrapiVideo } from './VideoLink';
 
 export type DefaultFlatItem = {
@@ -7,12 +8,7 @@ export type DefaultFlatItem = {
   id: string;
   price?: string;
   name?: string;
-  image?: {
-    url: string;
-    width: number;
-    height: number;
-    placeholderUrl: string;
-  };
+  image?: ImageType;
   initialCurrency: AvailableCurrencies;
   parameters: {
     totalArea: string;
@@ -50,13 +46,7 @@ export type DetailedFlatItem = {
   detailedDescription?: string;
   additionalInfo: Array<{ name: string }>;
   note?: string;
-  images: Array<{
-    width: number;
-    height: number;
-    url: string;
-    placeholderUrl: string;
-    thumb: { url: string; width: number; height: number; placeholderUrl: string };
-  }>;
+  images: Array<ImageTypeWithThumb>;
   video?: StrapiVideo;
   agents?: {
     fullName: string;

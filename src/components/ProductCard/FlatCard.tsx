@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import { AppRoutes } from '@/src/enums/AppRoutes';
 import { getPriceByCurrencySign } from '@/src/helpers/currencyHelpers';
 import { useCurrency } from '@/src/store/currency';
 import { DefaultFlatItem } from '@/src/types/Flats';
@@ -32,9 +33,9 @@ const FlatCard = ({ flatItem, wrapperClassName }: FlatCardProps) => {
   return (
     <CardWrapper
       address={address}
-      to={`/flats/${id}`}
+      to={`${AppRoutes.Flats}/${id}`}
       imgUrl={image?.url}
-      placeholderUrl={image?.placeholderUrl}
+      placeholderUrl={image?.placeholder}
       title={name}
       wrapperClassName={wrapperClassName}
     >

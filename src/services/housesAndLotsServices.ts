@@ -12,9 +12,8 @@ import {
 } from '@/src/enums/HousesAndLotsFilters';
 import { lotsWaterQueryMap } from '@/src/enums/HousesAndLotsFilters';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
-import { formatToDetailedHousesAndLots } from '@/src/helpers/formatters';
 import { formatToDefaultMapItem } from '@/src/helpers/formatters';
-import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/housesHelpers';
+import { convertToDefaultHouseItem, convertToDetailedHouseItem } from '@/src/helpers/housesHelpers';
 import {
   getDefaultMapPopulateQuery,
   getPaginationQuery,
@@ -224,7 +223,7 @@ export const getHousesAndLotsForList = async (searchParams: Record<string, strin
   } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 
   return {
-    housesAndLots: formatToDefaultHouseAndLotsItem(data),
+    housesAndLots: convertToDefaultHouseItem(data),
     pagination,
   };
 };
@@ -288,7 +287,7 @@ export const getHousesByIds = async (ids: string[]) => {
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 
-  return formatToDefaultHouseAndLotsItem(data);
+  return convertToDefaultHouseItem(data);
 };
 
 export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAndLotsItem> => {
@@ -343,7 +342,7 @@ export const getHousesAndLotsById = async (id: string): Promise<DetailedHousesAn
 
   const { data } = (await response.json()) as StrapiFindOneResponse<HousesAndLotsStrapiResponse>;
 
-  return formatToDetailedHousesAndLots(data);
+  return convertToDetailedHouseItem(data);
 };
 
 export const getHousesAndLotsSearchResults = async (value: string): Promise<SearchResults> => {
@@ -418,7 +417,7 @@ const getSimilarByPrice = async ({
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 
-  return formatToDefaultHouseAndLotsItem(data);
+  return convertToDefaultHouseItem(data);
 };
 
 const getSimilarByLocation = async ({
@@ -468,7 +467,7 @@ const getSimilarByLocation = async ({
 
   const { data } = (await response.json()) as StrapiFindResponse<HousesAndLotsStrapiResponse>;
 
-  return formatToDefaultHouseAndLotsItem(data);
+  return convertToDefaultHouseItem(data);
 };
 
 export const getSimilarHouseItems = async (flat: DetailedHousesAndLotsItem) => {

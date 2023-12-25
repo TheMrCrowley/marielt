@@ -1,3 +1,4 @@
+import { ImageType } from './ImageType';
 import { Training } from './TrainingType';
 
 export type Teacher = {
@@ -6,11 +7,6 @@ export type Teacher = {
   position: string;
   description1?: string;
   description2?: string;
-  photo?: {
-    width: number;
-    height: number;
-    placeholder: string;
-    url: string;
-  };
+  photo?: ImageType;
   trainings: Array<Partial<Training>>;
 };

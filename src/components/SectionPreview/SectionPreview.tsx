@@ -6,17 +6,13 @@ import LinkButton from '@/src/components/LinkButton';
 import { LinkButtonProps } from '@/src/components/LinkButton';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
+import { ImageType } from '@/src/types/ImageType';
 
 export interface SectionPreviewProps {
   sectionData: {
     title: string;
     description: string;
-    image: {
-      src: string;
-      width: number;
-      height: number;
-      placeholder: string;
-    };
+    image: ImageType;
     variant: 'primary' | 'secondary';
     type: LinkButtonProps['type'];
     to: LinkButtonProps['to'];
@@ -58,7 +54,7 @@ const SectionPreview = ({ sectionData, children }: PropsWithChildren<SectionPrev
             {renderDescription()}
             <Image
               className="object-cover md:w-1/2 w-full"
-              src={image.src}
+              src={image.url}
               width={image.width}
               height={image.height}
               placeholder="blur"
@@ -74,7 +70,7 @@ const SectionPreview = ({ sectionData, children }: PropsWithChildren<SectionPrev
           <>
             <Image
               className="object-cover md:w-1/2 w-full"
-              src={image.src}
+              src={image.url}
               width={image.width}
               height={image.height}
               placeholder="blur"

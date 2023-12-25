@@ -5,12 +5,12 @@ import {
   commercialLocationQueryMap,
   commercialWallMaterialQueryMap,
 } from '@/src/enums/CommercialFilters';
-import { formatToDefaultCommercial } from '@/src/helpers/commercialHelpers';
-import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import {
-  formatToCommercialMapItem,
-  formatToDetailedCommercialItem,
-} from '@/src/helpers/formatters';
+  convertToDefaultCommercialItem,
+  convertToDetailedCommercial,
+} from '@/src/helpers/commercialHelpers';
+import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
+import { formatToCommercialMapItem } from '@/src/helpers/formatters';
 import { concatQueries, getPaginationQuery, getQueryArray } from '@/src/helpers/queryHelpers';
 import {
   getDefaultCommercialListPopulateQuery,
@@ -558,7 +558,7 @@ export const getCommercialItemsForList = async (
     } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
     return {
-      commercial: formatToDefaultCommercial(data),
+      commercial: convertToDefaultCommercialItem(data),
       pagination,
     };
   } catch (e) {
@@ -688,7 +688,7 @@ export const getCommercialByIds = async (ids: string[]) => {
 
     const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-    return formatToDefaultCommercial(data);
+    return convertToDefaultCommercialItem(data);
   } catch (e) {
     console.log(
       `${new Date().toLocaleString()}: getCommercialByIds failed for ${url} with reason: ${
@@ -770,7 +770,7 @@ export const getCommercialById = async (id: string) => {
 
     const { data } = (await response.json()) as StrapiFindOneResponse<CommercialStrapiResponse>;
 
-    return formatToDetailedCommercialItem(data);
+    return convertToDetailedCommercial(data);
   } catch (e) {
     console.log(
       `${new Date().toLocaleString()}: getCommercialById failed for ${url} with reason: ${
@@ -844,7 +844,7 @@ const getSimilarByPrice = async ({
 
     const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-    return formatToDefaultCommercial(data);
+    return convertToDefaultCommercialItem(data);
   } catch (e) {
     console.log(
       `${new Date().toLocaleString()}: getSimilarByPrice failed for ${url} with reason: ${
@@ -903,7 +903,7 @@ const getSimilarByLocation = async ({
 
     const { data } = (await response.json()) as StrapiFindResponse<CommercialStrapiResponse>;
 
-    return formatToDefaultCommercial(data);
+    return convertToDefaultCommercialItem(data);
   } catch (e) {
     console.log(
       `${new Date().toLocaleString()}: getSimilarByLocation failed for ${url} with reason: ${

@@ -4,8 +4,8 @@ import React, { Suspense } from 'react';
 import FlatsFilters from '@/src/app-pages/FlatsPage/FlatsFilters';
 import FlatsMap from '@/src/app-pages/FlatsPage/FlatsMap';
 import Loader from '@/src/components/common/Loader';
+import { getFlatsForMap } from '@/src/services';
 import { getFlatsFiltersData } from '@/src/services/filtersDataServices';
-import { getFlatsForMap } from '@/src/services/flatsServices';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type FlatsProps = {

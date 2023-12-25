@@ -1,6 +1,6 @@
 import { AbstractActualProductsApi } from '@/src/api/ActualProductsApi';
 import { formatToDefaultCommercial } from '@/src/helpers/commercialHelpers';
-import { formatToDefaultFlat } from '@/src/helpers/flatsHelpers';
+import { convertToDefaultFlatItem } from '@/src/helpers/flatsHelpers';
 import { formatToDefaultHouseAndLotsItem } from '@/src/helpers/housesHelpers';
 import { DefaultCommercialItem } from '@/src/types/Commercial';
 import { DefaultFlatItem } from '@/src/types/Flats';
@@ -10,7 +10,7 @@ import { ProductType } from '@/src/types/Product';
 const getActualFlats = (api: AbstractActualProductsApi) => async (): Promise<DefaultFlatItem[]> => {
   const { data } = await api.getActualFlats();
 
-  return formatToDefaultFlat(data);
+  return convertToDefaultFlatItem(data);
 };
 
 const getActualCommercial =

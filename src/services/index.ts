@@ -3,6 +3,7 @@ import ActualProductsApi from '@/src/api/ActualProductsApi';
 import AgentPageApi from '@/src/api/AgentPageApi';
 import CareersPageApi from '@/src/api/CareersPageApi';
 import HomePageApi from '@/src/api/HomePageApi';
+import NavigationApi from '@/src/api/NavigationApi';
 import TeachersApi from '@/src/api/TeachersApi';
 import TeamMembersApi from '@/src/api/TeamMembersApi';
 import TeamPageApi from '@/src/api/TeamPageApi';
@@ -14,6 +15,7 @@ import getAgentPageDataFetchFunction from './getAgentPageDataFetchFunction';
 import getAllTeachersFetchFunction from './getAllTeachersFetchFunction';
 import getCareersPageDataFetchFunction from './getCareersPageDataFetchFunction';
 import getHomePageDataFetchFunction from './getHomePageDataFetchFunction';
+import getNavigationItemsFetchFunction from './getNavigationItemsFetchFunction';
 import getTeacherByIdFetchFunction from './getTeacherByIdFetchFunction';
 import getTeamMembersFetchFunction from './getTeamMembersFetchFunction';
 import getTeamPageDataFetchFunction from './getTeamPageDataFetchFunction';
@@ -28,6 +30,7 @@ const teamPageApi = new TeamPageApi(process.env.API_BASE_URL as string);
 const teamMembersApi = new TeamMembersApi(process.env.API_BASE_URL as string);
 const careersApi = new CareersPageApi(process.env.API_BASE_URL as string);
 const agentPageApi = new AgentPageApi(process.env.API_BASE_URL as string);
+const navigationApi = new NavigationApi(process.env.API_BASE_URL as string);
 
 // Home Page
 export const getHomePageData = getHomePageDataFetchFunction(homePageApi);
@@ -54,3 +57,6 @@ export const getCareersPageData = getCareersPageDataFetchFunction(careersApi);
 
 // Agent Page
 export const getAgentPageData = getAgentPageDataFetchFunction(agentPageApi);
+
+// Navigation
+export const getNavigationItems = getNavigationItemsFetchFunction(navigationApi);

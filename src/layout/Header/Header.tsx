@@ -7,7 +7,7 @@ import Logo from '@/public/logo.svg';
 import { isMobile } from '@/src/helpers/userAgent';
 import BurgerMenu from '@/src/layout/BurgerMenu';
 import Navigation from '@/src/layout/Navigation';
-import { getNavigationItems } from '@/src/services/navigationServices';
+import { getNavigationItems } from '@/src/services';
 
 const Header = async () => {
   const navigationItems = await getNavigationItems();

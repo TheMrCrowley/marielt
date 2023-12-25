@@ -1,4 +1,5 @@
 import { FlatStrapiResponse } from '@/src/api/FlatsApi';
+import { HousesAndLotsStrapiResponse } from '@/src/api/HouseApi';
 import {
   CommercialCategory,
   CommercialCategoryResponse,
@@ -14,14 +15,10 @@ import {
   DetailedHousesAndLotsItem,
   HousesAndLotsCategory,
   HousesAndLotsCategoryResponse,
-  HousesAndLotsStrapiResponse,
 } from '@/src/types/HousesAndLots';
 import { District, MicroDistrict } from '@/src/types/Location';
 import { DefaultMapItem } from '@/src/types/Product';
-import { StrapiFindResponse, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
-
-import { getFullAddress } from './addressHelpers';
-import { formatToPageImages } from './formatToPageImages';
+import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 export const formatToDefaultMapItem = (
   items:

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import HousesAndLotsProductPage from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsProductPage';
-import { getHouseSeoFields, getHousesAndLotsById } from '@/src/services/housesAndLotsServices';
+import { getHouseById, getHouseByIdSeoData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {
@@ -12,8 +12,10 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
-  const { seo, image } = await getHouseSeoFields(id);
+  const { seo, image } = await getHouseByIdSeoData(id);
   const canonical = canonicalUrlMap.housePageId(id);
+
+  const title = seo.title || 'Купить загородную недвижимость';
 
   return {
     title: seo.title,
@@ -21,7 +23,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
     alternates: {
       canonical,
     },
-    openGraph: getOpenGraphField(seo.title, seo.description, image),
+    openGraph: getOpenGraphField(title, seo.description, image?.url),
   };
 }
 
@@ -38,7 +40,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
 // export const dynamicParams = true;
 
 const page = async ({ params: { id } }: Props) => {
-  const houseAndLotsItem = await getHousesAndLotsById(id);
+  const houseAndLotsItem = await getHouseById(id);
 
   return <HousesAndLotsProductPage item={houseAndLotsItem} />;
 };

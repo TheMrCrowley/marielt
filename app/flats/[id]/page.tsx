@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 
 import FlatPage from '@/src/app-pages/FlatsPage/FlatPage';
-import { getFlatById } from '@/src/services';
-import { getFlatSeoFields } from '@/src/services/flatsServices';
+import { getFlatById, getFlatByIdSeoData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {
@@ -12,8 +11,10 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { id } }: Props): Promise<Metadata> {
-  const { seo, image } = await getFlatSeoFields(id);
+  const { seo, image } = await getFlatByIdSeoData(id);
   const canonical = canonicalUrlMap.apartPageId(id);
+
+  const title = seo.title || 'Купить квартиру в Минске';
 
   return {
     title: seo.title,
@@ -21,7 +22,7 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
     alternates: {
       canonical,
     },
-    openGraph: getOpenGraphField(seo.title, seo.description, image),
+    openGraph: getOpenGraphField(title, seo.description, image?.url),
   };
 }
 

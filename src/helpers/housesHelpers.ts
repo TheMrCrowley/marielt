@@ -1,8 +1,7 @@
-import {
-  HousesAndLotsStrapiResponse,
-  DefaultHousesAndLotsItem,
-  DetailedHousesAndLotsItem,
-} from '@/src/types/HousesAndLots';
+import qs from 'qs';
+
+import { HousesAndLotsStrapiResponse } from '@/src/api/HouseApi';
+import { DefaultHousesAndLotsItem, DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import { getFullAddress } from './addressHelpers';
@@ -122,3 +121,23 @@ export const convertToDetailedHouseItem = ({
   distance: attributes.distance,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
+
+export const getDefaultHouseListPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        image: {
+          fields: ['width', 'height', 'url', 'placeholder'],
+        },
+        house_number: {
+          fields: ['number'],
+        },
+        parameters: {
+          fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],
+        },
+        location: '*',
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};

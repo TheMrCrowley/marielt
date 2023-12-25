@@ -5,8 +5,8 @@ import HousesAndLotsFilters from '@/src/app-pages/HousesAndLotsPage/HousesAndLot
 import HousesAndLotsList from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsList';
 import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
+import { getHousesForList } from '@/src/services';
 import { getHousesAndLotsFiltersData } from '@/src/services/filtersDataServices';
-import { getHousesAndLotsForList } from '@/src/services/housesAndLotsServices';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 type HousesAndLotsProps = {
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const HousesAndLots = async ({ searchParams }: HousesAndLotsProps) => {
   const [data, { housesAndLots, pagination }] = await Promise.all([
     getHousesAndLotsFiltersData(),
-    getHousesAndLotsForList(searchParams),
+    getHousesForList(searchParams),
   ]);
 
   return (

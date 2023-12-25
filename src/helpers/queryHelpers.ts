@@ -90,28 +90,21 @@ export const getDefaultMapPopulateQuery = () => {
   );
 };
 
-export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
-
-export const getUrlWithQueries = (url: string, ...query: string[]): string => {
-  return `${url}${concatQueries(query)}`;
-};
-
-export const getDefaultHouseListPopulateQuery = () => {
+export const getIdsQuery = (ids: string[]) => {
   return qs.stringify(
     {
-      populate: {
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
+      filters: {
+        id: {
+          $in: ids,
         },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],
-        },
-        location: '*',
       },
     },
     { encodeValuesOnly: true },
   );
+};
+
+export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
+
+export const getUrlWithQueries = (url: string, ...query: string[]): string => {
+  return `${url}${concatQueries(query)}`;
 };

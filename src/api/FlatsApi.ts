@@ -17,7 +17,7 @@ import {
   getSortQuery,
   getUrlWithQueries,
 } from '@/src/helpers/queryHelpers';
-import { IMAGE_FIELDS_WITH_FORMATS } from '@/src/helpers/queryHelpers';
+import { IMAGE_FIELDS_WITH_FORMATS, IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { getDefaultMapPopulateQuery } from '@/src/helpers/queryHelpers';
 import { getCurrencies } from '@/src/services/currencyServices';
 import { CurrencyState } from '@/src/store/currency';
@@ -318,8 +318,8 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
     return data;
   }
 
-  private getFlatByIdQuery() {
-    return qs.stringify(
+  public async getFlatById(id: string): Promise<StrapiFindOneResponse<FlatStrapiResponse>> {
+    const populateQuery = qs.stringify(
       {
         populate: {
           additional_info: {
@@ -358,10 +358,8 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
         encodeValuesOnly: true,
       },
     );
-  }
 
-  public async getFlatById(id: string): Promise<StrapiFindOneResponse<FlatStrapiResponse>> {
-    const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, this.getFlatByIdQuery());
+    const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, populateQuery);
 
     const data = await this.fetchWrapper<StrapiFindOneResponse<FlatStrapiResponse>>(url);
 
@@ -475,6 +473,25 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     return data;
   }
+
+  public async getFlatByIdSeoData(id: string): Promise<StrapiFindOneResponse<FlatStrapiResponse>> {
+    const populateQuery = qs.stringify(
+      {
+        populate: {
+          image: {
+            fields: IMAGE_FIELDS_TO_POPULATE,
+          },
+        },
+      },
+      { encodeValuesOnly: true },
+    );
+
+    const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, populateQuery);
+
+    const data = await this.fetchWrapper<StrapiFindOneResponse<FlatStrapiResponse>>(url);
+
+    return data;
+  }
 }
 
 export abstract class AbstractFlatsApi {
@@ -491,6 +508,7 @@ export abstract class AbstractFlatsApi {
     searchParams: Record<string, string | string[]>,
   ): Promise<StrapiFindResponse<FlatStrapiResponse>>;
   abstract getFlatsByIds(ids: string[]): Promise<StrapiFindResponse<FlatStrapiResponse>>;
+  abstract getFlatByIdSeoData(id: string): Promise<StrapiFindOneResponse<FlatStrapiResponse>>;
 }
 
 export interface FlatStrapiResponse {

@@ -114,7 +114,7 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
     }
 
     return null;
-  }, [isLoaded, api, selectedCurrency]);
+  }, [isLoaded, api, selectedCurrency, items]);
 
   const clustersToRender = useMemo(() => {
     if (isLoaded && api) {
@@ -169,7 +169,7 @@ const ProductMap = ({ items, children }: ProductMapProps) => {
     }
 
     return null;
-  }, [isLoaded, api, selectedCurrency]);
+  }, [isLoaded, api, selectedCurrency, items]);
 
   return (
     <>

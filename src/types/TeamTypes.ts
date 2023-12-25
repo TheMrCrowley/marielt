@@ -1,5 +1,3 @@
-import { StrapiFindOneResponse, StrapiImage } from './StrapiTypes';
-
 export interface TeamItem {
   id: string;
   name: string;

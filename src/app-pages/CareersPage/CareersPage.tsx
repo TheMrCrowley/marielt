@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 
-import SectionPreview, {
-  SectionPreviewProps,
-} from '@/src/components/SectionPreview/SectionPreview';
+import SectionPreview from '@/src/components/SectionPreview/SectionPreview';
+import { CareersPageItem } from '@/src/types/CareersTypes';
 
 interface CareersPageProps {
-  careersData: Array<Omit<SectionPreviewProps['sectionData'], 'type'>>;
+  careersData: CareersPageItem[];
 }
 
 const CareersPage = ({ careersData }: CareersPageProps) => {

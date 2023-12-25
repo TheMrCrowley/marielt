@@ -3,17 +3,17 @@ import qs from 'qs';
 import { SortValues } from '@/src/enums/SortOptions';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
 import { TrainingStrapiResponse } from './TrainingsApi';
 
+const API_NAME = 'TeachersApi';
 export default class TeachersApi extends BaseApi implements AbstractTeachersApi {
   private readonly teachersApiUrl: string;
 
   public constructor(baseUrl: string) {
-    super(baseUrl);
+    super(baseUrl, API_NAME);
     this.teachersApiUrl = `${baseUrl}${StrapiApiPath.Teachers}`;
   }
 
@@ -38,7 +38,7 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
   public async getTeacherById(id: string) {
     const url = getUrlWithQueries(`${this.teachersApiUrl}/${id}`, this.getTeachersByIdQuery());
 
-    const data = await fetchWrapper<StrapiFindOneResponse<TeacherStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindOneResponse<TeacherStrapiResponse>>(url);
 
     return data;
   }
@@ -70,7 +70,7 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
   public async getAllTeachers() {
     const url = getUrlWithQueries(this.teachersApiUrl, this.getAllTeachersQuery());
 
-    const data = await fetchWrapper<StrapiFindResponse<TeacherStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindResponse<TeacherStrapiResponse>>(url);
 
     return data;
   }

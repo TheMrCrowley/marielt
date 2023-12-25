@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import CareersPage from '@/src/app-pages/CareersPage';
-import { getCareers } from '@/src/services/careersServices';
+import { getCareersPageData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Careers = async () => {
-  const data = await getCareers();
+  const data = await getCareersPageData();
 
   return <CareersPage careersData={data} />;
 };

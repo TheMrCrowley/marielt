@@ -5,6 +5,11 @@ import { ViewType } from '@/src/types/ViewType';
 
 export const IMAGE_FIELDS_TO_POPULATE = ['width', 'height', 'url', 'placeholder'];
 
+export const IMAGE_FIELDS_TO_POPULATE_WITH_META = [
+  ...IMAGE_FIELDS_TO_POPULATE,
+  'provider_metadata',
+];
+
 export const getSortQuery = (sort: string) => {
   return qs.stringify(
     {

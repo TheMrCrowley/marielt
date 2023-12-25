@@ -4,8 +4,6 @@ import React from 'react';
 import HousesAndLotsProductPage from '@/src/app-pages/HousesAndLotsPage/HousesAndLotsProductPage';
 import { getHouseSeoFields, getHousesAndLotsById } from '@/src/services/housesAndLotsServices';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
-import { HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
-import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 type Props = {
   params: {

@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import TeacherPage from '@/src/app-pages/Academy/TeacherPage';
-import { getTeacherById } from '@/src/services';
-import { getAllTeachers } from '@/src/services/academyServices';
+import { getAllTeachers, getTeacherById } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
 
 type Props = {

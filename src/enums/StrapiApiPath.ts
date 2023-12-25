@@ -6,4 +6,6 @@ export enum StrapiApiPath {
   Teachers = '/teachers',
   Trainings = '/trainings',
   AboutPage = '/about-page',
+  TeamMembers = '/teams',
+  TeamPage = '/team-page',
 }

@@ -2,20 +2,17 @@ import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
 
-export abstract class AbstractAboutPageApi {
-  abstract getAboutPageData(): Promise<StrapiFindOneResponse<AboutPageItemResponse>>;
-}
+const API_NAME = 'AboutPageApi';
 
 export default class AboutPageApi extends BaseApi implements AbstractAboutPageApi {
   private readonly aboutPageApiUrl: string;
 
   public constructor(baseUrl: string) {
-    super(baseUrl);
+    super(baseUrl, API_NAME);
 
     this.aboutPageApiUrl = `${baseUrl}${StrapiApiPath.AboutPage}`;
   }
@@ -42,10 +39,14 @@ export default class AboutPageApi extends BaseApi implements AbstractAboutPageAp
   public async getAboutPageData() {
     const url = getUrlWithQueries(this.aboutPageApiUrl, this.getAboutPageUrlQuery());
 
-    const response = await fetchWrapper<StrapiFindOneResponse<AboutPageItemResponse>>(url);
+    const response = await this.fetchWrapper<StrapiFindOneResponse<AboutPageItemResponse>>(url);
 
     return response;
   }
+}
+
+export abstract class AbstractAboutPageApi {
+  abstract getAboutPageData(): Promise<StrapiFindOneResponse<AboutPageItemResponse>>;
 }
 
 export interface AboutPageItemResponse {

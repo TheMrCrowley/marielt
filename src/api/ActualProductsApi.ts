@@ -7,7 +7,6 @@ import {
   getDefaultHouseListPopulateQuery,
   getDefaultCommercialListPopulateQuery,
 } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { CommercialStrapiResponse } from '@/src/types/Commercial';
 import { FlatStrapiResponse } from '@/src/types/Flats';
 import { HousesAndLotsStrapiResponse } from '@/src/types/HousesAndLots';
@@ -15,11 +14,7 @@ import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
 
-export abstract class AbstractActualProductsApi {
-  abstract getActualFlats(): Promise<StrapiFindResponse<FlatStrapiResponse>>;
-  abstract getActualHouses(): Promise<StrapiFindResponse<HousesAndLotsStrapiResponse>>;
-  abstract getActualCommercial(): Promise<StrapiFindResponse<CommercialStrapiResponse>>;
-}
+const API_NAME = 'ActualProductsApi';
 
 export default class ActualProductsApi extends BaseApi implements AbstractActualProductsApi {
   private readonly apartItemsUrl: string;
@@ -29,7 +24,7 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
   private readonly commItemsUrl: string;
 
   public constructor(baseApiURL: string) {
-    super(baseApiURL);
+    super(baseApiURL, API_NAME);
     this.apartItemsUrl = `${process.env.API_BASE_URL}${StrapiApiPath.ApartItems}`;
     this.houseItemsUrl = `${process.env.API_BASE_URL}${StrapiApiPath.HouseItems}`;
     this.commItemsUrl = `${process.env.API_BASE_URL}${StrapiApiPath.CommercialItems}`;
@@ -50,7 +45,7 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
       this.getActualQuery(),
     );
 
-    const data = await fetchWrapper<StrapiFindResponse<FlatStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindResponse<FlatStrapiResponse>>(url);
 
     return data;
   }
@@ -62,7 +57,7 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
       this.getActualQuery(),
     );
 
-    const data = await fetchWrapper<StrapiFindResponse<HousesAndLotsStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindResponse<HousesAndLotsStrapiResponse>>(url);
 
     return data;
   }
@@ -74,8 +69,14 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
       this.getActualQuery(),
     );
 
-    const data = await fetchWrapper<StrapiFindResponse<CommercialStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindResponse<CommercialStrapiResponse>>(url);
 
     return data;
   }
+}
+
+export abstract class AbstractActualProductsApi {
+  abstract getActualFlats(): Promise<StrapiFindResponse<FlatStrapiResponse>>;
+  abstract getActualHouses(): Promise<StrapiFindResponse<HousesAndLotsStrapiResponse>>;
+  abstract getActualCommercial(): Promise<StrapiFindResponse<CommercialStrapiResponse>>;
 }

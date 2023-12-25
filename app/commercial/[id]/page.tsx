@@ -3,8 +3,6 @@ import { Metadata } from 'next';
 import CommercialPage from '@/src/app-pages/CommercialPage/CommercialPage';
 import { getCommSeoFields, getCommercialById } from '@/src/services/commercialServices';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
-import { CommercialStrapiResponse } from '@/src/types/Commercial';
-import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 type Props = {
   params: {

@@ -8,4 +8,6 @@ export enum StrapiApiPath {
   AboutPage = '/about-page',
   TeamMembers = '/teams',
   TeamPage = '/team-page',
+  CareersPage = '/careers-page',
+  AgentPage = '/agent-page',
 }

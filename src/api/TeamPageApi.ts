@@ -2,10 +2,11 @@ import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { getUrlWithQueries, IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
+
+const API_NAME = 'TeamPageApi';
 
 export default class TeamPageApi extends BaseApi implements AbstractTeamPageApi {
   private readonly teamPageUrl: string;
@@ -13,16 +14,16 @@ export default class TeamPageApi extends BaseApi implements AbstractTeamPageApi 
   private readonly teamMembersUrl: string;
 
   public constructor(baseUrl: string) {
-    super(baseUrl);
+    super(baseUrl, API_NAME);
 
     this.teamMembersUrl = `${process.env.API_BASE_URL}${StrapiApiPath.TeamMembers}`;
     this.teamPageUrl = `${process.env.API_BASE_URL}${StrapiApiPath.TeamPage}`;
   }
 
   public async getTeamPageDescription(): Promise<string> {
-    const { data } = await fetchWrapper<StrapiFindOneResponse<StrapiTeamPageDescriptionResponse>>(
-      this.teamPageUrl,
-    );
+    const { data } = await this.fetchWrapper<
+      StrapiFindOneResponse<StrapiTeamPageDescriptionResponse>
+    >(this.teamPageUrl);
 
     return data.attributes.text;
   }
@@ -30,7 +31,7 @@ export default class TeamPageApi extends BaseApi implements AbstractTeamPageApi 
   async getTeamPageMembers(): Promise<StrapiFindResponse<TeamStrapiResponse>> {
     const url = getUrlWithQueries(this.teamMembersUrl, this.getTeamPageMembersQuery());
 
-    const data = await fetchWrapper<StrapiFindResponse<TeamStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindResponse<TeamStrapiResponse>>(url);
 
     return data;
   }

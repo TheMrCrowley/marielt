@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import 'swiper/css/zoom';
-import { Navigation, Keyboard, Thumbs, Zoom, Lazy } from 'swiper/modules';
+import { Navigation, Keyboard, Thumbs, Zoom } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import CrossIcon from '@/public/plus.svg';

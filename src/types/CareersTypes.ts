@@ -1,20 +1,7 @@
-import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from './StrapiTypes';
-import { StrapiVideo } from './VideoLink';
+import { AppChildRoutes } from '@/src/enums/AppRoutes';
 
-export interface CareersPageItemResponse {
-  section: Array<{
-    title: string;
-    description: string;
-    variant: 'primary';
-    to: string;
-    image: StrapiFindOneResponse<{
-      width: number;
-      height: number;
-      url: string;
-      placeholder: string;
-    }>;
-  }>;
-}
+import { ImageType } from './ImageType';
+import { StrapiVideo } from './VideoLink';
 
 export interface AgentPageData {
   agentVideo?: StrapiVideo;
@@ -34,9 +21,10 @@ export interface AgentPageData {
   }>;
 }
 
-export interface AgentPageDataResponse {
-  video_link?: string;
-  course_link?: string;
-  course_media: StrapiFindOneResponse<StrapiImage>;
-  carousel: StrapiFindResponse<StrapiImage>;
-}
+export type CareersPageItem = {
+  to: AppChildRoutes;
+  image: ImageType;
+  title: string;
+  description: string;
+  variant: 'primary';
+};

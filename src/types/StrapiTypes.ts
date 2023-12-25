@@ -1,5 +1,3 @@
-import { AppRoutes } from '@/src/enums/AppRoutes';
-
 export interface StrapiFindResponse<T> {
   data: Array<{
     id: string;

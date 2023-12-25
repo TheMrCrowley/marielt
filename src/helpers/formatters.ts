@@ -5,14 +5,12 @@ import {
   CommercialStrapiResponse,
   CommercialTransaction,
   CommercialTransactionResponse,
-  DefaultCommercialItem,
   DetailedCommercialItem,
 } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 import { DistrictResponse, MicroDistrictResponse, SearchResults } from '@/src/types/Filters';
-import { DefaultFlatItem, DetailedFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
+import { DetailedFlatItem, FlatStrapiResponse } from '@/src/types/Flats';
 import {
-  DefaultHousesAndLotsItem,
   DetailedHousesAndLotsItem,
   HousesAndLotsCategory,
   HousesAndLotsCategoryResponse,

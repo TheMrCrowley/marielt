@@ -3,16 +3,17 @@ import qs from 'qs';
 import { AppRoutes } from '@/src/enums/AppRoutes';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
+
+const API_NAME = 'HomePageApi';
 
 export default class HomePageApi extends BaseApi implements AbstractHomePageApi {
   private readonly homePageUrl: string;
 
   public constructor(baseApiURL: string) {
-    super(baseApiURL);
+    super(baseApiURL, API_NAME);
     this.homePageUrl = `${process.env.API_BASE_URL}${StrapiApiPath.HomePage}`;
   }
 
@@ -41,7 +42,7 @@ export default class HomePageApi extends BaseApi implements AbstractHomePageApi 
   public async getHomePageData() {
     const url = getUrlWithQueries(this.homePageUrl, this.getHomePageDataQuery());
 
-    const response = await fetchWrapper<StrapiFindOneResponse<HomePageItemResponse>>(url);
+    const response = await this.fetchWrapper<StrapiFindOneResponse<HomePageItemResponse>>(url);
 
     return response;
   }

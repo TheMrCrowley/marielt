@@ -2,16 +2,17 @@ import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
-import { fetchWrapper } from '@/src/services/baseServices';
 import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
+
+const API_NAME = 'TrainingsApi';
 
 export default class TrainingsApi extends BaseApi implements AbstractTrainingsApi {
   private readonly trainingsApiUrl: string;
 
   public constructor(baseUrl: string) {
-    super(baseUrl);
+    super(baseUrl, API_NAME);
 
     this.trainingsApiUrl = `${baseUrl}${StrapiApiPath}`;
   }
@@ -32,7 +33,7 @@ export default class TrainingsApi extends BaseApi implements AbstractTrainingsAp
   public async getTrainingById(id: string) {
     const url = getUrlWithQueries(`${this.trainingsApiUrl}/${id}`, this.getTrainingByIdQuery());
 
-    const data = await fetchWrapper<StrapiFindOneResponse<TrainingStrapiResponse>>(url);
+    const data = await this.fetchWrapper<StrapiFindOneResponse<TrainingStrapiResponse>>(url);
 
     return data;
   }

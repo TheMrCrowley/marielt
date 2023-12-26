@@ -1,8 +1,8 @@
 import qs from 'qs';
 
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { getDefaultFlatListPopulateQuery } from '@/src/helpers/flatsHelpers';
-import { getDefaultHouseListPopulateQuery } from '@/src/helpers/housesHelpers';
+import { getDefaultFlatListPopulateQuery } from '@/src/helpers/flats/flatsHelpers';
+import { getDefaultHouseListPopulateQuery } from '@/src/helpers/house/housesHelpers';
 import {
   getUrlWithQueries,
   getDefaultCommercialListPopulateQuery,
@@ -11,8 +11,8 @@ import { CommercialStrapiResponse } from '@/src/types/Commercial';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
-import { FlatStrapiResponse } from './FlatsApi';
-import { HousesAndLotsStrapiResponse } from './HouseApi';
+import { FlatItemsStrapiResponse } from './flats';
+import { HouseItemsStrapiResponse } from './house';
 
 const API_NAME = 'ActualProductsApi';
 
@@ -38,26 +38,26 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
     });
   }
 
-  public async getActualFlats(): Promise<StrapiFindResponse<FlatStrapiResponse>> {
+  public async getActualFlats(): Promise<FlatItemsStrapiResponse> {
     const url = getUrlWithQueries(
       this.apartItemsUrl,
       getDefaultFlatListPopulateQuery(),
       this.getActualQuery(),
     );
 
-    const data = await this.fetchWrapper<StrapiFindResponse<FlatStrapiResponse>>(url);
+    const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
     return data;
   }
 
-  public async getActualHouses(): Promise<StrapiFindResponse<HousesAndLotsStrapiResponse>> {
+  public async getActualHouses(): Promise<HouseItemsStrapiResponse> {
     const url = getUrlWithQueries(
       this.houseItemsUrl,
       getDefaultHouseListPopulateQuery(),
       this.getActualQuery(),
     );
 
-    const data = await this.fetchWrapper<StrapiFindResponse<HousesAndLotsStrapiResponse>>(url);
+    const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
 
     return data;
   }
@@ -76,7 +76,7 @@ export default class ActualProductsApi extends BaseApi implements AbstractActual
 }
 
 export abstract class AbstractActualProductsApi {
-  abstract getActualFlats(): Promise<StrapiFindResponse<FlatStrapiResponse>>;
-  abstract getActualHouses(): Promise<StrapiFindResponse<HousesAndLotsStrapiResponse>>;
+  abstract getActualFlats(): Promise<FlatItemsStrapiResponse>;
+  abstract getActualHouses(): Promise<HouseItemsStrapiResponse>;
   abstract getActualCommercial(): Promise<StrapiFindResponse<CommercialStrapiResponse>>;
 }

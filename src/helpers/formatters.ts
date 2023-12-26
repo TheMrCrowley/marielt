@@ -1,5 +1,5 @@
-import { FlatStrapiResponse } from '@/src/api/FlatsApi';
-import { HousesAndLotsStrapiResponse } from '@/src/api/HouseApi';
+import { FlatItemsStrapiResponse } from '@/src/api/flats';
+import { HouseItemsStrapiResponse } from '@/src/api/house';
 import {
   CommercialCategory,
   CommercialCategoryResponse,
@@ -21,9 +21,7 @@ import { DefaultMapItem } from '@/src/types/Product';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 export const formatToDefaultMapItem = (
-  items:
-    | StrapiFindResponse<FlatStrapiResponse>['data']
-    | StrapiFindResponse<HousesAndLotsStrapiResponse>['data'],
+  items: FlatItemsStrapiResponse['data'] | HouseItemsStrapiResponse['data'],
 ): DefaultMapItem[] =>
   items.map(({ attributes, id }) => ({
     id,
@@ -145,8 +143,8 @@ const normalizeAddressItem = (item: string) =>
 
 export const formatResponseToSearchResult = (
   data:
-    | StrapiFindResponse<FlatStrapiResponse>['data']
-    | StrapiFindResponse<HousesAndLotsStrapiResponse>['data']
+    | FlatItemsStrapiResponse['data']
+    | HouseItemsStrapiResponse['data']
     | StrapiFindResponse<CommercialStrapiResponse>['data'],
   value: string,
 ): SearchResults => {

@@ -7,7 +7,7 @@ import CommercialPageHeader from '@/src/components/ProductPageContent/Commercial
 import SimilarProducts from '@/src/components/ProductPageContent/components/SimilarProducts';
 import ProductViewsHandler from '@/src/components/ProductViewsHandler';
 import { getCommercialCharacteristics } from '@/src/helpers/characteristics';
-import { getCommercialSimilar } from '@/src/services/commercialServices';
+import { getSimilarCommercial } from '@/src/services';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
 
 const ProductPageSlider = dynamic(() =>
@@ -39,7 +39,7 @@ interface CommercialPageProps {
 }
 
 const CommercialPage = async ({ commercial }: CommercialPageProps) => {
-  const similarProducts = await getCommercialSimilar(commercial);
+  const similarProducts = await getSimilarCommercial(commercial);
 
   return (
     <>

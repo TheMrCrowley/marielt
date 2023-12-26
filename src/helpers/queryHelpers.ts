@@ -46,37 +46,6 @@ export const getPaginationQuery = (type: ViewType, page?: string) => {
   });
 };
 
-export const getDefaultCommercialListPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        price_total: {
-          populate: '*',
-        },
-        price_meter: {
-          populate: '*',
-        },
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
-        },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['plot_size', 'floor', 'floors_number', 'living_area'],
-          populate: {
-            premises_area: {
-              populate: '*',
-            },
-          },
-        },
-        location: '*',
-      },
-    },
-    { encodeValuesOnly: true },
-  );
-};
-
 export const getDefaultMapPopulateQuery = () => {
   return qs.stringify(
     {
@@ -108,3 +77,15 @@ export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
 export const getUrlWithQueries = (url: string, ...query: string[]): string => {
   return `${url}${concatQueries(query)}`;
 };
+
+export const getActualItemQuery = () =>
+  qs.stringify(
+    {
+      filters: {
+        home_page: true,
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );

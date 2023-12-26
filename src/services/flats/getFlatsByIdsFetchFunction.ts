@@ -8,6 +8,7 @@ const getFlatsByIdsFetchFunction =
     if (!ids) {
       return;
     }
+
     const { data } = await api.getFlatsByIds(ids);
 
     return convertToDefaultFlatItem(data);

@@ -5,7 +5,7 @@ import CommercialFilters from '@/src/app-pages/CommercialPage/CommercialFilters'
 import CommercialList from '@/src/app-pages/CommercialPage/CommercialList';
 import ApplicationField from '@/src/components/ApplicationField';
 import Loader from '@/src/components/common/Loader';
-import { getCommercialItemsForList } from '@/src/services/commercialServices';
+import { getCommercialForList } from '@/src/services';
 import { getCommercialFiltersData } from '@/src/services/filtersDataServices';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const Commercial = async ({ searchParams }: CommercialProps) => {
   const [data, { commercial, pagination }] = await Promise.all([
     getCommercialFiltersData(),
-    getCommercialItemsForList(searchParams),
+    getCommercialForList(searchParams),
   ]);
 
   return (

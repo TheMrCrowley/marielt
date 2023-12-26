@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PDF from '@/src/components/CommercialPDF/PDF';
-import { getCommercialById } from '@/src/services/commercialServices';
+import { getCommercialById } from '@/src/services';
 
 type Props = {
   params: {

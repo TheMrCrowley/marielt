@@ -17,6 +17,8 @@ import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import { getDefaultHouseListPopulateQuery } from '@/src/helpers/house/housesHelpers';
 import {
   IMAGE_FIELDS_TO_POPULATE,
+  IMAGE_FIELDS_WITH_FORMATS,
+  getActualItemQuery,
   getDefaultMapPopulateQuery,
   getIdsQuery,
   getPaginationQuery,
@@ -302,7 +304,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
             populate: '*',
           },
           image: {
-            fields: ['width', 'height', 'url', 'placeholder', 'formats'],
+            fields: IMAGE_FIELDS_WITH_FORMATS,
           },
         },
       },
@@ -428,6 +430,18 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
     const url = getUrlWithQueries(`${this.houseApiUrl}/${id}`, populateQuery);
 
     const data = await this.fetchWrapper<HouseStrapiResponse>(url);
+
+    return data;
+  }
+
+  public async getActualHouses(): Promise<HouseItemsStrapiResponse> {
+    const url = getUrlWithQueries(
+      this.houseApiUrl,
+      getDefaultHouseListPopulateQuery(),
+      getActualItemQuery(),
+    );
+
+    const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
 
     return data;
   }

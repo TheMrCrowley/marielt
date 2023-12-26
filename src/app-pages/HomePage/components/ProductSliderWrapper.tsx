@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 import Title from '@/src/components/common/Title';
-import { getActualProductsByType } from '@/src/services';
+import { getActualCommercial, getActualFlats, getActualHouses } from '@/src/services';
 import { ProductType } from '@/src/types/Product';
 
 type ProductSliderWrapperProps = {
@@ -18,6 +18,19 @@ const getTitleByType = (type: ProductType) => {
       return 'Актуальная коммерческая недвижимость';
     case 'houses-and-lots':
       return 'Актуальные дома и участки';
+  }
+};
+
+const getActualProductsByType = (type: ProductType) => {
+  switch (type) {
+    case 'flats':
+      return getActualFlats();
+    case 'houses-and-lots':
+      return getActualHouses();
+    case 'commercial':
+      return getActualCommercial();
+    default:
+      return null as never;
   }
 };
 

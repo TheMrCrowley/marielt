@@ -3,6 +3,7 @@ import qs from 'qs';
 import { HouseStrapiResponse, HouseItemsStrapiResponse } from '@/src/api/house';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
+import { IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { DefaultHousesAndLotsItem, DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
 export const convertToDefaultHouseItem = (
@@ -125,7 +126,7 @@ export const getDefaultHouseListPopulateQuery = () => {
     {
       populate: {
         image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
+          fields: IMAGE_FIELDS_TO_POPULATE,
         },
         house_number: {
           fields: ['number'],

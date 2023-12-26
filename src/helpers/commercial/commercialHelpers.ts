@@ -1,16 +1,15 @@
-import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
-import {
-  CommercialStrapiResponse,
-  DefaultCommercialItem,
-  DetailedCommercialItem,
-} from '@/src/types/Commercial';
-import { StrapiFindOneResponse, StrapiFindResponse } from '@/src/types/StrapiTypes';
+import qs from 'qs';
 
-import { getFullAddress } from './addressHelpers';
-import { formatToItemImage, formatToPageImages } from './formatToPageImages';
+import { CommercialItemsStrapiResponse, CommercialStrapiResponse } from '@/src/api/commercial';
+import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
+import { getFullAddress } from '@/src/helpers/addressHelpers';
+import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
+import { IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
+import { DefaultCommercialItem, DetailedCommercialItem } from '@/src/types/Commercial';
+import { DefaultMapItem } from '@/src/types/Product';
 
 export const convertToDefaultCommercialItem = (
-  commercial: StrapiFindResponse<CommercialStrapiResponse>['data'],
+  commercial: CommercialItemsStrapiResponse['data'],
 ): DefaultCommercialItem[] =>
   commercial.map(({ attributes, id }) => ({
     name: attributes.name,
@@ -48,7 +47,7 @@ export const convertToDefaultCommercialItem = (
 export const convertToDetailedCommercial = ({
   attributes,
   id,
-}: StrapiFindOneResponse<CommercialStrapiResponse>['data']): DetailedCommercialItem => ({
+}: CommercialStrapiResponse['data']): DetailedCommercialItem => ({
   location: attributes.coordinates
     ? {
         lat: attributes.coordinates.latitude,
@@ -146,3 +145,49 @@ export const convertToDetailedCommercial = ({
   detailedDescription: attributes.detailed_description,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
 });
+
+export const getDefaultCommercialListPopulateQuery = () => {
+  return qs.stringify(
+    {
+      populate: {
+        price_total: {
+          populate: '*',
+        },
+        price_meter: {
+          populate: '*',
+        },
+        image: {
+          fields: IMAGE_FIELDS_TO_POPULATE,
+        },
+        house_number: {
+          fields: ['number'],
+        },
+        parameters: {
+          fields: ['plot_size', 'floor', 'floors_number', 'living_area'],
+          populate: {
+            premises_area: {
+              populate: '*',
+            },
+          },
+        },
+        location: '*',
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};
+
+export const formatToCommercialMapItem = (
+  items: CommercialItemsStrapiResponse['data'],
+): DefaultMapItem[] =>
+  items.map(({ attributes, id }) => ({
+    id,
+    price: attributes.price_total?.from || attributes.price_meter?.from,
+    initialCurrency: attributes.currency || 'USD',
+    location: attributes.coordinates
+      ? {
+          lat: attributes.coordinates.latitude,
+          lng: attributes.coordinates.longitude,
+        }
+      : undefined,
+  }));

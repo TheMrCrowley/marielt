@@ -1,10 +1,13 @@
 import React, { PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import CurrencyProvider from '@/src/providers/CurrencyProvider';
 import WindowResizeProvider from '@/src/providers/WindowResizeProvider';
 
 import Footer from './Footer';
 import Header from './Header';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
@@ -21,6 +24,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 
         <Footer />
       </div>
+      <ToastContainer />
     </>
   );
 };

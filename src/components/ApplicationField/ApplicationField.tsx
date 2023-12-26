@@ -11,7 +11,7 @@ import Typography from '@/src/components/common/Typography/Typography';
 import { ApplicationFormType, applicationFormOptions } from '@/src/enums/ApplicationForm';
 import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
-import { sendGenericApplication } from '@/src/services/applicationServices';
+import { sendGenericApplication, toastApplication } from '@/src/services/applicationServices';
 
 const defaultFormState = {
   checkedValue: '',
@@ -39,7 +39,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
 
   const onApply = async () => {
     if (formState.checkedValue && formState.phoneValue && formState.nameValue) {
-      sendGenericApplication({
+      await sendGenericApplication({
         name: formState.nameValue,
         phone: formState.phoneValue,
         type: formState.checkedValue as ApplicationFormType,
@@ -148,7 +148,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
           <Button
             onClick={(e) => {
               e.preventDefault();
-              onApply();
+              toastApplication(onApply);
             }}
             disabled={disabled}
             className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}
@@ -266,7 +266,7 @@ const ApplicationField = ({ type = 'product' }: { type?: 'home' | 'product' }) =
         <Button
           onClick={(e) => {
             e.preventDefault();
-            onApply();
+            toastApplication(onApply);
           }}
           disabled={disabled}
           className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}

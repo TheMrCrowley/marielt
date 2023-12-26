@@ -7,7 +7,7 @@ import Button from '@/src/components/common/Button/Button';
 import Typography from '@/src/components/common/Typography/Typography';
 import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
-import { sendLeaderApplication } from '@/src/services/applicationServices';
+import { sendLeaderApplication, toastApplication } from '@/src/services/applicationServices';
 
 const defaultFormState = {
   isChecked: false,
@@ -32,7 +32,7 @@ const LeaderForm = () => {
 
   const onApply = async () => {
     if (formState.phoneValue && formState.nameValue) {
-      sendLeaderApplication({
+      await sendLeaderApplication({
         name: formState.nameValue,
         phone: formState.phoneValue,
       });
@@ -140,7 +140,7 @@ const LeaderForm = () => {
         <Button
           onClick={(e) => {
             e.preventDefault();
-            onApply();
+            toastApplication(onApply);
           }}
           disabled={disabled}
           className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}

@@ -1,9 +1,29 @@
+import { toast } from 'react-toastify';
+
 import { ApplicationFormType } from '@/src/enums/ApplicationForm';
 import { ProductType } from '@/src/types/Product';
 
 const PHONE_NUMBER_CODE = '+375';
 
-export const sendGenericApplication = ({
+export const toastApplication = (promiseFn: () => Promise<void>) =>
+  toast.promise(
+    promiseFn,
+    {
+      pending: 'Заявка отправляется',
+      success: 'Заявка отправлена',
+      error: 'Что-то пошло не так',
+    },
+    {
+      position: 'bottom-center',
+      autoClose: 2000,
+      draggablePercent: 60,
+      className: '!bg-primary-medium !text-white',
+      closeButton: false,
+      progressClassName: '!bg-secondary',
+    },
+  );
+
+export const sendGenericApplication = async ({
   name,
   phone,
   type,
@@ -12,7 +32,7 @@ export const sendGenericApplication = ({
   phone: string;
   type: ApplicationFormType;
 }) => {
-  fetch('/api/application', {
+  await fetch('/api/application', {
     method: 'POST',
     body: JSON.stringify({
       name,
@@ -22,7 +42,7 @@ export const sendGenericApplication = ({
   });
 };
 
-export const sendAgentApplication = ({
+export const sendAgentApplication = async ({
   type,
   name,
   phone,
@@ -33,7 +53,7 @@ export const sendAgentApplication = ({
   phone: string;
   id: string;
 }) => {
-  fetch('/api/application/agent', {
+  await fetch('/api/application/agent', {
     method: 'POST',
     body: JSON.stringify({ type, name, phone: PHONE_NUMBER_CODE + phone, id }),
   });

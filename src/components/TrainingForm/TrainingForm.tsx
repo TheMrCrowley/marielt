@@ -7,7 +7,7 @@ import Button from '@/src/components/common/Button/Button';
 import Typography from '@/src/components/common/Typography/Typography';
 import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
-import { sendTrainingApplication } from '@/src/services/applicationServices';
+import { sendTrainingApplication, toastApplication } from '@/src/services/applicationServices';
 
 const defaultFormState = {
   isChecked: false,
@@ -31,7 +31,7 @@ const TrainingForm = ({ id }: { id: string }) => {
 
   const onApply = async () => {
     if (formState.phoneValue && formState.nameValue) {
-      sendTrainingApplication({
+      await sendTrainingApplication({
         name: formState.nameValue,
         phone: formState.phoneValue,
         id,
@@ -140,7 +140,7 @@ const TrainingForm = ({ id }: { id: string }) => {
         <Button
           onClick={(e) => {
             e.preventDefault();
-            onApply();
+            toastApplication(onApply);
           }}
           disabled={disabled}
           className={clsx('disabled:pointer-events-none', 'disabled:opacity-50')}

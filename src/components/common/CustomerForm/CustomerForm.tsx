@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import { formatToNumber } from '@/src/helpers/formatToNumber';
 import { removeDigits } from '@/src/helpers/removeDigits';
+import { toastApplication } from '@/src/services/applicationServices';
 
 const defaultFormState = {
   isChecked: false,
@@ -114,7 +115,7 @@ const CustomerForm = ({ onApply }: CustomerFormProps) => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          handleApply();
+          toastApplication(handleApply);
         }}
         disabled={disabled}
         className={clsx(

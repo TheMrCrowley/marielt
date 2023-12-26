@@ -216,7 +216,7 @@ const AcademyPage = () => {
                   fontWeight="medium"
                   color="text-secondary p-4 bg-primary-medium w-max"
                 >
-                  Куратор
+                  Риэлтор
                 </Typography>
                 <Typography className="pl-8 " fontWeight="light">
                   Отвечает на все юридические вопросы, помогает с документами для сделки,
@@ -229,11 +229,11 @@ const AcademyPage = () => {
                   fontWeight="medium"
                   color="text-secondary p-4 bg-primary-medium w-max"
                 >
-                  Коуч
+                  Куратор
                 </Typography>
                 <Typography className="pl-8 " fontWeight="light">
                   Бывший опытный агент с навыками менеджмента. Разбирает вместе с новичком звонки и
-                  встречи, помогает вести торги с клиентами, ориентирует по всем сложностям, которые
+                  встречи, помогает вести торги с клиентами, ориентирует по всем сложностям которые
                   возникают в процессе продаж.
                 </Typography>
               </div>
@@ -243,7 +243,7 @@ const AcademyPage = () => {
                   fontWeight="medium"
                   color="text-secondary p-4 bg-primary-medium w-max"
                 >
-                  Риэлтор
+                  Коуч
                 </Typography>
                 <Typography className="pl-8 " fontWeight="light">
                   Помогает с планированием, мотивацией, управлением эмоциональным состоянием,
@@ -257,119 +257,6 @@ const AcademyPage = () => {
             <div className="max-w-xl w-full flex flex-col gap-4">
               <Typography fontSize={32} className="p-8 bg-primary-medium">
                 Регулярные утренние тренинги за пределами базового курса по самым разным темам:
-              </Typography>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  01
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Эмоциональный интеллект
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  02
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Целеполагание
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  03
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Трудные разговоры
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  04
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Медиация
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  05
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Лидерство
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  06
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Психология отношений
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  07
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Коучинг в менеджменте
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  08
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  Нейролингвистическое программирование
-                </Typography>
-              </div>
-              <div className="flex items-center gap-4">
-                <Typography
-                  fontWeight="medium"
-                  color="text-secondary"
-                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
-                >
-                  ...
-                </Typography>
-                <Typography fontSize={24} fontWeight="light">
-                  И многое другое
-                </Typography>
-              </div>
-            </div>
-            <div className="max-w-xl w-full flex flex-col gap-4">
-              <Typography fontSize={32} className="p-8 bg-primary-medium">
-                Продвинутые тренинги по желанию:
               </Typography>
               <div className="flex items-center gap-4">
                 <Typography
@@ -489,6 +376,119 @@ const AcademyPage = () => {
                 </Typography>
                 <Typography fontSize={24} fontWeight="light">
                   Финансовая грамотность
+                </Typography>
+              </div>
+            </div>
+            <div className="max-w-xl w-full flex flex-col gap-4">
+              <Typography fontSize={32} className="p-8 bg-primary-medium">
+                Продвинутые тренинги по желанию:
+              </Typography>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  01
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Эмоциональный интеллект
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  02
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Целеполагание
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  03
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Трудные разговоры
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  04
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Медиация
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  05
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Лидерство
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  06
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Психология отношений
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  07
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Коучинг в менеджменте
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  08
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  Нейролингвистическое программирование
+                </Typography>
+              </div>
+              <div className="flex items-center gap-4">
+                <Typography
+                  fontWeight="medium"
+                  color="text-secondary"
+                  className="flex justify-end items-center bg-primary-medium py-2 pl-8 pr-4 md:min-w-[88px] min-w-[65px]"
+                >
+                  ...
+                </Typography>
+                <Typography fontSize={24} fontWeight="light">
+                  И многое другое
                 </Typography>
               </div>
             </div>

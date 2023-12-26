@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import { AbstractHomePageApi, HomePageStrapiResponse } from './HomePageApi.types';
 
@@ -16,8 +15,8 @@ export default class HomePageApi extends BaseApi implements AbstractHomePageApi 
     this.homePageUrl = `${process.env.API_BASE_URL}${StrapiApiPath.HomePage}`;
   }
 
-  private getHomePageDataQuery() {
-    return qs.stringify(
+  public async getHomePageData() {
+    const populateQuery = qs.stringify(
       {
         populate: {
           banner: {
@@ -36,10 +35,7 @@ export default class HomePageApi extends BaseApi implements AbstractHomePageApi 
         encodeValuesOnly: true,
       },
     );
-  }
-
-  public async getHomePageData() {
-    const url = getUrlWithQueries(this.homePageUrl, this.getHomePageDataQuery());
+    const url = this.getUrlWithQueries(this.homePageUrl, populateQuery);
 
     const response = await this.fetchWrapper<HomePageStrapiResponse>(url);
 

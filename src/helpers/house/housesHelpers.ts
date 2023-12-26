@@ -1,9 +1,9 @@
 import qs from 'qs';
 
+import { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { HouseStrapiResponse, HouseItemsStrapiResponse } from '@/src/api/house';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
-import { IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { DefaultHousesAndLotsItem, DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 
 export const convertToDefaultHouseItem = (

@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import {
   balconyQueryMap,
   bathroomQueryMap,
@@ -18,9 +18,7 @@ import {
   getPaginationQuery,
   getQueryArray,
   getSortQuery,
-  getUrlWithQueries,
 } from '@/src/helpers/queryHelpers';
-import { IMAGE_FIELDS_WITH_FORMATS, IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { getDefaultMapPopulateQuery } from '@/src/helpers/queryHelpers';
 import { getCurrencies } from '@/src/services/currencyServices';
 import { CurrencyState } from '@/src/store/currency';
@@ -233,7 +231,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const populateQuery = getDefaultFlatListPopulateQuery();
 
-    const url = getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
@@ -272,7 +270,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const populateQuery = getDefaultFlatListPopulateQuery();
 
-    const url = getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
@@ -313,7 +311,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const populateQuery = getDefaultFlatListPopulateQuery();
 
-    const url = getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.flatsApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
@@ -361,7 +359,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
       },
     );
 
-    const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.flatsApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<FlatStrapiResponse>(url);
 
@@ -419,7 +417,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const sortQuery = getSortQuery(searchParams.sort as string);
 
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.flatsApiUrl,
       filterQuery,
       paginationQuery,
@@ -447,7 +445,12 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const populateQuery = getDefaultMapPopulateQuery();
 
-    const url = getUrlWithQueries(this.flatsApiUrl, filterQuery, paginationQuery, populateQuery);
+    const url = this.getUrlWithQueries(
+      this.flatsApiUrl,
+      filterQuery,
+      paginationQuery,
+      populateQuery,
+    );
 
     const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
@@ -460,7 +463,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
     const paginationQuery = getPaginationQuery('map');
     const populateQuery = getDefaultFlatListPopulateQuery();
 
-    const url = getUrlWithQueries(this.flatsApiUrl, idsQuery, paginationQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.flatsApiUrl, idsQuery, paginationQuery, populateQuery);
 
     const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
@@ -479,7 +482,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
       { encodeValuesOnly: true },
     );
 
-    const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.flatsApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<FlatStrapiResponse>(url);
 
@@ -487,7 +490,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
   }
 
   public async getActualFlats(): Promise<FlatItemsStrapiResponse> {
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.flatsApiUrl,
       getDefaultFlatListPopulateQuery(),
       getActualItemQuery(),

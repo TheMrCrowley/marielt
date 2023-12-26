@@ -1,9 +1,8 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { SortValues } from '@/src/enums/SortOptions';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import {
   AbstractTeachersApi,
@@ -12,6 +11,7 @@ import {
 } from './AcademyPage.types';
 
 const API_NAME = 'TeachersApi';
+
 export default class TeachersApi extends BaseApi implements AbstractTeachersApi {
   private readonly teachersApiUrl: string;
 
@@ -20,8 +20,8 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
     this.teachersApiUrl = `${baseUrl}${StrapiApiPath.Teachers}`;
   }
 
-  private getTeachersByIdQuery() {
-    return qs.stringify(
+  public async getTeacherById(id: string) {
+    const populateQuery = qs.stringify(
       {
         populate: {
           photo: {
@@ -36,18 +36,16 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
       },
       { encodeValuesOnly: true },
     );
-  }
 
-  public async getTeacherById(id: string) {
-    const url = getUrlWithQueries(`${this.teachersApiUrl}/${id}`, this.getTeachersByIdQuery());
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.teachersApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<TeacherStrapiResponse>(url);
 
     return data;
   }
 
-  private getAllTeachersQuery() {
-    return qs.stringify(
+  public async getAllTeachers() {
+    const allTeachersQuery = qs.stringify(
       {
         pagination: {
           limit: -1,
@@ -68,10 +66,7 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
         encodeValuesOnly: true,
       },
     );
-  }
-
-  public async getAllTeachers() {
-    const url = getUrlWithQueries(this.teachersApiUrl, this.getAllTeachersQuery());
+    const url = this.getUrlWithQueries(this.teachersApiUrl, allTeachersQuery);
 
     const data = await this.fetchWrapper<TeacherItemsStrapiResponse>(url);
 

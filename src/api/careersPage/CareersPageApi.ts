@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { getUrlWithQueries, IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 
 import { AbstractCareersApi, CareersPageStrapiResponse } from './CareersPageApi.types';
 
@@ -18,15 +17,7 @@ export default class CareersPageApi extends BaseApi implements AbstractCareersAp
   }
 
   public async getCareersPageData(): Promise<CareersPageStrapiResponse> {
-    const url = getUrlWithQueries(this.careersPageApiUrl, this.getCareersPageDataQuery());
-
-    const data = await this.fetchWrapper<CareersPageStrapiResponse>(url);
-
-    return data;
-  }
-
-  private getCareersPageDataQuery() {
-    return qs.stringify(
+    const populateQuery = qs.stringify(
       {
         populate: {
           section: {
@@ -42,5 +33,11 @@ export default class CareersPageApi extends BaseApi implements AbstractCareersAp
       },
       { encodeValuesOnly: true },
     );
+
+    const url = this.getUrlWithQueries(this.careersPageApiUrl, populateQuery);
+
+    const data = await this.fetchWrapper<CareersPageStrapiResponse>(url);
+
+    return data;
   }
 }

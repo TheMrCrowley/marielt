@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import { AbstractAboutPageApi, AboutPageItemStrapiResponse } from './AboutPageApi.types';
 
@@ -17,8 +16,8 @@ export default class AboutPageApi extends BaseApi implements AbstractAboutPageAp
     this.aboutPageApiUrl = `${baseUrl}${StrapiApiPath.AboutPage}`;
   }
 
-  private getAboutPageUrlQuery(): string {
-    return qs.stringify(
+  public async getAboutPageData() {
+    const populateQuery = qs.stringify(
       {
         populate: {
           section: {
@@ -34,10 +33,8 @@ export default class AboutPageApi extends BaseApi implements AbstractAboutPageAp
       },
       { encodeValuesOnly: true },
     );
-  }
 
-  public async getAboutPageData() {
-    const url = getUrlWithQueries(this.aboutPageApiUrl, this.getAboutPageUrlQuery());
+    const url = this.getUrlWithQueries(this.aboutPageApiUrl, populateQuery);
 
     const response = await this.fetchWrapper<AboutPageItemStrapiResponse>(url);
 

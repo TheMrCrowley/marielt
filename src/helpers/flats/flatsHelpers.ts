@@ -1,9 +1,9 @@
 import qs from 'qs';
 
+import { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { FlatItemsStrapiResponse, FlatStrapiResponse } from '@/src/api/flats';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
-import { IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { DefaultFlatItem, DetailedFlatItem } from '@/src/types/Flats';
 
 export const convertToDefaultFlatItem = (

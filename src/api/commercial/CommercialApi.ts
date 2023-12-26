@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import {
   commercialFinishingQueryMap,
   commercialLocationQueryMap,
@@ -10,12 +10,9 @@ import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { getDefaultCommercialListPopulateQuery } from '@/src/helpers/commercial/commercialHelpers';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import {
-  IMAGE_FIELDS_TO_POPULATE,
-  IMAGE_FIELDS_WITH_FORMATS,
   getDefaultMapPopulateQuery,
   getPaginationQuery,
   getQueryArray,
-  getUrlWithQueries,
 } from '@/src/helpers/queryHelpers';
 import { getCurrencies } from '@/src/services/currencyServices';
 import { CommercialFiltersType } from '@/src/store/commercialFilters';
@@ -617,7 +614,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
 
     const populateQuery = getDefaultCommercialListPopulateQuery();
 
-    const url = getUrlWithQueries(this.commercialApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.commercialApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);
 
@@ -657,7 +654,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
 
     const populateQuery = getDefaultCommercialListPopulateQuery();
 
-    const url = getUrlWithQueries(this.commercialApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.commercialApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);
 
@@ -725,7 +722,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       },
     );
 
-    const url = getUrlWithQueries(`${this.commercialApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.commercialApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<CommercialStrapiResponse>(url);
 
@@ -772,7 +769,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
     const paginationQuery = getPaginationQuery('list', searchParams.page as string);
     const populateQuery = getDefaultCommercialListPopulateQuery();
 
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.commercialApiUrl,
       filterQuery,
       paginationQuery,
@@ -810,7 +807,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       { encodeValuesOnly: true },
     );
 
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.commercialApiUrl,
       filterQuery,
       paginationQuery,
@@ -830,7 +827,12 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
 
     const populateQuery = getDefaultCommercialListPopulateQuery();
 
-    const url = getUrlWithQueries(this.commercialApiUrl, idsQuery, paginationQuery, populateQuery);
+    const url = this.getUrlWithQueries(
+      this.commercialApiUrl,
+      idsQuery,
+      paginationQuery,
+      populateQuery,
+    );
 
     const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);
 
@@ -851,7 +853,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       },
     );
 
-    const url = getUrlWithQueries(`${this.commercialApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.commercialApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<CommercialStrapiResponse>(url);
 
@@ -862,7 +864,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
     const actualQuery = getActualItemQuery();
     const populateQuery = getDefaultCommercialListPopulateQuery();
 
-    const url = getUrlWithQueries(this.commercialApiUrl, actualQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.commercialApiUrl, actualQuery, populateQuery);
 
     const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);
 

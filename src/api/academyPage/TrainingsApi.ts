@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import {
   AbstractTrainingsApi,
@@ -21,8 +20,8 @@ export default class TrainingsApi extends BaseApi implements AbstractTrainingsAp
     this.trainingsApiUrl = `${baseUrl}${StrapiApiPath.Trainings}`;
   }
 
-  private getTrainingByIdQuery() {
-    return qs.stringify(
+  public async getTrainingById(id: string) {
+    const populateQuery = qs.stringify(
       {
         populate: {
           image: {
@@ -32,10 +31,8 @@ export default class TrainingsApi extends BaseApi implements AbstractTrainingsAp
       },
       { encodeValuesOnly: true },
     );
-  }
 
-  public async getTrainingById(id: string) {
-    const url = getUrlWithQueries(`${this.trainingsApiUrl}/${id}`, this.getTrainingByIdQuery());
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.trainingsApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<TrainingStrapiResponse>(url);
 
@@ -54,7 +51,7 @@ export default class TrainingsApi extends BaseApi implements AbstractTrainingsAp
       },
     );
 
-    const url = getUrlWithQueries(this.trainingsApiUrl, populateQuery);
+    const url = this.getUrlWithQueries(this.trainingsApiUrl, populateQuery);
 
     const data = await this.fetchWrapper<TrainingItemsStrapiResponse>(url);
 

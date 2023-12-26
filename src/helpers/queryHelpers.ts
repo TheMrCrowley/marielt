@@ -3,15 +3,6 @@ import qs from 'qs';
 import { SortValues } from '@/src/enums/SortOptions';
 import { ViewType } from '@/src/types/ViewType';
 
-export const IMAGE_FIELDS_TO_POPULATE = ['width', 'height', 'url', 'placeholder'];
-
-export const IMAGE_FIELDS_TO_POPULATE_WITH_META = [
-  ...IMAGE_FIELDS_TO_POPULATE,
-  'provider_metadata',
-];
-
-export const IMAGE_FIELDS_WITH_FORMATS = [...IMAGE_FIELDS_TO_POPULATE, 'formats'];
-
 export const getSortQuery = (sort: string) => {
   return qs.stringify(
     {
@@ -70,12 +61,6 @@ export const getIdsQuery = (ids: string[]) => {
     },
     { encodeValuesOnly: true },
   );
-};
-
-export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
-
-export const getUrlWithQueries = (url: string, ...query: string[]): string => {
-  return `${url}${concatQueries(query)}`;
 };
 
 export const getActualItemQuery = () =>

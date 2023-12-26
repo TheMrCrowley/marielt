@@ -1,10 +1,10 @@
 import qs from 'qs';
 
+import { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { CommercialItemsStrapiResponse, CommercialStrapiResponse } from '@/src/api/commercial';
 import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
-import { IMAGE_FIELDS_TO_POPULATE } from '@/src/helpers/queryHelpers';
 import { DefaultCommercialItem, DetailedCommercialItem } from '@/src/types/Commercial';
 import { DefaultMapItem } from '@/src/types/Product';
 

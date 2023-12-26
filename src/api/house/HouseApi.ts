@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import { saleTermQueryMap } from '@/src/enums/FlatsFilters';
 import {
   electricityQueryMap,
@@ -16,15 +16,12 @@ import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import { getDefaultHouseListPopulateQuery } from '@/src/helpers/house/housesHelpers';
 import {
-  IMAGE_FIELDS_TO_POPULATE,
-  IMAGE_FIELDS_WITH_FORMATS,
   getActualItemQuery,
   getDefaultMapPopulateQuery,
   getIdsQuery,
   getPaginationQuery,
   getQueryArray,
   getSortQuery,
-  getUrlWithQueries,
 } from '@/src/helpers/queryHelpers';
 import { getCurrencies } from '@/src/services/currencyServices';
 import { CurrencyState } from '@/src/store/currency';
@@ -224,7 +221,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
 
     const populateQuery = getDefaultHouseListPopulateQuery();
 
-    const url = getUrlWithQueries(this.houseApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.houseApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
 
@@ -264,7 +261,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
 
     const populateQuery = getDefaultHouseListPopulateQuery();
 
-    const url = getUrlWithQueries(this.houseApiUrl, filterQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.houseApiUrl, filterQuery, populateQuery);
 
     const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
 
@@ -313,7 +310,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
       },
     );
 
-    const url = getUrlWithQueries(`${this.houseApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.houseApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<HouseStrapiResponse>(url);
 
@@ -360,7 +357,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
 
     const sortQuery = getSortQuery(searchParams.sort as string);
 
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.houseApiUrl,
       query,
       paginationQuery,
@@ -390,7 +387,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
 
     const sortQuery = getSortQuery(searchParams.sort as string);
 
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.houseApiUrl,
       query,
       paginationQuery,
@@ -408,7 +405,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
     const paginationQuery = getPaginationQuery('map');
     const populateQuery = getDefaultHouseListPopulateQuery();
 
-    const url = getUrlWithQueries(this.houseApiUrl, idsQuery, paginationQuery, populateQuery);
+    const url = this.getUrlWithQueries(this.houseApiUrl, idsQuery, paginationQuery, populateQuery);
 
     const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
 
@@ -427,7 +424,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
       { encodeValuesOnly: true },
     );
 
-    const url = getUrlWithQueries(`${this.houseApiUrl}/${id}`, populateQuery);
+    const url = this.getUrlWithQueries(this.getUrlWithId(this.houseApiUrl, id), populateQuery);
 
     const data = await this.fetchWrapper<HouseStrapiResponse>(url);
 
@@ -435,7 +432,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
   }
 
   public async getActualHouses(): Promise<HouseItemsStrapiResponse> {
-    const url = getUrlWithQueries(
+    const url = this.getUrlWithQueries(
       this.houseApiUrl,
       getDefaultHouseListPopulateQuery(),
       getActualItemQuery(),

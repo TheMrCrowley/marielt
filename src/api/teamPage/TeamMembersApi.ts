@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import { AbstractTeamMembersApi, TeamMemberStrapiResponse } from './TeamPage.types';
 
@@ -18,15 +17,7 @@ export default class TeamMembersApi extends BaseApi implements AbstractTeamMembe
   }
 
   async getTeamPageMembers(): Promise<TeamMemberStrapiResponse> {
-    const url = getUrlWithQueries(this.teamMembersApiUrl, this.getTeamPageMembersQuery());
-
-    const data = await this.fetchWrapper<TeamMemberStrapiResponse>(url);
-
-    return data;
-  }
-
-  private getTeamPageMembersQuery() {
-    return qs.stringify(
+    const populateQuery = qs.stringify(
       {
         populate: {
           photo: {
@@ -41,5 +32,11 @@ export default class TeamMembersApi extends BaseApi implements AbstractTeamMembe
         encodeValuesOnly: true,
       },
     );
+
+    const url = this.getUrlWithQueries(this.teamMembersApiUrl, populateQuery);
+
+    const data = await this.fetchWrapper<TeamMemberStrapiResponse>(url);
+
+    return data;
   }
 }

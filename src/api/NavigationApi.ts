@@ -2,7 +2,6 @@ import qs from 'qs';
 
 import { AppRoutes } from '@/src/enums/AppRoutes';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { getUrlWithQueries } from '@/src/helpers/queryHelpers';
 import { StrapiFindOneResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 import BaseApi from './BaseApi';
@@ -19,15 +18,7 @@ export default class NavigationApi extends BaseApi implements AbstractNavigation
   }
 
   public async getNavigationItems(): Promise<StrapiFindOneResponse<NavigationItemResponse>> {
-    const url = getUrlWithQueries(this.navigationApiUrl, this.getNavigationItemsQuery());
-
-    const data = await this.fetchWrapper<StrapiFindOneResponse<NavigationItemResponse>>(url);
-
-    return data;
-  }
-
-  private getNavigationItemsQuery() {
-    return qs.stringify(
+    const populateQuery = qs.stringify(
       {
         populate: {
           section: {
@@ -37,6 +28,12 @@ export default class NavigationApi extends BaseApi implements AbstractNavigation
       },
       { encodeValuesOnly: true },
     );
+
+    const url = this.getUrlWithQueries(this.navigationApiUrl, populateQuery);
+
+    const data = await this.fetchWrapper<StrapiFindOneResponse<NavigationItemResponse>>(url);
+
+    return data;
   }
 }
 

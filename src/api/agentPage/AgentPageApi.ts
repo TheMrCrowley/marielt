@@ -1,8 +1,7 @@
 import qs from 'qs';
 
-import BaseApi from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_TO_POPULATE_WITH_META } from '@/src/api/BaseApi';
 import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
-import { IMAGE_FIELDS_TO_POPULATE_WITH_META, getUrlWithQueries } from '@/src/helpers/queryHelpers';
 
 import { AbstractAgentPageApi, AgentPageStrapiResponse } from './AgentPageApi.types';
 
@@ -18,15 +17,7 @@ export default class AgentPageApi extends BaseApi implements AbstractAgentPageAp
   }
 
   public async getAgentPageData(): Promise<AgentPageStrapiResponse> {
-    const url = getUrlWithQueries(this.agentPageApiUrl, this.getAgentPageDataQuery());
-
-    const data = await this.fetchWrapper<AgentPageStrapiResponse>(url);
-
-    return data;
-  }
-
-  private getAgentPageDataQuery() {
-    return qs.stringify(
+    const populateQuery = qs.stringify(
       {
         populate: {
           carousel: {
@@ -39,5 +30,11 @@ export default class AgentPageApi extends BaseApi implements AbstractAgentPageAp
       },
       { encodeValuesOnly: true },
     );
+
+    const url = this.getUrlWithQueries(this.agentPageApiUrl, populateQuery);
+
+    const data = await this.fetchWrapper<AgentPageStrapiResponse>(url);
+
+    return data;
   }
 }

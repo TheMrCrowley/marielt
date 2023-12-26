@@ -95,4 +95,5 @@ export abstract class AbstractHouseApi {
   ): Promise<HouseItemsStrapiResponse>;
   abstract getHousesByIds(ids: string[]): Promise<HouseItemsStrapiResponse>;
   abstract getHouseByIdSeoFields(id: string): Promise<HouseStrapiResponse>;
+  abstract getActualHouses(): Promise<HouseItemsStrapiResponse>;
 }

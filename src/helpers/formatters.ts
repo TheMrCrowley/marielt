@@ -1,9 +1,9 @@
+import { CommercialItemsStrapiResponse } from '@/src/api/commercial';
 import { FlatItemsStrapiResponse } from '@/src/api/flats';
 import { HouseItemsStrapiResponse } from '@/src/api/house';
 import {
   CommercialCategory,
   CommercialCategoryResponse,
-  CommercialStrapiResponse,
   CommercialTransaction,
   CommercialTransactionResponse,
   DetailedCommercialItem,
@@ -26,21 +26,6 @@ export const formatToDefaultMapItem = (
   items.map(({ attributes, id }) => ({
     id,
     price: attributes.price,
-    initialCurrency: attributes.currency || 'USD',
-    location: attributes.coordinates
-      ? {
-          lat: attributes.coordinates.latitude,
-          lng: attributes.coordinates.longitude,
-        }
-      : undefined,
-  }));
-
-export const formatToCommercialMapItem = (
-  items: StrapiFindResponse<CommercialStrapiResponse>['data'],
-): DefaultMapItem[] =>
-  items.map(({ attributes, id }) => ({
-    id,
-    price: attributes.price_total?.from || attributes.price_meter?.from,
     initialCurrency: attributes.currency || 'USD',
     location: attributes.coordinates
       ? {
@@ -145,7 +130,7 @@ export const formatResponseToSearchResult = (
   data:
     | FlatItemsStrapiResponse['data']
     | HouseItemsStrapiResponse['data']
-    | StrapiFindResponse<CommercialStrapiResponse>['data'],
+    | CommercialItemsStrapiResponse['data'],
   value: string,
 ): SearchResults => {
   const streets = new Set<string>();

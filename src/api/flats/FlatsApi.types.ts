@@ -101,4 +101,5 @@ export abstract class AbstractFlatsApi {
   ): Promise<FlatItemsStrapiResponse>;
   abstract getFlatsByIds(ids: string[]): Promise<FlatItemsStrapiResponse>;
   abstract getFlatByIdSeoData(id: string): Promise<FlatStrapiResponse>;
+  abstract getActualFlats(): Promise<FlatItemsStrapiResponse>;
 }

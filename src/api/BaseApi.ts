@@ -4,6 +4,7 @@ export default class BaseApi {
   public constructor(private readonly baseApiURL: string, private readonly apiName: string) {}
 
   protected async fetchWrapper<T>(url: string, options?: RequestInit): Promise<T> {
+    console.info('Request from: ', this.apiName);
     try {
       const response = await fetch(url, {
         ...options,

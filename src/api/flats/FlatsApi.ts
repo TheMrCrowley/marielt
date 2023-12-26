@@ -13,6 +13,8 @@ import { StrapiApiPath } from '@/src/enums/StrapiApiPath';
 import { getPriceByCurrency } from '@/src/helpers/currencyHelpers';
 import { getDefaultFlatListPopulateQuery } from '@/src/helpers/flats/flatsHelpers';
 import {
+  getActualItemQuery,
+  getIdsQuery,
   getPaginationQuery,
   getQueryArray,
   getSortQuery,
@@ -453,16 +455,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
   }
 
   public async getFlatsByIds(ids: string[]): Promise<FlatItemsStrapiResponse> {
-    const idsQuery = qs.stringify(
-      {
-        filters: {
-          id: {
-            $in: ids,
-          },
-        },
-      },
-      { encodeValuesOnly: true },
-    );
+    const idsQuery = getIdsQuery(ids);
 
     const paginationQuery = getPaginationQuery('map');
     const populateQuery = getDefaultFlatListPopulateQuery();
@@ -489,6 +482,18 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
     const url = getUrlWithQueries(`${this.flatsApiUrl}/${id}`, populateQuery);
 
     const data = await this.fetchWrapper<FlatStrapiResponse>(url);
+
+    return data;
+  }
+
+  public async getActualFlats(): Promise<FlatItemsStrapiResponse> {
+    const url = getUrlWithQueries(
+      this.flatsApiUrl,
+      getDefaultFlatListPopulateQuery(),
+      getActualItemQuery(),
+    );
+
+    const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
 
     return data;
   }

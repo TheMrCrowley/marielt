@@ -12,8 +12,6 @@ const DistanceFilter = ({ distance, onChange }: DistanceFilterProps) => {
     <Select
       isMulti={false}
       label="Расстояние от МКАД"
-      placeholderPrefix="До"
-      placeholderPostfix="км."
       items={[
         {
           value: '50',

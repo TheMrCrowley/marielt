@@ -122,7 +122,11 @@ export const getFlatsFiltersData = async () => {
 
 const getDirections = async () => {
   const url = `${process.env.API_BASE_URL}/directions`;
-  const directionsResponse = await fetch(url);
+  const directionsResponse = await fetch(url, {
+    next: {
+      revalidate: 60,
+    },
+  });
   const { data } = (await directionsResponse.json()) as StrapiFindResponse<DirectionResponse>;
 
   return data.map((direction) => direction.attributes.name);

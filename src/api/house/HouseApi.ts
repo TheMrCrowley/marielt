@@ -85,20 +85,30 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
     const query = qs.stringify(
       {
         filters: {
-          locality: {
-            $in: locality,
-          },
-          street: {
-            $in: street,
-          },
-          district_rb: {
-            $in: district_rb,
-          },
-          region: {
-            name: {
-              $in: region,
+          $or: [
+            {
+              locality: {
+                $in: locality,
+              },
             },
-          },
+            {
+              street: {
+                $in: street,
+              },
+            },
+            {
+              district_rb: {
+                $in: district_rb,
+              },
+            },
+            {
+              region: {
+                name: {
+                  $in: region,
+                },
+              },
+            },
+          ],
           price: {
             $gte: priceFrom && getPriceByCurrency(priceFrom, selectedCurrency, 'USD', rates),
             $lte: priceTo && getPriceByCurrency(priceTo, selectedCurrency, 'USD', rates),

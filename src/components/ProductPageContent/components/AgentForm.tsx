@@ -73,16 +73,24 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
           'sm:flex-row',
           'flex-col',
           'w-full',
+          'h-full',
         )}
       >
         <div
-          className={clsx('bg-primary-bold', 'flex', 'justify-between', 'items-end', 'p-4')}
+          className={clsx(
+            'bg-primary-bold',
+            'flex',
+            'justify-between',
+            'items-end',
+            'p-4',
+            'flex-1',
+          )}
           style={{
             minWidth: AgentPlaceholder.width + 32,
           }}
         >
-          <div className={clsx('flex', 'flex-col', 'gap-4', 'w-full')}>
-            <Image alt="agent" src={AgentPlaceholder} className={'m-auto'} />
+          <div className={clsx('flex', 'flex-col', 'gap-4', 'w-full', 'h-full')}>
+            <Image alt="agent" src={AgentPlaceholder} className={'mx-auto h-full w-auto'} />
 
             <Typography fontSize={12} color="text-[#B1B1B1]">
               {position || 'Агент по недвижимости'}
@@ -165,9 +173,11 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
               justifyContent: 'center',
               alignItems: 'center',
               zIndex: 30,
+              height: '100dvh',
               bottom: 0,
               left: 0,
-              y: '-100%',
+              right: 0,
+              y: '100%',
               opacity: '0',
             }}
             animate={{

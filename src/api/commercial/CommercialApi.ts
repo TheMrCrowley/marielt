@@ -96,20 +96,30 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
     const query = qs.stringify(
       {
         filters: {
-          locality: {
-            $in: locality,
-          },
-          street: {
-            $in: street,
-          },
-          district_rb: {
-            $in: district_rb,
-          },
-          region: {
-            name: {
-              $in: region,
+          $or: [
+            {
+              locality: {
+                $in: locality,
+              },
             },
-          },
+            {
+              street: {
+                $in: street,
+              },
+            },
+            {
+              district_rb: {
+                $in: district_rb,
+              },
+            },
+            {
+              region: {
+                name: {
+                  $in: region,
+                },
+              },
+            },
+          ],
           comm_tran: {
             name: {
               $in: [transactionType],

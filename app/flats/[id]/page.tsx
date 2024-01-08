@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { FlatItemsStrapiResponse } from '@/src/api/flats';
 import FlatPage from '@/src/app-pages/FlatsPage/FlatPage';
 import { getFlatById, getFlatByIdSeoData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
@@ -26,17 +27,17 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
   };
 }
 
-// export async function generateStaticParams() {
-//   const response = await fetch(`${process.env.API_BASE_URL}/apart-items?pagination[limit]=-1`);
+export async function generateStaticParams() {
+  const response = await fetch(`${process.env.API_BASE_URL}/apart-items?pagination[limit]=-1`);
 
-//   const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+  const { data } = (await response.json()) as FlatItemsStrapiResponse;
 
-//   return data.map((item) => ({
-//     id: item.id.toString(),
-//   }));
-// }
+  return data.map((item) => ({
+    id: item.id.toString(),
+  }));
+}
 
-// export const dynamicParams = true;
+export const dynamicParams = true;
 
 const page = async ({ params: { id } }: Props) => {
   const flat = await getFlatById(id);

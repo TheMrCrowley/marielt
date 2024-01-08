@@ -208,7 +208,7 @@ const AcademyPage = () => {
             <div className="flex flex-col gap-8 max-w-2xl w-full">
               <Typography fontSize={24} fontWeight="medium" className="max-w-2xl">
                 После базового курса стажер попадает в коллектив, в котором с ним работают опытный
-                куратор, коуч и риэлтор.
+                куратор, коуч и риэлтер.
               </Typography>
               <div className="flex flex-col gap-4">
                 <Typography
@@ -216,7 +216,7 @@ const AcademyPage = () => {
                   fontWeight="medium"
                   color="text-secondary p-4 bg-primary-medium w-max"
                 >
-                  Риэлтор
+                  Риэлтер
                 </Typography>
                 <Typography className="pl-8 " fontWeight="light">
                   Отвечает на все юридические вопросы, помогает с документами для сделки,

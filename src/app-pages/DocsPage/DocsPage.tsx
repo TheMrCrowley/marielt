@@ -39,17 +39,17 @@ const realtorCertificationCertificate: DocLinkListProps = {
     {
       href: '/Svid-moroz-1.pdf',
       icon: 'private',
-      title: 'Мороз Константину Владимировичу',
+      title: 'Мороз Константин Владимирович',
     },
     {
       href: '/savelieva-1.pdf',
       icon: 'private',
-      title: 'Савельевой Ирине Сергеевне',
+      title: 'Савельева Ирина Сергеевна',
     },
     {
       href: '/safrankova-1.pdf',
       icon: 'private',
-      title: 'Сафранковой Ольге Викторовне',
+      title: 'Сафранкова Ольга Викторовна',
     },
     {
       href: '/belyavskaya-4.pdf',
@@ -59,22 +59,22 @@ const realtorCertificationCertificate: DocLinkListProps = {
     {
       href: '/klimovich.pdf',
       icon: 'private',
-      title: 'Климович Татьяне Федоровне',
+      title: 'Климович Татьяна Федоровна',
     },
     {
       href: '/plyanta.pdf',
       icon: 'private',
-      title: 'Плянта Дмитрию Ивановичу',
+      title: 'Плянта Дмитрий Иванович',
     },
     {
       href: '/lazarenko.pdf',
       icon: 'private',
-      title: 'Лазаренковой Ольге Валерьевне',
+      title: 'Лазаренкова Ольга Валерьевна',
     },
     {
       href: '/homenkova.pdf',
       icon: 'private',
-      title: 'Хоменковой Дарье Сергеевне',
+      title: 'Хоменкова Дарья Сергеевна',
     },
     {
       href: '/novik-1.pdf',

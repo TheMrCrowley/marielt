@@ -1,7 +1,7 @@
 import { Document, Page, View, Text, Image, Font } from '@react-pdf/renderer';
 import React from 'react';
 
-import Logo from '@/public/logo.jpg';
+import Logo from '@/public/logo.png';
 import {
   getCommercialCharacteristics,
   getCommercialPriceValues,
@@ -88,7 +88,9 @@ const CommercialPDFDocument = ({
           <View>
             <Text style={{ fontSize: '10px' }}>+375 17 322 73 22</Text>
             <Text style={{ fontSize: '10px' }}>+375 29 710-20-20</Text>
-            <Text style={{ fontSize: '10px' }}>ул. Кальварийская 42, оф. 72 ст.м.Молодёжная</Text>
+            <Text style={{ fontSize: '10px' }}>
+              ул. Кальварийская 42, оф. 72, ст. м. Молодёжная
+            </Text>
           </View>
         </View>
         {name && (
@@ -208,7 +210,7 @@ const CommercialPDFDocument = ({
               <Image
                 src={image.url}
                 key={`presentation-image-item-${i}-${image.url}`}
-                style={{ width: '250px' }}
+                style={{ width: '250px', height: '250px' }}
               />
             ))}
           </View>

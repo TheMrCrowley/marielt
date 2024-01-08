@@ -113,7 +113,7 @@ const Footer = () => {
             </Title>
             <ul className={clsx('flex', 'flex-col', 'gap-4')}>
               <ContactItem type="address">
-                ул. Кальварийская 42, оф. 68 ст. м. Молодёжная
+                ул. Кальварийская 42, оф. 68, <br /> ст. м. Молодёжная
               </ContactItem>
               <Typography>Время работы:</Typography>
               <ContactItem type="clock">пн - пт с 9:00 до 21:00</ContactItem>

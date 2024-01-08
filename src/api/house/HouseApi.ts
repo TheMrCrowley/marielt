@@ -313,6 +313,9 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
           image: {
             fields: IMAGE_FIELDS_WITH_FORMATS,
           },
+          additional_info: {
+            populate: '*',
+          },
         },
       },
       {

@@ -29,7 +29,7 @@ export const getCommercialCharacteristics = (commercial: DetailedCommercialItem)
     characteristics.push({
       name: commercial.parameters.maxFloor ? 'Этаж/этажность' : 'Этаж',
       value: commercial.parameters.maxFloor
-        ? `${commercial.parameters.floor}/${commercial.parameters.maxFloor}`
+        ? `${commercial.parameters.floor || 'Нет'}/${commercial.parameters.maxFloor}`
         : `${commercial.parameters.floor}`,
     });
   }

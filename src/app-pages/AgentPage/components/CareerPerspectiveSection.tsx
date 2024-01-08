@@ -17,7 +17,7 @@ const CareerPerspectiveSection = () => {
       <div className="grid md:grid-cols-2 gap-4 max-w-7xl w-full">
         <div className="p-8 flex flex-col bg-primary-medium sm:gap-8 gap-4">
           <Typography fontSize={36} fontWeight="medium" color="text-secondary">
-            Риэлтор
+          Риэлтер
           </Typography>
           <Typography fontSize={24} fontWeight="light">
             Юрист, который сопровождает все документы по проверке и продаже недвижимости.

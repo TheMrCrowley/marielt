@@ -14,7 +14,7 @@ interface ProductMapModalProps extends PropsWithChildren {
 const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps) => {
   const breakpoint = useWindowSize();
 
-  if (breakpoint > WindowWidth.LG) {
+  if (breakpoint > WindowWidth.XS) {
     return (
       <LazyMotion features={domAnimation}>
         <m.div
@@ -124,7 +124,8 @@ const ProductMapModal = ({ closeModal, isOpen, children }: ProductMapModalProps)
             className={clsx(
               'absolute',
               'w-full',
-              'h-[70dvh]',
+              'max-h-[70dvh]',
+              'h-max',
               'bg-primary-light',
               'scrollbar-thin',
               'scrollbar-thumb-primary',

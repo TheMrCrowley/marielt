@@ -120,7 +120,7 @@ const BurgerMenu = ({ navigationItems }: BurgerMenuProps) => {
               </Title>
               <ul className={clsx('flex', 'flex-col', 'gap-4')}>
                 <ContactItem type="address">
-                  ул. Кальварийская 42, оф. 72 ст. м .Молодёжная
+                  ул. Кальварийская 42, оф. 72, ст. м. Молодёжная
                 </ContactItem>
                 <ContactItem type="clock">Время работы: с 9:00 до 21:00</ContactItem>
               </ul>

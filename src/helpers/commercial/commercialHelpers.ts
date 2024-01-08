@@ -102,6 +102,7 @@ export const convertToDetailedCommercial = ({
     profitability: attributes?.business?.profitability,
     rentAmountMonth: attributes?.business?.rent_amount_month,
     rentAmountYear: attributes?.business?.rent_amount_year,
+    vat: attributes.parameters?.vat,
   },
   pricePerMeter:
     attributes.price_meter?.from || attributes.price_meter?.to

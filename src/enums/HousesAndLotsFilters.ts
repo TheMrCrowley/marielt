@@ -288,7 +288,7 @@ export const houseCharacteristicsMap: Partial<
   telephone: (value) => ({ name: 'Телефон', value: value as string }),
   balcony: (value) => ({ name: 'Балкон', value: value as string }),
   parking: (value) => ({ name: 'Парковочное место', value: value as string }),
-  readinessPercentage: (value) => ({ name: 'Процент готовности', value: value as string }),
+  readinessPercentage: (value) => ({ name: 'Процент готовности', value: `${value}%` }),
   builtUpAreaLength: (value) => ({ name: 'Длина застройки', value: `${value} м` }),
   builtUpAreaWidth: (value) => ({ name: 'Ширина застройки', value: `${value} м` }),
 };

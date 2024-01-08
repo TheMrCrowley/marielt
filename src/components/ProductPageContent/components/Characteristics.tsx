@@ -46,7 +46,7 @@ const Characteristics = ({
           <Typography
             fontWeight="light"
             fontSize={16}
-            className="capitalize place-self-end max-w-max w-full text-left"
+            className="place-self-end max-w-max w-full text-left"
           >
             {value}
           </Typography>

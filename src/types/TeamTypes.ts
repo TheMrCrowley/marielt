@@ -1,12 +1,4 @@
-import { StrapiFindOneResponse, StrapiImage } from './StrapiTypes';
-
-export interface TeamStrapiResponse {
-  name: string;
-  position: string;
-  description: string;
-  management: boolean;
-  photo: StrapiFindOneResponse<StrapiImage>;
-}
+import { ImageType } from './ImageType';
 
 export interface TeamItem {
   id: string;
@@ -14,10 +6,5 @@ export interface TeamItem {
   position: string;
   description: string;
   management: boolean;
-  photo?: {
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string;
-  };
+  photo?: ImageType;
 }

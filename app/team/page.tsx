@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import TeamPage from '@/src/app-pages/TeamPage';
+import { getTeamMembers, getTeamPageData } from '@/src/services';
 import { getSeoFields, canonicalUrlMap, getOpenGraphField } from '@/src/services/seoServices';
-import { getTeamPageData } from '@/src/services/teamServices';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('docPage');
@@ -23,7 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Team = async () => {
-  const { description, members } = await getTeamPageData();
+  const [description, members] = await Promise.all([getTeamPageData(), getTeamMembers()]);
+
   return <TeamPage description={description} members={members} />;
 };
 

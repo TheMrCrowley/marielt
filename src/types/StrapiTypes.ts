@@ -1,5 +1,3 @@
-import { AppRoutes } from '@/src/enums/AppRoutes';
-
 export interface StrapiFindResponse<T> {
   data: Array<{
     id: string;
@@ -13,32 +11,6 @@ export interface StrapiFindOneResponse<T> {
     id: string;
     attributes: T;
   };
-}
-
-export interface HomePageItemResponse {
-  text_1: string;
-  text_2: string;
-  background: boolean;
-  banner: StrapiFindOneResponse<{
-    width: number;
-    height: number;
-    url: string;
-    placeholder: string;
-  }>;
-  section: Array<{
-    title: string;
-    description: string;
-    variant: 'primary' | 'secondary';
-    to: AppRoutes;
-    navigation_title: string;
-    type: 'product' | 'opportunity';
-    image: StrapiFindOneResponse<{
-      width: number;
-      height: number;
-      url: string;
-      placeholder: string;
-    }>;
-  }>;
 }
 
 export interface StrapiImage {
@@ -83,8 +55,4 @@ interface Format {
 interface ProviderMetadata {
   public_id: string;
   resource_type: 'image' | 'video';
-}
-
-export interface CreditStrapiResponse {
-  interest_rate: number;
 }

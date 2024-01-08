@@ -15,7 +15,9 @@ interface GetCurrencyResponse {
 
 export const getCurrencyByType = async (type: keyof typeof CurrencyId) => {
   const response = await fetch(`https://api.nbrb.by/exrates/rates/${CurrencyId[type]}`, {
-    cache: 'no-cache',
+    next: {
+      revalidate: 60,
+    },
   });
   const data = (await response.json()) as GetCurrencyResponse;
 

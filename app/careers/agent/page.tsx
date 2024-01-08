@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 import AgentPage from '@/src/app-pages/AgentPage';
-import { getAgentPageData } from '@/src/services/careersServices';
+import { getAgentPageData } from '@/src/services';
 import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services/seoServices';
 
 export async function generateMetadata(): Promise<Metadata> {

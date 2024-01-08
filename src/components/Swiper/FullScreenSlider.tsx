@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import 'swiper/css/zoom';
-import { Navigation, Keyboard, Thumbs, Zoom, Lazy } from 'swiper/modules';
+import { Navigation, Keyboard, Thumbs, Zoom } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import CrossIcon from '@/public/plus.svg';
@@ -10,6 +10,7 @@ import WithDisabledScroll from '@/src/components/common/WithDisabledScroll';
 import { WindowWidth } from '@/src/enums/Width';
 import { getVideoId } from '@/src/helpers/videoHelpers';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
+import { ImageTypeWithThumb } from '@/src/types/ImageType';
 import { ProductType } from '@/src/types/Product';
 import { StrapiVideo } from '@/src/types/VideoLink';
 
@@ -17,13 +18,7 @@ import SliderButton from './SliderButton';
 
 interface FullScreenSliderProps {
   closeModal: () => void;
-  images: Array<{
-    width: number;
-    height: number;
-    url: string;
-    placeholderUrl: string;
-    thumb: { url: string; width: number; height: number; placeholderUrl: string };
-  }>;
+  images: Array<ImageTypeWithThumb>;
   type: ProductType;
   initialSlide: number;
   video?: StrapiVideo;
@@ -130,7 +125,7 @@ const FullScreenSlider = ({
                 />
               </SwiperSlide>
             )}
-            {images.map(({ url, height, width, placeholderUrl }) => (
+            {images.map(({ url, height, width, placeholder }) => (
               <SwiperSlide
                 className={clsx('!w-full', 'swiper-zoom-container')}
                 style={{
@@ -150,7 +145,7 @@ const FullScreenSlider = ({
                   unoptimized
                   className={clsx('object-contain', 'w-full', 'h-full')}
                   placeholder="blur"
-                  blurDataURL={placeholderUrl}
+                  blurDataURL={placeholder}
                 />
               </SwiperSlide>
             ))}

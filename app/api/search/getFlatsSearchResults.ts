@@ -1,10 +1,9 @@
+import { FlatItemsStrapiResponse } from '@/src/api/flats';
 import { getUrlByType } from '@/src/helpers/apiHelpers';
 import { formatResponseToSearchResult } from '@/src/helpers/formatters';
 import { getSearchFieldQuery } from '@/src/services/filtersDataServices';
 import { SearchResults } from '@/src/types/Filters';
-import { FlatStrapiResponse } from '@/src/types/Flats';
 import { ProductType } from '@/src/types/Product';
-import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 export const getFlatsSearchResults = async (
   value: string,
@@ -21,7 +20,7 @@ export const getFlatsSearchResults = async (
     },
   });
 
-  const { data } = (await response.json()) as StrapiFindResponse<FlatStrapiResponse>;
+  const { data } = (await response.json()) as FlatItemsStrapiResponse;
 
   return formatResponseToSearchResult(data, value);
 };

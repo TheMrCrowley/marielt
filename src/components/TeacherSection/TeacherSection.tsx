@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 import AgentPlaceholder from '@/public/agentPlaceholder.jpg';
 import LinkButton from '@/src/components/LinkButton';
 import Typography from '@/src/components/common/Typography';
+import { ImageType } from '@/src/types/ImageType';
 
 type TeacherSectionProps = {
   item: {
@@ -12,7 +13,7 @@ type TeacherSectionProps = {
     name: string;
     position: string;
     description?: string;
-    photo?: { width: number; height: number; url: string; placeholder: string };
+    photo?: ImageType;
   };
   withoutLink?: boolean;
 };

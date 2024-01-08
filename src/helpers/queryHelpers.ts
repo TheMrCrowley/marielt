@@ -37,57 +37,6 @@ export const getPaginationQuery = (type: ViewType, page?: string) => {
   });
 };
 
-export const getDefaultFlatListPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
-        },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['floor', 'living_area', 'floors_number', 'total_area'],
-        },
-        location: '*',
-      },
-    },
-    { encodeValuesOnly: true },
-  );
-};
-
-export const getDefaultCommercialListPopulateQuery = () => {
-  return qs.stringify(
-    {
-      populate: {
-        price_total: {
-          populate: '*',
-        },
-        price_meter: {
-          populate: '*',
-        },
-        image: {
-          fields: ['width', 'height', 'url', 'placeholder'],
-        },
-        house_number: {
-          fields: ['number'],
-        },
-        parameters: {
-          fields: ['plot_size', 'floor', 'floors_number', 'living_area'],
-          populate: {
-            premises_area: {
-              populate: '*',
-            },
-          },
-        },
-        location: '*',
-      },
-    },
-    { encodeValuesOnly: true },
-  );
-};
-
 export const getDefaultMapPopulateQuery = () => {
   return qs.stringify(
     {
@@ -101,4 +50,27 @@ export const getDefaultMapPopulateQuery = () => {
   );
 };
 
-export const concatQueries = (queries: string[]) => `?${queries.join('&')}`;
+export const getIdsQuery = (ids: string[]) => {
+  return qs.stringify(
+    {
+      filters: {
+        id: {
+          $in: ids,
+        },
+      },
+    },
+    { encodeValuesOnly: true },
+  );
+};
+
+export const getActualItemQuery = () =>
+  qs.stringify(
+    {
+      filters: {
+        home_page: true,
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  );

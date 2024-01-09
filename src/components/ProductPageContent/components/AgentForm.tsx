@@ -116,14 +116,14 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
             <div className={clsx('flex', 'flex-col')}>
               <div className="flex gap-2">
                 <Image alt="phone" src={PhoneIcon} />
-                <Typography fontSize={14} fontWeight="medium" color="#000000">
+                <Typography fontSize={16} fontWeight="medium" color="#000000">
                   {getPhone(phone1, isPhoneVisible)}
                 </Typography>
               </div>
               {phone2 && (
                 <div className="flex gap-2">
                   <Image alt="phone" src={PhoneIcon} />
-                  <Typography fontSize={14} fontWeight="medium" color="#000000">
+                  <Typography fontSize={16} fontWeight="medium" color="#000000">
                     {getPhone(phone2, isPhoneVisible)}
                   </Typography>
                 </div>

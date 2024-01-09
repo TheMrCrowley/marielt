@@ -49,7 +49,7 @@ const CommercialArea = ({
         <Typography fontSize={14} fontWeight="medium">
           {totalArea.minArea}
           {totalArea.maxArea && `-${totalArea.maxArea}`}
-          <span className={clsx('text-xs', 'opacity-50')}>м²</span>
+          <span className={clsx('text-xs', 'opacity-50')}> м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>площадь</p>
       </div>

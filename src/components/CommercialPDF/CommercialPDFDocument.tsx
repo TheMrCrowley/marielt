@@ -62,6 +62,11 @@ const CommercialPDFDocument = ({
           gap: '10px',
         }}
       >
+        <View style={{ marginLeft: 'auto' }}>
+          <Text style={{ fontSize: '10px' }}>Отдел коммерческой недвижимости:</Text>
+          <Text style={{ fontSize: '10px', marginLeft: 'auto' }}>+375 33 380-85-85</Text>
+          <Text style={{ fontSize: '10px', marginLeft: 'auto' }}>+375 29 380-85-85</Text>
+        </View>
         <View
           style={{
             width: '100%',
@@ -69,9 +74,10 @@ const CommercialPDFDocument = ({
             justifyContent: 'flex-start',
             alignItems: 'center',
             borderBottom: '1px solid #E3C496',
+            borderTop: '1px solid #E3C496',
             flexDirection: 'row',
+            padding: '16px 0',
             gap: '16px',
-            paddingBottom: '16px',
           }}
         >
           <Image
@@ -88,6 +94,7 @@ const CommercialPDFDocument = ({
           <View>
             <Text style={{ fontSize: '10px' }}>+375 17 322 73 22</Text>
             <Text style={{ fontSize: '10px' }}>+375 29 710-20-20</Text>
+
             <Text style={{ fontSize: '10px' }}>
               ул. Кальварийская 42, оф. 72, ст. м. Молодёжная
             </Text>

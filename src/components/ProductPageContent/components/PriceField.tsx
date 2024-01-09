@@ -93,7 +93,7 @@ const PriceField: FC<PriceFieldProps> = ({ price, initialCurrency, totalArea }) 
     <div
       className={clsx(
         'flex',
-        'lg:justify-center',
+
         'justify-start',
         'items-center',
         'flex-wrap',

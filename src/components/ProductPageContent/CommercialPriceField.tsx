@@ -33,11 +33,10 @@ const CommercialPriceField = ({
   return (
     <div
       className={clsx(
-        'w-full',
+        'w-max',
         'flex',
         'flex-col',
-        'lg:justify-center',
-        'justify-start',
+        'justify-ce',
         'items-center',
         'flex-wrap',
         'lg:gap-4',

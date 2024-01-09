@@ -40,9 +40,7 @@ const Characteristics = ({
             i % 2 ? 'bg-primary-bold' : 'bg-primary',
           )}
         >
-          <Typography fontWeight="light" className="capitalize">
-            {name}
-          </Typography>
+          <Typography fontWeight="light">{name}</Typography>
           <Typography
             fontWeight="light"
             fontSize={16}

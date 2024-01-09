@@ -23,7 +23,7 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {totalArea} <span className={clsx('text-xs', 'opacity-50')}>м²</span>
+          {totalArea} <span className={clsx('text-xs', 'opacity-50')}> м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>общая</p>
       </div>
@@ -38,7 +38,7 @@ const CardArea = ({ livingArea, plotSize, totalArea, priceByMeter }: CardAreaPro
     return (
       <div className={clsx('flex', 'flex-col')}>
         <Typography fontSize={14} fontWeight="medium">
-          {livingArea} <span className={clsx('text-xs', 'opacity-50')}>м²</span>
+          {livingArea} <span className={clsx('text-xs', 'opacity-50')}> м²</span>
         </Typography>
         <p className={clsx('text-white', 'text-xs', 'font-light')}>жилая</p>
       </div>

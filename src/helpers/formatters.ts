@@ -189,7 +189,7 @@ export function formatItemToCharacteristics<
   item.additionalInfo
     ?.filter((info) => !!info.name)
     .forEach(({ name }) => {
-      result.push({ name, value: 'Да' });
+      result.push({ name, value: 'да' });
     });
 
   const keySet = new Set<string>();

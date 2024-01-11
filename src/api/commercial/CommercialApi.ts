@@ -675,6 +675,9 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
     const populateQuery = qs.stringify(
       {
         populate: {
+          house_number: {
+            fields: ['number'],
+          },
           price_total: {
             populate: '*',
           },

@@ -14,9 +14,8 @@ interface FlatsListProps {
 const FlatsList = ({ flats, pagination }: FlatsListProps) => {
   return (
     <ProductListWrapper pagination={pagination}>
-      {flats.map((flat) => (
-        <FlatCard flatItem={flat} key={`flats-list-flats-item-${flat.id}`} />
-      ))}
+      {!!flats.length &&
+        flats.map((flat) => <FlatCard flatItem={flat} key={`flats-list-flats-item-${flat.id}`} />)}
     </ProductListWrapper>
   );
 };

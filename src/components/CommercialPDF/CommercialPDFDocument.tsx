@@ -121,7 +121,7 @@ const CommercialPDFDocument = ({
         </View>
         {additional && (
           <View style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
-            <Text style={{ fontSize: '16px', color: '#E3C496' }}>Стоимость за м²: </Text>
+            <Text style={{ fontSize: '16px', color: '#E3C496' }}>Цена за м²: </Text>
             <Text
               style={{
                 padding: '4px 8px',

@@ -129,7 +129,7 @@ export const commercialCharacteristicsMap: Partial<
   }),
   isGroundFloor: () => ({
     name: 'Цокольный этаж',
-    value: 'Да',
+    value: 'да',
   }),
   ceilingHeight: (value) => ({
     name: 'Высота потолков',

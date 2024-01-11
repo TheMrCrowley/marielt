@@ -362,6 +362,9 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
           coordinates: {
             populate: '*',
           },
+          house_number: {
+            fields: ['number'],
+          },
         },
       },
       {

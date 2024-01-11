@@ -15,7 +15,7 @@ const VatToggleFilter = () => {
       isMulti={false}
       values={vat}
       items={[
-        { value: 'НДС включен', label: 'НДС включен' },
+        { value: 'НДС 20%', label: 'НДС 20%' },
         { value: 'НДС 0', label: 'НДС 0' },
       ]}
       onChange={(selected) => updateFilters({ vat: selected })}

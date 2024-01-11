@@ -29,7 +29,7 @@ const ProductListWrapper = ({
 
     return pathname + '/map' + '?' + currentSearchParams.toString();
   };
-
+  console.log(children);
   const renderProducts = () => {
     if (children) {
       return (

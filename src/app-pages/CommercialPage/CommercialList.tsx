@@ -11,15 +11,12 @@ interface CommercialListProps {
 }
 
 const CommercialList = ({ commercial, pagination }: CommercialListProps) => {
-  if (!commercial.length) {
-    return null;
-  }
-
   return (
     <ProductListWrapper pagination={pagination}>
-      {commercial.map((item) => (
-        <CommercialCard commercialItem={item} key={`flats-list-flats-item-${item.id}`} />
-      ))}
+      {!!commercial.length &&
+        commercial.map((item) => (
+          <CommercialCard commercialItem={item} key={`flats-list-flats-item-${item.id}`} />
+        ))}
     </ProductListWrapper>
   );
 };

@@ -13,9 +13,10 @@ interface HousesAndLotsListProps {
 const HousesAndLotsList = ({ housesAndLots, pagination }: HousesAndLotsListProps) => {
   return (
     <ProductListWrapper pagination={pagination}>
-      {housesAndLots.map((item) => (
-        <HousesAndLotsCard housesAndLotsItem={item} key={`flats-list-flats-item-${item.id}`} />
-      ))}
+      {!!housesAndLots.length &&
+        housesAndLots.map((item) => (
+          <HousesAndLotsCard housesAndLotsItem={item} key={`flats-list-flats-item-${item.id}`} />
+        ))}
     </ProductListWrapper>
   );
 };

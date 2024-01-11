@@ -61,7 +61,7 @@ const Footer = () => {
                 'mb-8',
               )}
             />
-            <div className={clsx('flex', 'flex-col', 'gap-6', 'opacity-50')}>
+            <div className={clsx('flex', 'flex-col', 'gap-6', 'opacity-50', 'mb-4')}>
               <Typography fontSize={16}>
                 Юридические{' '}
                 <Link href={AppRoutes.Docs} className="underline text-secondary">
@@ -70,6 +70,13 @@ const Footer = () => {
                 , на основании которых работает компания
               </Typography>
             </div>
+            <Title variant="h2" fontSize={24} fontWeight="medium" className="mb-4">
+              Отдел коммерческой недвижимости:
+            </Title>
+            <ul className={clsx('flex', 'flex-col', 'gap-4')}>
+              <ContactItem type="phone">+375 33 380-85-85</ContactItem>
+              <ContactItem type="phone">+375 29 380-85-85</ContactItem>
+            </ul>
           </div>
           <div className={clsx('flex', 'flex-col', 'min-w-max')}>
             <Title variant="h2" fontSize={36} fontWeight="medium" className="xl:mb-12 mb-8">
@@ -112,7 +119,7 @@ const Footer = () => {
               Адрес
             </Title>
             <ul className={clsx('flex', 'flex-col', 'gap-4')}>
-              <ContactItem type="address">
+              <ContactItem type="address" iconClassName="self-center">
                 ул. Кальварийская 42, оф. 68, <br /> ст. м. Молодёжная
               </ContactItem>
               <Typography>Время работы:</Typography>

@@ -20,6 +20,7 @@ import { CurrencyState } from '@/src/store/currency';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
+import { SortValues } from './../../enums/SortOptions';
 import { getIdsQuery, getActualItemQuery } from './../../helpers/queryHelpers';
 import {
   AbstractCommercialApi,
@@ -769,6 +770,24 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
     };
   }
 
+  private getSortQuery(sort: string): string {
+    const convertedSort =
+      sort === SortValues.PriceAsc
+        ? 'price_meter.from:asc'
+        : sort === SortValues.PriceDesc
+        ? 'price_meter.from:desc'
+        : 'createdAt:desc';
+
+    return qs.stringify(
+      {
+        sort: convertedSort,
+      },
+      {
+        encodeValuesOnly: true,
+      },
+    );
+  }
+
   public async getCommercialForList(
     searchParams: Record<string, string | string[]>,
   ): Promise<CommercialItemsStrapiResponse> {
@@ -781,12 +800,14 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
 
     const paginationQuery = getPaginationQuery('list', searchParams.page as string);
     const populateQuery = getDefaultCommercialListPopulateQuery();
+    const sortQuery = this.getSortQuery(searchParams.sort as string);
 
     const url = this.getUrlWithQueries(
       this.commercialApiUrl,
       filterQuery,
       paginationQuery,
       populateQuery,
+      sortQuery,
     );
 
     const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);

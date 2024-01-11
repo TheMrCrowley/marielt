@@ -7,7 +7,7 @@ export enum SortLabels {
 export enum SortValues {
   PriceDesc = 'price:desc',
   PriceAsc = 'price:asc',
-  DateAsc = 'createdAt:asc',
+  DateAsc = 'createdAt:desc',
 }
 
 export const sortOptions = [

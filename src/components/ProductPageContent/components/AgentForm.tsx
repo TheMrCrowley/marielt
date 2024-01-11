@@ -12,6 +12,7 @@ import Button from '@/src/components/common/Button';
 import CustomerForm from '@/src/components/common/CustomerForm';
 import Typography from '@/src/components/common/Typography';
 import { WindowWidth } from '@/src/enums/Width';
+import { phoneNumberMask } from '@/src/helpers/phoneNumberMask';
 import { useWindowSize } from '@/src/hooks/useWindowSize';
 import { sendAgentApplication } from '@/src/services/applicationServices';
 import { handleContactsViews } from '@/src/services/localStorageServices';
@@ -116,16 +117,32 @@ const AgentForm = ({ agentData, type, productId }: AgentFormProps) => {
             <div className={clsx('flex', 'flex-col')}>
               <div className="flex gap-2">
                 <Image alt="phone" src={PhoneIcon} />
-                <Typography fontSize={16} fontWeight="medium" color="#000000">
-                  {getPhone(phone1, isPhoneVisible)}
-                </Typography>
+                {isPhoneVisible ? (
+                  <a href={`tel:${phone1}`}>
+                    <Typography className="!text-lg" fontWeight="medium" color="#000000">
+                      {phoneNumberMask(getPhone(phone1, isPhoneVisible))}
+                    </Typography>
+                  </a>
+                ) : (
+                  <Typography className="!text-lg" fontWeight="medium" color="#000000">
+                    {phoneNumberMask(getPhone(phone1, isPhoneVisible))}
+                  </Typography>
+                )}
               </div>
               {phone2 && (
                 <div className="flex gap-2">
                   <Image alt="phone" src={PhoneIcon} />
-                  <Typography fontSize={16} fontWeight="medium" color="#000000">
-                    {getPhone(phone2, isPhoneVisible)}
-                  </Typography>
+                  {isPhoneVisible ? (
+                    <a href={`tel:${phone2}`}>
+                      <Typography className="!text-lg" fontWeight="medium" color="#000000">
+                        {phoneNumberMask(getPhone(phone2, isPhoneVisible))}
+                      </Typography>
+                    </a>
+                  ) : (
+                    <Typography className="!text-lg" fontWeight="medium" color="#000000">
+                      {phoneNumberMask(getPhone(phone2, isPhoneVisible))}
+                    </Typography>
+                  )}
                 </div>
               )}
             </div>

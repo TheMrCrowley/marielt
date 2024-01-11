@@ -42,14 +42,49 @@ const InternSection = () => {
       </div>
       <div className="max-w-7xl w-full flex flex-col gap-4">
         <Title fontSize={24}>Чему научитесь и что вам это даст</Title>
-        <div className="flex max-w-xl gap-8 flex-wrap justify-center items-center">
-          <Typography fontWeight="light">Психология</Typography>
-          <Typography fontWeight="light">Типология</Typography>
-          <Typography fontWeight="light">Целеполагание</Typography>
-          <Typography fontWeight="light">Уверенность</Typography>
-          <Typography fontWeight="light">Дисциплина</Typography>
-          <Typography fontWeight="light">Ответственность</Typography>
-          <Typography fontWeight="light">и многое другое</Typography>
+        <div className="flex flex-col max-w-xl gap-4 flex-wrap">
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Психология
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Типология
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Целеполагание
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Уверенность
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Дисциплина
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            Ответственность
+          </Typography>
+          <Typography
+            className="pl-4 relative before before:block before:w-2 before:h-2 before:bg-secondary before:z-30 before:absolute before:left-0 before:-translate-y-1/2 before:top-1/2 overflow-hidden"
+            fontWeight="light"
+          >
+            И многое другое
+          </Typography>
         </div>
       </div>
     </section>

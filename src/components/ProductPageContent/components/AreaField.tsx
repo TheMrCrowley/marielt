@@ -25,18 +25,7 @@ const AreaField = ({ children }: PropsWithChildren) => {
       <Title variant="h2" fontSize={24} fontWeight={'medium'}>
         Площадь
       </Title>
-      <div
-        className={clsx(
-          'flex',
-          'lg:justify-center',
-          'xs:justify-start',
-          'justify-center',
-          'items-center',
-          'my-auto',
-          'px-4',
-          'gap-6',
-        )}
-      >
+      <div className={clsx('flex', 'justify-start', 'items-center', 'my-auto', 'px-4', 'gap-6')}>
         {children}
       </div>
     </div>

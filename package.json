@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "next dev --turbo -H 192.168.0.106",
+    "serve": "next dev --turbo -- -H 192.168.0.101",
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",

@@ -36,7 +36,7 @@ export const formatToDefaultMapItem = (
   }));
 
 export const convertToMonetary = (value: number, type: AvailableCurrencies) =>
-  new Intl.NumberFormat('by-BY', {
+  new Intl.NumberFormat('ru-RU', {
     currency: type,
     style: 'currency',
     currencyDisplay: 'code',
@@ -45,7 +45,7 @@ export const convertToMonetary = (value: number, type: AvailableCurrencies) =>
   }).format(value);
 
 export const convertToSign = (value: number, type: AvailableCurrencies) =>
-  new Intl.NumberFormat('by-BY', {
+  new Intl.NumberFormat('ru', {
     currency: type,
     style: 'currency',
     currencyDisplay: 'narrowSymbol',

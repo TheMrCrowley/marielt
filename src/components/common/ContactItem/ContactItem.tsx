@@ -10,16 +10,17 @@ import Typography from '@/src/components/common/Typography';
 
 interface ContactItemProps extends PropsWithChildren {
   type: 'phone' | 'email' | 'address' | 'clock';
+  iconClassName?: string;
 }
 
 // TODO extend this with components for cards
-const ContactItem = ({ type, children }: ContactItemProps) => {
+const ContactItem = ({ type, children, iconClassName }: ContactItemProps) => {
   const renderByType = () => {
     switch (type) {
       case 'phone':
         return (
           <>
-            <Image src={PhoneIcon} alt={type} className="self-end" />
+            <Image src={PhoneIcon} alt={type} className={clsx('self-end', iconClassName)} />
             <a href={`tel:${children}`} className="no-underline">
               <Typography fontWeight="medium">{children}</Typography>
             </a>
@@ -28,7 +29,7 @@ const ContactItem = ({ type, children }: ContactItemProps) => {
       case 'email':
         return (
           <>
-            <Image src={EmailIcon} alt={type} className="self-end" />
+            <Image src={EmailIcon} alt={type} className={clsx('self-end', iconClassName)} />
             <a href={`mailto:${children}`} className="no-underline">
               <Typography fontWeight="medium">{children}</Typography>
             </a>
@@ -37,14 +38,14 @@ const ContactItem = ({ type, children }: ContactItemProps) => {
       case 'address':
         return (
           <>
-            <Image src={MapPinIcon} alt={type} className="self-end" />
+            <Image src={MapPinIcon} alt={type} className={clsx('self-end', iconClassName)} />
             <Typography fontWeight="medium">{children}</Typography>
           </>
         );
       case 'clock':
         return (
           <>
-            <Image src={TimeIcon} alt={type} className="self-end" />
+            <Image src={TimeIcon} alt={type} className={clsx('self-end', iconClassName)} />
             <Typography fontWeight="medium">{children}</Typography>
           </>
         );

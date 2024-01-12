@@ -127,7 +127,7 @@ export enum BalconyValues {
 
 export const balconyOptions: OptionType<BalconyValues> = [
   { value: BalconyValues.None, label: 'Нет' },
-  { value: BalconyValues.Balcony, label: 'Есть' },
+  { value: BalconyValues.Balcony, label: 'есть' },
   { value: BalconyValues.Loggia, label: 'Лоджия' },
 ];
 

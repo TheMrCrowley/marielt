@@ -149,43 +149,43 @@ export const commercialCharacteristicsMap: Partial<
   }),
   equipment: () => ({
     name: 'Оборудование',
-    value: 'Есть',
+    value: 'есть',
   }),
   daylight: () => ({
     name: 'Естественное освещение',
-    value: 'Есть',
+    value: 'есть',
   }),
   electricity: () => ({
     name: 'Электроснабжение',
-    value: 'Есть',
+    value: 'есть',
   }),
   heating: () => ({
     name: 'Отопление',
-    value: 'Есть',
+    value: 'есть',
   }),
   gas: () => ({
     name: 'Газоснабжение',
-    value: 'Есть',
+    value: 'есть',
   }),
   water: () => ({
     name: 'Вода',
-    value: 'Есть',
+    value: 'есть',
   }),
   bathroom: () => ({
     name: 'Санузел',
-    value: 'Есть',
+    value: 'есть',
   }),
   ventilation: () => ({
     name: 'Вентиляция',
-    value: 'Есть',
+    value: 'есть',
   }),
   sewerage: () => ({
     name: 'Канализация',
-    value: 'Есть',
+    value: 'есть',
   }),
   furniture: () => ({
     name: 'Мебель',
-    value: 'Есть',
+    value: 'есть',
   }),
   location: (value) => ({
     name: 'Расположение',
@@ -193,10 +193,10 @@ export const commercialCharacteristicsMap: Partial<
   }),
   separateEntrance: () => ({
     name: 'Отдельный вход',
-    value: 'Есть',
+    value: 'есть',
   }),
   ramp: () => ({
     name: 'Погрузка/разгрузка/рампа',
-    value: 'Есть',
+    value: 'есть',
   }),
 };

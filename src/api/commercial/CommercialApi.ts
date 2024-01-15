@@ -355,7 +355,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
                     !!areaFrom &&
                       !areaTo && {
                         min_area: {
-                          $lte: areaFrom,
+                          $gte: areaFrom,
                         },
                         max_area: {
                           $null: true,

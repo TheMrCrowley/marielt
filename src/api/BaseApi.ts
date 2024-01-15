@@ -29,6 +29,7 @@ export default class BaseApi {
     try {
       const response = await fetch(url, {
         ...options,
+
         next: {
           revalidate: BASE_REVALIDATE_TIME,
         },

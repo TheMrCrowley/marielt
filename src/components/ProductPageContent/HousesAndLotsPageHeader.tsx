@@ -23,6 +23,7 @@ interface HousesAndLotsPageHeaderProps {
   direction?: string;
   distance?: string;
   childCategory?: string;
+  metro?: string;
 }
 
 const HousesAndLotsPageHeader = ({
@@ -38,6 +39,7 @@ const HousesAndLotsPageHeader = ({
   direction,
   childCategory,
   distance,
+  metro,
 }: HousesAndLotsPageHeaderProps) => {
   const renderAreas = () => (
     <>
@@ -88,6 +90,12 @@ const HousesAndLotsPageHeader = ({
                 {address}
               </Typography>
             </div>
+            {metro && (
+              <div className={clsx('flex', 'gap-1.5')}>
+                <Image alt="map-pin" src={LocationIcon} />
+                <Typography fontSize={16}>Метро: {metro}</Typography>
+              </div>
+            )}
             {direction && (
               <div className={clsx('flex', 'gap-1.5')}>
                 <Image alt="direction" src={DirectionIcon} />

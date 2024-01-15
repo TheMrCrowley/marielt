@@ -48,6 +48,7 @@ export type DetailedFlatItem = {
   note?: string;
   images: Array<ImageTypeWithThumb>;
   video?: StrapiVideo;
+  metro?: string;
   agents?: {
     fullName: string;
     phone1: string;

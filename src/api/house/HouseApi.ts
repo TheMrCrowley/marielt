@@ -307,6 +307,11 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
               fields: ['name'],
             },
           },
+          metro: {
+            populate: {
+              fields: ['name'],
+            },
+          },
           parameters: {
             populate: '*',
           },

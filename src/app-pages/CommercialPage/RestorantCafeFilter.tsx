@@ -8,6 +8,7 @@ import CommercialFloorFilter from '@/src/components/CommercialFilters/Commercial
 import CommercialLocationFilter from '@/src/components/CommercialFilters/CommercialLocationFilter';
 import CommercialRampToggle from '@/src/components/CommercialFilters/CommercialRampToggle';
 import SeparateEntrance from '@/src/components/CommercialFilters/SeparateEntrance';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
@@ -80,6 +81,8 @@ const RestorantCafeFilter = ({ applyFilters }: RestorantCafeFilterProps) => {
         <CommercialFinishingFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <VatToggleFilter />
+
         <CommercialBathroomToggle />
         <SeparateEntrance />
         <CommercialRampToggle />

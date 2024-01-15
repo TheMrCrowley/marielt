@@ -119,6 +119,7 @@ export const convertToDetailedHouseItem = ({
   images: formatToPageImages(attributes.image?.data),
   distance: attributes.distance,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
+  metro: attributes.metro?.data?.attributes.name,
 });
 
 export const getDefaultHouseListPopulateQuery = () => {

@@ -431,6 +431,7 @@ export const getCommercialFiltersToApply = (
     bathroom,
     separateEntrance,
     furniture,
+    vat,
   };
 
   const shopFilters = {
@@ -451,6 +452,7 @@ export const getCommercialFiltersToApply = (
     bathroom,
     separateEntrance,
     ramp,
+    vat,
   };
 
   const cafeFilters = {
@@ -469,6 +471,7 @@ export const getCommercialFiltersToApply = (
     bathroom,
     separateEntrance,
     ramp,
+    vat,
   };
 
   const warehouseFilters = {
@@ -489,6 +492,7 @@ export const getCommercialFiltersToApply = (
     sewerage,
     electricity,
     ramp,
+    vat,
   };
 
   const productionFilters = {
@@ -507,9 +511,10 @@ export const getCommercialFiltersToApply = (
     sewerage,
     electricity,
     gas,
+    vat,
   };
 
-  const plotFilters = { propertyType, plotAreaFrom, plotAreaTo, directions, distance };
+  const plotFilters = { propertyType, plotAreaFrom, plotAreaTo, directions, distance, vat };
 
   const rentBusiness = {
     propertyType,

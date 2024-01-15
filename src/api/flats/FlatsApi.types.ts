@@ -48,6 +48,13 @@ interface FlatResponse {
       };
     };
   };
+  metro?: {
+    data: {
+      attributes: {
+        name: string;
+      };
+    };
+  };
   locality: string;
   street?: string;
   district_rb?: string;

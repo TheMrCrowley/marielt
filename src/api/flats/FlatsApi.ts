@@ -351,6 +351,11 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
               fields: ['name'],
             },
           },
+          metro: {
+            populate: {
+              fields: ['name'],
+            },
+          },
           microdistrict: {
             populate: {
               fields: ['name'],

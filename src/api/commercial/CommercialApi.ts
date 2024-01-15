@@ -709,6 +709,11 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
               fields: ['name'],
             },
           },
+          metro: {
+            populate: {
+              fields: ['name'],
+            },
+          },
           microdistrict: {
             populate: {
               fields: ['name'],

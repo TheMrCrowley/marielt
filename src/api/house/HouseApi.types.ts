@@ -76,6 +76,7 @@ interface HousesResponse {
     name: string;
   }>;
   direction: StrapiFindOneResponse<{ name: string }>;
+  metro?: StrapiFindOneResponse<{ name: string }>;
 }
 
 export type HouseStrapiResponse = StrapiFindOneResponse<HousesResponse>;

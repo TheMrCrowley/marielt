@@ -145,6 +145,7 @@ export const convertToDetailedCommercial = ({
   note: attributes.note,
   detailedDescription: attributes.detailed_description,
   video: attributes.video_link ? JSON.parse(attributes.video_link) : undefined,
+  metro: attributes.metro?.data?.attributes.name,
 });
 
 export const getDefaultCommercialListPopulateQuery = () => {

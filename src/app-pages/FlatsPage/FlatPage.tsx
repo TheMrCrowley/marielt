@@ -59,6 +59,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
     detailedDescription,
     video,
     id,
+    metro,
   } = flat;
 
   const { roominess, floor, maxFloor, constructionYear, totalArea, livingArea, kitchenArea } =
@@ -92,6 +93,7 @@ const FlatPage = async ({ flat }: FlatPageProps) => {
             kitchenArea={kitchenArea}
             initialCurrency={initialCurrency}
             price={+price!}
+            metro={metro}
           />
         }
         creditCalculator={

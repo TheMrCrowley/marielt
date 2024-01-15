@@ -60,6 +60,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
     id,
     type,
     distance,
+    metro,
   } = item;
 
   const { constructionYear, totalArea, livingArea, plotSize } = item.parameters;
@@ -105,6 +106,7 @@ const HousesAndLotsProductPage = async ({ item }: HousesAndLotsProductPageProps)
             title={name}
             direction={direction}
             distance={distance}
+            metro={metro}
           />
         }
       />

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import PropertyTypeFilter from '@/src/components/CommercialFilters/PropertyTypeFilter';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import DirectionFilter from '@/src/components/filters/DirectionFilter';
 import DistanceFilter from '@/src/components/filters/DistanceFilter';
@@ -59,6 +60,7 @@ const PlotsFilters = ({ applyFilters }: PlotsFiltersProps) => {
           values={directions}
         />
         <DistanceFilter distance={distance} onChange={updateFilters} />
+        <VatToggleFilter />
       </div>
       <Button className={clsx('sm:self-center', 'mt-auto')} onClick={onApply}>
         Применить

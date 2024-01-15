@@ -9,6 +9,7 @@ import CommercialFurnitureToggle from '@/src/components/CommercialFilters/Commer
 import CommercialLocationFilter from '@/src/components/CommercialFilters/CommercialLocationFilter';
 import CommercialSeparateRooms from '@/src/components/CommercialFilters/CommercialSeparateRooms';
 import SeparateEntrance from '@/src/components/CommercialFilters/SeparateEntrance';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
@@ -82,6 +83,7 @@ const OfficeFilter = ({ applyFilters }: OfficeFilterProps) => {
         <CommercialFinishingFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <VatToggleFilter />
         <CommercialBathroomToggle />
         <SeparateEntrance />
         <CommercialFurnitureToggle />

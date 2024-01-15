@@ -218,6 +218,7 @@ export const flatCharacteristicsMap: Partial<
     (value?: string | boolean) => { name: string; value: string }
   >
 > = {
+  roominess: (value) => ({ name: 'Комнатность', value: value as string }),
   houseType: (value) => ({ name: 'Тип дома', value: value as string }),
   separateRooms: (value) => ({ name: 'Раздельных комнат', value: value as string }),
   shareInApartment: (value) => ({ name: 'Доля в квартире', value: value as string }),

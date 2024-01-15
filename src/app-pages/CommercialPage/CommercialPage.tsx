@@ -82,6 +82,7 @@ const CommercialPage = async ({ commercial }: CommercialPageProps) => {
             type={commercial.type}
             priceMeter={commercial.pricePerMeter}
             priceTotal={commercial.totalPrice}
+            metro={commercial.metro}
           />
         }
         similarObjectsField={

@@ -144,7 +144,7 @@ export const commercialCharacteristicsMap: Partial<
     value: value as string,
   }),
   finishing: (value) => ({
-    name: 'Состояние дома',
+    name: 'Состояние помещения',
     value: value as string,
   }),
   equipment: () => ({

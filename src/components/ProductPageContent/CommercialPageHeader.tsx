@@ -21,6 +21,7 @@ interface CommercialPageHeaderProps {
   distance?: string;
   priceTotal?: DetailedCommercialItem['totalPrice'];
   priceMeter?: DetailedCommercialItem['pricePerMeter'];
+  metro?: string;
 }
 
 const CommercialPageHeader = ({
@@ -33,6 +34,7 @@ const CommercialPageHeader = ({
   initialCurrency,
   priceMeter,
   priceTotal,
+  metro,
 }: CommercialPageHeaderProps) => {
   return (
     <ProductHeader
@@ -49,6 +51,12 @@ const CommercialPageHeader = ({
                 {address}
               </Typography>
             </div>
+            {metro && (
+              <div className={clsx('flex', 'gap-1.5')}>
+                <Image alt="map-pin" src={LocationIcon} />
+                <Typography fontSize={16}>Метро: {metro}</Typography>
+              </div>
+            )}
             {direction && (
               <div className={clsx('flex', 'gap-1.5')}>
                 <Image alt="direction" src={DirectionIcon} />

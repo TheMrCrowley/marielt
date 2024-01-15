@@ -9,6 +9,7 @@ import CommercialSewerageToggle from '@/src/components/CommercialFilters/Commerc
 import CommercialWallMaterialFilter from '@/src/components/CommercialFilters/CommercialWallMaterialFilter';
 import CommercialWaterToggle from '@/src/components/CommercialFilters/CommercialWaterToggle';
 import PropertyTypeFilter from '@/src/components/CommercialFilters/PropertyTypeFilter';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
@@ -90,6 +91,8 @@ const WarehousesFilter = ({ applyFilters }: WarehousesFilterProps) => {
         <DistanceFilter distance={distance} onChange={updateFilters} />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
+        <VatToggleFilter />
+
         <CommercialHeatingToggle />
         <CommercialWaterToggle />
         <CommercialSewerageToggle />

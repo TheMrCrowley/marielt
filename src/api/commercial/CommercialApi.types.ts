@@ -101,6 +101,7 @@ type CommercialResponse = Partial<{
     latitude: number;
     longitude: number;
   };
+  metro: StrapiFindOneResponse<{ name: string }>;
 }>;
 
 export type CommercialStrapiResponse = StrapiFindOneResponse<CommercialResponse>;

@@ -101,6 +101,7 @@ export type DetailedCommercialItem = {
     branch?: string;
     position?: string;
   };
+  metro?: string;
 } & DefaultCommercialItem;
 
 export interface CommercialTransaction {

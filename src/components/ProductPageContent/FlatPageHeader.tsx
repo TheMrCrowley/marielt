@@ -13,6 +13,7 @@ import Typography from '@/src/components/common/Typography';
 import { AvailableCurrencies } from '@/src/types/Currency';
 
 interface FlatPageHeaderProps {
+  initialCurrency: AvailableCurrencies;
   address?: string;
   title?: string;
   roominess?: string;
@@ -22,8 +23,8 @@ interface FlatPageHeaderProps {
   totalArea?: string;
   livingArea?: string;
   kitchenArea?: string;
-  initialCurrency: AvailableCurrencies;
   price?: number;
+  metro?: string;
 }
 
 const FlatPageHeader = ({
@@ -38,6 +39,7 @@ const FlatPageHeader = ({
   livingArea,
   price,
   totalArea,
+  metro,
 }: FlatPageHeaderProps) => {
   const renderAreas = () => (
     <>
@@ -89,6 +91,12 @@ const FlatPageHeader = ({
               <Image alt="map-pin" src={LocationIcon} />
               <Typography fontSize={16}>{address}</Typography>
             </div>
+            {metro && (
+              <div className={clsx('flex', 'gap-1.5')}>
+                <Image alt="map-pin" src={LocationIcon} />
+                <Typography fontSize={16}>Метро: {metro}</Typography>
+              </div>
+            )}
             <div
               className={clsx(
                 'flex',

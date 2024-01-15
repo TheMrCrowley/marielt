@@ -62,6 +62,7 @@ export type DetailedHousesAndLotsItem = {
   rootType?: string;
   type?: string;
   direction: string;
+  metro?: string;
 } & DefaultHousesAndLotsItem;
 
 export interface HousesAndLotsCategory {

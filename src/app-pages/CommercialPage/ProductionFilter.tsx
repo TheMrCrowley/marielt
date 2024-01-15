@@ -8,6 +8,7 @@ import CommercialHeatingToggle from '@/src/components/CommercialFilters/Commerci
 import CommercialSewerageToggle from '@/src/components/CommercialFilters/CommercialSewerageToggle';
 import CommercialWaterToggle from '@/src/components/CommercialFilters/CommercialWaterToggle';
 import PropertyTypeFilter from '@/src/components/CommercialFilters/PropertyTypeFilter';
+import VatToggleFilter from '@/src/components/CommercialFilters/VatFilter';
 import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
@@ -87,6 +88,7 @@ const ProductionFilter = ({ applyFilters }: ProductionFilterProps) => {
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <DistanceFilter distance={distance} onChange={updateFilters} />
+        <VatToggleFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
         <CommercialHeatingToggle />

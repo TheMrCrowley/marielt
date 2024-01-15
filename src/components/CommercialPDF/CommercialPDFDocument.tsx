@@ -212,7 +212,15 @@ const CommercialPDFDocument = ({
           </View>
         )}
         {images && images.length && (
-          <View style={{ display: 'flex', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
             {images.map((image, i) => (
               <Image
                 src={image.url}

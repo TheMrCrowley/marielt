@@ -9,6 +9,7 @@ import React, { PropsWithChildren } from 'react';
 import MapIcon from '@/public/map.png';
 import Pagination from '@/src/components/common/Pagination';
 import Title from '@/src/components/common/Title';
+import Typography from '@/src/components/common/Typography';
 import { StrapiFindResponse } from '@/src/types/StrapiTypes';
 
 import SortSelect from './SortSelect';
@@ -70,8 +71,15 @@ const ProductListWrapper = ({
     }
 
     return (
-      <section className="h-full min-h-[50dvh] flex-auto">
+      <section className="h-full min-h-[50dvh] flex-auto flex flex-col gap-4">
         <Title>По вашему запросу ничего не найдено</Title>
+        <Typography>Можете связаться с нами по телефонам:</Typography>
+        <Typography>
+          <a href="tel:+375297102020">+375 29 710-20-20 (офис компании)</a>
+        </Typography>
+        <Typography>
+          <a href="tel:+375293808585">+375 29 380-85-85 (коммерческий отдел)</a>
+        </Typography>
       </section>
     );
   };

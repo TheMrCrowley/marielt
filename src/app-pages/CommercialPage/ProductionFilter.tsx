@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import CommercialCeilingHeight from '@/src/components/CommercialFilters/CommercialCeilingHeight';
+import CommercialDistanceFilter from '@/src/components/CommercialFilters/CommercialDistanceFilter';
 import CommercialElectricityToggle from '@/src/components/CommercialFilters/CommercialElectricityToggle';
 import CommercialGasToggle from '@/src/components/CommercialFilters/CommercialGasToggle';
 import CommercialHeatingToggle from '@/src/components/CommercialFilters/CommercialHeatingToggle';
@@ -13,7 +14,6 @@ import Button from '@/src/components/common/Button';
 import AreaFilter from '@/src/components/filters/AreaFilter';
 import ConstructionYearFilter from '@/src/components/filters/ConstructionYearFilter';
 import DirectionFilter from '@/src/components/filters/DirectionFilter';
-import DistanceFilter from '@/src/components/filters/DistanceFilter';
 import PlotAreaFilter from '@/src/components/filters/PlotAreaFilter';
 import {
   CommercialFiltersType,
@@ -87,7 +87,7 @@ const ProductionFilter = ({ applyFilters }: ProductionFilterProps) => {
         />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>
-        <DistanceFilter distance={distance} onChange={updateFilters} />
+        <CommercialDistanceFilter distance={distance} onChange={updateFilters} />
         <VatToggleFilter />
       </div>
       <div className={clsx('flex', 'gap-8', 'justify-start', 'items-end', 'flex-wrap')}>

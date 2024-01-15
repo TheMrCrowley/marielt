@@ -41,6 +41,10 @@ export type DetailedHousesAndLotsItem = {
     parking?: string;
     readinessPercentage?: string;
     constructionYear?: string;
+    bargain?: boolean;
+    propertyType?: string;
+    saleTerms?: string;
+    contractNumber?: string;
   };
   additionalInfo: Array<{ name: string }>;
   note?: string;

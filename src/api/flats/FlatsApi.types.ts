@@ -26,7 +26,14 @@ interface FlatResponse {
     telephone?: string;
     layout?: string;
     level_number?: string;
+    parking?: boolean;
+    is_last_floor?: boolean;
+    furniture?: boolean;
   };
+  bargain?: boolean;
+  property_type?: string;
+  sale_terms?: string;
+  contract_number?: string;
   coordinates?: {
     latitude: number;
     longitude: number;

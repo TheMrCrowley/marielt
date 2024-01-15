@@ -23,6 +23,10 @@ interface HousesResponse {
     latitude: number;
     longitude: number;
   };
+  bargain?: boolean;
+  land_status?: string;
+  sale_terms?: string;
+  contract_number?: string;
   parameters: {
     plot_size?: string;
     level_number?: string;

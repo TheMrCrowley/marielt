@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import LocationIcon from '@/public/card-map-pin.svg';
+import MetroIcon from '@/public/metro-icon.svg';
 import {
   AreaField,
   PriceField,
@@ -93,8 +94,8 @@ const FlatPageHeader = ({
             </div>
             {metro && (
               <div className={clsx('flex', 'gap-1.5')}>
-                <Image alt="map-pin" src={LocationIcon} />
-                <Typography fontSize={16}>Метро: {metro}</Typography>
+                <Image alt="map-pin" src={MetroIcon} />
+                <Typography fontSize={16}>{metro}</Typography>
               </div>
             )}
             <div

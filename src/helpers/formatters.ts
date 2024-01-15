@@ -174,14 +174,17 @@ export function formatItemToCharacteristics<
 >(
   item: T,
   map: Partial<
-    Record<keyof T['parameters'], (value?: string | boolean) => { name: string; value: string }>
+    Record<
+      keyof T['parameters'],
+      (value?: string | boolean) => { name: string; value: string; order: number }
+    >
   >,
 ) {
-  const result: Array<{ name: string; value: string }> = [];
+  const result: Array<{ name: string; value: string; order: number }> = [];
 
   Object.entries(item.parameters).forEach(([key, value]) => {
     const fn = map[key as keyof T['parameters']];
-    if (!!value && fn) {
+    if (fn && (typeof value === 'boolean' || !!value)) {
       result.push(fn(value));
     }
   });
@@ -189,7 +192,7 @@ export function formatItemToCharacteristics<
   item.additionalInfo
     ?.filter((info) => !!info.name)
     .forEach(({ name }) => {
-      result.push({ name, value: 'да' });
+      result.push({ name, value: 'да', order: 100 });
     });
 
   const keySet = new Set<string>();

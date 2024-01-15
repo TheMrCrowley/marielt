@@ -22,6 +22,7 @@ interface CommercialAreaProps {
   plotSize?: string;
   floor?: string;
   maxFloor?: string;
+  vat?: string;
 }
 
 const CommercialArea = ({
@@ -32,6 +33,7 @@ const CommercialArea = ({
   totalPrice,
   pricePerMeter,
   initialCurrency,
+  vat,
 }: CommercialAreaProps) => {
   const { selectedCurrency, rates } = useCurrency();
 
@@ -87,11 +89,27 @@ const CommercialArea = ({
     );
   };
 
+  const renderVat = () => {
+    if (!vat) {
+      return null;
+    }
+
+    return (
+      <div className={clsx('flex', 'flex-col')}>
+        <Typography fontSize={14} fontWeight="medium">
+          {vat.replace(/\D/gim, '')}%
+        </Typography>{' '}
+        <p className={clsx('text-white', 'text-xs', 'font-light')}>НДС</p>
+      </div>
+    );
+  };
+
   return (
     <div className={clsx('flex', 'items-start', 'justify-start', 'gap-4')}>
       {renderTotalArea()}
       {renderPlotSize()}
       {renderPricePerMeter()}
+      {renderVat()}
       <CardFloor floor={floor} maxFloor={maxFloor} />
     </div>
   );

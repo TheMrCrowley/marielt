@@ -42,6 +42,7 @@ const CommercialCard = ({ commercialItem, wrapperClassName }: CommercialCardProp
         initialCurrency={initialCurrency || 'USD'}
         pricePerMeter={pricePerMeter}
         totalPrice={!!totalPrice?.from}
+        vat={parameters?.vat}
       />
       <CommercialPrice
         initialCurrency={initialCurrency || 'USD'}

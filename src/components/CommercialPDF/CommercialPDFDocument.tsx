@@ -44,7 +44,7 @@ const CommercialPDFDocument = ({
     totalPrice,
   });
 
-  const chars = getCommercialCharacteristics(commercialItem);
+  const chars = getCommercialCharacteristics(commercialItem).sort((a, b) => a.order - b.order);
 
   return (
     <Document

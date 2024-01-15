@@ -43,6 +43,7 @@ const getFlatCharacteristics = (flat: DetailedFlatItem) => [
   {
     name: 'Этаж/этажность',
     value: `${flat.parameters.floor}/${flat.parameters.maxFloor}`,
+    order: 9,
   },
 ];
 

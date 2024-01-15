@@ -42,6 +42,13 @@ export type DetailedFlatItem = {
     layout?: string;
     majorRenovationYear?: string;
     levelNumber?: string;
+    parking?: boolean;
+    lastFloor?: boolean;
+    furniture?: boolean;
+    bargain?: boolean;
+    propertyType?: string;
+    saleTerms?: string;
+    contractNumber?: string;
   };
   detailedDescription?: string;
   additionalInfo: Array<{ name: string }>;

@@ -29,6 +29,7 @@ export const convertToDefaultCommercialItem = (
       plotSize: attributes.parameters?.plot_size,
       floor: attributes.parameters?.floor,
       maxFloor: attributes.parameters?.floors_number,
+      vat: attributes.parameters?.vat,
     },
     totalArea: {
       maxArea: attributes.parameters?.premises_area?.max_area,
@@ -103,6 +104,7 @@ export const convertToDetailedCommercial = ({
     rentAmountMonth: attributes?.business?.rent_amount_month,
     rentAmountYear: attributes?.business?.rent_amount_year,
     vat: attributes.parameters?.vat,
+    contractNumber: attributes.contract_number,
   },
   pricePerMeter:
     attributes.price_meter?.from || attributes.price_meter?.to
@@ -165,7 +167,7 @@ export const getDefaultCommercialListPopulateQuery = () => {
           fields: ['number'],
         },
         parameters: {
-          fields: ['plot_size', 'floor', 'floors_number', 'living_area'],
+          fields: ['plot_size', 'floor', 'floors_number', 'living_area', 'vat'],
           populate: {
             premises_area: {
               populate: '*',

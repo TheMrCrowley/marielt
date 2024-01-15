@@ -23,6 +23,7 @@ export type DefaultCommercialItem = Partial<{
     plotSize: string;
     floor: string;
     maxFloor: string;
+    vat: string;
   }>;
   totalArea: {
     minArea?: string;
@@ -64,6 +65,7 @@ export type DetailedCommercialItem = {
     ventilation: boolean;
     sewerage: boolean;
     vat: string;
+    contractNumber: string;
   }>;
   distance?: string;
   direction?: string;

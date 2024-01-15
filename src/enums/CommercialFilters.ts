@@ -117,86 +117,110 @@ export const commercialWallMaterialQueryMap: QueryMapType<CommercialWallMaterial
 export const commercialCharacteristicsMap: Partial<
   Record<
     keyof DetailedCommercialItem['parameters'],
-    (value?: string | boolean) => { name: string; value: string }
+    (value?: string | boolean) => { name: string; value: string; order: number }
   >
 > = {
-  profitability: (value) => ({ name: 'доходность', value: `${value}%` }),
-  payback: (value) => ({ name: 'окупаемость(лет)', value: value as string }),
-  vat: (value) => ({ name: 'НДС', value: value as string }),
   plotSize: (value) => ({
     name: 'Площадь участка',
     value: `${value} сот.`,
-  }),
-  isGroundFloor: () => ({
-    name: 'Цокольный этаж',
-    value: 'да',
-  }),
-  ceilingHeight: (value) => ({
-    name: 'Высота потолков',
-    value: `${value} м`,
-  }),
-  wallMaterial: (value) => ({
-    name: 'Материал стен',
-    value: value as string,
-  }),
-  constructionYear: (value) => ({
-    name: 'Год постройки',
-    value: value as string,
-  }),
-  finishing: (value) => ({
-    name: 'Состояние помещения',
-    value: value as string,
-  }),
-  equipment: () => ({
-    name: 'Оборудование',
-    value: 'есть',
-  }),
-  daylight: () => ({
-    name: 'Естественное освещение',
-    value: 'есть',
-  }),
-  electricity: () => ({
-    name: 'Электроснабжение',
-    value: 'есть',
-  }),
-  heating: () => ({
-    name: 'Отопление',
-    value: 'есть',
-  }),
-  gas: () => ({
-    name: 'Газоснабжение',
-    value: 'есть',
-  }),
-  water: () => ({
-    name: 'Вода',
-    value: 'есть',
-  }),
-  bathroom: () => ({
-    name: 'Санузел',
-    value: 'есть',
-  }),
-  ventilation: () => ({
-    name: 'Вентиляция',
-    value: 'есть',
-  }),
-  sewerage: () => ({
-    name: 'Канализация',
-    value: 'есть',
-  }),
-  furniture: () => ({
-    name: 'Мебель',
-    value: 'есть',
-  }),
-  location: (value) => ({
-    name: 'Расположение',
-    value: value as string,
+    order: 2,
   }),
   separateEntrance: () => ({
     name: 'Отдельный вход',
     value: 'есть',
+    order: 4,
+  }),
+  constructionYear: (value) => ({
+    name: 'Год постройки',
+    value: value as string,
+    order: 5,
+  }),
+  location: (value) => ({
+    name: 'Расположение',
+    value: value as string,
+    order: 6,
+  }),
+  vat: (value) => ({ name: 'НДС', value: `${value}`, order: 7 }),
+  wallMaterial: (value) => ({
+    name: 'Материал стен',
+    value: value as string,
+    order: 9,
+  }),
+  ceilingHeight: (value) => ({
+    name: 'Высота потолков',
+    value: `${value} м`,
+    order: 10,
+  }),
+  finishing: (value) => ({
+    name: 'Состояние помещения',
+    value: value as string,
+    order: 11,
+  }),
+  furniture: () => ({
+    name: 'Мебель',
+    value: 'есть',
+    order: 12,
+  }),
+  bathroom: () => ({
+    name: 'Санузел',
+    value: 'есть',
+    order: 13,
+  }),
+  water: () => ({
+    name: 'Вода',
+    value: 'есть',
+    order: 14,
+  }),
+  daylight: () => ({
+    name: 'Естественное освещение',
+    value: 'есть',
+    order: 15,
+  }),
+  heating: () => ({
+    name: 'Отопление',
+    value: 'есть',
+    order: 16,
+  }),
+  profitability: (value) => ({ name: 'доходность', value: `${value}%`, order: 17 }),
+  payback: (value) => ({ name: 'окупаемость(лет)', value: value as string, order: 18 }),
+  isGroundFloor: () => ({
+    name: 'Цокольный этаж',
+    value: 'да',
+    order: 19,
+  }),
+  equipment: () => ({
+    name: 'Оборудование',
+    value: 'есть',
+    order: 20,
+  }),
+  electricity: () => ({
+    name: 'Электроснабжение',
+    value: 'есть',
+    order: 21,
+  }),
+  gas: () => ({
+    name: 'Газоснабжение',
+    value: 'есть',
+    order: 22,
+  }),
+  ventilation: () => ({
+    name: 'Вентиляция',
+    value: 'есть',
+    order: 23,
+  }),
+  sewerage: () => ({
+    name: 'Канализация',
+    value: 'есть',
+    order: 24,
   }),
   ramp: () => ({
     name: 'Погрузка/разгрузка/рампа',
     value: 'есть',
+    order: 25,
+  }),
+  contractNumber: (value) => ({
+    name: 'Номер договора',
+    value: value as string,
+    order: 26,
   }),
 };

@@ -13,6 +13,7 @@ export const getCommercialCharacteristics = (commercial: DetailedCommercialItem)
       value: commercial.premisesArea.max
         ? `${commercial.premisesArea.min}-${commercial.premisesArea.max} м²`
         : `${commercial.premisesArea.min} м²`,
+      order: 1,
     });
   }
 
@@ -22,6 +23,7 @@ export const getCommercialCharacteristics = (commercial: DetailedCommercialItem)
       value: commercial.separateRooms.to
         ? `${commercial.separateRooms.from}-${commercial.separateRooms.to}`
         : `${commercial.separateRooms.from}`,
+      order: 8,
     });
   }
 
@@ -31,6 +33,7 @@ export const getCommercialCharacteristics = (commercial: DetailedCommercialItem)
       value: commercial.parameters.maxFloor
         ? `${commercial.parameters.floor || 'Нет'}/${commercial.parameters.maxFloor}`
         : `${commercial.parameters.floor}`,
+      order: 3,
     });
   }
 

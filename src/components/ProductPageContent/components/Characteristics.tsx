@@ -7,6 +7,7 @@ import Typography from '@/src/components/common/Typography/Typography';
 interface CharacteristicItem {
   name: string;
   value: string;
+  order: number;
 }
 
 type CharacteristicsProps = {
@@ -21,12 +22,14 @@ const Characteristics = ({
     return null;
   }
 
+  const sortedCharacteristics = characteristics.sort((a, b) => a.order - b.order);
+
   return (
     <div className={clsx('flex', 'flex-col', 'xl:w-[35%]', 'w-full', 'min-w-fit')}>
       <Title fontSize={32} className={clsx('bg-primary-bold', 'py-6', 'px-5')}>
         Характеристики
       </Title>
-      {characteristics.map(({ name, value }, i) => (
+      {sortedCharacteristics.map(({ name, value }, i) => (
         <div
           key={`product-item-characteristic-item-${name}-${value}-${i}`}
           className={clsx(

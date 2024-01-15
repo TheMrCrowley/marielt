@@ -28,7 +28,9 @@ export async function generateMetadata({ params: { id } }: Props): Promise<Metad
 }
 
 export async function generateStaticParams() {
-  const response = await fetch(`${process.env.API_BASE_URL}/apart-items?pagination[limit]=-1`);
+  const response = await fetch(`${process.env.API_BASE_URL}/apart-items?pagination[limit]=-1`, {
+    cache: 'no-cache',
+  });
 
   const { data } = (await response.json()) as FlatItemsStrapiResponse;
 

@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import LocationIcon from '@/public/card-map-pin.svg';
 import DirectionIcon from '@/public/direction.svg';
+import MetroIcon from '@/public/metro-icon.svg';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
 import { DetailedCommercialItem } from '@/src/types/Commercial';
@@ -53,8 +54,8 @@ const CommercialPageHeader = ({
             </div>
             {metro && (
               <div className={clsx('flex', 'gap-1.5')}>
-                <Image alt="map-pin" src={LocationIcon} />
-                <Typography fontSize={16}>Метро: {metro}</Typography>
+                <Image alt="map-pin" src={MetroIcon} />
+                <Typography fontSize={16}>{metro}</Typography>
               </div>
             )}
             {direction && (

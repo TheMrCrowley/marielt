@@ -5,6 +5,7 @@ import React, { PropsWithChildren } from 'react';
 
 import CardMapPinIcon from '@/public/card-map-pin.svg';
 import ImagePlaceholder from '@/public/card-placeholder.jpg';
+import MetroIcon from '@/public/metro-icon.svg';
 import Button from '@/src/components/common/Button';
 import Title from '@/src/components/common/Title';
 import Typography from '@/src/components/common/Typography';
@@ -16,6 +17,7 @@ interface CardWrapperProps extends PropsWithChildren {
   imgUrl?: string;
   title?: string;
   wrapperClassName?: string;
+  metro?: string;
 }
 
 const CardWrapper = ({
@@ -26,6 +28,7 @@ const CardWrapper = ({
   children,
   placeholderUrl,
   wrapperClassName,
+  metro,
 }: CardWrapperProps) => {
   return (
     <div className={clsx('bg-primary-bold', 'grid', 'w-full', 'h-full', wrapperClassName)}>
@@ -78,6 +81,23 @@ const CardWrapper = ({
             {address}
           </Typography>
         </div>
+        {metro && (
+          <div
+            className={clsx(
+              'flex',
+              'items-center',
+              'gap-2',
+              'max-w-full',
+              'w-full',
+              'overflow-hidden',
+            )}
+          >
+            <div className={clsx('flex', 'gap-1.5')}>
+              <Image alt="map-pin" src={MetroIcon} />
+              <Typography fontSize={16}>{metro}</Typography>
+            </div>
+          </div>
+        )}
         <div className={clsx('flex-auto', 'flex', 'flex-col', 'gap-4', 'mt-auto', 'justify-end')}>
           {children}
         </div>

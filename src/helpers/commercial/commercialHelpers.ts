@@ -22,6 +22,7 @@ export const convertToDefaultCommercialItem = (
       houseNumber: attributes.house_number?.number,
     }),
     id,
+    metro: attributes.metro?.data?.attributes.name,
     initialCurrency: attributes.currency || 'USD',
     transactionType: attributes.comm_tran?.data?.attributes?.uid!,
     image: formatToItemImage(attributes.image?.data),
@@ -173,6 +174,9 @@ export const getDefaultCommercialListPopulateQuery = () => {
               populate: '*',
             },
           },
+        },
+        metro: {
+          fields: ['name'],
         },
         location: '*',
       },

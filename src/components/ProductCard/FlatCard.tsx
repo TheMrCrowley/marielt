@@ -26,6 +26,7 @@ const FlatCard = ({ flatItem, wrapperClassName }: FlatCardProps) => {
     price,
     initialCurrency,
     parameters: { floor, maxFloor, totalArea, livingArea },
+    metro,
   } = flatItem;
 
   const { selectedCurrency, rates } = useCurrency();
@@ -38,6 +39,7 @@ const FlatCard = ({ flatItem, wrapperClassName }: FlatCardProps) => {
       placeholderUrl={image?.placeholder}
       title={name}
       wrapperClassName={wrapperClassName}
+      metro={metro}
     >
       <CardFloor floor={floor} maxFloor={maxFloor} />
       <CardArea

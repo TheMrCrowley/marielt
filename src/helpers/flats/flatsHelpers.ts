@@ -17,6 +17,7 @@ export const convertToDefaultFlatItem = (
       region: attributes.region?.data.attributes.name,
     }),
     id,
+    metro: attributes.metro?.data?.attributes.name,
     price: attributes.price,
     name: attributes.name,
     image: formatToItemImage(attributes.image.data),
@@ -112,6 +113,9 @@ export const getDefaultFlatListPopulateQuery = () => {
           fields: ['floor', 'living_area', 'floors_number', 'total_area'],
         },
         location: '*',
+        metro: {
+          fields: ['name'],
+        },
       },
     },
     { encodeValuesOnly: true },

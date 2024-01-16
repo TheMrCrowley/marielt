@@ -23,6 +23,7 @@ export const convertToDefaultHouseItem = (
         village_council,
         district_rb,
         region,
+        metro,
       },
       id,
     }) => ({
@@ -35,6 +36,7 @@ export const convertToDefaultHouseItem = (
         districtRb: district_rb,
         region: region?.data.attributes.name,
       }),
+      metro: metro?.data?.attributes.name,
       initialCurrency: currency || 'USD',
       image: formatToItemImage(image?.data),
       name,
@@ -140,6 +142,9 @@ export const getDefaultHouseListPopulateQuery = () => {
           fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],
         },
         location: '*',
+        metro: {
+          fields: ['name'],
+        },
       },
     },
     { encodeValuesOnly: true },

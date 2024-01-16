@@ -11,6 +11,7 @@ export type DefaultHousesAndLotsItem = {
   name?: string;
   image?: ImageType;
   initialCurrency: AvailableCurrencies;
+  metro?: string;
   parameters: {
     plotSize?: string;
     livingArea?: string;

@@ -13,6 +13,7 @@ export type DefaultCommercialItem = Partial<{
   price: string;
   name: string;
   image: ImageType;
+  metro?: string;
   location?: {
     lng: number;
     lat: number;

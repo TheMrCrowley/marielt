@@ -23,6 +23,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem, wrapperClassName }: HousesAndLot
     name,
     price,
     parameters: { plotSize, totalArea },
+    metro,
   } = housesAndLotsItem;
 
   const { selectedCurrency, rates } = useCurrency();
@@ -35,6 +36,7 @@ const HousesAndLotsCard = ({ housesAndLotsItem, wrapperClassName }: HousesAndLot
       imgUrl={image?.url}
       placeholderUrl={image?.placeholder}
       title={name}
+      metro={metro}
     >
       <CardArea plotSize={plotSize} totalArea={totalArea} />
       <CardPrice

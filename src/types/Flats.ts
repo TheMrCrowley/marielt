@@ -10,6 +10,7 @@ export type DefaultFlatItem = {
   name?: string;
   image?: ImageType;
   initialCurrency: AvailableCurrencies;
+  metro?: string;
   parameters: {
     totalArea: string;
     floor: string;

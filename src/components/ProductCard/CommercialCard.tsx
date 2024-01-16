@@ -24,6 +24,7 @@ const CommercialCard = ({ commercialItem, wrapperClassName }: CommercialCardProp
     totalArea,
     pricePerMeter,
     totalPrice,
+    metro,
   } = commercialItem;
 
   return (
@@ -33,6 +34,7 @@ const CommercialCard = ({ commercialItem, wrapperClassName }: CommercialCardProp
       imgUrl={image?.url}
       title={name}
       wrapperClassName={wrapperClassName}
+      metro={metro}
     >
       <CommercialArea
         totalArea={totalArea}

@@ -48,19 +48,41 @@ const Footer = () => {
             'flex-wrap',
           )}
         >
-          <div className={clsx('flex', 'flex-col', 'md:max-w-[30%]')}>
+          <div className={clsx('flex', 'flex-col', 'md:max-w-sm', 'gap-6')}>
             <Image
               src={Logo}
               alt="logo"
-              className={clsx(
-                'sm:max-w-[200px]',
-                'max-w-[140px]',
-                'h-auto',
-                'object-contain',
-                'xl:mb-16',
-                'mb-8',
-              )}
+              className={clsx('sm:max-w-[200px]', 'max-w-[140px]', 'h-auto', 'object-contain')}
             />
+            <div className="flex flex-col gap-2">
+              <Typography fontSize={16}>
+                © {new Date().getFullYear()} «Группа Компаний Мариэлт»
+              </Typography>
+              <Typography fontSize={16}>УНП: 193601325</Typography>
+              <Typography fontSize={16}>Лицензия: 02240/431, МЮ РБ</Typography>
+            </div>
+            <div className={clsx('flex', 'flex-col', 'gap-6', 'opacity-50', 'mb-4')}>
+              <Typography fontSize={16}>
+                Использование портала означает согласие с{' '}
+                <Link
+                  href={'/Пользовательское соглашение.docx'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-secondary"
+                >
+                  Пользовательское соглашение
+                </Link>
+                <br />
+                <Link
+                  href={'/Политика_обработки_персональных_данных_.docx'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-secondary"
+                >
+                  Политика обработки персональных данных
+                </Link>
+              </Typography>
+            </div>
             <div className={clsx('flex', 'flex-col', 'gap-6', 'opacity-50', 'mb-4')}>
               <Typography fontSize={16}>
                 Юридические{' '}
@@ -70,7 +92,17 @@ const Footer = () => {
                 , на основании которых работает компания
               </Typography>
             </div>
-            <Title variant="h2" fontSize={24} fontWeight="medium" className="mb-4">
+          </div>
+          <div className={clsx('flex', 'flex-col', 'min-w-max', 'gap-6')}>
+            <Title variant="h2" fontSize={36} fontWeight="medium">
+              Контакты
+            </Title>
+            <ul className={clsx('flex', 'flex-col', 'gap-4')}>
+              <ContactItem type="phone">+375 17 322 73 22</ContactItem>
+              <ContactItem type="phone">+375 29 710 20 20</ContactItem>
+              <ContactItem type="email">office@marielt.by</ContactItem>
+            </ul>
+            <Title variant="h2" fontSize={20} fontWeight="medium">
               Отдел коммерческой недвижимости:
             </Title>
             <ul className={clsx('flex', 'flex-col', 'gap-4')}>
@@ -78,44 +110,8 @@ const Footer = () => {
               <ContactItem type="phone">+375 29 380-85-85</ContactItem>
             </ul>
           </div>
-          <div className={clsx('flex', 'flex-col', 'min-w-max')}>
-            <Title variant="h2" fontSize={36} fontWeight="medium" className="xl:mb-12 mb-8">
-              Контакты
-            </Title>
-            <ul className={clsx('flex', 'flex-col', 'gap-4', 'mb-11')}>
-              <ContactItem type="phone">+375 17 322 73 22</ContactItem>
-              <ContactItem type="phone">+375 29 710 20 20</ContactItem>
-              <ContactItem type="email">office@marielt.by</ContactItem>
-            </ul>
-            <div className={clsx('flex', 'gap-6', 'items-center')}>
-              <a
-                href="https://instagram.com/marielt_an?igshid=NzZlODBkYWE4Ng=="
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src={InstagramIcon} alt="instagram" />
-              </a>
-              <a href="https://vk.com/club223330939" target="_blank" rel="noopener noreferrer">
-                <Image src={VkIcon} alt="instagram" />
-              </a>
-              <a
-                href="https://ok.ru/group/70000004512862"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src={OkIcon} alt="instagram" />
-              </a>
-              <a
-                href="https://www.facebook.com/marielt.agency"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image src={FacebookIcon} alt="instagram" />
-              </a>
-            </div>
-          </div>
-          <div className={clsx('flex', 'flex-col')}>
-            <Title variant="h2" fontSize={36} fontWeight="medium" className="xl:mb-12 mb-8">
+          <div className={clsx('flex', 'flex-col', 'gap-6')}>
+            <Title variant="h2" fontSize={36} fontWeight="medium">
               Адрес
             </Title>
             <ul className={clsx('flex', 'flex-col', 'gap-4')}>
@@ -142,13 +138,6 @@ const Footer = () => {
             'flex-wrap',
           )}
         >
-          <div className="flex flex-col gap-2">
-            <Typography fontSize={16}>
-              © {new Date().getFullYear()} «Группа Компаний Мариэлт»
-            </Typography>
-            <Typography fontSize={16}>УНП: 193601325</Typography>
-            <Typography fontSize={16}>Лицензия: 02240/431, МЮ РБ</Typography>
-          </div>
           <div className={clsx('flex', 'justify-center', 'gap-2')}>
             <Link
               href="https://realt.by/agencies/rating/"
@@ -166,6 +155,28 @@ const Footer = () => {
             >
               <Image src={WeOnRealtImg} alt="we-on-realt" />
             </Link>
+          </div>
+          <div className={clsx('flex', 'gap-6', 'items-center')}>
+            <a
+              href="https://instagram.com/marielt_an?igshid=NzZlODBkYWE4Ng=="
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={InstagramIcon} alt="instagram" />
+            </a>
+            <a href="https://vk.com/club223330939" target="_blank" rel="noopener noreferrer">
+              <Image src={VkIcon} alt="instagram" />
+            </a>
+            <a href="https://ok.ru/group/70000004512862" target="_blank" rel="noopener noreferrer">
+              <Image src={OkIcon} alt="instagram" />
+            </a>
+            <a
+              href="https://www.facebook.com/marielt.agency"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={FacebookIcon} alt="instagram" />
+            </a>
           </div>
           <Typography fontSize={16}>VUCA - digital studio © {new Date().getFullYear()}</Typography>
         </div>

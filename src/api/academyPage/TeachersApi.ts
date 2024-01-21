@@ -50,7 +50,7 @@ export default class TeachersApi extends BaseApi implements AbstractTeachersApi 
         pagination: {
           limit: -1,
         },
-        sort: SortValues.DateAsc,
+        sort: 'createdAt:asc',
         populate: {
           photo: {
             fields: IMAGE_FIELDS_TO_POPULATE,

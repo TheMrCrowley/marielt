@@ -17,7 +17,7 @@ const SortSelect = () => {
 
   const [sortType, setSortType] = useState<SortLabels>(
     sortLabelMap[new URLSearchParams(location.search).get('sort') as SortValues] ||
-      SortLabels.DateAsc,
+      SortLabels.DateDesc,
   );
 
   useEffect(() => {

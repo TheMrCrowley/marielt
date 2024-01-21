@@ -1,19 +1,19 @@
 export enum SortLabels {
   PriceDesc = 'Сначала дорогие',
   PriceAsc = 'Сначала дешевые',
-  DateAsc = 'Сначала новые',
+  DateDesc = 'Сначала новые',
 }
 
 export enum SortValues {
   PriceDesc = 'price:desc',
   PriceAsc = 'price:asc',
-  DateAsc = 'createdAt:desc',
+  DateDesc = 'createdAt:desc',
 }
 
 export const sortOptions = [
   {
-    label: SortLabels.DateAsc,
-    value: SortLabels.DateAsc,
+    label: SortLabels.DateDesc,
+    value: SortLabels.DateDesc,
   },
   {
     label: SortLabels.PriceAsc,
@@ -26,13 +26,13 @@ export const sortOptions = [
 ];
 
 export const sortQueryMap = {
-  [SortLabels.DateAsc]: SortValues.DateAsc,
+  [SortLabels.DateDesc]: SortValues.DateDesc,
   [SortLabels.PriceAsc]: SortValues.PriceAsc,
   [SortLabels.PriceDesc]: SortValues.PriceDesc,
 };
 
 export const sortLabelMap = {
-  [SortValues.DateAsc]: SortLabels.DateAsc,
+  [SortValues.DateDesc]: SortLabels.DateDesc,
   [SortValues.PriceAsc]: SortLabels.PriceAsc,
   [SortValues.PriceDesc]: SortLabels.PriceDesc,
 };

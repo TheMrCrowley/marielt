@@ -6,7 +6,7 @@ import { ViewType } from '@/src/types/ViewType';
 export const getSortQuery = (sort: string) => {
   return qs.stringify(
     {
-      sort: sort || SortValues.DateAsc,
+      sort: sort || SortValues.DateDesc,
     },
     {
       encodeValuesOnly: true,

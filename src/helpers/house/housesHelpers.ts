@@ -42,10 +42,10 @@ export const convertToDefaultHouseItem = (
       name,
       price,
       parameters: {
-        plotSize: parameters.plot_size,
-        kitchenArea: parameters.kitchen_area,
-        livingArea: parameters.living_area,
-        totalArea: parameters.total_area,
+        plotSize: parameters?.plot_size,
+        kitchenArea: parameters?.kitchen_area,
+        livingArea: parameters?.living_area,
+        totalArea: parameters?.total_area,
       },
     }),
   );

@@ -156,7 +156,9 @@ const getHouseAndLotsCategories = async () => {
 
   const url = `${process.env.API_BASE_URL}/house-categories?${query}`;
 
-  const directionsResponse = await fetch(url);
+  const directionsResponse = await fetch(url, {
+    cache: 'no-cache',
+  });
 
   const { data } =
     (await directionsResponse.json()) as StrapiFindResponse<HousesAndLotsCategoryResponse>;

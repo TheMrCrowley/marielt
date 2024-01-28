@@ -7,7 +7,7 @@ import { canonicalUrlMap, getOpenGraphField, getSeoFields } from '@/src/services
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getSeoFields('docPage');
 
-  const canonical = canonicalUrlMap.aboutPage();
+  const canonical = canonicalUrlMap.docsPage();
   const title = seo.title || 'Документы';
   const description = seo.description || 'Все прозрачно - нам нечего скрывать';
 

@@ -23,10 +23,10 @@ export const convertToDefaultFlatItem = (
     image: formatToItemImage(attributes.image.data),
     initialCurrency: attributes.currency || 'USD',
     parameters: {
-      floor: attributes.parameters.floor,
-      livingArea: attributes.parameters.living_area,
-      maxFloor: attributes.parameters.floors_number,
-      totalArea: attributes.parameters.total_area,
+      floor: attributes?.parameters?.floor,
+      livingArea: attributes?.parameters?.living_area,
+      maxFloor: attributes?.parameters?.floors_number,
+      totalArea: attributes?.parameters?.total_area,
     },
     location: attributes.location?.coordinates,
   }));

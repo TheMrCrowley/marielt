@@ -19,7 +19,7 @@ export const convertToTeacher = (data: TeacherStrapiResponse['data']): Teacher =
           height: data.attributes.photo.data.attributes.height,
           width: data.attributes.photo.data.attributes.width,
           placeholder: data.attributes.photo.data.attributes.placeholder,
-          url: data.attributes.photo.data.attributes.url,
+          url: `https://marielt.by:6060${data.attributes.photo.data.attributes.url}`,
         }
       : undefined,
   };

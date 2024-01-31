@@ -11,7 +11,7 @@ export const convertToTraining = (data: TrainingStrapiResponse['data']) => {
           height: data.attributes.image.data.attributes.height,
           width: data.attributes.image.data.attributes.width,
           placeholder: data.attributes.image.data.attributes.placeholder,
-          url: data.attributes.image.data.attributes.url,
+          url: `https://marielt.by:6060${data.attributes.image.data.attributes.url}`,
         }
       : undefined,
   };

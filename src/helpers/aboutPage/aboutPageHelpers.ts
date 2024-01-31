@@ -9,7 +9,7 @@ export const convertToAboutPageData = (
     ...item,
     to: item.to as AppRoutes,
     image: {
-      url: item.image.data.attributes.url,
+      url: `https://marielt.by:6060${item.image.data.attributes.url}`,
       width: item.image.data.attributes.width,
       height: item.image.data.attributes.height,
       placeholder: item.image.data.attributes.placeholder,

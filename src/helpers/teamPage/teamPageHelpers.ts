@@ -11,7 +11,7 @@ export const convertToTeamPageItem = (data: TeamMemberStrapiResponse['data']): T
       ? {
           height: member.attributes.photo.data.attributes.height,
           placeholder: member.attributes.photo.data.attributes.placeholder,
-          url: member.attributes.photo.data.attributes.url,
+          url: `https://marielt.by:6060${member.attributes.photo.data.attributes.url}`,
           width: member.attributes.photo.data.attributes.width,
         }
       : undefined,

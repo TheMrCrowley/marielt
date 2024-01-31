@@ -16,7 +16,7 @@ const convertToHomePageItem = (
         to: cur.to,
         type: cur.type,
         image: {
-          url: cur.image.data.attributes.url,
+          url: `https://marielt.by:6060${cur.image.data.attributes.url}`,
           width: cur.image.data.attributes.width,
           height: cur.image.data.attributes.height,
           placeholder: cur.image.data.attributes.placeholder,
@@ -51,7 +51,12 @@ export const convertToHomePageData = (
     welcomeSection: {
       description: data.text_2,
       title: data.text_1,
-      image: data.banner.data.attributes,
+      image: {
+        height: data.banner.data.attributes.height,
+        placeholder: data.banner.data.attributes.placeholder,
+        url: `https://marielt.by:6060${data.banner.data.attributes.url}`,
+        width: data.banner.data.attributes.width,
+      },
     },
   };
 };

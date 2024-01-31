@@ -36,7 +36,7 @@ export default class HomePageApi extends BaseApi implements AbstractHomePageApi 
       },
     );
     const url = this.getUrlWithQueries(this.homePageUrl, populateQuery);
-
+    console.log(url);
     const response = await this.fetchWrapper<HomePageStrapiResponse>(url);
 
     return response;

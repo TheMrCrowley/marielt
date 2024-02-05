@@ -85,7 +85,6 @@ const TrainingPage = ({ training, id }: TrainingPageProps) => {
               src={image.url}
               placeholder="blur"
               loading="lazy"
-              unoptimized
               blurDataURL={image.placeholder}
               width={image.width}
               height={image.height}

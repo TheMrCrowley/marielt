@@ -138,7 +138,6 @@ const ProductPageSlider = ({
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
                   loading="lazy"
-                  unoptimized
                   className={clsx(
                     'relative',
                     'object-cover',
@@ -174,7 +173,6 @@ const ProductPageSlider = ({
                   width={width}
                   height={height}
                   loading="lazy"
-                  unoptimized
                   className={clsx(
                     'object-contain',
                     'w-full',
@@ -244,7 +242,6 @@ const ProductPageSlider = ({
               src={video.thumbnail}
               alt=""
               loading="lazy"
-              unoptimized
               width={video.rawData.thumbnail_width}
               height={video.rawData.thumbnail_height}
               className={clsx(
@@ -275,7 +272,6 @@ const ProductPageSlider = ({
               src={url}
               alt=""
               loading="lazy"
-              unoptimized
               width={width}
               height={height}
               className={clsx(

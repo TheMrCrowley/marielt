@@ -142,7 +142,6 @@ const FullScreenSlider = ({
                   width={width}
                   height={height}
                   loading="lazy"
-                  unoptimized
                   className={clsx('object-contain', 'w-full', 'h-full')}
                   placeholder="blur"
                   blurDataURL={placeholder}
@@ -193,7 +192,6 @@ const FullScreenSlider = ({
                   width={video.rawData.thumbnail_width}
                   height={video.rawData.thumbnail_height}
                   loading="lazy"
-                  unoptimized
                   className={clsx(
                     'object-cover',
                     'w-full',
@@ -222,7 +220,6 @@ const FullScreenSlider = ({
                   src={url}
                   alt=""
                   loading="lazy"
-                  unoptimized
                   width={width}
                   height={height}
                   className={clsx(

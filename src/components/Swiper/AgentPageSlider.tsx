@@ -25,7 +25,6 @@ const AgentPageSlider = ({ media }: AgentPageSliderProps) => {
             src={item.url}
             placeholder="blur"
             loading="lazy"
-            unoptimized
             blurDataURL={item.placeholder!}
             width={item.width}
             height={item.height}

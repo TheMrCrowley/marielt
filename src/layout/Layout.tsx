@@ -22,7 +22,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           </main>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
       <ToastContainer />
     </>

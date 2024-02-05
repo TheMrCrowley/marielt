@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import {
   balconyQueryMap,
   bathroomQueryMap,
@@ -470,7 +470,12 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
       populateQuery,
     );
 
-    const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url);
+    const data = await this.fetchWrapper<FlatItemsStrapiResponse>(url, {
+      cache: 'no-cache',
+      next: {
+        revalidate: false,
+      },
+    });
 
     return data;
   }
@@ -493,7 +498,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
       {
         populate: {
           image: {
-            fields: IMAGE_FIELDS_TO_POPULATE,
+            fields: IMAGE_FIELDS_WITH_FORMATS,
           },
         },
       },

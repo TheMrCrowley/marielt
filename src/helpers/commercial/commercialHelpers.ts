@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
+import { IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import { CommercialItemsStrapiResponse, CommercialStrapiResponse } from '@/src/api/commercial';
 import { TransactionTypeValues } from '@/src/enums/CommercialFilters';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
@@ -162,7 +162,7 @@ export const getDefaultCommercialListPopulateQuery = () => {
           populate: '*',
         },
         image: {
-          fields: IMAGE_FIELDS_TO_POPULATE,
+          fields: IMAGE_FIELDS_WITH_FORMATS,
         },
         house_number: {
           fields: ['number'],

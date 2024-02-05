@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import { saleTermQueryMap } from '@/src/enums/FlatsFilters';
 import {
   electricityQueryMap,
@@ -413,7 +413,12 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
       sortQuery,
     );
 
-    const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url);
+    const data = await this.fetchWrapper<HouseItemsStrapiResponse>(url, {
+      cache: 'no-cache',
+      next: {
+        revalidate: false,
+      },
+    });
 
     return data;
   }
@@ -435,7 +440,7 @@ export default class HouseApi extends BaseApi implements AbstractHouseApi {
       {
         populate: {
           image: {
-            fields: IMAGE_FIELDS_TO_POPULATE,
+            fields: IMAGE_FIELDS_WITH_FORMATS,
           },
         },
       },

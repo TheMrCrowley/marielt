@@ -31,7 +31,7 @@ export default class BaseApi {
         ...options,
 
         next: {
-          revalidate: BASE_REVALIDATE_TIME,
+          revalidate: options?.next?.revalidate ?? BASE_REVALIDATE_TIME,
         },
       });
 

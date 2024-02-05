@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import BaseApi, { IMAGE_FIELDS_TO_POPULATE, IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
+import BaseApi, { IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import {
   commercialFinishingQueryMap,
   commercialLocationQueryMap,
@@ -854,7 +854,12 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       priceQuery,
     );
 
-    const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url);
+    const data = await this.fetchWrapper<CommercialItemsStrapiResponse>(url, {
+      cache: 'no-cache',
+      next: {
+        revalidate: false,
+      },
+    });
 
     return data;
   }
@@ -883,7 +888,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       {
         populate: {
           image: {
-            fields: IMAGE_FIELDS_TO_POPULATE,
+            fields: IMAGE_FIELDS_WITH_FORMATS,
           },
         },
       },

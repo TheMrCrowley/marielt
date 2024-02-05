@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import { IMAGE_FIELDS_TO_POPULATE } from '@/src/api/BaseApi';
+import { IMAGE_FIELDS_WITH_FORMATS } from '@/src/api/BaseApi';
 import { FlatItemsStrapiResponse, FlatStrapiResponse } from '@/src/api/flats';
 import { getFullAddress } from '@/src/helpers/addressHelpers';
 import { formatToItemImage, formatToPageImages } from '@/src/helpers/formatToPageImages';
@@ -104,7 +104,7 @@ export const getDefaultFlatListPopulateQuery = () => {
     {
       populate: {
         image: {
-          fields: IMAGE_FIELDS_TO_POPULATE,
+          fields: IMAGE_FIELDS_WITH_FORMATS,
         },
         house_number: {
           fields: ['number'],

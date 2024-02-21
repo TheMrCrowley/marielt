@@ -20,6 +20,7 @@ export const convertToDefaultCommercialItem = (
       district: attributes.district?.data.attributes.name,
       street: attributes.street,
       houseNumber: attributes.house_number?.number,
+      building: attributes.house_number?.building,
     }),
     id,
     metro: attributes.metro?.data?.attributes.name,
@@ -73,6 +74,7 @@ export const convertToDetailedCommercial = ({
     district: attributes.district?.data?.attributes.name,
     street: attributes.street,
     houseNumber: attributes.house_number?.number,
+    building: attributes.house_number?.building,
   }),
   id,
   initialCurrency: attributes.currency || 'USD',
@@ -165,7 +167,7 @@ export const getDefaultCommercialListPopulateQuery = () => {
           fields: IMAGE_FIELDS_WITH_FORMATS,
         },
         house_number: {
-          fields: ['number'],
+          fields: ['number', 'building'],
         },
         parameters: {
           fields: ['plot_size', 'floor', 'floors_number', 'living_area', 'vat'],

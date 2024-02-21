@@ -35,6 +35,7 @@ export const convertToDefaultHouseItem = (
         village: village_council,
         districtRb: district_rb,
         region: region?.data.attributes.name,
+        building: house_number?.building,
       }),
       metro: metro?.data?.attributes.name,
       initialCurrency: currency || 'USD',
@@ -61,6 +62,7 @@ export const convertToDetailedHouseItem = ({
     locality: attributes.locality,
     street: attributes.street,
     houseNumber: attributes.house_number?.number,
+    building: attributes.house_number?.building,
   }),
   id,
   price: attributes.price,
@@ -136,7 +138,7 @@ export const getDefaultHouseListPopulateQuery = () => {
           fields: IMAGE_FIELDS_WITH_FORMATS,
         },
         house_number: {
-          fields: ['number'],
+          fields: ['number', 'building'],
         },
         parameters: {
           fields: ['plot_size', 'kitchen_area', 'living_area', 'total_area'],

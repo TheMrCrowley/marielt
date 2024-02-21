@@ -368,7 +368,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
             populate: '*',
           },
           house_number: {
-            fields: ['number'],
+            fields: ['number', 'building'],
           },
         },
       },

@@ -15,6 +15,7 @@ export const convertToDefaultFlatItem = (
       houseNumber: attributes.house_number?.number,
       locality: attributes.locality,
       region: attributes.region?.data.attributes.name,
+      building: attributes.house_number?.building,
     }),
     id,
     metro: attributes.metro?.data?.attributes.name,
@@ -42,6 +43,7 @@ export const convertToDetailedFlatItem = ({
     district: attributes.district?.data?.attributes.name,
     street: attributes.street,
     houseNumber: attributes.house_number?.number,
+    building: attributes.house_number?.building,
   }),
   id,
   price: attributes.price,
@@ -107,7 +109,7 @@ export const getDefaultFlatListPopulateQuery = () => {
           fields: IMAGE_FIELDS_WITH_FORMATS,
         },
         house_number: {
-          fields: ['number'],
+          fields: ['number', 'building'],
         },
         parameters: {
           fields: ['floor', 'living_area', 'floors_number', 'total_area'],

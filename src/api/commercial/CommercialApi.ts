@@ -677,7 +677,7 @@ export default class CommercialApi extends BaseApi implements AbstractCommercial
       {
         populate: {
           house_number: {
-            fields: ['number'],
+            fields: ['number', 'building'],
           },
           price_total: {
             populate: '*',

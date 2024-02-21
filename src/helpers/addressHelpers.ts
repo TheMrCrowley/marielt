@@ -19,6 +19,7 @@ export const getFullAddress = ({
   region,
   street,
   village,
+  building,
 }: {
   region?: string;
   districtRb?: string;
@@ -28,17 +29,30 @@ export const getFullAddress = ({
   microDistrict?: string;
   street?: string;
   houseNumber?: string;
+  building?: string;
 }) => {
   if (locality?.toLowerCase() === 'минск') {
-    return Array.from(
+    const result = Array.from(
       new Set([locality, district, microDistrict, street, houseNumber].filter(Boolean)),
     ).join(', ');
+    return building ? result + '/' + building : result;
   }
-  return Array.from(
+
+  const result = Array.from(
     new Set(
-      [region, districtRb, village, locality, district, microDistrict, street, houseNumber].filter(
-        Boolean,
-      ),
+      [
+        region,
+        districtRb,
+        village,
+        locality,
+        district,
+        microDistrict,
+        street,
+        houseNumber,
+        building,
+      ].filter(Boolean),
     ),
   ).join(', ');
+
+  return building ? result + '/' + building : result;
 };

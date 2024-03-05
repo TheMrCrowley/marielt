@@ -4,6 +4,7 @@ import { AvailableCurrencies } from '@/src/types/Currency';
 import { StrapiFindResponse, StrapiImage, StrapiFindOneResponse } from '@/src/types/StrapiTypes';
 
 type CommercialResponse = Partial<{
+  publishedAt: string | null;
   locality: string;
   street: string;
   house_number: Partial<{

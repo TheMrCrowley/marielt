@@ -41,6 +41,7 @@ export type DefaultCommercialItem = Partial<{
 }>;
 
 export type DetailedCommercialItem = {
+  isPublished: boolean;
   parameters: Partial<{
     profitability: string;
     payback: string;

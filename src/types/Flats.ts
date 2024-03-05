@@ -24,6 +24,7 @@ export type DefaultFlatItem = {
 };
 
 export type DetailedFlatItem = {
+  isPublished: boolean;
   parameters: {
     constructionYear?: string;
     roominess?: string;

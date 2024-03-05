@@ -51,6 +51,7 @@ export const convertToDetailedCommercial = ({
   attributes,
   id,
 }: CommercialStrapiResponse['data']): DetailedCommercialItem => ({
+  isPublished: !!attributes.publishedAt,
   location: attributes.coordinates
     ? {
         lat: attributes.coordinates.latitude,

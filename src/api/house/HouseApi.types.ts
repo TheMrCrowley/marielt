@@ -3,6 +3,7 @@ import { DetailedHousesAndLotsItem } from '@/src/types/HousesAndLots';
 import { StrapiFindOneResponse, StrapiFindResponse, StrapiImage } from '@/src/types/StrapiTypes';
 
 interface HousesResponse {
+  publishedAt: string | null;
   locality: string;
   street?: string;
   district_rb?: string;

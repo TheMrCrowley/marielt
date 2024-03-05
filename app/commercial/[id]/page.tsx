@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 import { CommercialItemsStrapiResponse } from '@/src/api/commercial';
 import CommercialPage from '@/src/app-pages/CommercialPage/CommercialPage';
@@ -44,6 +45,10 @@ export const dynamicParams = true;
 
 const Commercial = async ({ params: { id } }: Props) => {
   const commercialItem = await getCommercialById(id);
+
+  if (!commercialItem.isPublished) {
+    return redirect('/not-found');
+  }
 
   return <CommercialPage commercial={commercialItem} />;
 };

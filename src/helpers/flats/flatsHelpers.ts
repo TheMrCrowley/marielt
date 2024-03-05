@@ -36,6 +36,7 @@ export const convertToDetailedFlatItem = ({
   attributes,
   id,
 }: FlatStrapiResponse['data']): DetailedFlatItem => ({
+  isPublished: !!attributes.publishedAt,
   address: getFullAddress({
     region: attributes.region?.data?.attributes.name,
     districtRb: attributes.district_rb,

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 import { FlatItemsStrapiResponse } from '@/src/api/flats';
 import FlatPage from '@/src/app-pages/FlatsPage/FlatPage';
@@ -43,6 +44,10 @@ export const dynamicParams = true;
 
 const page = async ({ params: { id } }: Props) => {
   const flat = await getFlatById(id);
+
+  if (!flat.isPublished) {
+    return redirect('/not-found');
+  }
 
   return <FlatPage flat={flat} />;
 };

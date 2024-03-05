@@ -21,6 +21,7 @@ export type DefaultHousesAndLotsItem = {
 };
 
 export type DetailedHousesAndLotsItem = {
+  isPublished: boolean;
   parameters: {
     builtUpAreaLength?: string;
     builtUpAreaWidth?: string;

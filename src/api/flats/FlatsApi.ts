@@ -381,6 +381,7 @@ export default class FlatsApi extends BaseApi implements AbstractFlatsApi {
 
     const data = await this.fetchWrapper<FlatStrapiResponse>(url);
 
+    console.log(data);
     return data;
   }
 

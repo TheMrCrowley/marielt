@@ -81,6 +81,7 @@ interface FlatResponse {
   name?: string;
   image: StrapiFindResponse<StrapiImage>;
   detailed_description?: string;
+  publishedAt: string | null;
   location?: {
     coordinates: {
       lat: number;

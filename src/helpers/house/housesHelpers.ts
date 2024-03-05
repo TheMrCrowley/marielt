@@ -68,7 +68,7 @@ export const convertToDetailedHouseItem = ({
   price: attributes.price,
   name: attributes.name,
   initialCurrency: attributes.currency || 'USD',
-
+  isPublished: !!attributes.publishedAt,
   parameters: {
     plotSize: attributes.parameters.plot_size,
     livingArea: attributes.parameters.living_area,

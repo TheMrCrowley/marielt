@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 import { HouseItemsStrapiResponse } from '@/src/api/house';
@@ -44,6 +45,10 @@ export const dynamicParams = true;
 
 const page = async ({ params: { id } }: Props) => {
   const houseAndLotsItem = await getHouseById(id);
+
+  if (!houseAndLotsItem.isPublished) {
+    return redirect('/not-found');
+  }
 
   return <HousesAndLotsProductPage item={houseAndLotsItem} />;
 };
